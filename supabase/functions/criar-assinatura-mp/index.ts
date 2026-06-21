@@ -21,8 +21,8 @@ const URL_BASE_APP = Deno.env.get("URL_BASE_APP") ?? "http://localhost:5173"
 const DIAS_TRIAL = Number(Deno.env.get("DIAS_TRIAL") ?? "5")
 
 const PRECOS = {
-  mensal: Number(Deno.env.get("PRECO_PLANO_MENSAL") ?? "99.00"),
-  anual: Number(Deno.env.get("PRECO_PLANO_ANUAL") ?? "950.00"),
+  mensal: Number(Deno.env.get("PRECO_PLANO_MENSAL") ?? "497.00"),
+  anual: Number(Deno.env.get("PRECO_PLANO_ANUAL") ?? "4999.00"),
 }
 
 const corsHeaders = {
@@ -36,7 +36,7 @@ Deno.serve(async (req: Request) => {
   }
 
   try {
-    const { plano, cardTokenId } = await req.json()
+    const { plano, cardTokenId, precoPromocional } = await req.json()
 
     if (plano !== "mensal" && plano !== "anual") {
       return new Response(
@@ -72,7 +72,28 @@ Deno.serve(async (req: Request) => {
     }
 
     const profileId = userData.user.id
-    const valor = PRECOS[plano as "mensal" | "anual"]
+    let valor = PRECOS[plano as "mensal" | "anual"]
+
+    // Se o frontend pediu preço promocional, NUNCA confiamos nesse valor
+    // diretamente — validamos no banco se a promoção está mesmo ativa
+    // antes de aplicar qualquer desconto. Isso evita que alguém manipule
+    // o preço editando o código no navegador.
+    if (precoPromocional) {
+      const { data: statusPromo } = await supabaseAdmin
+        .from("promocao_vagas")
+        .select("ativa, vagas_usadas, vagas_totais")
+        .eq("id", 1)
+        .maybeSingle()
+
+      const promocaoRealmenteAtiva =
+        statusPromo?.ativa && statusPromo.vagas_usadas <= statusPromo.vagas_totais
+
+      if (promocaoRealmenteAtiva) {
+        valor = Number(precoPromocional)
+      }
+      // Se a promoção não estiver realmente ativa no banco, ignora
+      // silenciosamente o preço promocional e cobra o valor de tabela.
+    }
 
     const { data: perfil, error: erroPerfil } = await supabaseAdmin
       .from("profiles")
