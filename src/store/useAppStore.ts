@@ -8,6 +8,7 @@ import type {
   Filtros,
 } from "@/types/empresa"
 import { gerarEmpresasMock } from "@/lib/dadosMock"
+import { buscarEmpresasReais } from "@/lib/dadosReais"
 import { gerarId } from "@/lib/utils"
 
 // Filtros padrão iniciais
@@ -69,6 +70,7 @@ export const useAppStore = create<AppState>()(
       erroAtual: null,
       paginaAtual: 1,
       itensPorPagina: 10,
+      usandoDadosReais: true,
       filtros: FILTROS_PADRAO,
 
       // ══ Ações ══
@@ -80,7 +82,17 @@ export const useAppStore = create<AppState>()(
         set({ carregando: true, erroAtual: null, paginaAtual: 1 })
 
         try {
-          const empresas = await gerarEmpresasMock(params)
+          // Tenta dados reais do OpenStreetMap primeiro. Se a cidade não for
+          // localizada ou não houver estabelecimentos cadastrados na região,
+          // cai automaticamente para o gerador de exemplo (mock), avisando
+          // o usuário através do campo usandoDadosReais.
+          let empresas = await buscarEmpresasReais(params)
+          let usandoDadosReais = true
+
+          if (!empresas || empresas.length === 0) {
+            empresas = await gerarEmpresasMock(params)
+            usandoDadosReais = false
+          }
 
           // Aplica os favoritos salvos anteriormente
           const { favoritos } = get()
@@ -98,6 +110,7 @@ export const useAppStore = create<AppState>()(
             empresasFiltradas: filtradas,
             buscaAtual: params,
             carregando: false,
+            usandoDadosReais,
           })
 
           // Salva no histórico de buscas (máx. 5)

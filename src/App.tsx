@@ -6,6 +6,7 @@ import { TelaAbertura } from "@/components/TelaAbertura"
 import { FormularioBusca } from "@/components/FormularioBusca"
 import { Dashboard } from "@/components/Dashboard"
 import { NavegacaoTopo } from "@/components/NavegacaoTopo"
+import { PaginaSAC } from "@/components/PaginaSAC"
 import { TelaAuth } from "@/components/auth/TelaAuth"
 import { FormularioPerfil } from "@/components/perfil/FormularioPerfil"
 import { SelecaoPlano } from "@/components/perfil/SelecaoPlano"
@@ -114,6 +115,7 @@ function ConteudoApp() {
       <Routes>
         <Route path="/" element={<TelaAbertura />} />
         <Route path="/buscar" element={<PaginaBusca />} />
+        <Route path="/ajuda" element={<PaginaSAC />} />
         <Route path="/entrar" element={<PaginaAuth />} />
         <Route path="/perfil" element={<PaginaPerfil />} />
         <Route path="/planos" element={<PaginaPlanos />} />

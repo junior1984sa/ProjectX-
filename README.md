@@ -38,7 +38,7 @@ npm run dev
 
 O app estará disponível em **http://localhost:5173**
 
-> ⚠️ **Importante**: sem configurar o Supabase e o Mercado Pago (passo 2 e 3), o login, cadastro de prestadores e cobrança não vão funcionar. A busca de prospecção (dados simulados) funciona mesmo sem isso. Veja o guia completo em [`SUPABASE_SETUP.md`](./SUPABASE_SETUP.md).
+> ⚠️ **Importante**: sem configurar o Supabase e o Mercado Pago (passo 2 e 3), o login, cadastro de prestadores e cobrança não vão funcionar. A busca de prospecção funciona mesmo sem isso (usa OpenStreetMap, gratuito), mas precisa de conexão com a internet para consultar a Nominatim e a Overpass API. Veja o guia completo em [`SUPABASE_SETUP.md`](./SUPABASE_SETUP.md).
 
 ---
 
@@ -113,8 +113,9 @@ supabase/
 
 ## ✨ Funcionalidades
 
-### Prospecção (dados simulados, conectável a APIs reais)
-- Busca por segmento + cidade + raio
+### Prospecção (dados reais via OpenStreetMap, com fallback de exemplo)
+- Busca por segmento + cidade + raio usando dados reais e gratuitos do OpenStreetMap (Nominatim + Overpass API)
+- Se a cidade/segmento não tiver estabelecimentos cadastrados na região, cai automaticamente em um gerador de exemplo simulado — sempre identificado na tela com um aviso visual, nunca apresentado como dado real por engano
 - Mapa interativo com marcadores por score
 - Gráficos de canais de contato e top bairros
 - Filtros, ordenação, paginação, exportação CSV
@@ -142,9 +143,11 @@ supabase/
 
 ---
 
-## 🔌 Integrar APIs Reais de Prospecção
+## 🔌 Fonte dos dados de prospecção
 
-Por padrão, a busca usa **dados simulados**. Para usar dados reais, veja a seção correspondente no app (botão "Usar APIs reais" no dashboard) ou edite `src/lib/dadosMock.ts`.
+A busca usa **OpenStreetMap (Nominatim + Overpass API)** — gratuito, sem necessidade de chave de API. O fluxo é: `src/lib/dadosReais.ts` geocodifica a cidade digitada e busca estabelecimentos reais próximos, filtrando pelo segmento. Se não encontrar nada (cidade pequena, segmento raro na região, indisponibilidade temporária da API), o app cai automaticamente no gerador de exemplo (`src/lib/dadosMock.ts`) — e isso é sinalizado com clareza na tela ("Exemplo simulado" em amarelo), nunca apresentado como dado real.
+
+**Limitação conhecida**: a cobertura de telefone/e-mail no OpenStreetMap depende de quem cadastrou aquele estabelecimento no mapa colaborativo — em muitas cidades brasileiras, isso é mais escasso do que no Google Places. Quando o produto gerar receita suficiente, a evolução natural é integrar o **Google Places API** (a partir de ~$275/mês) ou um serviço de enriquecimento como Hunter.io, que têm cobertura de contato muito superior.
 
 ---
 

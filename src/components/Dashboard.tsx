@@ -1,6 +1,5 @@
-import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Info } from "lucide-react"
+import { Globe, AlertTriangle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { HeroMetricas } from "@/components/HeroMetricas"
 import { PainelMapa } from "@/components/PainelMapa"
@@ -8,16 +7,14 @@ import { GraficoCanais } from "@/components/GraficoCanais"
 import { GraficoBairros } from "@/components/GraficoBairros"
 import { PainelFiltros } from "@/components/PainelFiltros"
 import { GridLeads } from "@/components/GridLeads"
-import { InstrucoesAPI } from "@/components/InstrucoesAPI"
 import { useAppStore } from "@/store/useAppStore"
 import { useAuthStore } from "@/store/useAuthStore"
 import { Badge } from "@/components/ui/badge"
 
 export function Dashboard() {
   const navigate = useNavigate()
-  const { buscaAtual, limparResultados, empresas } = useAppStore()
+  const { buscaAtual, limparResultados, empresas, usandoDadosReais } = useAppStore()
   const { usuarioId, perfil } = useAuthStore()
-  const [modalAPIAberto, setModalAPIAberto] = useState(false)
 
   function handleAssinar() {
     if (!usuarioId) {
@@ -70,15 +67,19 @@ export function Dashboard() {
             </div>
 
             <div className="flex items-center gap-2 flex-shrink-0">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => setModalAPIAberto(true)}
-                className="h-8 text-xs text-muted-foreground hover:text-foreground"
-              >
-                <Info className="w-3.5 h-3.5 mr-1.5" />
-                <span className="hidden sm:inline">Usar APIs reais</span>
-              </Button>
+              {buscaAtual && (
+                usandoDadosReais ? (
+                  <Badge variant="success" className="text-xs flex items-center gap-1">
+                    <Globe className="w-3 h-3" />
+                    Dados reais (OpenStreetMap)
+                  </Badge>
+                ) : (
+                  <Badge variant="warning" className="text-xs flex items-center gap-1" title="Não encontramos estabelecimentos reais cadastrados nessa região/segmento. Mostrando exemplo simulado.">
+                    <AlertTriangle className="w-3 h-3" />
+                    Exemplo simulado
+                  </Badge>
+                )
+              )}
             </div>
           </div>
         </div>
@@ -104,11 +105,6 @@ export function Dashboard() {
         {/* Grid de cards de leads — substitui a tabela tradicional */}
         <GridLeads onAssinar={handleAssinar} />
       </main>
-
-      <InstrucoesAPI
-        aberto={modalAPIAberto}
-        onFechar={() => setModalAPIAberto(false)}
-      />
     </div>
   )
 }

@@ -22,7 +22,8 @@ interface RespostaCancelar {
  */
 export async function iniciarAssinaturaComTrial(
   plano: TipoPlano,
-  dadosCartao: DadosCartaoForm
+  dadosCartao: DadosCartaoForm,
+  precoPromocional: number | null = null
 ): Promise<{ sucesso: boolean; trialDias: number; erro: string | null }> {
   const { data: sessao } = await supabase.auth.getSession()
   const token = sessao.session?.access_token
@@ -47,7 +48,7 @@ export async function iniciarAssinaturaComTrial(
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ plano, cardTokenId: tokenId }),
+      body: JSON.stringify({ plano, cardTokenId: tokenId, precoPromocional }),
     })
 
     const dados: RespostaCriarAssinatura = await resposta.json()

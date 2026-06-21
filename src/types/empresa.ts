@@ -89,6 +89,8 @@ export interface AppState {
   erroAtual: string | null
   paginaAtual: number
   itensPorPagina: number
+  /** true se a última busca trouxe dados reais (OpenStreetMap); false se caiu no exemplo simulado */
+  usandoDadosReais: boolean
 
   // Filtros
   filtros: Filtros

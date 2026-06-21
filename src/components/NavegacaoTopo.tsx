@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
-import { LogOut, User, Building2, Zap, Gift } from "lucide-react"
+import { LogOut, User, Building2, Zap, Gift, HelpCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useAuthStore } from "@/store/useAuthStore"
@@ -95,6 +95,17 @@ export function NavegacaoTopo() {
                 </span>
               </Button>
 
+              {/* Ajuda / SAC */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate("/ajuda")}
+                className={`h-8 w-8 ${location.pathname === "/ajuda" ? "text-dourado-400" : "text-muted-foreground"}`}
+                title="Central de Ajuda"
+              >
+                <HelpCircle className="w-4 h-4" />
+              </Button>
+
               {/* E-mail do usuário */}
               <span className="text-xs text-muted-foreground hidden md:inline truncate max-w-[160px]">
                 {email}
@@ -112,14 +123,25 @@ export function NavegacaoTopo() {
               </Button>
             </>
           ) : (
-            <Button
-              size="sm"
-              onClick={() => navigate("/entrar")}
-              className="h-8 text-xs bg-dourado-600 hover:bg-dourado-700 text-white"
-            >
-              <User className="w-3.5 h-3.5 mr-1.5" />
-              Cadastrar empresa
-            </Button>
+            <>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => navigate("/ajuda")}
+                className={`h-8 w-8 ${location.pathname === "/ajuda" ? "text-dourado-400" : "text-muted-foreground"}`}
+                title="Central de Ajuda"
+              >
+                <HelpCircle className="w-4 h-4" />
+              </Button>
+              <Button
+                size="sm"
+                onClick={() => navigate("/entrar")}
+                className="h-8 text-xs bg-dourado-600 hover:bg-dourado-700 text-white"
+              >
+                <User className="w-3.5 h-3.5 mr-1.5" />
+                Cadastrar empresa
+              </Button>
+            </>
           )}
         </div>
       </div>

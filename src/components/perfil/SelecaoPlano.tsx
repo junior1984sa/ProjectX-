@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { Check, Loader2, Sparkles, ShieldCheck, TrendingUp, Calendar, CreditCard, Gift, ChevronDown } from "lucide-react"
+import { Check, Loader2, Sparkles, ShieldCheck, TrendingUp, Calendar, CreditCard, Gift, ChevronDown, Flame } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -8,13 +8,22 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { iniciarAssinaturaComTrial, aplicarCodigoCortesia } from "@/lib/pagamento"
 import { useAuthStore } from "@/store/useAuthStore"
+import { usePromocaoStore } from "@/store/usePromocaoStore"
 import type { TipoPlano } from "@/types/prestador"
 import type { DadosCartaoForm } from "@/lib/mercadopago"
 import toast from "react-hot-toast"
 
-const PRECO_MENSAL = Number(import.meta.env.VITE_PRECO_PLANO_MENSAL ?? "99.00")
-const PRECO_ANUAL = Number(import.meta.env.VITE_PRECO_PLANO_ANUAL ?? "950.00")
+const PRECO_MENSAL = Number(import.meta.env.VITE_PRECO_PLANO_MENSAL ?? "497.00")
+const PRECO_ANUAL = Number(import.meta.env.VITE_PRECO_PLANO_ANUAL ?? "4999.00")
 const DIAS_TRIAL = 5
+
+// Promoção de lançamento: preço reduzido para os primeiros assinantes.
+// Controlada por variável de ambiente — fica DESLIGADA por padrão.
+// Para ativar, defina VITE_PROMOCAO_ATIVA=true na Vercel (Settings >
+// Environment Variables) e redeploy. Não exige nenhuma mudança de código.
+const PROMOCAO_ATIVA = import.meta.env.VITE_PROMOCAO_ATIVA === "true"
+const PROMOCAO_PRECO_MENSAL = Number(import.meta.env.VITE_PROMOCAO_PRECO_MENSAL ?? "247.00")
+const PROMOCAO_PRECO_ANUAL = Number(import.meta.env.VITE_PROMOCAO_PRECO_ANUAL ?? "2499.00")
 
 const ECONOMIA_ANUAL = Math.round((1 - PRECO_ANUAL / (PRECO_MENSAL * 12)) * 100)
 
@@ -38,12 +47,27 @@ const CARTAO_VAZIO: DadosCartaoForm = {
 export function SelecaoPlano() {
   const navigate = useNavigate()
   const { carregarPerfil } = useAuthStore()
+  const { ativa: promocaoAtivaNoBanco, vagasUsadas, vagasTotais, carregarStatus } = usePromocaoStore()
   const [planoSelecionado, setPlanoSelecionado] = useState<TipoPlano>("anual")
   const [cartao, setCartao] = useState<DadosCartaoForm>(CARTAO_VAZIO)
   const [carregando, setCarregando] = useState(false)
   const [mostrarCodigoCortesia, setMostrarCodigoCortesia] = useState(false)
   const [codigoCortesia, setCodigoCortesia] = useState("")
   const [validandoCodigo, setValidandoCodigo] = useState(false)
+
+  useEffect(() => {
+    if (PROMOCAO_ATIVA) {
+      carregarStatus()
+    }
+  }, [])
+
+  // A promoção só vale se estiver ligada no código E ativa no banco
+  // (ambas as travas precisam estar abertas) E ainda houver vagas.
+  const vagasRestantes = vagasTotais - vagasUsadas
+  const promocaoDisponivel = PROMOCAO_ATIVA && promocaoAtivaNoBanco && vagasRestantes > 0
+
+  const precoMensalExibido = promocaoDisponivel ? PROMOCAO_PRECO_MENSAL : PRECO_MENSAL
+  const precoAnualExibido = promocaoDisponivel ? PROMOCAO_PRECO_ANUAL : PRECO_ANUAL
 
   async function handleAplicarCodigo() {
     if (!codigoCortesia.trim()) {
@@ -91,7 +115,23 @@ export function SelecaoPlano() {
     }
 
     setCarregando(true)
-    const resultado = await iniciarAssinaturaComTrial(planoSelecionado, cartao)
+
+    // Se a promoção estiver disponível, reserva a vaga ANTES de cobrar —
+    // a reserva é atômica no banco, então mesmo com várias pessoas
+    // assinando ao mesmo tempo, ninguém passa do limite de vagas.
+    let precoPromocionalConfirmado: number | null = null
+    if (promocaoDisponivel) {
+      const reserva = await usePromocaoStore.getState().reservarVaga()
+      if (reserva.sucesso) {
+        precoPromocionalConfirmado = planoSelecionado === "mensal"
+          ? PROMOCAO_PRECO_MENSAL
+          : PROMOCAO_PRECO_ANUAL
+      }
+      // Se a reserva falhar (vagas esgotaram nesse instante), segue
+      // normalmente com o preço de tabela — não trava a assinatura.
+    }
+
+    const resultado = await iniciarAssinaturaComTrial(planoSelecionado, cartao, precoPromocionalConfirmado)
     setCarregando(false)
 
     if (!resultado.sucesso) {
@@ -121,6 +161,20 @@ export function SelecaoPlano() {
         </p>
       </div>
 
+      {/* Banner de promoção — bem explícito, só aparece quando ativada */}
+      {promocaoDisponivel && (
+        <div className="mb-6 rounded-xl border-2 border-dourado-500 bg-gradient-to-r from-dourado-900/30 to-dourado-900/10 p-4 text-center">
+          <p className="flex items-center justify-center gap-1.5 text-sm font-bold text-dourado-300">
+            <Flame className="w-4 h-4" />
+            PROMOÇÃO DE LANÇAMENTO — APENAS OS {vagasTotais} PRIMEIROS ASSINANTES
+          </p>
+          <p className="text-xs text-dourado-200/80 mt-1">
+            Restam <span className="font-bold">{vagasRestantes}</span> de {vagasTotais} vagas com preço especial.
+            Depois disso, o valor volta ao normal.
+          </p>
+        </div>
+      )}
+
       {/* Cards de planos */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <Card
@@ -140,9 +194,14 @@ export function SelecaoPlano() {
                 </div>
               )}
             </div>
+            {promocaoDisponivel && (
+              <span className="text-sm text-muted-foreground/60 line-through">
+                R$ {PRECO_MENSAL.toFixed(2).replace(".", ",")}
+              </span>
+            )}
             <div className="flex items-baseline gap-1">
               <span className="text-3xl font-bold text-foreground">
-                R$ {PRECO_MENSAL.toFixed(2).replace(".", ",")}
+                R$ {precoMensalExibido.toFixed(2).replace(".", ",")}
               </span>
               <span className="text-muted-foreground text-sm">/mês</span>
             </div>
@@ -160,7 +219,7 @@ export function SelecaoPlano() {
         >
           {ECONOMIA_ANUAL > 0 && (
             <Badge className="absolute -top-2.5 right-4 text-xs bg-dourado-600 text-background">
-              Economize {ECONOMIA_ANUAL}% + mais créditos/mês
+              {promocaoDisponivel ? "Promoção" : `Economize ${ECONOMIA_ANUAL}% + mais créditos/mês`}
             </Badge>
           )}
           <CardContent className="p-6">
@@ -172,14 +231,19 @@ export function SelecaoPlano() {
                 </div>
               )}
             </div>
+            {promocaoDisponivel && (
+              <span className="text-sm text-muted-foreground/60 line-through">
+                R$ {PRECO_ANUAL.toFixed(2).replace(".", ",")}
+              </span>
+            )}
             <div className="flex items-baseline gap-1">
               <span className="text-3xl font-bold text-foreground">
-                R$ {PRECO_ANUAL.toFixed(2).replace(".", ",")}
+                R$ {precoAnualExibido.toFixed(2).replace(".", ",")}
               </span>
               <span className="text-muted-foreground text-sm">/ano</span>
             </div>
             <p className="text-xs text-muted-foreground mt-2">
-              Equivalente a R$ {(PRECO_ANUAL / 12).toFixed(2).replace(".", ",")}/mês · Após o teste
+              Equivalente a R$ {(precoAnualExibido / 12).toFixed(2).replace(".", ",")}/mês · Após o teste
             </p>
           </CardContent>
         </Card>
