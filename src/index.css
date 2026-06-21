@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 9% 9%;
+    --foreground: 210 12% 90%;
+
+    --card: 220 9% 13%;
+    --card-foreground: 210 12% 90%;
+
+    --popover: 220 9% 13%;
+    --popover-foreground: 210 12% 90%;
+
+    --primary: 210 8% 62%;
+    --primary-foreground: 220 12% 10%;
+
+    --secondary: 220 8% 18%;
+    --secondary-foreground: 210 12% 90%;
+
+    --muted: 220 8% 16%;
+    --muted-foreground: 215 8% 58%;
+
+    --accent: 38 47% 63%;
+    --accent-foreground: 220 12% 10%;
+
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 220 8% 22%;
+    --input: 220 8% 22%;
+    --ring: 40 38% 58%;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    /* Fundo sutil de engrenagens em esboço técnico — reforça a temática
+       industrial sem competir visualmente com o conteúdo. */
+    background-image: url('/gear-pattern.svg');
+    background-repeat: repeat;
+    background-size: 480px 480px;
+    background-attachment: fixed;
+  }
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+/* Camada de esmaecimento sobre o padrão de engrenagens — aplicada nos
+   containers de conteúdo para garantir que o texto/cards continuem
+   com contraste e legibilidade total por cima do fundo decorativo. */
+.fundo-conteudo {
+  position: relative;
+}
+.fundo-conteudo::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: hsl(var(--background) / 0.55);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scrollbar personalizada */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(222 47% 10%);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(220 8% 26%);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(40 38% 58% / 0.6);
+}
+
+/* Leaflet customizações */
+.leaflet-container {
+  background: hsl(220 8% 11%) !important;
+  font-family: inherit !important;
+}
+
+.leaflet-popup-content-wrapper {
+  background: hsl(220 9% 16%) !important;
+  color: hsl(210 12% 88%) !important;
+  border: 1px solid hsl(220 8% 26%) !important;
+  border-radius: 8px !important;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+}
+
+.leaflet-popup-tip {
+  background: hsl(220 9% 16%) !important;
+}
+
+.leaflet-popup-close-button {
+  color: hsl(210 12% 88%) !important;
+}
+
+/* Skeleton animation */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    hsl(220 9% 16%) 25%,
+    hsl(220 8% 23%) 50%,
+    hsl(220 9% 16%) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Transições globais */
+button, a, [role="button"] {
+  transition: all 0.15s ease;
+}
+
+/* Estrelas de score */
+.estrela-cheia { color: #cba968; }
+.estrela-vazia { color: hsl(220 8% 30%); }
+
+/* Badge de score */
+.score-alto { @apply bg-green-900/40 text-green-400 border border-green-700/50; }
+.score-medio { @apply bg-yellow-900/40 text-yellow-400 border border-yellow-700/50; }
+.score-baixo { @apply bg-red-900/40 text-red-400 border border-red-700/50; }
+
+/* Recharts tooltip */
+.recharts-tooltip-wrapper .recharts-default-tooltip {
+  background: hsl(220 9% 16%) !important;
+  border: 1px solid hsl(220 8% 26%) !important;
+  border-radius: 8px !important;
+  color: hsl(210 12% 88%) !important;
+}
+
+/* Focus ring visível */
+:focus-visible {
+  outline: 2px solid hsl(40 38% 58%);
+  outline-offset: 2px;
+}
+
+/* Tabela listrada */
+.tabela-linha-par {
+  background: hsl(220 9% 12%);
+}
+.tabela-linha-impar {
+  background: hsl(220 9% 15%);
+}
