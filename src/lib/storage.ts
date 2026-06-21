@@ -42,7 +42,6 @@ export async function enviarArquivoPortfolio(
   }
 
   // Nome único: pasta do usuário + timestamp + nome original sanitizado
-  const extensao = arquivo.name.split(".").pop()
   const nomeSanitizado = arquivo.name
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")

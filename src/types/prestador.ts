@@ -3,7 +3,7 @@
 /**
  * Status possíveis de uma assinatura
  */
-export type StatusAssinatura = "pendente" | "ativa" | "atraso" | "cancelada"
+export type StatusAssinatura = "pendente" | "trial" | "ativa" | "atraso" | "cancelada"
 
 /**
  * Planos de assinatura disponíveis
