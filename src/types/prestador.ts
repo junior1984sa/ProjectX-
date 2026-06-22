@@ -8,7 +8,7 @@ export type StatusAssinatura = "pendente" | "trial" | "ativa" | "atraso" | "canc
 /**
  * Planos de assinatura disponíveis
  */
-export type TipoPlano = "mensal" | "anual"
+export type TipoPlano = "mensal" | "semestral" | "anual"
 
 /**
  * Tipos de arquivo que o prestador pode enviar
@@ -205,4 +205,60 @@ export const SEGMENTOS_SUGERIDOS = [
 export function temAcessoLiberado(perfil: Profile | null): boolean {
   if (!perfil) return false
   return perfil.status_assinatura === "ativa" || perfil.status_assinatura === "trial"
+}
+
+/**
+ * Perfil público exibido no diretório de busca direta — separado do
+ * perfil de prospecção. Mais rico, pensado para gerar conversão em
+ * quem está buscando um prestador diretamente.
+ */
+export interface PerfilDiretorio {
+  id: string
+  titulo_publico: string
+  descricao_completa: string
+  area_atendimento: string | null
+  anos_de_mercado: number | null
+  certificacoes: string | null
+  tempo_resposta_estimado: string | null
+  logo_url: string | null
+  publicado: boolean
+  criado_em: string
+  atualizado_em: string
+}
+
+/**
+ * Dados do formulário de edição do perfil de diretório (sem campos
+ * gerados pelo banco).
+ */
+export interface DadosPerfilDiretorioForm {
+  titulo_publico: string
+  descricao_completa: string
+  area_atendimento: string
+  anos_de_mercado: string
+  certificacoes: string
+  tempo_resposta_estimado: string
+}
+
+/**
+ * Foto de trabalho realizado, exibida na galeria do perfil público.
+ */
+export interface FotoTrabalho {
+  id: string
+  profile_id: string
+  url_foto: string
+  legenda: string | null
+  ordem: number
+  criado_em: string
+}
+
+/**
+ * Resultado de busca no diretório: combina o perfil de prospecção
+ * (dados básicos/contato) com o perfil de diretório (dados públicos)
+ * e a galeria de fotos, tudo já filtrado para quem está publicado
+ * e com assinatura ativa.
+ */
+export interface ResultadoBuscaDiretorio {
+  profile: Profile
+  diretorio: PerfilDiretorio
+  fotos: FotoTrabalho[]
 }

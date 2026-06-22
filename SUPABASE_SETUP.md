@@ -115,8 +115,8 @@ supabase link --project-ref SEU_PROJECT_REF
 ```bash
 supabase secrets set MERCADOPAGO_ACCESS_TOKEN=TEST-sua-access-token-secreta
 supabase secrets set URL_BASE_APP=http://localhost:5173
-supabase secrets set PRECO_PLANO_MENSAL=99.00
-supabase secrets set PRECO_PLANO_ANUAL=950.00
+supabase secrets set PRECO_PLANO_MENSAL=497.00
+supabase secrets set PRECO_PLANO_ANUAL=4999.00
 supabase secrets set DIAS_TRIAL=5
 ```
 
@@ -172,6 +172,73 @@ Se quiser criar mais códigos depois, rode no SQL Editor:
 insert into public.codigos_cortesia (codigo, dias_gratis, usos_maximos, observacao)
 values ('MEU-CODIGO-NOVO', 14, 1, 'Descrição opcional');
 ```
+
+## 6.2. Ativar a promoção de lançamento (quando estiver pronto)
+
+A promoção ("R$497 por R$247 para os 100 primeiros") já está implementada no código, mas **desligada por padrão**. Veja `supabase/migrations/007_promocao_lancamento.sql` — rode esse arquivo no SQL Editor primeiro.
+
+Quando quiser ativar de verdade:
+
+1. **No SQL Editor do Supabase**, rode:
+   ```sql
+   update public.promocao_vagas set ativa = true, vagas_totais = 100 where id = 1;
+   ```
+
+2. **Na Vercel**, em Settings → Environment Variables, adicione:
+   ```
+   VITE_PROMOCAO_ATIVA=true
+   VITE_PROMOCAO_PRECO_MENSAL=247.00
+   VITE_PROMOCAO_PRECO_ANUAL=2499.00
+   ```
+
+3. Clique em **Redeploy** no painel da Vercel para a variável entrar em vigor.
+
+O banner de promoção (com contador de vagas restantes) aparece automaticamente na tela de planos assim que as duas travas (banco + variável) estiverem ativas. Cada assinatura concluída durante a promoção decrementa o contador de vagas automaticamente — quando chegar a 100, a promoção se desliga sozinha, mesmo que a variável continue marcada como `true`.
+
+Para **desativar antes** de esgotar as vagas:
+```sql
+update public.promocao_vagas set ativa = false where id = 1;
+```
+
+## 6.3. Configurar busca real via Google Places (opcional, recomendado)
+
+A busca de prospecção tenta, nesta ordem: **Google Places** → **OpenStreetMap** → **exemplo simulado**. O Google tem precisão de categoria muito superior, mas tem custo a partir de ~$275/mês acima da faixa gratuita.
+
+### Criar a chave da API
+
+1. Acesse **https://console.cloud.google.com/** e crie um projeto (ex: "ProspectX")
+2. No menu de busca, digite **"Places API"** e clique em **Enable**
+3. Configure o **billing** (cartão de crédito é exigido mesmo para a faixa gratuita)
+4. Vá em **Credentials → Create Credentials → API Key**
+5. **Restrinja a chave** para funcionar só com a Places API (Restrict Key → API restrictions → Places API)
+
+### Configurar no Supabase
+
+```bash
+supabase secrets set GOOGLE_PLACES_API_KEY=sua-chave-aqui
+```
+
+### Publicar as Edge Functions de busca
+
+```bash
+supabase functions deploy buscar-empresas-google --no-verify-jwt
+supabase functions deploy buscar-empresas-osm --no-verify-jwt
+```
+
+Se a chave do Google não estiver configurada, a busca cai automaticamente no OpenStreetMap (gratuito) sem erro — você pode lançar o produto sem o Google e adicionar depois, sem precisar mudar código.
+
+## 6.4. Aplicar a migration do diretório público
+
+No SQL Editor, rode `supabase/migrations/008_diretorio_publico.sql`. Ele cria:
+- Tabela `perfis_diretorio` (perfil público, separado do perfil de prospecção)
+- Tabela `fotos_trabalhos` (galeria de fotos exibida no diretório)
+- Bucket de Storage `fotos-trabalhos` (fotos públicas)
+- Políticas de RLS: só perfis **publicados** de assinantes **ativos ou em trial** aparecem para outros usuários logados na busca do diretório
+
+**Como funciona na prática:**
+- Qualquer empresa com conta (mesmo sem assinatura) pode **buscar** no diretório (`/diretorio`)
+- Só quem é assinante ativo (ou está em trial) E publicou o próprio perfil **aparece** nos resultados
+- O prestador preenche esse perfil na aba "Diretório" dentro de "Meu perfil"
 
 ## 7. Testar o fluxo completo
 

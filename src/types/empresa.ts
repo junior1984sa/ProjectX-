@@ -89,8 +89,8 @@ export interface AppState {
   erroAtual: string | null
   paginaAtual: number
   itensPorPagina: number
-  /** true se a última busca trouxe dados reais (OpenStreetMap); false se caiu no exemplo simulado */
-  usandoDadosReais: boolean
+  /** Identifica a origem dos dados da última busca: qual fonte foi usada de fato */
+  fonteDados: "google" | "openstreetmap" | "simulado"
 
   // Filtros
   filtros: Filtros

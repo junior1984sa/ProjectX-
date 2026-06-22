@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { Globe, AlertTriangle } from "lucide-react"
+import { Globe, AlertTriangle, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { HeroMetricas } from "@/components/HeroMetricas"
 import { PainelMapa } from "@/components/PainelMapa"
@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge"
 
 export function Dashboard() {
   const navigate = useNavigate()
-  const { buscaAtual, limparResultados, empresas, usandoDadosReais } = useAppStore()
+  const { buscaAtual, limparResultados, empresas, fonteDados } = useAppStore()
   const { usuarioId, perfil } = useAuthStore()
 
   function handleAssinar() {
@@ -68,9 +68,14 @@ export function Dashboard() {
 
             <div className="flex items-center gap-2 flex-shrink-0">
               {buscaAtual && (
-                usandoDadosReais ? (
+                fonteDados === "google" ? (
                   <Badge variant="success" className="text-xs flex items-center gap-1">
                     <Globe className="w-3 h-3" />
+                    Dados reais (Google)
+                  </Badge>
+                ) : fonteDados === "openstreetmap" ? (
+                  <Badge variant="secondary" className="text-xs flex items-center gap-1">
+                    <MapPin className="w-3 h-3" />
                     Dados reais (OpenStreetMap)
                   </Badge>
                 ) : (

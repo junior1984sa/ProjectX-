@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
-import { LogOut, User, Building2, Zap, Gift, HelpCircle } from "lucide-react"
+import { LogOut, User, Building2, Zap, Gift, HelpCircle, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useAuthStore } from "@/store/useAuthStore"
@@ -80,6 +80,19 @@ export function NavegacaoTopo() {
                 <Badge variant="warning" className="text-xs hidden sm:inline-flex">
                   Pendente
                 </Badge>
+              )}
+
+              {/* Buscar prestadores (diretório) — só faz sentido para quem já tem perfil */}
+              {perfil && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => navigate("/diretorio")}
+                  className={`h-8 text-xs ${location.pathname === "/diretorio" ? "text-dourado-400" : "text-muted-foreground"}`}
+                >
+                  <Search className="w-3.5 h-3.5 mr-1.5" />
+                  <span className="hidden sm:inline">Buscar prestadores</span>
+                </Button>
               )}
 
               {/* Link para perfil */}

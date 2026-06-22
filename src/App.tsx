@@ -7,8 +7,9 @@ import { FormularioBusca } from "@/components/FormularioBusca"
 import { Dashboard } from "@/components/Dashboard"
 import { NavegacaoTopo } from "@/components/NavegacaoTopo"
 import { PaginaSAC } from "@/components/PaginaSAC"
+import { BuscaDiretorio } from "@/components/diretorio/BuscaDiretorio"
 import { TelaAuth } from "@/components/auth/TelaAuth"
-import { FormularioPerfil } from "@/components/perfil/FormularioPerfil"
+import { AbasPerfil } from "@/components/perfil/AbasPerfil"
 import { SelecaoPlano } from "@/components/perfil/SelecaoPlano"
 import { StatusAssinatura } from "@/components/perfil/StatusAssinatura"
 import { useAppStore } from "@/store/useAppStore"
@@ -48,7 +49,7 @@ function PaginaPerfil() {
   }
 
   return (
-    <FormularioPerfil
+    <AbasPerfil
       onConcluido={() => {
         if (!perfil || !temAcessoLiberado(perfil)) {
           navigate("/planos")
@@ -56,6 +57,21 @@ function PaginaPerfil() {
       }}
     />
   )
+}
+
+/** Página de busca no diretório: exige login (qualquer empresa cadastrada, mesmo sem assinatura) */
+function PaginaDiretorio() {
+  const { usuarioId, carregandoAuth } = useAuthStore()
+
+  if (carregandoAuth) {
+    return <TelaCarregando />
+  }
+
+  if (!usuarioId) {
+    return <Navigate to="/entrar" replace />
+  }
+
+  return <BuscaDiretorio />
 }
 
 /** Página de seleção de plano: exige login + perfil criado */
@@ -116,6 +132,7 @@ function ConteudoApp() {
         <Route path="/" element={<TelaAbertura />} />
         <Route path="/buscar" element={<PaginaBusca />} />
         <Route path="/ajuda" element={<PaginaSAC />} />
+        <Route path="/diretorio" element={<PaginaDiretorio />} />
         <Route path="/entrar" element={<PaginaAuth />} />
         <Route path="/perfil" element={<PaginaPerfil />} />
         <Route path="/planos" element={<PaginaPlanos />} />

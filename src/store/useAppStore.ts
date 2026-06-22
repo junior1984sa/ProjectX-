@@ -9,6 +9,7 @@ import type {
 } from "@/types/empresa"
 import { gerarEmpresasMock } from "@/lib/dadosMock"
 import { buscarEmpresasReais } from "@/lib/dadosReais"
+import { buscarEmpresasGoogle } from "@/lib/dadosGoogle"
 import { gerarId } from "@/lib/utils"
 
 // Filtros padrão iniciais
@@ -70,7 +71,7 @@ export const useAppStore = create<AppState>()(
       erroAtual: null,
       paginaAtual: 1,
       itensPorPagina: 10,
-      usandoDadosReais: true,
+      fonteDados: "google" as const,
       filtros: FILTROS_PADRAO,
 
       // ══ Ações ══
@@ -82,16 +83,21 @@ export const useAppStore = create<AppState>()(
         set({ carregando: true, erroAtual: null, paginaAtual: 1 })
 
         try {
-          // Tenta dados reais do OpenStreetMap primeiro. Se a cidade não for
-          // localizada ou não houver estabelecimentos cadastrados na região,
-          // cai automaticamente para o gerador de exemplo (mock), avisando
-          // o usuário através do campo usandoDadosReais.
-          let empresas = await buscarEmpresasReais(params)
-          let usandoDadosReais = true
+          // Cascata de fontes de dados, da mais precisa para a mais simples:
+          // 1. Google Places (melhor precisão de categoria, tem custo)
+          // 2. OpenStreetMap (gratuito, cobertura menor de contato/precisão)
+          // 3. Exemplo simulado (sempre disponível, claramente identificado na UI)
+          let empresas = await buscarEmpresasGoogle(params)
+          let fonteDados: "google" | "openstreetmap" | "simulado" = "google"
+
+          if (!empresas || empresas.length === 0) {
+            empresas = await buscarEmpresasReais(params)
+            fonteDados = "openstreetmap"
+          }
 
           if (!empresas || empresas.length === 0) {
             empresas = await gerarEmpresasMock(params)
-            usandoDadosReais = false
+            fonteDados = "simulado"
           }
 
           // Aplica os favoritos salvos anteriormente
@@ -110,7 +116,7 @@ export const useAppStore = create<AppState>()(
             empresasFiltradas: filtradas,
             buscaAtual: params,
             carregando: false,
-            usandoDadosReais,
+            fonteDados,
           })
 
           // Salva no histórico de buscas (máx. 5)
