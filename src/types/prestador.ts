@@ -262,3 +262,70 @@ export interface ResultadoBuscaDiretorio {
   diretorio: PerfilDiretorio
   fotos: FotoTrabalho[]
 }
+
+/**
+ * Modo de busca de prospecção: "pares" busca o mesmo segmento (útil
+ * para benchmarking, parcerias, ou achar quem terceiriza); "clientes"
+ * busca segmentos que tipicamente CONTRATAM o serviço do prestador —
+ * essa é a prospecção de verdade, voltada a gerar leads de venda.
+ */
+export type ModoBusca = "pares" | "clientes"
+
+/**
+ * Mapeamento segmento → segmentos-clientes típicos. Cobre os ramos já
+ * sugeridos no app. Esta tabela é a base inicial — conforme a base de
+ * segmentos crescer (novos países, novos ramos), o caminho de evolução
+ * é trocar esta função por uma chamada de IA que infere os segmentos-
+ * clientes dinamicamente a partir de qualquer texto livre, em qualquer
+ * idioma, sem depender de manutenção manual desta tabela.
+ */
+const MAPA_SEGMENTOS_CLIENTES: Record<string, string[]> = {
+  "marmoraria": ["Construtora", "Arquitetura e design de interiores", "Loja de material de construção", "Marcenaria"],
+  "jateamento abrasivo": ["Estaleiro naval", "Indústria metalúrgica", "Manutenção industrial", "Construção civil pesada"],
+  "pintura industrial": ["Estaleiro naval", "Indústria metalúrgica", "Construtora", "Manutenção industrial"],
+  "aluguel de containers": ["Construtora", "Eventos e feiras", "Logística e armazenagem", "Indústria"],
+  "aluguel de caminhões": ["Construtora", "Transportadora", "Indústria", "Comércio de materiais"],
+  "aluguel de betoneiras": ["Construtora", "Empreiteira", "Reforma residencial", "Engenharia civil"],
+  "locação de equipamentos": ["Construtora", "Indústria", "Empreiteira", "Eventos"],
+  "caldeiraria": ["Indústria metalúrgica", "Petroquímica", "Manutenção industrial", "Estaleiro naval"],
+  "ensaios não destrutivos (ndt)": ["Indústria metalúrgica", "Petroquímica", "Construção civil pesada", "Manutenção industrial"],
+  "andaimes e acesso": ["Construtora", "Pintura industrial", "Manutenção predial", "Eventos"],
+  "isolamento térmico industrial": ["Petroquímica", "Indústria alimentícia", "Frigorífico", "Manutenção industrial"],
+  "solda industrial": ["Indústria metalúrgica", "Construção civil pesada", "Manutenção industrial", "Estaleiro naval"],
+  "manutenção mecânica industrial": ["Indústria", "Fábrica", "Mineração", "Petroquímica"],
+  "montagem industrial": ["Indústria", "Construtora", "Petroquímica", "Mineração"],
+  "transporte de cargas": ["Indústria", "Comércio", "Construtora", "Distribuidora"],
+  "locação de guindastes": ["Construtora", "Indústria", "Estaleiro naval", "Montagem industrial"],
+  "limpeza industrial": ["Indústria alimentícia", "Petroquímica", "Fábrica", "Frigorífico"],
+  "tratamento de superfícies": ["Indústria metalúrgica", "Construção civil", "Estaleiro naval", "Manutenção industrial"],
+  "refratários": ["Indústria metalúrgica", "Cerâmica", "Petroquímica", "Fundição"],
+  "elétrica industrial": ["Indústria", "Construtora", "Condomínio comercial", "Fábrica"],
+  "instrumentação industrial": ["Petroquímica", "Indústria", "Mineração", "Usina"],
+  "clínica odontológica": ["Plano de saúde", "Empresa (convênio corporativo)", "Escola (parceria)"],
+  "restaurante": ["Empresa (eventos corporativos)", "Buffet e eventos", "Hotel"],
+  "academia": ["Empresa (parceria corporativa/wellness)", "Condomínio residencial", "Plano de saúde"],
+  "mecânica automotiva": ["Locadora de veículos", "Frota empresarial", "Transportadora", "Concessionária"],
+  "advocacia": ["Construtora", "Indústria", "Imobiliária", "Empresa em geral"],
+  "contabilidade": ["Construtora", "Comércio", "Indústria", "Empresa em geral"],
+  "construção civil": ["Incorporadora", "Loja de material de construção", "Engenharia", "Imobiliária"],
+}
+
+/**
+ * Retorna os segmentos-clientes típicos para um segmento de prestador.
+ * Faz correspondência por substring (case-insensitive) para tolerar
+ * pequenas variações no texto digitado.
+ */
+export function obterSegmentosClientes(segmentoPrestador: string): string[] {
+  const chave = segmentoPrestador.toLowerCase().trim()
+
+  for (const [seg, clientes] of Object.entries(MAPA_SEGMENTOS_CLIENTES)) {
+    if (chave.includes(seg) || seg.includes(chave)) {
+      return clientes
+    }
+  }
+
+  // Sem mapeamento conhecido: retorna vazio — quem chama deve tratar
+  // esse caso (ex: cair no modo "pares", ou avisar que o segmento é
+  // novo e ainda não tem mapeamento de clientes configurado).
+  return []
+}

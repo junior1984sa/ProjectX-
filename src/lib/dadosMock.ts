@@ -136,6 +136,34 @@ const NOMES_POR_SEGMENTO: Record<string, string[]> = {
     "Construtora", "Engenharia", "Obras", "Construção", "Reforma",
     "Edificações", "Alvenaria", "Projetos", "Build", "Habitação"
   ],
+  construtora: [
+    "Construtora", "Engenharia", "Incorporadora", "Edificações", "Obras",
+    "Empreendimentos", "Construções", "Build", "Realizações", "Habitação"
+  ],
+  arquitetura: [
+    "Arquitetura", "Design de Interiores", "Studio", "Projetos", "Ateliê",
+    "Espaço", "Ambientes", "Arq.", "Decor", "Living"
+  ],
+  marcenaria: [
+    "Marcenaria", "Móveis Planejados", "Madeiras", "Marcenaria Fina", "Ambientes",
+    "Móveis", "Decor Madeira", "Carpintaria", "Marcenaria Premium", "Design em Madeira"
+  ],
+  "indústria metalúrgica": [
+    "Metalúrgica", "Indústria Metal", "Aços", "Metais", "Fundição",
+    "Metalúrgica Industrial", "Estruturas Metálicas", "Aço e Cia", "Metalmecânica", "Industrial Metal"
+  ],
+  petroquímica: [
+    "Petroquímica", "Química Industrial", "Refinaria", "Processamento", "Indústria Química",
+    "Petróleo e Gás", "Química", "Insumos Industriais", "Petroquímica do Brasil", "Derivados"
+  ],
+  "estaleiro naval": [
+    "Estaleiro", "Naval", "Construção Naval", "Indústria Naval", "Navios e Cia",
+    "Estaleiro Naval", "Embarcações", "Naval Service", "Marítima Industrial", "Docas"
+  ],
+  mineração: [
+    "Mineração", "Mineradora", "Mining", "Extração Mineral", "Recursos Minerais",
+    "Mineração do Brasil", "Pedreira Industrial", "Britagem", "Minérios", "Mineral"
+  ],
   default: [
     "Empresa", "Serviços", "Soluções", "Center", "Plus",
     "Pro", "Master", "Express", "Total", "Prime"
@@ -386,11 +414,20 @@ export async function gerarEmpresasMock(
     cidadeNorm.includes(c) || c.includes(cidadeNorm)
   )?.[1] || "BR"
 
+  // No modo "clientes potenciais", distribui os termos mapeados entre
+  // as empresas geradas, para a demonstração simulada também refletir
+  // a variedade de segmentos-clientes — não apenas o segmento do
+  // prestador repetido em todas as linhas.
+  const termosDisponiveis = params.segmentosBusca && params.segmentosBusca.length > 0
+    ? params.segmentosBusca
+    : [params.segmento]
+
   for (let i = 0; i < quantidade; i++) {
     const bairro = bairros[Math.floor(Math.random() * bairros.length)]
     const perfil = definirPerfil()
     const coordenadas = gerarCoordenadas(params.cidade, params.raioKm)
-    const nome = gerarNomeEmpresa(params.segmento, bairro, i)
+    const segmentoEmpresa = termosDisponiveis[i % termosDisponiveis.length]
+    const nome = gerarNomeEmpresa(segmentoEmpresa, bairro, i)
 
     // Define presença de contatos por perfil
     const temTelefone = perfil !== "baixo" || Math.random() > 0.3
@@ -425,7 +462,7 @@ export async function gerarEmpresasMock(
     const empresa: Empresa = {
       id: gerarId(),
       nome,
-      segmento: params.segmento,
+      segmento: segmentoEmpresa,
       endereco: gerarEndereco(bairro),
       bairro,
       cidade: params.cidade,

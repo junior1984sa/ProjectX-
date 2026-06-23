@@ -5,6 +5,12 @@
 // livre por texto (ex: "jateamento abrasivo em Florianópolis, SC")
 // em vez de depender de tags fixas. Tem custo a partir de ~$275/mês
 // acima da faixa gratuita — veja SUPABASE_SETUP.md para configurar.
+//
+// Suporta dois modos de busca (ver ParametrosBusca.segmentosBusca):
+// - "pares": busca pelo próprio segmento do prestador
+// - "clientes": busca por múltiplos segmentos-clientes em paralelo,
+//   distribuindo a quantidade desejada entre eles e combinando os
+//   resultados — é a prospecção de verdade, voltada a gerar leads.
 // ═══════════════════════════════════════════════════════════
 
 import type { Empresa, ParametrosBusca } from "@/types/empresa"
@@ -24,16 +30,15 @@ interface EmpresaGoogleBruta {
 }
 
 /**
- * Busca empresas reais via Google Places (Edge Function `buscar-empresas-google`).
- * Retorna null se a chave não estiver configurada, não houver resultados,
- * ou ocorrer qualquer erro de rede — nesses casos, quem chamou deve cair
- * para outra fonte de dados (OpenStreetMap ou exemplo simulado).
+ * Executa uma única busca por um termo específico via a Edge Function.
  */
-export async function buscarEmpresasGoogle(
-  params: ParametrosBusca
-): Promise<Empresa[] | null> {
+async function buscarPorTermo(
+  termoBusca: string,
+  params: ParametrosBusca,
+  quantidade: number
+): Promise<Empresa[]> {
   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string
-  if (!supabaseUrl) return null
+  if (!supabaseUrl) return []
 
   try {
     const resposta = await fetch(`${supabaseUrl}/functions/v1/buscar-empresas-google`, {
@@ -43,26 +48,26 @@ export async function buscarEmpresasGoogle(
         cidade: params.cidade,
         estado: params.estado,
         raioKm: params.raioKm,
-        segmento: params.segmento,
-        quantidadeDesejada: params.quantidadeDesejada,
+        segmento: termoBusca,
+        quantidadeDesejada: quantidade,
       }),
     })
 
     if (!resposta.ok) {
       console.error("Edge Function de busca Google respondeu com erro:", resposta.status)
-      return null
+      return []
     }
 
     const dados = await resposta.json()
 
     if (!dados.encontrado || !dados.empresas || dados.empresas.length === 0) {
-      return null
+      return []
     }
 
-    const empresas: Empresa[] = (dados.empresas as EmpresaGoogleBruta[]).map((e) => ({
+    return (dados.empresas as EmpresaGoogleBruta[]).map((e) => ({
       id: gerarId(),
       nome: e.nome,
-      segmento: params.segmento,
+      segmento: termoBusca,
       endereco: e.endereco,
       bairro: e.bairro,
       cidade: params.cidade,
@@ -81,10 +86,36 @@ export async function buscarEmpresasGoogle(
       favorita: false,
       criadaEm: new Date(),
     }))
-
-    return empresas
   } catch (erro) {
     console.error("Erro ao buscar empresas no Google Places:", erro)
-    return null
+    return []
   }
+}
+
+/**
+ * Busca empresas reais via Google Places. Se `params.segmentosBusca`
+ * tiver múltiplos termos (modo "clientes potenciais"), distribui a
+ * quantidade desejada entre eles e busca em paralelo, combinando os
+ * resultados. Caso contrário, busca só pelo `params.segmento` (modo
+ * "pares", comportamento original).
+ *
+ * Retorna null se nenhuma busca encontrar nada — nesse caso, quem
+ * chamou deve cair para outra fonte de dados.
+ */
+export async function buscarEmpresasGoogle(
+  params: ParametrosBusca
+): Promise<Empresa[] | null> {
+  const termos = params.segmentosBusca && params.segmentosBusca.length > 0
+    ? params.segmentosBusca
+    : [params.segmento]
+
+  const quantidadePorTermo = Math.ceil(params.quantidadeDesejada / termos.length)
+
+  const resultadosPorTermo = await Promise.all(
+    termos.map((termo) => buscarPorTermo(termo, params, quantidadePorTermo))
+  )
+
+  const empresas = resultadosPorTermo.flat().slice(0, params.quantidadeDesejada)
+
+  return empresas.length > 0 ? empresas : null
 }

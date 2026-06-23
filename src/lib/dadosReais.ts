@@ -9,6 +9,12 @@
 // Limitação conhecida: a cobertura de telefone/e-mail no OpenStreetMap
 // depende de quem cadastrou aquele estabelecimento no mapa colaborativo.
 // Em muitas cidades brasileiras, isso é mais escasso que no Google Places.
+//
+// Suporta dois modos de busca (ver ParametrosBusca.segmentosBusca):
+// - "pares": busca pelo próprio segmento do prestador
+// - "clientes": busca por múltiplos segmentos-clientes em paralelo,
+//   distribuindo a quantidade desejada entre eles e combinando os
+//   resultados.
 // ═══════════════════════════════════════════════════════════
 
 import type { Empresa, ParametrosBusca } from "@/types/empresa"
@@ -21,9 +27,6 @@ interface ElementoOSM {
   tags?: Record<string, string>
 }
 
-/**
- * Calcula o score de uma empresa com base nos dados reais disponíveis.
- */
 function calcularScoreReal(tags: Record<string, string>): number {
   let score = 0
   if (tags.phone || tags["contact:phone"]) score += 1
@@ -33,10 +36,6 @@ function calcularScoreReal(tags: Record<string, string>): number {
   return Math.min(5, Math.round(score * 10) / 10)
 }
 
-/**
- * Converte um elemento retornado pela Edge Function em uma Empresa
- * no formato interno do app.
- */
 function converterParaEmpresa(
   elemento: ElementoOSM,
   segmento: string,
@@ -87,10 +86,57 @@ function converterParaEmpresa(
 }
 
 /**
- * Busca empresas reais via a Edge Function `buscar-empresas-osm`.
- * Retorna null se a cidade não for localizada ou se nenhum
- * estabelecimento for encontrado — nesse caso, quem chamou esta
- * função deve decidir se cai no gerador de dados de exemplo.
+ * Executa uma única busca por um termo específico via a Edge Function.
+ */
+async function buscarPorTermo(
+  termoBusca: string,
+  params: ParametrosBusca,
+  quantidade: number,
+  supabaseUrl: string
+): Promise<Empresa[]> {
+  try {
+    const resposta = await fetch(`${supabaseUrl}/functions/v1/buscar-empresas-osm`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        cidade: params.cidade,
+        estado: params.estado,
+        raioKm: params.raioKm,
+        segmento: termoBusca,
+      }),
+    })
+
+    if (!resposta.ok) {
+      console.error("Edge Function de busca OSM respondeu com erro:", resposta.status)
+      return []
+    }
+
+    const dados = await resposta.json()
+
+    if (!dados.encontrado || !dados.elementos || dados.elementos.length === 0) {
+      return []
+    }
+
+    return (dados.elementos as ElementoOSM[])
+      .map((el) => converterParaEmpresa(el, termoBusca, params.cidade, params.estado))
+      .filter((e): e is Empresa => e !== null)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, quantidade)
+  } catch (erro) {
+    console.error("Erro ao buscar empresas reais:", erro)
+    return []
+  }
+}
+
+/**
+ * Busca empresas reais via OpenStreetMap. Se `params.segmentosBusca`
+ * tiver múltiplos termos (modo "clientes potenciais"), distribui a
+ * quantidade desejada entre eles e busca em paralelo. Caso contrário,
+ * busca só pelo `params.segmento` (modo "pares").
+ *
+ * Retorna null se a cidade não for localizada ou se nenhuma busca
+ * encontrar nada — nesse caso, quem chamou deve cair no gerador de
+ * dados de exemplo.
  */
 export async function buscarEmpresasReais(
   params: ParametrosBusca
@@ -102,38 +148,17 @@ export async function buscarEmpresasReais(
     return null
   }
 
-  try {
-    const resposta = await fetch(`${supabaseUrl}/functions/v1/buscar-empresas-osm`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        cidade: params.cidade,
-        estado: params.estado,
-        raioKm: params.raioKm,
-        segmento: params.segmento,
-      }),
-    })
+  const termos = params.segmentosBusca && params.segmentosBusca.length > 0
+    ? params.segmentosBusca
+    : [params.segmento]
 
-    if (!resposta.ok) {
-      console.error("Edge Function de busca OSM respondeu com erro:", resposta.status)
-      return null
-    }
+  const quantidadePorTermo = Math.ceil(params.quantidadeDesejada / termos.length)
 
-    const dados = await resposta.json()
+  const resultadosPorTermo = await Promise.all(
+    termos.map((termo) => buscarPorTermo(termo, params, quantidadePorTermo, supabaseUrl))
+  )
 
-    if (!dados.encontrado || !dados.elementos || dados.elementos.length === 0) {
-      return null
-    }
+  const empresas = resultadosPorTermo.flat().slice(0, params.quantidadeDesejada)
 
-    const empresas = (dados.elementos as ElementoOSM[])
-      .map((el) => converterParaEmpresa(el, params.segmento, params.cidade, params.estado))
-      .filter((e): e is Empresa => e !== null)
-      .sort((a, b) => b.score - a.score)
-      .slice(0, params.quantidadeDesejada)
-
-    return empresas.length > 0 ? empresas : null
-  } catch (erro) {
-    console.error("Erro ao buscar empresas reais:", erro)
-    return null
-  }
+  return empresas.length > 0 ? empresas : null
 }

@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { useAppStore } from "@/store/useAppStore"
 import { useAuthStore } from "@/store/useAuthStore"
 import { useCreditosStore } from "@/store/useCreditosStore"
-import { FAIXAS_CREDITO, temAcessoLiberado } from "@/types/prestador"
+import { FAIXAS_CREDITO, temAcessoLiberado, obterSegmentosClientes, type ModoBusca } from "@/types/prestador"
 import { type ParametrosBusca } from "@/types/empresa"
 import toast from "react-hot-toast"
 import { format } from "date-fns"
@@ -37,6 +37,7 @@ export function FormularioBusca() {
   const [cidade, setCidade] = useState("")
   const [raioKm, setRaioKm] = useState(10)
   const [faixaSelecionada, setFaixaSelecionada] = useState(0) // índice em FAIXAS_CREDITO
+  const [modoBusca, setModoBusca] = useState<ModoBusca>("clientes")
   const [mostrarSugestoesSegmento, setMostrarSugestoesSegmento] = useState(false)
   const [mostrarSugestoesCidade, setMostrarSugestoesCidade] = useState(false)
 
@@ -63,6 +64,20 @@ export function FormularioBusca() {
     const nomeCidade = partes[0].trim()
     const estado = partes[1]?.trim() || ""
 
+    // No modo "clientes potenciais", traduz o segmento do prestador
+    // para os segmentos que tipicamente CONTRATAM esse serviço.
+    let segmentosBusca: string[] | undefined
+    if (modoBusca === "clientes") {
+      const clientesMapeados = obterSegmentosClientes(segmento.trim())
+      if (clientesMapeados.length === 0) {
+        toast.error(
+          "Ainda não temos um mapeamento de clientes para esse segmento. Tente o modo \"Buscar concorrentes\" por agora."
+        )
+        return
+      }
+      segmentosBusca = clientesMapeados
+    }
+
     // Visitante sem login: libera uma busca de demonstração, sem gastar
     // créditos, para que a pessoa sinta a ferramenta antes de criar conta.
     // O tamanho fica fixo em 10 empresas e fica marcado como "demo" na sessão.
@@ -79,6 +94,7 @@ export function FormularioBusca() {
         estado,
         raioKm,
         quantidadeDesejada: 10,
+        segmentosBusca,
         timestamp: new Date(),
       }
 
@@ -118,6 +134,7 @@ export function FormularioBusca() {
       estado,
       raioKm,
       quantidadeDesejada: faixa.max,
+      segmentosBusca,
       timestamp: new Date(),
     }
 
@@ -167,10 +184,43 @@ export function FormularioBusca() {
       <Card className="w-full max-w-2xl border-border/60 shadow-2xl shadow-black/30 animate-fadeIn">
         <CardContent className="p-6 md:p-8 space-y-6">
 
+          {/* Seletor de modo de busca */}
+          <div className="space-y-2">
+            <Label className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
+              O que você quer encontrar?
+            </Label>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                type="button"
+                onClick={() => setModoBusca("clientes")}
+                className={`flex flex-col items-start gap-0.5 p-3 rounded-lg border text-left transition-all ${
+                  modoBusca === "clientes"
+                    ? "bg-dourado-900/30 border-dourado-600 text-dourado-300"
+                    : "bg-secondary border-transparent text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
+                }`}
+              >
+                <span className="text-sm font-semibold">Clientes potenciais</span>
+                <span className="text-xs opacity-80">Empresas que contratam seu serviço</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setModoBusca("pares")}
+                className={`flex flex-col items-start gap-0.5 p-3 rounded-lg border text-left transition-all ${
+                  modoBusca === "pares"
+                    ? "bg-dourado-900/30 border-dourado-600 text-dourado-300"
+                    : "bg-secondary border-transparent text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
+                }`}
+              >
+                <span className="text-sm font-semibold">Concorrentes/pares</span>
+                <span className="text-xs opacity-80">Empresas do mesmo ramo que você</span>
+              </button>
+            </div>
+          </div>
+
           {/* Campo: Segmento */}
           <div className="space-y-2 relative">
             <Label htmlFor="segmento" className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-              Ramo / Segmento
+              {modoBusca === "clientes" ? "Seu ramo / segmento" : "Ramo / Segmento a buscar"}
             </Label>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -211,6 +261,32 @@ export function FormularioBusca() {
                     {sug}
                   </button>
                 ))}
+              </div>
+            )}
+
+            {/* Preview dos segmentos-clientes mapeados, em tempo real */}
+            {modoBusca === "clientes" && segmento.trim() && (
+              <div className="mt-2">
+                {(() => {
+                  const previewClientes = obterSegmentosClientes(segmento)
+                  if (previewClientes.length === 0) {
+                    return (
+                      <p className="text-xs text-yellow-500/80">
+                        Ainda não temos mapeamento de clientes para "{segmento}". Tente o modo "Concorrentes/pares".
+                      </p>
+                    )
+                  }
+                  return (
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <span className="text-xs text-muted-foreground">Vamos buscar:</span>
+                      {previewClientes.map((c) => (
+                        <span key={c} className="px-2 py-0.5 rounded-full bg-dourado-900/20 border border-dourado-700/30 text-xs text-dourado-300">
+                          {c}
+                        </span>
+                      ))}
+                    </div>
+                  )
+                })()}
               </div>
             )}
           </div>
