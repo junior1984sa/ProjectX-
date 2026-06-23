@@ -6,6 +6,7 @@ import { TelaAbertura } from "@/components/TelaAbertura"
 import { FormularioBusca } from "@/components/FormularioBusca"
 import { Dashboard } from "@/components/Dashboard"
 import { NavegacaoTopo } from "@/components/NavegacaoTopo"
+import { PromptInstalarApp } from "@/components/PromptInstalarApp"
 import { PaginaSAC } from "@/components/PaginaSAC"
 import { BuscaDiretorio } from "@/components/diretorio/BuscaDiretorio"
 import { TelaAuth } from "@/components/auth/TelaAuth"
@@ -128,6 +129,7 @@ function ConteudoApp() {
     <>
       {/* O header de navegação não aparece na tela de abertura (splash) */}
       {location.pathname !== "/" && <NavegacaoTopo />}
+      <PromptInstalarApp />
       <Routes>
         <Route path="/" element={<TelaAbertura />} />
         <Route path="/buscar" element={<PaginaBusca />} />

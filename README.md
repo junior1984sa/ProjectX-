@@ -143,6 +143,17 @@ supabase/
 
 ---
 
+## 📱 App instalável no celular (PWA)
+
+O ProspectX é um **Progressive Web App** — qualquer visitante pode instalá-lo na tela inicial do celular, direto do navegador, sem passar por loja de aplicativos. Um banner de instalação aparece automaticamente quando o navegador detecta que o app pode ser instalado.
+
+**O que isso já entrega:**
+- Ícone próprio na tela inicial do celular
+- Abre em tela cheia, sem barra de navegador
+- Funciona parcialmente offline (arquivos estáticos em cache)
+
+**Próxima evolução possível**: empacotar esse mesmo código com [Capacitor](https://capacitorjs.com) para publicar nas lojas (Google Play / App Store) de verdade, reaproveitando quase 100% do código já escrito — recomendado quando já houver uma base de usuários validando o produto, já que as lojas têm taxas de desenvolvedor anuais.
+
 ## 🔌 Fonte dos dados de prospecção
 
 A busca usa **OpenStreetMap (Nominatim + Overpass API)** — gratuito, sem necessidade de chave de API. O fluxo é: `src/lib/dadosReais.ts` geocodifica a cidade digitada e busca estabelecimentos reais próximos, filtrando pelo segmento. Se não encontrar nada (cidade pequena, segmento raro na região, indisponibilidade temporária da API), o app cai automaticamente no gerador de exemplo (`src/lib/dadosMock.ts`) — e isso é sinalizado com clareza na tela ("Exemplo simulado" em amarelo), nunca apresentado como dado real.

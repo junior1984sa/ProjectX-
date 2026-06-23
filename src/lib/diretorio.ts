@@ -220,3 +220,94 @@ export async function buscarNoDiretorio(
 
   return resultados
 }
+
+/**
+ * Envia a imagem de capa/destaque do perfil de diretório — campo
+ * separado da galeria de trabalhos, usado também no carrossel
+ * público da tela de abertura.
+ */
+export async function enviarImagemCapa(
+  profileId: string,
+  arquivo: File
+): Promise<{ url: string | null; erro: string | null }> {
+  const tiposAceitos = ["image/jpeg", "image/jpg", "image/png", "image/webp"]
+  if (!tiposAceitos.includes(arquivo.type)) {
+    return { url: null, erro: "Formato não aceito. Use JPG, PNG ou WEBP." }
+  }
+
+  const tamanhoMB = arquivo.size / (1024 * 1024)
+  if (tamanhoMB > TAMANHO_MAXIMO_MB) {
+    return { url: null, erro: `Arquivo muito grande. Máximo de ${TAMANHO_MAXIMO_MB}MB.` }
+  }
+
+  const nomeSanitizado = arquivo.name
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-zA-Z0-9.]/g, "_")
+  // Prefixo "capa_" para diferenciar da galeria na mesma pasta do usuário
+  const caminhoStorage = `${profileId}/capa_${Date.now()}_${nomeSanitizado}`
+
+  const { error: erroUpload } = await supabase.storage
+    .from(NOME_BUCKET_FOTOS)
+    .upload(caminhoStorage, arquivo, { cacheControl: "3600", upsert: false })
+
+  if (erroUpload) {
+    return { url: null, erro: `Erro ao enviar imagem: ${erroUpload.message}` }
+  }
+
+  const { data: urlData } = supabase.storage
+    .from(NOME_BUCKET_FOTOS)
+    .getPublicUrl(caminhoStorage)
+
+  const { error: erroUpdate } = await supabase
+    .from("perfis_diretorio")
+    .update({ logo_url: urlData.publicUrl })
+    .eq("id", profileId)
+
+  if (erroUpdate) {
+    return { url: null, erro: `Erro ao salvar imagem de capa: ${erroUpdate.message}` }
+  }
+
+  return { url: urlData.publicUrl, erro: null }
+}
+
+/**
+ * Busca perfis publicados com imagem de capa definida, para alimentar
+ * o carrossel da tela de abertura. Não exige login — usa as policies
+ * públicas restritas criadas na migration 010 (expõe só nome, cidade,
+ * segmento e capa, nunca dados de contato).
+ */
+export interface ItemCarrossel {
+  profileId: string
+  nomeEmpresa: string
+  segmento: string
+  cidade: string
+  estado: string
+  logoUrl: string
+}
+
+export async function buscarItensCarrossel(limite = 12): Promise<ItemCarrossel[]> {
+  const { data, error } = await supabase
+    .from("perfis_diretorio")
+    .select("id, logo_url, profiles!inner(nome_empresa, segmento, cidade, estado)")
+    .eq("publicado", true)
+    .not("logo_url", "is", null)
+    .limit(limite)
+
+  if (error) {
+    console.error("Erro ao buscar itens do carrossel:", error.message)
+    return []
+  }
+
+  return (data ?? []).map((linha: Record<string, unknown>) => {
+    const profileInfo = linha.profiles as Record<string, unknown>
+    return {
+      profileId: linha.id as string,
+      logoUrl: linha.logo_url as string,
+      nomeEmpresa: profileInfo.nome_empresa as string,
+      segmento: profileInfo.segmento as string,
+      cidade: profileInfo.cidade as string,
+      estado: profileInfo.estado as string,
+    }
+  })
+}

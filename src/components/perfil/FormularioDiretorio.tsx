@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react"
-import { Sparkles, Loader2, Eye, EyeOff, ImageIcon } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
+import { Sparkles, Loader2, Eye, EyeOff, ImageIcon, Camera } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -11,6 +11,7 @@ import {
   carregarPerfilDiretorio,
   salvarPerfilDiretorio,
   definirPublicacaoDiretorio,
+  enviarImagemCapa,
 } from "@/lib/diretorio"
 import { GaleriaFotosTrabalhos } from "@/components/perfil/GaleriaFotosTrabalhos"
 import { temAcessoLiberado, type DadosPerfilDiretorioForm, type PerfilDiretorio } from "@/types/prestador"
@@ -32,6 +33,8 @@ export function FormularioDiretorio() {
   const [carregando, setCarregando] = useState(true)
   const [salvando, setSalvando] = useState(false)
   const [alternandoPublicacao, setAlternandoPublicacao] = useState(false)
+  const [enviandoCapa, setEnviandoCapa] = useState(false)
+  const inputCapaRef = useRef<HTMLInputElement>(null)
 
   const acessoLiberado = temAcessoLiberado(perfil)
 
@@ -63,6 +66,27 @@ export function FormularioDiretorio() {
       return "Escreva uma descrição com pelo menos 30 caracteres — é o que convence quem está buscando."
     }
     return null
+  }
+
+  async function handleEnviarCapa(e: React.ChangeEvent<HTMLInputElement>) {
+    const arquivo = e.target.files?.[0]
+    if (!arquivo || !usuarioId) return
+
+    setEnviandoCapa(true)
+    const { url, erro } = await enviarImagemCapa(usuarioId, arquivo)
+    setEnviandoCapa(false)
+
+    if (erro) {
+      toast.error(erro)
+      return
+    }
+
+    if (url) {
+      setPerfilDiretorio((prev) => (prev ? { ...prev, logo_url: url } : prev))
+      toast.success("Imagem de capa atualizada!")
+    }
+
+    if (inputCapaRef.current) inputCapaRef.current.value = ""
   }
 
   async function handleSalvar() {
@@ -180,6 +204,47 @@ export function FormularioDiretorio() {
           <CardDescription>O que aparece em destaque no seu perfil do diretório</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          {/* Imagem de capa/destaque — também usada no carrossel da página inicial */}
+          <div className="space-y-2">
+            <Label>Imagem de capa/destaque</Label>
+            <div className="flex items-center gap-3">
+              <div className="w-24 h-24 rounded-lg overflow-hidden border border-border bg-secondary/40 flex-shrink-0 flex items-center justify-center">
+                {perfilDiretorio?.logo_url ? (
+                  <img src={perfilDiretorio.logo_url} alt="Capa" className="w-full h-full object-cover" />
+                ) : (
+                  <Camera className="w-6 h-6 text-muted-foreground/40" />
+                )}
+              </div>
+              <div className="flex-1 space-y-1.5">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={() => inputCapaRef.current?.click()}
+                  disabled={enviandoCapa || !perfilDiretorio}
+                >
+                  {enviandoCapa ? (
+                    <Loader2 className="w-3.5 h-3.5 mr-1.5 animate-spin" />
+                  ) : (
+                    <Camera className="w-3.5 h-3.5 mr-1.5" />
+                  )}
+                  {perfilDiretorio?.logo_url ? "Trocar imagem" : "Enviar imagem"}
+                </Button>
+                <p className="text-xs text-muted-foreground">
+                  Essa imagem também pode aparecer no carrossel de destaque da página inicial.
+                  {!perfilDiretorio && " Salve o perfil primeiro para liberar o envio."}
+                </p>
+              </div>
+            </div>
+            <input
+              ref={inputCapaRef}
+              type="file"
+              accept=".jpg,.jpeg,.png,.webp"
+              onChange={handleEnviarCapa}
+              className="hidden"
+            />
+          </div>
+
           <div className="space-y-2">
             <Label>Título público *</Label>
             <Input

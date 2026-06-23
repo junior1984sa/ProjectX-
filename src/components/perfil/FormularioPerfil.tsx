@@ -9,7 +9,7 @@ import { useAuthStore } from "@/store/useAuthStore"
 import { UploadPortfolio } from "@/components/perfil/UploadPortfolio"
 import { PainelCreditos } from "@/components/perfil/PainelCreditos"
 import { CancelarAssinatura } from "@/components/perfil/CancelarAssinatura"
-import { SEGMENTOS_SUGERIDOS, PAISES_DISPONIVEIS, type DadosPerfilForm } from "@/types/prestador"
+import { SEGMENTOS_SUGERIDOS, PAISES_DISPONIVEIS, temAcessoLiberado, type DadosPerfilForm } from "@/types/prestador"
 import toast from "react-hot-toast"
 
 interface FormularioPerfilProps {
@@ -321,9 +321,8 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
         </CardContent>
       </Card>
 
-      {/* Painel de créditos — só para assinantes ativos */}
       {/* Painel de créditos e cancelamento — para assinantes ativos ou em trial */}
-      {perfil && (perfil.status_assinatura === "ativa" || perfil.status_assinatura === "trial") && (
+      {perfil && temAcessoLiberado(perfil) && (
         <>
           {perfil.status_assinatura === "trial" && (
             <div className="rounded-lg bg-dourado-900/15 border border-dourado-800/40 p-4 flex items-center justify-between flex-wrap gap-3">

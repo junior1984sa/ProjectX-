@@ -3,9 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/png" href="/logo-x-apenas.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content="ProspectX - Prospecção B2B inteligente para empresas brasileiras" />
     <title>ProspectX — Prospecção B2B</title>
+
+    <!-- PWA: manifest e cor de tema -->
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#1c1f24" />
+
+    <!-- PWA no iOS: Safari não lê manifest.json plenamente, exige tags próprias -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="ProspectX" />
+    <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
     <!-- Leaflet CSS -->
     <link
       rel="stylesheet"
@@ -20,5 +31,16 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Registra o service worker para tornar o app instalável e
+      // permitir funcionamento offline básico (cache de estáticos).
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("/sw.js").catch((erro) => {
+            console.error("Erro ao registrar service worker:", erro)
+          })
+        })
+      }
+    </script>
   </body>
 </html>
