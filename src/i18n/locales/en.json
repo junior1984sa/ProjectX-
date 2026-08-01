@@ -20,5 +20,64 @@
     "AU": "Australia",
     "GB": "United Kingdom",
     "PT": "Portugal"
+  },
+  "paisesEm": {
+    "BR": "in Brazil",
+    "US": "in the United States",
+    "AU": "in Australia",
+    "GB": "in the United Kingdom",
+    "PT": "in Portugal"
+  },
+  "busca": {
+    "chamada": "Forget ads waiting for someone to notice them. ProspectX goes straight to the companies that need your service right now — in any city {{regiao}}.",
+    "regiaoDoPais": "in your chosen country",
+    "oQueEncontrar": "What are you looking for?",
+    "modoClientes": "Potential clients",
+    "modoClientesDescricao": "Companies that hire your service",
+    "modoDireta": "A service I need",
+    "modoDiretaDescricao": "Search directly for what you're looking for",
+    "seuRamo": "Your industry / trade",
+    "ramoABuscar": "Industry / trade to search",
+    "placeholderRamoClientes": "e.g. stonemason, sandblasting, dental clinic...",
+    "placeholderRamoDireta": "e.g. builder, hospital, restaurant — what do you need to hire?",
+    "foraDaLista": "Not in our list — when you search, we'll use AI to identify the potential clients.",
+    "vamosBuscar": "We'll search for:",
+    "segmentosSugeridos": [
+      "Stonemason",
+      "Dental clinic",
+      "Restaurant",
+      "Gym",
+      "Auto repair",
+      "Pharmacy",
+      "Pet shop",
+      "Construction company",
+      "Law firm",
+      "Accounting"
+    ],
+    "cidade": "City",
+    "placeholderCidade": "e.g. {{exemplo}}",
+    "raioDeBusca": "Search radius",
+    "tamanhoDaBusca": "Search size",
+    "creditosDisponiveis": "{{quantidade}} credits available",
+    "ateEmpresas": "Up to {{quantidade}} companies",
+    "custoEmCreditos": "{{quantidade}} credits",
+    "dicaCreditos": "Larger searches return more companies per credit spent. Whatever is left over never expires: it adds to your next top-up.",
+    "identificandoClientes": "Identifying potential clients...",
+    "buscandoEmpresas": "Searching for companies...",
+    "buscarEmpresas": "Search companies · {{quantidade}} credits",
+    "buscasRecentes": "Recent searches",
+    "erro": {
+      "informeRamo": "Enter the company's industry or trade.",
+      "informeCidade": "Enter the city to search in.",
+      "semClientesPotenciais": "We couldn't identify potential clients for that trade. Try the \"A service I need\" mode.",
+      "demoUsada": "You've already used your demo search. Create an account to keep searching.",
+      "assineParaLiberar": "Subscribe to a plan to unlock your searches.",
+      "creditosInsuficientes": "Not enough credits (you need {{custo}}, you have {{saldo}}). Wait for your plan's next top-up."
+    },
+    "ok": {
+      "iaIdentificou": "We identified the potential clients with help from AI.",
+      "demonstracao": "This is a demo — create an account to see contact details and search without limits.",
+      "creditosUsados": "{{custo}} credits used · {{saldo}} remaining"
+    }
   }
 }

@@ -20,5 +20,64 @@
     "AU": "Austrália",
     "GB": "Reino Unido",
     "PT": "Portugal"
+  },
+  "paisesEm": {
+    "BR": "do Brasil",
+    "US": "dos Estados Unidos",
+    "AU": "da Austrália",
+    "GB": "do Reino Unido",
+    "PT": "de Portugal"
+  },
+  "busca": {
+    "chamada": "Esqueça anúncio esperando alguém ver. O ProspectX vai direto até quem, agora, precisa do serviço que você presta — em qualquer cidade {{regiao}}.",
+    "regiaoDoPais": "do país escolhido",
+    "oQueEncontrar": "O que você quer encontrar?",
+    "modoClientes": "Clientes potenciais",
+    "modoClientesDescricao": "Empresas que contratam seu serviço",
+    "modoDireta": "Serviço que eu preciso",
+    "modoDiretaDescricao": "Busca direta pelo que você está procurando",
+    "seuRamo": "Seu ramo / segmento",
+    "ramoABuscar": "Ramo / segmento a buscar",
+    "placeholderRamoClientes": "Ex: marmoraria, jateamento abrasivo, clínica odontológica...",
+    "placeholderRamoDireta": "Ex: construtora, hospital, restaurante — o que você precisa contratar?",
+    "foraDaLista": "Não está na nossa lista — ao buscar, vamos usar IA para identificar os clientes potenciais.",
+    "vamosBuscar": "Vamos buscar:",
+    "segmentosSugeridos": [
+      "Marmoraria",
+      "Clínica odontológica",
+      "Restaurante",
+      "Academia",
+      "Mecânica",
+      "Farmácia",
+      "Pet shop",
+      "Construtora",
+      "Advocacia",
+      "Contabilidade"
+    ],
+    "cidade": "Cidade",
+    "placeholderCidade": "Ex: {{exemplo}}",
+    "raioDeBusca": "Raio de busca",
+    "tamanhoDaBusca": "Tamanho da busca",
+    "creditosDisponiveis": "{{quantidade}} créditos disponíveis",
+    "ateEmpresas": "Até {{quantidade}} empresas",
+    "custoEmCreditos": "{{quantidade}} créditos",
+    "dicaCreditos": "Buscas maiores rendem mais empresas por crédito gasto. O que sobrar não expira: soma à recarga do próximo ciclo.",
+    "identificandoClientes": "Identificando clientes potenciais...",
+    "buscandoEmpresas": "Buscando empresas...",
+    "buscarEmpresas": "Buscar empresas · {{quantidade}} créditos",
+    "buscasRecentes": "Buscas recentes",
+    "erro": {
+      "informeRamo": "Informe o ramo ou segmento da empresa.",
+      "informeCidade": "Informe a cidade para a busca.",
+      "semClientesPotenciais": "Não conseguimos identificar clientes potenciais para esse segmento. Tente o modo \"Serviço que eu preciso\".",
+      "demoUsada": "Você já usou sua busca de demonstração. Crie sua conta para continuar buscando.",
+      "assineParaLiberar": "Assine um plano para liberar suas buscas.",
+      "creditosInsuficientes": "Créditos insuficientes (precisa de {{custo}}, você tem {{saldo}}). Aguarde a próxima recarga do seu plano."
+    },
+    "ok": {
+      "iaIdentificou": "Identificamos os clientes potenciais com a ajuda de IA.",
+      "demonstracao": "Essa é uma demonstração — crie sua conta para ver os contatos e buscar sem limites.",
+      "creditosUsados": "{{custo}} créditos usados · {{saldo}} restantes"
+    }
   }
 }

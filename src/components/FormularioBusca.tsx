@@ -10,23 +10,16 @@ import { useAppStore } from "@/store/useAppStore"
 import { useAuthStore } from "@/store/useAuthStore"
 import { usePreferenciasStore } from "@/store/usePreferenciasStore"
 import { useCreditosStore } from "@/store/useCreditosStore"
-import { FAIXAS_CREDITO, temAcessoLiberado, obterSegmentosClientes as obterSegmentosClientesPreview, obterSegmentosClientesComFallback, type ModoBusca } from "@/types/prestador"
+import { FAIXAS_CREDITO, temAcessoLiberado, obterSegmentosClientes as obterSegmentosClientesPreview, obterSegmentosClientesComFallback, obterPais, type ModoBusca } from "@/types/prestador"
+import { useTranslation } from "react-i18next"
 import { type ParametrosBusca } from "@/types/empresa"
 import toast from "react-hot-toast"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 
-// Sugestões rápidas de segmentos
-const SEGMENTOS_SUGERIDOS = [
-  "Marmoraria", "Clínica odontológica", "Restaurante", "Academia",
-  "Mecânica", "Farmácia", "Pet shop", "Construtora", "Advocacia", "Contabilidade"
-]
-
-// Cidades populares
-const CIDADES_SUGERIDAS = [
-  "São Paulo, SP", "Rio de Janeiro, RJ", "Florianópolis, SC",
-  "Curitiba, PR", "Belo Horizonte, MG", "Porto Alegre, RS"
-]
+// As sugestões de segmento vêm da tradução (mudam com o idioma) e as
+// de cidade vêm do país escolhido — sugerir "São Paulo, SP" para quem
+// prospecta em Chicago seria pior do que não sugerir nada.
 
 export function FormularioBusca() {
   const navigate = useNavigate()
@@ -40,6 +33,8 @@ export function FormularioBusca() {
    */
   const paisPreferido = usePreferenciasStore((s) => s.pais)
   const paisDaBusca = perfil?.pais_foco ?? paisPreferido
+  const configPais = obterPais(paisDaBusca)
+  const { t } = useTranslation()
   const { creditos, carregarCreditos, consumirCreditos } = useCreditosStore()
 
   const [segmento, setSegmento] = useState("")
@@ -61,11 +56,11 @@ export function FormularioBusca() {
 
   async function handleBuscar() {
     if (!segmento.trim()) {
-      toast.error("Informe o ramo ou segmento da empresa.")
+      toast.error(t("busca.erro.informeRamo"))
       return
     }
     if (!cidade.trim()) {
-      toast.error("Informe a cidade para a busca.")
+      toast.error(t("busca.erro.informeCidade"))
       return
     }
 
@@ -84,13 +79,11 @@ export function FormularioBusca() {
       setBuscandoMapeamento(false)
 
       if (segmentos.length === 0) {
-        toast.error(
-          'Não conseguimos identificar clientes potenciais para esse segmento. Tente o modo "Buscar serviço que preciso".'
-        )
+        toast.error(t("busca.erro.semClientesPotenciais"))
         return
       }
       if (fonte === "ia") {
-        toast.success("Identificamos os clientes potenciais com a ajuda de IA.")
+        toast.success(t("busca.ok.iaIdentificou"))
       }
       segmentosBusca = segmentos
     }
@@ -100,7 +93,7 @@ export function FormularioBusca() {
     // O tamanho fica fixo em 10 empresas e fica marcado como "demo" na sessão.
     if (!usuarioId) {
       if (sessionStorage.getItem("prospectx_demo_usado")) {
-        toast.error("Você já usou sua busca de demonstração. Crie sua conta para continuar buscando.")
+        toast.error(t("busca.erro.demoUsada"))
         navigate("/entrar")
         return
       }
@@ -117,13 +110,13 @@ export function FormularioBusca() {
       }
 
       sessionStorage.setItem("prospectx_demo_usado", "true")
-      toast.success("Essa é uma demonstração — crie sua conta para ver os contatos e buscar sem limites.")
+      toast.success(t("busca.ok.demonstracao"))
       await buscarEmpresas(params)
       return
     }
 
     if (!temAcesso) {
-      toast.error("Assine um plano para liberar suas buscas mensais.")
+      toast.error(t("busca.erro.assineParaLiberar"))
       navigate(perfil ? "/planos" : "/perfil")
       return
     }
@@ -141,7 +134,10 @@ export function FormularioBusca() {
 
     if (!resultado.sucesso) {
       toast.error(
-        `Créditos insuficientes (precisa de ${resultado.custo}, você tem ${resultado.creditos_restantes}). Aguarde a próxima recarga do seu plano.`
+        t("busca.erro.creditosInsuficientes", {
+          custo: resultado.custo,
+          saldo: resultado.creditos_restantes,
+        })
       )
       return
     }
@@ -157,7 +153,12 @@ export function FormularioBusca() {
       timestamp: new Date(),
     }
 
-    toast.success(`${resultado.custo} créditos usados · ${resultado.creditos_restantes} restantes`)
+    toast.success(
+      t("busca.ok.creditosUsados", {
+        custo: resultado.custo,
+        saldo: resultado.creditos_restantes,
+      })
+    )
     await buscarEmpresas(params)
   }
 
@@ -171,12 +172,17 @@ export function FormularioBusca() {
     setRaioKm(busca.raioKm)
   }
 
-  // Filtra sugestões
-  const sugestoesSegmentoFiltradas = SEGMENTOS_SUGERIDOS.filter(s =>
-    s.toLowerCase().includes(segmento.toLowerCase()) && segmento.length > 0
+  // Sugestões: segmentos seguem o idioma, cidades seguem o país
+  const segmentosSugeridos = t("busca.segmentosSugeridos", {
+    returnObjects: true,
+  }) as string[]
+  const cidadesSugeridas = configPais.cidadesSugeridas
+
+  const sugestoesSegmentoFiltradas = segmentosSugeridos.filter(
+    (s) => s.toLowerCase().includes(segmento.toLowerCase()) && segmento.length > 0
   )
-  const sugestoesCidadeFiltradas = CIDADES_SUGERIDAS.filter(c =>
-    c.toLowerCase().includes(cidade.toLowerCase()) && cidade.length > 0
+  const sugestoesCidadeFiltradas = cidadesSugeridas.filter(
+    (c) => c.toLowerCase().includes(cidade.toLowerCase()) && cidade.length > 0
   )
 
   return (
@@ -194,8 +200,9 @@ export function FormularioBusca() {
           </h1>
         </div>
         <p className="text-muted-foreground text-lg max-w-md mx-auto">
-          Esqueça anúncio esperando alguém ver. O ProspectX vai direto até quem,
-          agora, precisa do serviço que você presta — em qualquer cidade do Brasil.
+          {/* A região sai do país escolhido: prometer "do Brasil" para
+              quem prospecta em Sydney seria promessa errada */}
+          {t("busca.chamada", { regiao: t(`paisesEm.${configPais.codigo}`) })}
         </p>
       </div>
 
@@ -206,7 +213,7 @@ export function FormularioBusca() {
           {/* Seletor de modo de busca */}
           <div className="space-y-2">
             <Label className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-              O que você quer encontrar?
+              {t("busca.oQueEncontrar")}
             </Label>
             <div className="grid grid-cols-2 gap-2">
               <button
@@ -218,8 +225,8 @@ export function FormularioBusca() {
                     : "bg-secondary border-transparent text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
                 }`}
               >
-                <span className="text-sm font-semibold">Clientes potenciais</span>
-                <span className="text-xs opacity-80">Empresas que contratam seu serviço</span>
+                <span className="text-sm font-semibold">{t("busca.modoClientes")}</span>
+                <span className="text-xs opacity-80">{t("busca.modoClientesDescricao")}</span>
               </button>
               <button
                 type="button"
@@ -230,8 +237,8 @@ export function FormularioBusca() {
                     : "bg-secondary border-transparent text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
                 }`}
               >
-                <span className="text-sm font-semibold">Serviço que eu preciso</span>
-                <span className="text-xs opacity-80">Busca direta pelo que você está procurando</span>
+                <span className="text-sm font-semibold">{t("busca.modoDireta")}</span>
+                <span className="text-xs opacity-80">{t("busca.modoDiretaDescricao")}</span>
               </button>
             </div>
           </div>
@@ -239,7 +246,7 @@ export function FormularioBusca() {
           {/* Campo: Segmento */}
           <div className="space-y-2 relative">
             <Label htmlFor="segmento" className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-              {modoBusca === "clientes" ? "Seu ramo / segmento" : "Ramo / Segmento a buscar"}
+              {modoBusca === "clientes" ? t("busca.seuRamo") : t("busca.ramoABuscar")}
             </Label>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -247,8 +254,8 @@ export function FormularioBusca() {
                 id="segmento"
                 placeholder={
                   modoBusca === "clientes"
-                    ? "Ex: marmoraria, jateamento abrasivo, clínica odontológica..."
-                    : "Ex: construtora, hospital, restaurante — o que você precisa contratar?"
+                    ? t("busca.placeholderRamoClientes")
+                    : t("busca.placeholderRamoDireta")
                 }
                 value={segmento}
                 onChange={(e) => setSegmento(e.target.value)}
@@ -275,7 +282,7 @@ export function FormularioBusca() {
             {/* Chips de sugestões rápidas */}
             {!segmento && (
               <div className="flex flex-wrap gap-1.5 mt-2">
-                {SEGMENTOS_SUGERIDOS.slice(0, 5).map((sug) => (
+                {segmentosSugeridos.slice(0, 5).map((sug) => (
                   <button
                     key={sug}
                     onClick={() => setSegmento(sug)}
@@ -295,13 +302,13 @@ export function FormularioBusca() {
                   if (previewClientes.length === 0) {
                     return (
                       <p className="text-xs text-muted-foreground">
-                        Não está na nossa lista — ao buscar, vamos usar IA para identificar os clientes potenciais.
+                        {t("busca.foraDaLista")}
                       </p>
                     )
                   }
                   return (
                     <div className="flex flex-wrap items-center gap-1.5">
-                      <span className="text-xs text-muted-foreground">Vamos buscar:</span>
+                      <span className="text-xs text-muted-foreground">{t("busca.vamosBuscar")}</span>
                       {previewClientes.map((c) => (
                         <span key={c} className="px-2 py-0.5 rounded-full bg-dourado-900/20 border border-dourado-700/30 text-xs text-dourado-300">
                           {c}
@@ -317,13 +324,15 @@ export function FormularioBusca() {
           {/* Campo: Cidade */}
           <div className="space-y-2 relative">
             <Label htmlFor="cidade" className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-              Cidade
+              {t("busca.cidade")}
             </Label>
             <div className="relative">
               <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
                 id="cidade"
-                placeholder="Ex: São Paulo, SP"
+                placeholder={t("busca.placeholderCidade", {
+                  exemplo: configPais.exemploCidade,
+                })}
                 value={cidade}
                 onChange={(e) => setCidade(e.target.value)}
                 onFocus={() => setMostrarSugestoesCidade(true)}
@@ -352,7 +361,7 @@ export function FormularioBusca() {
           {/* Campo: Raio */}
           <div className="space-y-2">
             <Label className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-              Raio de Busca
+              {t("busca.raioDeBusca")}
             </Label>
             <div className="flex items-center gap-3">
               {[5, 10, 20, 30, 50].map((km) => (
@@ -375,12 +384,14 @@ export function FormularioBusca() {
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <Label className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-                Tamanho da busca
+                {t("busca.tamanhoDaBusca")}
               </Label>
               {usuarioId && temAcesso && creditos && (
                 <span className="flex items-center gap-1 text-xs text-dourado-400 font-medium">
                   <Zap className="w-3 h-3" />
-                  {creditos.creditos_disponiveis} créditos disponíveis
+                  {t("busca.creditosDisponiveis", {
+                    quantidade: creditos.creditos_disponiveis,
+                  })}
                 </span>
               )}
             </div>
@@ -395,13 +406,17 @@ export function FormularioBusca() {
                       : "bg-secondary border-transparent text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
                   }`}
                 >
-                  <span>{faixa.label}</span>
-                  <span className="text-[10px] opacity-70 mt-0.5">{faixa.custo} créditos</span>
+                  {/* O rótulo vem da tradução, não do `label` fixo da
+                      constante, que está escrito em português */}
+                  <span>{t("busca.ateEmpresas", { quantidade: faixa.max })}</span>
+                  <span className="text-[10px] opacity-70 mt-0.5">
+                    {t("busca.custoEmCreditos", { quantidade: faixa.custo })}
+                  </span>
                 </button>
               ))}
             </div>
             <p className="text-[11px] text-muted-foreground">
-              Buscas maiores rendem mais empresas por crédito gasto. O que sobrar não expira: soma à recarga do próximo ciclo.
+              {t("busca.dicaCreditos")}
             </p>
           </div>
 
@@ -415,17 +430,19 @@ export function FormularioBusca() {
             {buscandoMapeamento ? (
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                Identificando clientes potenciais...
+                {t("busca.identificandoClientes")}
               </div>
             ) : carregando ? (
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                Buscando empresas...
+                {t("busca.buscandoEmpresas")}
               </div>
             ) : (
               <div className="flex items-center gap-2">
                 <Sparkles className="w-5 h-5" />
-                Buscar Empresas · {FAIXAS_CREDITO[faixaSelecionada].custo} créditos
+                {t("busca.buscarEmpresas", {
+                  quantidade: FAIXAS_CREDITO[faixaSelecionada].custo,
+                })}
               </div>
             )}
           </Button>
@@ -438,7 +455,7 @@ export function FormularioBusca() {
           <div className="flex items-center gap-2 mb-3">
             <Clock className="w-4 h-4 text-muted-foreground" />
             <h2 className="text-sm font-medium text-muted-foreground uppercase tracking-wide">
-              Buscas Recentes
+              {t("busca.buscasRecentes")}
             </h2>
           </div>
           <div className="space-y-2">
