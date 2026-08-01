@@ -65,12 +65,14 @@ export function NavegacaoTopo() {
                 <button
                   onClick={() => navigate("/perfil")}
                   className="flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full border border-dourado-700/40 bg-dourado-900/15 text-dourado-300 hover:bg-dourado-900/25 transition-colors"
-                  title={`Renova em ${new Date(creditos.ciclo_fim).toLocaleDateString("pt-BR")}`}
+                  title={`Próxima recarga em ${new Date(creditos.ciclo_fim).toLocaleDateString("pt-BR")}. O que sobrar não expira.`}
                 >
                   <Zap className="w-3 h-3" />
                   <span className="font-semibold">{creditos.creditos_disponiveis}</span>
+                  {/* Sem "X / Y": com créditos acumulativos o saldo pode
+                      passar da franquia do ciclo, e "150 / 100" confunde */}
                   <span className="hidden sm:inline text-dourado-400/70">
-                    / {creditos.creditos_totais_ciclo} créditos
+                    créditos
                   </span>
                 </button>
               )}

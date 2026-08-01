@@ -240,6 +240,11 @@ export function SelecaoPlano() {
                   <Zap className="w-3 h-3" />
                   {config.creditosMensais} créditos por mês
                 </p>
+                {/* Acúmulo é diferencial de venda: o cliente não perde
+                    o que não usou, então não precisa correr contra o mês */}
+                <p className="text-[11px] text-muted-foreground mt-0.5">
+                  Não expiram — o que sobrar acumula
+                </p>
               </CardContent>
             </Card>
           )

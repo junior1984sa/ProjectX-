@@ -22,7 +22,7 @@ const PERGUNTAS_FREQUENTES: PerguntaFrequente[] = [
   {
     pergunta: "Como funcionam os créditos de busca?",
     resposta:
-      "Cada busca consome créditos de acordo com a quantidade de empresas retornadas: até 10 empresas custam 10 créditos, até 20 custam 18, até 30 custam 25, e até 40 custam 30. Seu saldo (100 ou 150 créditos, dependendo do plano) renova automaticamente todo mês.",
+      "Cada busca consome créditos de acordo com a quantidade de empresas retornadas: até 10 empresas custam 10 créditos, até 20 custam 18, até 30 custam 25, e até 40 custam 30. Seu plano recarrega o saldo a cada ciclo (de 100 a 150 créditos, conforme o plano) e os créditos NÃO expiram: o que você não usar continua na conta e soma à próxima recarga. Se num mês você usar 50 de 100, entra no mês seguinte com 150.",
   },
   {
     pergunta: "Posso cancelar quando quiser?",

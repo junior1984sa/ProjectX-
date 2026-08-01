@@ -25,9 +25,19 @@ export function PainelCreditos() {
     )
   }
 
-  const percentualUsado = Math.round(
-    ((creditos.creditos_totais_ciclo - creditos.creditos_disponiveis) / creditos.creditos_totais_ciclo) * 100
-  )
+  const franquia = creditos.creditos_totais_ciclo
+  const disponiveis = creditos.creditos_disponiveis
+
+  /** Quanto o assinante trouxe de ciclos anteriores (créditos não expiram) */
+  const acumulado = Math.max(0, disponiveis - franquia)
+
+  /**
+   * Proporção do saldo em relação à franquia do ciclo, limitada a 100%.
+   * O limite é necessário porque, com acúmulo, o saldo pode ultrapassar
+   * a franquia — sem ele a barra estouraria a largura do container.
+   */
+  const percentualRestante =
+    franquia > 0 ? Math.min(100, Math.round((disponiveis / franquia) * 100)) : 0
 
   return (
     <Card className="border-border/60">
@@ -38,28 +48,31 @@ export function PainelCreditos() {
         </CardTitle>
         <CardDescription>
           Cada busca consome créditos conforme a quantidade de empresas retornadas.
-          Seu saldo renova automaticamente todo mês.
+          O que sobrar não expira: soma à recarga do próximo ciclo.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-5">
         <div>
           <div className="flex items-baseline justify-between mb-2">
             <span className="text-2xl font-bold text-dourado-400">
-              {creditos.creditos_disponiveis}
+              {disponiveis}
             </span>
             <span className="text-sm text-muted-foreground">
-              de {creditos.creditos_totais_ciclo} créditos
+              {acumulado > 0
+                ? `${franquia} do plano + ${acumulado} acumulados`
+                : `de ${franquia} créditos`}
             </span>
           </div>
           <div className="h-2 rounded-full bg-secondary overflow-hidden">
             <div
               className="h-full rounded-full bg-gradient-to-r from-dourado-700 to-dourado-400 transition-all"
-              style={{ width: `${100 - percentualUsado}%` }}
+              style={{ width: `${percentualRestante}%` }}
             />
           </div>
           <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1.5">
             <Clock className="w-3 h-3" />
-            Renova em {format(new Date(creditos.ciclo_fim), "dd 'de' MMMM", { locale: ptBR })}
+            Próxima recarga em{" "}
+            {format(new Date(creditos.ciclo_fim), "dd 'de' MMMM", { locale: ptBR })}
           </p>
         </div>
 

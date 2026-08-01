@@ -131,7 +131,7 @@ export function FormularioBusca() {
 
     if (!resultado.sucesso) {
       toast.error(
-        `Créditos insuficientes (precisa de ${resultado.custo}, você tem ${resultado.creditos_restantes}). Aguarde a renovação mensal.`
+        `Créditos insuficientes (precisa de ${resultado.custo}, você tem ${resultado.creditos_restantes}). Aguarde a próxima recarga do seu plano.`
       )
       return
     }
@@ -390,7 +390,7 @@ export function FormularioBusca() {
               ))}
             </div>
             <p className="text-[11px] text-muted-foreground">
-              Buscas maiores rendem mais empresas por crédito gasto. Seu saldo renova todo mês.
+              Buscas maiores rendem mais empresas por crédito gasto. O que sobrar não expira: soma à recarga do próximo ciclo.
             </p>
           </div>
 

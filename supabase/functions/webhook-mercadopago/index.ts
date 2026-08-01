@@ -127,15 +127,20 @@ async function processarPagamento(paymentId: string) {
 
   if (statusPagamento === "approved") {
     // Confirma o perfil como ativo (saindo do trial, se ainda estivesse nele)
-    // e renova o ciclo normal de créditos (100 ou 150, conforme o plano).
+    // e concede os créditos do ciclo, SOMANDO ao saldo que sobrou do mês
+    // anterior — o assinante decide o próprio ritmo de uso.
     await supabaseAdmin
       .from("profiles")
       .update({ status_assinatura: "ativa", em_trial: false })
       .eq("id", profileId)
 
+    // p_referencia é a trava contra crédito duplicado: o Mercado Pago
+    // reenvia o mesmo aviso mais de uma vez, e sem essa marca cada
+    // reenvio somaria uma franquia inteira de graça.
     await supabaseAdmin.rpc("inicializar_creditos_por_plano", {
       p_profile_id: profileId,
       p_plano: plano ?? "mensal",
+      p_referencia: String(paymentId),
     })
 
     console.log(`Perfil ${profileId} confirmado como ativo após cobrança aprovada.`)
