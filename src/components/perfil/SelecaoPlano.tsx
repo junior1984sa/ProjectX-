@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { iniciarAssinaturaComTrial, aplicarCodigoCortesia } from "@/lib/pagamento"
+import { aplicarCodigoCortesia } from "@/lib/pagamento"
+import { iniciarAssinatura, formaDeCobranca } from "@/lib/assinaturas"
 import { useAuthStore } from "@/store/useAuthStore"
 import { usePromocaoStore } from "@/store/usePromocaoStore"
 import { useTranslation } from "react-i18next"
@@ -130,25 +131,49 @@ export function SelecaoPlano() {
     if (promocaoDisponivel) {
       const reserva = await usePromocaoStore.getState().reservarVaga()
       if (reserva.sucesso) {
-        // Aplica o desconto sobre o preço real do plano escolhido,
-        // qualquer que seja ele (mensal, trimestral, semestral ou anual).
+        // Aplica o desconto sobre o preço real do plano escolhido, no
+        // país do assinante — usar o preço do Brasil aqui cobraria R$ 497
+        // com desconto de alguém que está vendo $97 na tela.
         precoPromocionalConfirmado =
-          PLANOS[planoSelecionado].precoTotal * (1 - DESCONTO_PROMOCIONAL)
+          precoTotalNoPais(planoSelecionado, pais) * (1 - DESCONTO_PROMOCIONAL)
       }
       // Se a reserva falhar (vagas esgotaram nesse instante), segue
       // normalmente com o preço de tabela — não trava a assinatura.
     }
 
-    const resultado = await iniciarAssinaturaComTrial(planoSelecionado, cartao, precoPromocionalConfirmado)
+    const resultado = await iniciarAssinatura({
+      plano: planoSelecionado,
+      pais,
+      dadosCartao: cartao,
+      precoPromocional: precoPromocionalConfirmado,
+    })
     setCarregando(false)
 
-    if (!resultado.sucesso) {
-      toast.error(resultado.erro ?? "Não foi possível iniciar a assinatura.")
-      return
-    }
+    switch (resultado.tipo) {
+      case "sucesso":
+        toast.success(t("planos.trialIniciado", { dias: resultado.trialDias }) + " 🎉")
+        navigate("/buscar")
+        return
 
-    toast.success(t("planos.trialIniciado", { dias: resultado.trialDias }) + " 🎉")
-    navigate("/buscar")
+      // Stripe e PayPal levam o cliente para a página deles. A tela já
+      // sabe tratar isso, então quando as credenciais chegarem não é
+      // preciso mexer aqui.
+      case "redirecionar":
+        window.location.href = resultado.url
+        return
+
+      case "indisponivel":
+        toast.error(
+          t("planos.cobrancaIndisponivel", {
+            pais: t(`paisesEm.${resultado.pais}`),
+          })
+        )
+        return
+
+      case "erro":
+        toast.error(resultado.mensagem)
+        return
+    }
   }
 
   return (
@@ -322,12 +347,18 @@ export function SelecaoPlano() {
         </CardContent>
       </Card>
 
-      {/* Formulário de cartão */}
+      {/* Formulário de cartão — só aparece quando o gateway do país
+          coleta o cartão aqui dentro (Mercado Pago). Stripe e PayPal
+          redirecionam para a página deles, e países sem gateway não têm
+          como cobrar: em ambos os casos pedir cartão aqui seria pior que
+          inútil, assustaria o cliente e criaria risco de conformidade
+          sem necessidade. */}
+      {formaDeCobranca(pais) === "cartao-no-app" && (
       <Card className="border-border/60 mb-6">
         <CardContent className="p-6 space-y-4">
           <h3 className="font-medium text-foreground flex items-center gap-2 mb-2">
             <CreditCard className="w-4 h-4 text-dourado-400" />
-            Dados do cartão
+            {t("planos.dadosCartao")}
           </h3>
 
           <div className="space-y-2">
@@ -395,6 +426,7 @@ export function SelecaoPlano() {
           </div>
         </CardContent>
       </Card>
+      )}
 
       <Button
         onClick={handleAssinar}

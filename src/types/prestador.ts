@@ -192,7 +192,33 @@ export interface PlanoRegiao {
  * `codigoISO2` restringe o resultado àquele país — sem isso, "Springfield"
  * cai em qualquer lugar do mundo.
  */
-export const PAISES_DISPONIVEIS = [
+/**
+ * Gateways previstos. Precisa ser um tipo declarado, e a lista abaixo
+ * precisa ser tipada por ele em vez de usar `as const`: com `as const`,
+ * e nenhum país apontando hoje para stripe/paypal, o TypeScript inferiria
+ * `gateway` como apenas "mercadopago" | null — e recusaria o roteador em
+ * src/lib/assinaturas.ts tratar os casos futuros.
+ */
+export type TipoGateway = "mercadopago" | "stripe" | "paypal" | null
+
+export interface ConfiguracaoPais {
+  codigo: string
+  nome: string
+  /** Nome usado na consulta ao Nominatim */
+  nomeGeocodificacao: string
+  /** Exemplo mostrado no campo de cidade */
+  exemploCidade: string
+  /** Sugestões de cidade do próprio país */
+  cidadesSugeridas: string[]
+  /** Restringe a geocodificação a este país */
+  codigoISO2: string
+  moeda: string
+  idioma: string
+  buscaDisponivel: boolean
+  gateway: TipoGateway
+}
+
+export const PAISES_DISPONIVEIS: ConfiguracaoPais[] = [
   {
     codigo: "BR",
     nome: "Brasil",
@@ -281,9 +307,7 @@ export const PAISES_DISPONIVEIS = [
     buscaDisponivel: true,
     gateway: null,
   },
-] as const
-
-export type CodigoPais = (typeof PAISES_DISPONIVEIS)[number]["codigo"]
+]
 
 /** Busca a configuração de um país, caindo no Brasil se o código for desconhecido */
 export function obterPais(codigo: string | null | undefined) {

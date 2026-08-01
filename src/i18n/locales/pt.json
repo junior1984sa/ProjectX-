@@ -62,6 +62,7 @@
       "Disparo de mensagem com seu portfólio direto para os leads",
       "Acesso completo à ferramenta de prospecção de clientes"
     ],
+    "dadosCartao": "Dados do cartão",
     "cobrancaIndisponivel": "A cobrança ainda não está disponível {{pais}}. Você pode usar a busca normalmente enquanto liberamos o pagamento por aqui.",
     "trialIniciado": "Teste grátis de {{dias}} dias iniciado!"
   },

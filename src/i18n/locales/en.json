@@ -62,6 +62,7 @@
       "Send your portfolio straight to leads",
       "Full access to the client prospecting tool"
     ],
+    "dadosCartao": "Card details",
     "cobrancaIndisponivel": "Billing isn't available {{pais}} yet. You can keep using search normally while we enable payments here.",
     "trialIniciado": "{{dias}}-day free trial started!"
   },
