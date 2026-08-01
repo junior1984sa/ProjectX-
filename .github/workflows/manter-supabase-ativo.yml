@@ -1,0 +1,77 @@
+# ═══════════════════════════════════════════════════════════
+# MANTER SUPABASE ATIVO (keep-alive)
+#
+# POR QUE ISSO EXISTE:
+# O plano gratuito do Supabase PAUSA o projeto após ~7 dias sem
+# nenhuma requisição. Quando pausa, tudo para de uma vez (banco,
+# login, storage, edge functions) e o site fica inutilizável até
+# alguém restaurar manualmente no painel. Os dados não são perdidos,
+# mas o site fica fora do ar — o que é péssimo se acontecer bem na
+# hora de uma demonstração para cliente ou investidor.
+#
+# Este workflow faz uma consulta mínima ao banco todo dia, o que
+# reinicia o contador de inatividade e evita a pausa.
+#
+# ═══════════════════════════════════════════════════════════
+# COMO CONFIGURAR (leva 2 minutos, só precisa fazer uma vez):
+#
+# 1. No GitHub, vá no seu repositório
+# 2. Settings > Secrets and variables > Actions > New repository secret
+# 3. Crie estes dois secrets:
+#
+#    Nome:  SUPABASE_URL
+#    Valor: https://tkckawmcjfthgwxbqlsf.supabase.co
+#
+#    Nome:  SUPABASE_ANON_KEY
+#    Valor: (a mesma chave "anon public" que está no seu .env)
+#
+# 4. Pronto. O workflow roda sozinho todo dia às 12h UTC (9h no
+#    horário de Brasília). Você pode acompanhar em Actions.
+#
+# Para testar agora sem esperar: aba Actions > "Manter Supabase ativo"
+# > botão "Run workflow".
+# ═══════════════════════════════════════════════════════════
+
+name: Manter Supabase ativo
+
+on:
+  schedule:
+    # Todo dia às 12:00 UTC (09:00 em Brasília)
+    - cron: "0 12 * * *"
+  # Permite disparar manualmente pelo painel do GitHub Actions
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Consultar o banco para reiniciar o contador de inatividade
+        run: |
+          if [ -z "${{ secrets.SUPABASE_URL }}" ] || [ -z "${{ secrets.SUPABASE_ANON_KEY }}" ]; then
+            echo "ERRO: configure os secrets SUPABASE_URL e SUPABASE_ANON_KEY."
+            echo "Veja as instruções no topo deste arquivo."
+            exit 1
+          fi
+
+          # Consulta uma tabela com leitura pública (promocao_vagas).
+          # É uma leitura mínima, só para registrar atividade no banco.
+          CODIGO=$(curl -s -o /tmp/resposta.txt -w "%{http_code}" \
+            "${{ secrets.SUPABASE_URL }}/rest/v1/promocao_vagas?select=id&limit=1" \
+            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}")
+
+          echo "Código HTTP: $CODIGO"
+          echo "Resposta: $(cat /tmp/resposta.txt)"
+
+          if [ "$CODIGO" = "540" ]; then
+            echo "ATENÇÃO: o projeto Supabase está PAUSADO."
+            echo "Restaure manualmente em https://supabase.com/dashboard"
+            exit 1
+          fi
+
+          if [ "$CODIGO" -ge 200 ] && [ "$CODIGO" -lt 300 ]; then
+            echo "OK — projeto ativo, contador de inatividade reiniciado."
+          else
+            echo "Resposta inesperada. Verifique a configuração."
+            exit 1
+          fi

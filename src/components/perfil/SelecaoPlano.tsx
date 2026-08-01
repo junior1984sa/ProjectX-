@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { Check, Loader2, Sparkles, ShieldCheck, TrendingUp, Calendar, CreditCard, Gift, ChevronDown, Flame } from "lucide-react"
+import { Check, Loader2, Sparkles, ShieldCheck, TrendingUp, Calendar, CreditCard, Gift, ChevronDown, Flame, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -9,23 +9,25 @@ import { Badge } from "@/components/ui/badge"
 import { iniciarAssinaturaComTrial, aplicarCodigoCortesia } from "@/lib/pagamento"
 import { useAuthStore } from "@/store/useAuthStore"
 import { usePromocaoStore } from "@/store/usePromocaoStore"
-import type { TipoPlano } from "@/types/prestador"
+import {
+  PLANOS,
+  ORDEM_PLANOS,
+  economiaPercentual,
+  precoMensalEquivalente,
+  type TipoPlano,
+} from "@/types/prestador"
 import type { DadosCartaoForm } from "@/lib/mercadopago"
 import toast from "react-hot-toast"
 
-const PRECO_MENSAL = Number(import.meta.env.VITE_PRECO_PLANO_MENSAL ?? "497.00")
-const PRECO_ANUAL = Number(import.meta.env.VITE_PRECO_PLANO_ANUAL ?? "4999.00")
-const DIAS_TRIAL = 5
+const DIAS_TRIAL = 7
 
-// Promoção de lançamento: preço reduzido para os primeiros assinantes.
-// Controlada por variável de ambiente — fica DESLIGADA por padrão.
-// Para ativar, defina VITE_PROMOCAO_ATIVA=true na Vercel (Settings >
-// Environment Variables) e redeploy. Não exige nenhuma mudança de código.
+// Promoção de lançamento: percentual de desconto aplicado sobre QUALQUER
+// plano, para os primeiros assinantes. Fica DESLIGADA por padrão.
+// Para ativar: defina VITE_PROMOCAO_ATIVA=true na Vercel e ative também
+// no banco (tabela promocao_vagas) — as duas travas precisam estar abertas.
 const PROMOCAO_ATIVA = import.meta.env.VITE_PROMOCAO_ATIVA === "true"
-const PROMOCAO_PRECO_MENSAL = Number(import.meta.env.VITE_PROMOCAO_PRECO_MENSAL ?? "247.00")
-const PROMOCAO_PRECO_ANUAL = Number(import.meta.env.VITE_PROMOCAO_PRECO_ANUAL ?? "2499.00")
-
-const ECONOMIA_ANUAL = Math.round((1 - PRECO_ANUAL / (PRECO_MENSAL * 12)) * 100)
+/** 0.5 = 50% de desconto (ex: plano mensal de R$497 sai por R$248,50) */
+const DESCONTO_PROMOCIONAL = Number(import.meta.env.VITE_PROMOCAO_DESCONTO ?? "0.5")
 
 const BENEFICIOS = [
   "Perfil completo visível no diretório nacional",
@@ -65,9 +67,6 @@ export function SelecaoPlano() {
   // (ambas as travas precisam estar abertas) E ainda houver vagas.
   const vagasRestantes = vagasTotais - vagasUsadas
   const promocaoDisponivel = PROMOCAO_ATIVA && promocaoAtivaNoBanco && vagasRestantes > 0
-
-  const precoMensalExibido = promocaoDisponivel ? PROMOCAO_PRECO_MENSAL : PRECO_MENSAL
-  const precoAnualExibido = promocaoDisponivel ? PROMOCAO_PRECO_ANUAL : PRECO_ANUAL
 
   async function handleAplicarCodigo() {
     if (!codigoCortesia.trim()) {
@@ -123,9 +122,10 @@ export function SelecaoPlano() {
     if (promocaoDisponivel) {
       const reserva = await usePromocaoStore.getState().reservarVaga()
       if (reserva.sucesso) {
-        precoPromocionalConfirmado = planoSelecionado === "mensal"
-          ? PROMOCAO_PRECO_MENSAL
-          : PROMOCAO_PRECO_ANUAL
+        // Aplica o desconto sobre o preço real do plano escolhido,
+        // qualquer que seja ele (mensal, trimestral, semestral ou anual).
+        precoPromocionalConfirmado =
+          PLANOS[planoSelecionado].precoTotal * (1 - DESCONTO_PROMOCIONAL)
       }
       // Se a reserva falhar (vagas esgotaram nesse instante), segue
       // normalmente com o preço de tabela — não trava a assinatura.
@@ -175,78 +175,75 @@ export function SelecaoPlano() {
         </div>
       )}
 
-      {/* Cards de planos */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-        <Card
-          onClick={() => setPlanoSelecionado("mensal")}
-          className={`cursor-pointer transition-all border-2 ${
-            planoSelecionado === "mensal"
-              ? "border-prata-400 bg-prata-900/10"
-              : "border-border/60 hover:border-border"
-          }`}
-        >
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="font-semibold text-foreground">Plano Mensal</h3>
-              {planoSelecionado === "mensal" && (
-                <div className="w-5 h-5 rounded-full bg-prata-400 flex items-center justify-center">
-                  <Check className="w-3 h-3 text-background" />
-                </div>
-              )}
-            </div>
-            {promocaoDisponivel && (
-              <span className="text-sm text-muted-foreground/60 line-through">
-                R$ {PRECO_MENSAL.toFixed(2).replace(".", ",")}
-              </span>
-            )}
-            <div className="flex items-baseline gap-1">
-              <span className="text-3xl font-bold text-foreground">
-                R$ {precoMensalExibido.toFixed(2).replace(".", ",")}
-              </span>
-              <span className="text-muted-foreground text-sm">/mês</span>
-            </div>
-            <p className="text-xs text-muted-foreground mt-2">Após o período de teste</p>
-          </CardContent>
-        </Card>
+      {/* Cards de planos — renderizados a partir da configuração central
+          em src/types/prestador.ts (PLANOS). Para alterar preço, desconto
+          ou créditos, edite lá: esta tela se ajusta sozinha. */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+        {ORDEM_PLANOS.map((idPlano) => {
+          const config = PLANOS[idPlano]
+          const selecionado = planoSelecionado === idPlano
+          const economia = economiaPercentual(idPlano)
+          const equivalenteMensal = precoMensalEquivalente(idPlano)
+          const precoExibido = promocaoDisponivel
+            ? config.precoTotal * (1 - DESCONTO_PROMOCIONAL)
+            : config.precoTotal
 
-        <Card
-          onClick={() => setPlanoSelecionado("anual")}
-          className={`cursor-pointer transition-all border-2 relative ${
-            planoSelecionado === "anual"
-              ? "border-dourado-500 bg-dourado-900/10"
-              : "border-border/60 hover:border-border"
-          }`}
-        >
-          {ECONOMIA_ANUAL > 0 && (
-            <Badge className="absolute -top-2.5 right-4 text-xs bg-dourado-600 text-background">
-              {promocaoDisponivel ? "Promoção" : `Economize ${ECONOMIA_ANUAL}% + mais créditos/mês`}
-            </Badge>
-          )}
-          <CardContent className="p-6">
-            <div className="flex items-center justify-between mb-3">
-              <h3 className="font-semibold text-foreground">Plano Anual</h3>
-              {planoSelecionado === "anual" && (
-                <div className="w-5 h-5 rounded-full bg-dourado-500 flex items-center justify-center">
-                  <Check className="w-3 h-3 text-background" />
-                </div>
+          return (
+            <Card
+              key={idPlano}
+              onClick={() => setPlanoSelecionado(idPlano)}
+              className={`cursor-pointer transition-all border-2 relative ${
+                selecionado
+                  ? "border-dourado-500 bg-dourado-900/10"
+                  : "border-border/60 hover:border-border"
+              }`}
+            >
+              {economia > 0 && (
+                <Badge className="absolute -top-2.5 right-3 text-[10px] bg-dourado-600 text-background">
+                  {promocaoDisponivel ? "Promoção" : `${economia}% OFF`}
+                </Badge>
               )}
-            </div>
-            {promocaoDisponivel && (
-              <span className="text-sm text-muted-foreground/60 line-through">
-                R$ {PRECO_ANUAL.toFixed(2).replace(".", ",")}
-              </span>
-            )}
-            <div className="flex items-baseline gap-1">
-              <span className="text-3xl font-bold text-foreground">
-                R$ {precoAnualExibido.toFixed(2).replace(".", ",")}
-              </span>
-              <span className="text-muted-foreground text-sm">/ano</span>
-            </div>
-            <p className="text-xs text-muted-foreground mt-2">
-              Equivalente a R$ {(precoAnualExibido / 12).toFixed(2).replace(".", ",")}/mês · Após o teste
-            </p>
-          </CardContent>
-        </Card>
+
+              <CardContent className="p-5">
+                <div className="flex items-center justify-between mb-2">
+                  <div>
+                    <h3 className="font-semibold text-foreground text-sm">{config.nome}</h3>
+                    {config.destaque && (
+                      <span className="text-[10px] text-dourado-400">{config.destaque}</span>
+                    )}
+                  </div>
+                  {selecionado && (
+                    <div className="w-5 h-5 rounded-full bg-dourado-500 flex items-center justify-center flex-shrink-0">
+                      <Check className="w-3 h-3 text-background" />
+                    </div>
+                  )}
+                </div>
+
+                {/* O número que o cliente usa para comparar planos */}
+                <div className="flex items-baseline gap-1">
+                  <span className="text-2xl font-bold text-foreground">
+                    R$ {(promocaoDisponivel
+                      ? equivalenteMensal * (1 - DESCONTO_PROMOCIONAL)
+                      : equivalenteMensal
+                    ).toFixed(0)}
+                  </span>
+                  <span className="text-muted-foreground text-xs">/mês</span>
+                </div>
+
+                <p className="text-[11px] text-muted-foreground mt-1.5">
+                  {config.meses === 1
+                    ? "Cobrado mensalmente"
+                    : `R$ ${precoExibido.toFixed(2).replace(".", ",")} a cada ${config.meses} meses`}
+                </p>
+
+                <p className="text-[11px] text-dourado-300/90 mt-2 flex items-center gap-1">
+                  <Zap className="w-3 h-3" />
+                  {config.creditosMensais} créditos por mês
+                </p>
+              </CardContent>
+            </Card>
+          )
+        })}
       </div>
 
       {/* Linha do tempo do trial */}

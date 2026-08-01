@@ -49,7 +49,7 @@ export interface ParametrosBusca {
    * Quando a busca é no modo "clientes potenciais", esta lista contém
    * os termos reais usados na busca (ex: segmentos-clientes mapeados a
    * partir do segmento do prestador). Quando ausente ou vazia, a busca
-   * usa o campo `segmento` diretamente (modo "pares", comportamento
+   * usa o campo `segmento` diretamente (modo "direta", comportamento
    * original).
    */
   segmentosBusca?: string[]

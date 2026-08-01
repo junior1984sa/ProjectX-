@@ -49,7 +49,7 @@ export function PromptInstalarApp() {
   if (!mostrar) return null
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:w-80 z-50 rounded-xl border border-dourado-700/40 bg-card shadow-2xl shadow-black/40 p-4 animate-fadeIn">
+    <div className="fixed bottom-20 left-4 right-4 sm:left-auto sm:right-4 sm:w-80 z-50 rounded-xl border border-dourado-700/40 bg-card shadow-2xl shadow-black/40 p-4 animate-fadeIn">
       <button
         onClick={handleDispensar}
         className="absolute top-2 right-2 text-muted-foreground hover:text-foreground"

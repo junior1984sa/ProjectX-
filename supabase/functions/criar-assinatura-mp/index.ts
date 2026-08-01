@@ -1,7 +1,7 @@
 // ═══════════════════════════════════════════════════════════
 // EDGE FUNCTION: criar-assinatura-mp
 // Cria uma ASSINATURA RECORRENTE (preapproval) no Mercado Pago,
-// com período de teste gratuito de 5 dias. Ao final do trial, o
+// com período de teste gratuito de 7 dias (mínimo legal do CDC). Ao final do trial, o
 // Mercado Pago cobra automaticamente no cartão cadastrado — sem
 // nova ação do usuário — a menos que ele cancele antes.
 //
@@ -18,12 +18,33 @@ const MERCADOPAGO_ACCESS_TOKEN = Deno.env.get("MERCADOPAGO_ACCESS_TOKEN") ?? ""
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? ""
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
 const URL_BASE_APP = Deno.env.get("URL_BASE_APP") ?? "http://localhost:5173"
-const DIAS_TRIAL = Number(Deno.env.get("DIAS_TRIAL") ?? "5")
+const DIAS_TRIAL = Number(Deno.env.get("DIAS_TRIAL") ?? "7")
 
-const PRECOS = {
-  mensal: Number(Deno.env.get("PRECO_PLANO_MENSAL") ?? "497.00"),
-  anual: Number(Deno.env.get("PRECO_PLANO_ANUAL") ?? "4999.00"),
-}
+// Configuração dos quatro planos. Os preços podem ser sobrescritos por
+// secrets do Supabase; os valores padrão devem espelhar os do frontend
+// (src/types/prestador.ts), que é a fonte única de verdade da UI.
+const PLANOS = {
+  mensal: {
+    preco: Number(Deno.env.get("PRECO_PLANO_MENSAL") ?? "497.00"),
+    meses: 1,
+  },
+  trimestral: {
+    preco: Number(Deno.env.get("PRECO_PLANO_TRIMESTRAL") ?? "1341.00"),
+    meses: 3,
+  },
+  semestral: {
+    preco: Number(Deno.env.get("PRECO_PLANO_SEMESTRAL") ?? "2532.00"),
+    meses: 6,
+  },
+  anual: {
+    preco: Number(Deno.env.get("PRECO_PLANO_ANUAL") ?? "4764.00"),
+    meses: 12,
+  },
+} as const
+
+type TipoPlano = keyof typeof PLANOS
+
+const PLANOS_VALIDOS = Object.keys(PLANOS) as TipoPlano[]
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -38,9 +59,11 @@ Deno.serve(async (req: Request) => {
   try {
     const { plano, cardTokenId, precoPromocional } = await req.json()
 
-    if (plano !== "mensal" && plano !== "anual") {
+    if (!PLANOS_VALIDOS.includes(plano)) {
       return new Response(
-        JSON.stringify({ erro: "Plano inválido. Use 'mensal' ou 'anual'." }),
+        JSON.stringify({
+          erro: `Plano inválido. Use um destes: ${PLANOS_VALIDOS.join(", ")}.`,
+        }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       )
     }
@@ -72,7 +95,8 @@ Deno.serve(async (req: Request) => {
     }
 
     const profileId = userData.user.id
-    let valor = PRECOS[plano as "mensal" | "anual"]
+    const configPlano = PLANOS[plano as TipoPlano]
+    let valor = configPlano.preco
 
     // Se o frontend pediu preço promocional, NUNCA confiamos nesse valor
     // diretamente — validamos no banco se a promoção está mesmo ativa
@@ -111,7 +135,7 @@ Deno.serve(async (req: Request) => {
     const referenciaExterna = `${profileId}_${plano}_${Date.now()}`
 
     // ═══ Cria a ASSINATURA RECORRENTE (preapproval) com trial ═══
-    // frequency_type "months" com frequency 1 (mensal) ou 12 (anual, cobrado
+    // frequency_type "months" com a duração do plano escolhido (1, 3, 6 ou 12
     // de uma vez por ano). O free_trial define os dias sem cobrança.
     const corpoAssinatura = {
       reason: `ProspectX — Plano ${plano === "mensal" ? "Mensal" : "Anual"}`,
@@ -119,7 +143,7 @@ Deno.serve(async (req: Request) => {
       payer_email: perfil.email_contato,
       card_token_id: cardTokenId,
       auto_recurring: {
-        frequency: plano === "mensal" ? 1 : 12,
+        frequency: configPlano.meses,
         frequency_type: "months",
         transaction_amount: valor,
         currency_id: "BRL",

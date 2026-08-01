@@ -17,7 +17,7 @@ const PERGUNTAS_FREQUENTES: PerguntaFrequente[] = [
   {
     pergunta: "Como funciona o período de teste gratuito?",
     resposta:
-      "Você cadastra seu cartão e tem 5 dias para usar a ferramenta sem nenhuma cobrança. Se não cancelar antes do fim do período, a primeira cobrança é feita automaticamente. Você pode cancelar a qualquer momento, em um clique, dentro da sua área de perfil.",
+      "Você cadastra seu cartão e tem 7 dias para usar a ferramenta sem nenhuma cobrança. Se não cancelar antes do fim do período, a primeira cobrança é feita automaticamente. Você pode cancelar a qualquer momento, em um clique, dentro da sua área de perfil, e receber de volta qualquer valor já pago — sem desconto e sem justificativa, conforme o artigo 49 do Código de Defesa do Consumidor.",
   },
   {
     pergunta: "Como funcionam os créditos de busca?",

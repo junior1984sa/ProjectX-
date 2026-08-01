@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { useAppStore } from "@/store/useAppStore"
 import { useAuthStore } from "@/store/useAuthStore"
 import { useCreditosStore } from "@/store/useCreditosStore"
-import { FAIXAS_CREDITO, temAcessoLiberado, obterSegmentosClientes, type ModoBusca } from "@/types/prestador"
+import { FAIXAS_CREDITO, temAcessoLiberado, obterSegmentosClientes as obterSegmentosClientesPreview, obterSegmentosClientesComFallback, type ModoBusca } from "@/types/prestador"
 import { type ParametrosBusca } from "@/types/empresa"
 import toast from "react-hot-toast"
 import { format } from "date-fns"
@@ -38,6 +38,7 @@ export function FormularioBusca() {
   const [raioKm, setRaioKm] = useState(10)
   const [faixaSelecionada, setFaixaSelecionada] = useState(0) // índice em FAIXAS_CREDITO
   const [modoBusca, setModoBusca] = useState<ModoBusca>("clientes")
+  const [buscandoMapeamento, setBuscandoMapeamento] = useState(false)
   const [mostrarSugestoesSegmento, setMostrarSugestoesSegmento] = useState(false)
   const [mostrarSugestoesCidade, setMostrarSugestoesCidade] = useState(false)
 
@@ -65,17 +66,24 @@ export function FormularioBusca() {
     const estado = partes[1]?.trim() || ""
 
     // No modo "clientes potenciais", traduz o segmento do prestador
-    // para os segmentos que tipicamente CONTRATAM esse serviço.
+    // para os segmentos que tipicamente CONTRATAM esse serviço — usa
+    // a tabela fixa primeiro e, se não achar, recorre à inferência por IA.
     let segmentosBusca: string[] | undefined
     if (modoBusca === "clientes") {
-      const clientesMapeados = obterSegmentosClientes(segmento.trim())
-      if (clientesMapeados.length === 0) {
+      setBuscandoMapeamento(true)
+      const { segmentos, fonte } = await obterSegmentosClientesComFallback(segmento.trim())
+      setBuscandoMapeamento(false)
+
+      if (segmentos.length === 0) {
         toast.error(
-          "Ainda não temos um mapeamento de clientes para esse segmento. Tente o modo \"Buscar concorrentes\" por agora."
+          'Não conseguimos identificar clientes potenciais para esse segmento. Tente o modo "Buscar serviço que preciso".'
         )
         return
       }
-      segmentosBusca = clientesMapeados
+      if (fonte === "ia") {
+        toast.success("Identificamos os clientes potenciais com a ajuda de IA.")
+      }
+      segmentosBusca = segmentos
     }
 
     // Visitante sem login: libera uma busca de demonstração, sem gastar
@@ -204,15 +212,15 @@ export function FormularioBusca() {
               </button>
               <button
                 type="button"
-                onClick={() => setModoBusca("pares")}
+                onClick={() => setModoBusca("direta")}
                 className={`flex flex-col items-start gap-0.5 p-3 rounded-lg border text-left transition-all ${
-                  modoBusca === "pares"
+                  modoBusca === "direta"
                     ? "bg-dourado-900/30 border-dourado-600 text-dourado-300"
                     : "bg-secondary border-transparent text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
                 }`}
               >
-                <span className="text-sm font-semibold">Concorrentes/pares</span>
-                <span className="text-xs opacity-80">Empresas do mesmo ramo que você</span>
+                <span className="text-sm font-semibold">Serviço que eu preciso</span>
+                <span className="text-xs opacity-80">Busca direta pelo que você está procurando</span>
               </button>
             </div>
           </div>
@@ -226,7 +234,11 @@ export function FormularioBusca() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
                 id="segmento"
-                placeholder="Ex: marmoraria, clínica odontológica, restaurante..."
+                placeholder={
+                  modoBusca === "clientes"
+                    ? "Ex: marmoraria, jateamento abrasivo, clínica odontológica..."
+                    : "Ex: construtora, hospital, restaurante — o que você precisa contratar?"
+                }
                 value={segmento}
                 onChange={(e) => setSegmento(e.target.value)}
                 onFocus={() => setMostrarSugestoesSegmento(true)}
@@ -268,11 +280,11 @@ export function FormularioBusca() {
             {modoBusca === "clientes" && segmento.trim() && (
               <div className="mt-2">
                 {(() => {
-                  const previewClientes = obterSegmentosClientes(segmento)
+                  const previewClientes = obterSegmentosClientesPreview(segmento)
                   if (previewClientes.length === 0) {
                     return (
-                      <p className="text-xs text-yellow-500/80">
-                        Ainda não temos mapeamento de clientes para "{segmento}". Tente o modo "Concorrentes/pares".
+                      <p className="text-xs text-muted-foreground">
+                        Não está na nossa lista — ao buscar, vamos usar IA para identificar os clientes potenciais.
                       </p>
                     )
                   }
@@ -385,11 +397,16 @@ export function FormularioBusca() {
           {/* Botão buscar */}
           <Button
             onClick={handleBuscar}
-            disabled={carregando}
+            disabled={carregando || buscandoMapeamento}
             size="xl"
             className="w-full bg-gradient-to-r from-dourado-600 to-dourado-700 hover:from-dourado-700 hover:to-dourado-800 text-white font-semibold shadow-lg shadow-dourado-900/30"
           >
-            {carregando ? (
+            {buscandoMapeamento ? (
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                Identificando clientes potenciais...
+              </div>
+            ) : carregando ? (
               <div className="flex items-center gap-2">
                 <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                 Buscando empresas...

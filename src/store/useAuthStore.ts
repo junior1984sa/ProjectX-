@@ -10,6 +10,8 @@ interface AuthState {
   carregandoAuth: boolean
   carregandoPerfil: boolean
   inicializado: boolean
+  /** true quando o backend (Supabase) não respondeu — ex: projeto pausado por inatividade */
+  backendIndisponivel: boolean
 
   // Ações
   inicializar: () => Promise<void>
@@ -27,35 +29,64 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   carregandoAuth: true,
   carregandoPerfil: false,
   inicializado: false,
+  backendIndisponivel: false,
 
   /**
    * Verifica se já existe uma sessão ativa e escuta mudanças de auth
    */
   inicializar: async () => {
-    const { data } = await supabase.auth.getSession()
+    // IMPORTANTE: esta função NUNCA pode lançar exceção sem marcar
+    // `inicializado: true`. O App.tsx exibe a tela de carregamento
+    // enquanto `!inicializado` — se uma falha de rede (ex: projeto
+    // Supabase pausado, que responde HTTP 540) interrompesse o fluxo
+    // antes dessa linha, o app ficaria travado no spinner para sempre,
+    // parecendo "fora do ar" mesmo com o site publicado normalmente.
+    try {
+      // Timeout defensivo: se o Supabase não responder em 8s, seguimos
+      // como visitante não logado em vez de esperar indefinidamente.
+      const sessaoPromise = supabase.auth.getSession()
+      const timeoutPromise = new Promise<never>((_, reject) =>
+        setTimeout(() => reject(new Error("timeout")), 8000)
+      )
 
-    if (data.session) {
-      set({
-        usuarioId: data.session.user.id,
-        email: data.session.user.email ?? null,
-      })
-      await get().carregarPerfil()
-    }
+      const { data } = (await Promise.race([sessaoPromise, timeoutPromise])) as Awaited<
+        ReturnType<typeof supabase.auth.getSession>
+      >
 
-    set({ carregandoAuth: false, inicializado: true })
-
-    // Escuta mudanças futuras (login/logout em outra aba, expiração, etc.)
-    supabase.auth.onAuthStateChange(async (_evento, session) => {
-      if (session) {
+      if (data.session) {
         set({
-          usuarioId: session.user.id,
-          email: session.user.email ?? null,
+          usuarioId: data.session.user.id,
+          email: data.session.user.email ?? null,
         })
         await get().carregarPerfil()
-      } else {
-        set({ usuarioId: null, email: null, perfil: null })
       }
-    })
+    } catch (erro) {
+      console.error(
+        "Não foi possível verificar a sessão (backend indisponível?). Seguindo como visitante.",
+        erro
+      )
+      set({ usuarioId: null, email: null, perfil: null, backendIndisponivel: true })
+    } finally {
+      // Roda sempre, com sucesso ou erro — garante que o app carregue.
+      set({ carregandoAuth: false, inicializado: true })
+    }
+
+    // Escuta mudanças futuras (login/logout em outra aba, expiração, etc.)
+    try {
+      supabase.auth.onAuthStateChange(async (_evento, session) => {
+        if (session) {
+          set({
+            usuarioId: session.user.id,
+            email: session.user.email ?? null,
+          })
+          await get().carregarPerfil()
+        } else {
+          set({ usuarioId: null, email: null, perfil: null })
+        }
+      })
+    } catch (erro) {
+      console.error("Não foi possível registrar o listener de auth:", erro)
+    }
   },
 
   /**
@@ -120,17 +151,24 @@ export const useAuthStore = create<AuthState>((set, get) => ({
 
     set({ carregandoPerfil: true })
 
-    const { data, error } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", usuarioId)
-      .maybeSingle()
+    try {
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", usuarioId)
+        .maybeSingle()
 
-    if (error) {
-      console.error("Erro ao carregar perfil:", error.message)
+      if (error) {
+        console.error("Erro ao carregar perfil:", error.message)
+      }
+
+      set({ perfil: data as Profile | null, carregandoPerfil: false })
+    } catch (erro) {
+      // Falha de rede (ex: backend pausado). Não pode deixar
+      // `carregandoPerfil` travado em true — isso congelaria a UI.
+      console.error("Falha de rede ao carregar perfil:", erro)
+      set({ carregandoPerfil: false, backendIndisponivel: true })
     }
-
-    set({ perfil: data as Profile | null, carregandoPerfil: false })
   },
 
   /**

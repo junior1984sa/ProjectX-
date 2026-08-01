@@ -7,8 +7,10 @@ import { FormularioBusca } from "@/components/FormularioBusca"
 import { Dashboard } from "@/components/Dashboard"
 import { NavegacaoTopo } from "@/components/NavegacaoTopo"
 import { PromptInstalarApp } from "@/components/PromptInstalarApp"
+import { BannerContextual } from "@/components/BannerContextual"
 import { PaginaSAC } from "@/components/PaginaSAC"
 import { BuscaDiretorio } from "@/components/diretorio/BuscaDiretorio"
+import { PaginaAdmin } from "@/components/admin/PaginaAdmin"
 import { TelaAuth } from "@/components/auth/TelaAuth"
 import { AbasPerfil } from "@/components/perfil/AbasPerfil"
 import { SelecaoPlano } from "@/components/perfil/SelecaoPlano"
@@ -58,6 +60,21 @@ function PaginaPerfil() {
       }}
     />
   )
+}
+
+/** Área administrativa: exige login; a permissão de admin é checada dentro da página */
+function PaginaAdministracao() {
+  const { usuarioId, carregandoAuth } = useAuthStore()
+
+  if (carregandoAuth) {
+    return <TelaCarregando />
+  }
+
+  if (!usuarioId) {
+    return <Navigate to="/entrar" replace />
+  }
+
+  return <PaginaAdmin />
 }
 
 /** Página de busca no diretório: exige login (qualquer empresa cadastrada, mesmo sem assinatura) */
@@ -114,7 +131,7 @@ function TelaCarregando() {
 
 /** Componente interno que inicializa autenticação e define as rotas */
 function ConteudoApp() {
-  const { inicializar, inicializado } = useAuthStore()
+  const { inicializar, inicializado, backendIndisponivel } = useAuthStore()
   const location = useLocation()
 
   useEffect(() => {
@@ -127,14 +144,30 @@ function ConteudoApp() {
 
   return (
     <>
+      {/* Aviso de backend fora do ar — a causa mais comum é o projeto
+          Supabase ter sido pausado por inatividade (plano gratuito
+          pausa após 7 dias sem requisições). Os dados não são perdidos:
+          basta restaurar o projeto no painel do Supabase. */}
+      {backendIndisponivel && (
+        <div className="bg-destructive/90 text-white text-center text-xs py-2 px-4">
+          Não foi possível conectar ao servidor. Login, cadastro e dados salvos
+          estão temporariamente indisponíveis.
+        </div>
+      )}
+
       {/* O header de navegação não aparece na tela de abertura (splash) */}
       {location.pathname !== "/" && <NavegacaoTopo />}
       <PromptInstalarApp />
+
+      {/* pb-14 reserva a altura exata do banner fixo do rodapé,
+          garantindo que nenhum conteúdo fique escondido atrás dele */}
+      <div className="pb-14">
       <Routes>
         <Route path="/" element={<TelaAbertura />} />
         <Route path="/buscar" element={<PaginaBusca />} />
         <Route path="/ajuda" element={<PaginaSAC />} />
         <Route path="/diretorio" element={<PaginaDiretorio />} />
+        <Route path="/admin" element={<PaginaAdministracao />} />
         <Route path="/entrar" element={<PaginaAuth />} />
         <Route path="/perfil" element={<PaginaPerfil />} />
         <Route path="/planos" element={<PaginaPlanos />} />
@@ -143,6 +176,13 @@ function ConteudoApp() {
         <Route path="/assinatura/pendente" element={<PaginaRetornoCheckout resultado="pendente" />} />
         <Route path="*" element={<Navigate to="/buscar" replace />} />
       </Routes>
+      </div>
+
+      {/* Banner contextual — fixo no rodapé, em todas as páginas.
+          Mostra apenas anunciantes que vendem para o ramo de quem
+          está navegando. Não bloqueia nada: é uma faixa fina, sem
+          pop-up e sem exigir clique para dispensar. */}
+      <BannerContextual />
     </>
   )
 }

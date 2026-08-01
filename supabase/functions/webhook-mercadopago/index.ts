@@ -103,11 +103,16 @@ async function processarPagamento(paymentId: string) {
   if (assinaturasExistentes && assinaturasExistentes.length > 0) {
     const agora = new Date()
     const proximaCobranca = new Date(agora)
-    if (plano === "anual") {
-      proximaCobranca.setFullYear(proximaCobranca.getFullYear() + 1)
-    } else {
-      proximaCobranca.setMonth(proximaCobranca.getMonth() + 1)
+    // Duração do ciclo conforme o plano contratado
+    const mesesDoPlano: Record<string, number> = {
+      mensal: 1,
+      trimestral: 3,
+      semestral: 6,
+      anual: 12,
     }
+    proximaCobranca.setMonth(
+      proximaCobranca.getMonth() + (mesesDoPlano[plano ?? "mensal"] ?? 1)
+    )
 
     await supabaseAdmin
       .from("assinaturas")
@@ -128,9 +133,9 @@ async function processarPagamento(paymentId: string) {
       .update({ status_assinatura: "ativa", em_trial: false })
       .eq("id", profileId)
 
-    await supabaseAdmin.rpc("inicializar_creditos", {
+    await supabaseAdmin.rpc("inicializar_creditos_por_plano", {
       p_profile_id: profileId,
-      p_plano_anual: plano === "anual",
+      p_plano: plano ?? "mensal",
     })
 
     console.log(`Perfil ${profileId} confirmado como ativo após cobrança aprovada.`)

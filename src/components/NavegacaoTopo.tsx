@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
-import { LogOut, User, Building2, Zap, Gift, HelpCircle, Search } from "lucide-react"
+import { LogOut, User, Building2, Zap, Gift, HelpCircle, Search, LayoutDashboard } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useAuthStore } from "@/store/useAuthStore"
@@ -80,6 +80,19 @@ export function NavegacaoTopo() {
                 <Badge variant="warning" className="text-xs hidden sm:inline-flex">
                   Pendente
                 </Badge>
+              )}
+
+              {/* Administração — só aparece para o dono do negócio */}
+              {perfil?.is_admin && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => navigate("/admin")}
+                  className={`h-8 w-8 ${location.pathname === "/admin" ? "text-dourado-400" : "text-muted-foreground"}`}
+                  title="Administração"
+                >
+                  <LayoutDashboard className="w-4 h-4" />
+                </Button>
               )}
 
               {/* Buscar prestadores (diretório) — só faz sentido para quem já tem perfil */}

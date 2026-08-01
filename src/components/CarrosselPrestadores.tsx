@@ -3,20 +3,73 @@ import { useNavigate } from "react-router-dom"
 import { MapPin } from "lucide-react"
 import { buscarItensCarrossel, type ItemCarrossel } from "@/lib/diretorio"
 
+// Itens de demonstração — usados SOMENTE quando ainda não há nenhum
+// prestador real publicado com imagem de capa. Marcados com selo
+// "Exemplo" para nunca serem confundidos com prestadores de verdade.
+// Substituídos automaticamente assim que o primeiro perfil real for
+// publicado no diretório (a busca real tem prioridade).
+const ITENS_DEMONSTRACAO: ItemCarrossel[] = [
+  {
+    profileId: "demo-1",
+    nomeEmpresa: "Jateamento Industrial Exemplo",
+    segmento: "Jateamento abrasivo",
+    cidade: "Florianópolis",
+    estado: "SC",
+    logoUrl: "/demo/demo_1.jpg",
+  },
+  {
+    profileId: "demo-2",
+    nomeEmpresa: "Marmoraria Exemplo Ltda",
+    segmento: "Marmoraria",
+    cidade: "São Paulo",
+    estado: "SP",
+    logoUrl: "/demo/demo_2.jpg",
+  },
+  {
+    profileId: "demo-3",
+    nomeEmpresa: "Construtora Exemplo S.A.",
+    segmento: "Construção civil",
+    cidade: "Curitiba",
+    estado: "PR",
+    logoUrl: "/demo/demo_3.jpg",
+  },
+  {
+    profileId: "demo-4",
+    nomeEmpresa: "Pintura Industrial Exemplo",
+    segmento: "Pintura industrial",
+    cidade: "Rio de Janeiro",
+    estado: "RJ",
+    logoUrl: "/demo/demo_4.jpg",
+  },
+]
+
 /**
  * Carrossel de imagens de capa de prestadores publicados, exibido na
  * tela de abertura — funciona sem login, como "vitrine" do produto.
  * Clicar em qualquer item leva direto para o cadastro/login, já que
  * ver detalhes do prestador exige conta.
+ *
+ * Quando não há nenhum prestador real publicado ainda, mostra itens
+ * de demonstração claramente identificados, para você validar o
+ * visual antes de ter dados reais.
  */
 export function CarrosselPrestadores() {
   const navigate = useNavigate()
   const [itens, setItens] = useState<ItemCarrossel[]>([])
+  const [usandoDemo, setUsandoDemo] = useState(false)
   const [indiceAtivo, setIndiceAtivo] = useState(0)
   const intervaloRef = useRef<ReturnType<typeof setInterval> | null>(null)
 
   useEffect(() => {
-    buscarItensCarrossel(12).then(setItens)
+    buscarItensCarrossel(12).then((reais) => {
+      if (reais.length > 0) {
+        setItens(reais)
+        setUsandoDemo(false)
+      } else {
+        setItens(ITENS_DEMONSTRACAO)
+        setUsandoDemo(true)
+      }
+    })
   }, [])
 
   useEffect(() => {
@@ -39,9 +92,16 @@ export function CarrosselPrestadores() {
 
   return (
     <div className="w-full max-w-3xl mx-auto px-4">
-      <p className="text-center text-xs text-muted-foreground uppercase tracking-wide mb-3">
-        Prestadores em destaque
-      </p>
+      <div className="flex items-center justify-center gap-2 mb-3">
+        <p className="text-center text-xs text-muted-foreground uppercase tracking-wide">
+          Prestadores em destaque
+        </p>
+        {usandoDemo && (
+          <span className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-foreground">
+            Exemplo
+          </span>
+        )}
+      </div>
       <div className="relative h-44 sm:h-56 rounded-2xl overflow-hidden border border-border/60">
         {itens.map((item, i) => (
           <button

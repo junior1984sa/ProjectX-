@@ -7,7 +7,7 @@
 // acima da faixa gratuita — veja SUPABASE_SETUP.md para configurar.
 //
 // Suporta dois modos de busca (ver ParametrosBusca.segmentosBusca):
-// - "pares": busca pelo próprio segmento do prestador
+// - "direta": busca pelo próprio segmento do prestador
 // - "clientes": busca por múltiplos segmentos-clientes em paralelo,
 //   distribuindo a quantidade desejada entre eles e combinando os
 //   resultados — é a prospecção de verdade, voltada a gerar leads.
@@ -97,7 +97,7 @@ async function buscarPorTermo(
  * tiver múltiplos termos (modo "clientes potenciais"), distribui a
  * quantidade desejada entre eles e busca em paralelo, combinando os
  * resultados. Caso contrário, busca só pelo `params.segmento` (modo
- * "pares", comportamento original).
+ * "direta", comportamento original).
  *
  * Retorna null se nenhuma busca encontrar nada — nesse caso, quem
  * chamou deve cair para outra fonte de dados.

@@ -11,7 +11,7 @@
 // Em muitas cidades brasileiras, isso é mais escasso que no Google Places.
 //
 // Suporta dois modos de busca (ver ParametrosBusca.segmentosBusca):
-// - "pares": busca pelo próprio segmento do prestador
+// - "direta": busca pelo próprio segmento do prestador
 // - "clientes": busca por múltiplos segmentos-clientes em paralelo,
 //   distribuindo a quantidade desejada entre eles e combinando os
 //   resultados.
@@ -132,7 +132,7 @@ async function buscarPorTermo(
  * Busca empresas reais via OpenStreetMap. Se `params.segmentosBusca`
  * tiver múltiplos termos (modo "clientes potenciais"), distribui a
  * quantidade desejada entre eles e busca em paralelo. Caso contrário,
- * busca só pelo `params.segmento` (modo "pares").
+ * busca só pelo `params.segmento` (modo "direta").
  *
  * Retorna null se a cidade não for localizada ou se nenhuma busca
  * encontrar nada — nesse caso, quem chamou deve cair no gerador de
