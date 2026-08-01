@@ -69,22 +69,64 @@ export const PLANOS: Record<TipoPlano, ConfiguracaoPlano> = {
 /** Ordem em que os planos aparecem na tela, do menor para o maior compromisso */
 export const ORDEM_PLANOS: TipoPlano[] = ["mensal", "trimestral", "semestral", "anual"]
 
+/**
+ * PREÇOS POR PAÍS — em moeda local, não convertidos pelo câmbio.
+ *
+ * Converter R$ 497 pelo dólar daria algo como US$ 92, um número quebrado
+ * e barato demais para o mercado americano, onde ferramentas equivalentes
+ * (Speedio, Econodata, Apollo) cobram bem mais. Cada praça tem preço
+ * próprio, ancorado no mercado local.
+ *
+ * A escada de desconto é a mesma do Brasil, para a proposta ser idêntica
+ * em qualquer país: trimestral -10%, semestral -15%, anual -20% sobre o
+ * equivalente mensal.
+ *
+ * FONTE DE VERDADE do que é cobrado de fato é a tabela `planos_regiao`
+ * no banco, lida pelas Edge Functions de pagamento. Estes valores são o
+ * que a tela exibe — mantenha os dois em sincronia ao alterar preços.
+ */
+export const PRECOS_POR_PAIS: Record<string, Record<TipoPlano, number>> = {
+  BR: { mensal: 497, trimestral: 1341, semestral: 2532, anual: 4764 },
+  US: { mensal: 97, trimestral: 261, semestral: 492, anual: 924 },
+  AU: { mensal: 147, trimestral: 396, semestral: 744, anual: 1404 },
+  GB: { mensal: 77, trimestral: 207, semestral: 390, anual: 732 },
+  PT: { mensal: 89, trimestral: 240, semestral: 450, anual: 852 },
+}
+
+/** Preço total do plano no país informado, caindo no Brasil se desconhecido */
+export function precoTotalNoPais(plano: TipoPlano, pais: string): number {
+  return (PRECOS_POR_PAIS[pais] ?? PRECOS_POR_PAIS.BR)[plano]
+}
+
+/**
+ * Formata um valor na moeda e no formato do país/idioma.
+ * Intl cuida das diferenças reais: R$ 1.341,00 no Brasil, $261.00 nos
+ * EUA, 1 341,00 € em Portugal.
+ */
+export function formatarMoeda(valor: number, pais: string, idioma: string): string {
+  const config = obterPais(pais)
+  return new Intl.NumberFormat(idioma, {
+    style: "currency",
+    currency: config.moeda,
+    maximumFractionDigits: valor % 1 === 0 ? 0 : 2,
+  }).format(valor)
+}
+
 /** Valor equivalente por mês — é o número que o cliente usa para comparar */
-export function precoMensalEquivalente(plano: TipoPlano): number {
-  const config = PLANOS[plano]
-  return config.precoTotal / config.meses
+export function precoMensalEquivalente(plano: TipoPlano, pais = "BR"): number {
+  return precoTotalNoPais(plano, pais) / PLANOS[plano].meses
 }
 
 /**
  * Percentual de economia em relação a pagar o plano mensal pelo
  * mesmo período. Retorna 0 para o próprio plano mensal.
  */
-export function economiaPercentual(plano: TipoPlano): number {
-  const config = PLANOS[plano]
+export function economiaPercentual(plano: TipoPlano, pais = "BR"): number {
   if (plano === "mensal") return 0
 
-  const custoSeFosseMensal = PLANOS.mensal.precoTotal * config.meses
-  return Math.round((1 - config.precoTotal / custoSeFosseMensal) * 100)
+  const custoSeFosseMensal =
+    precoTotalNoPais("mensal", pais) * PLANOS[plano].meses
+  return Math.round((1 - precoTotalNoPais(plano, pais) / custoSeFosseMensal) * 100)
 }
 
 /**

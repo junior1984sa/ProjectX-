@@ -28,6 +28,64 @@
     "GB": "do Reino Unido",
     "PT": "de Portugal"
   },
+  "nav": {
+    "emTesteGratis": "Em teste grátis",
+    "creditos": "créditos",
+    "proximaRecarga": "Próxima recarga em {{data}}. O que sobrar não expira.",
+    "pendente": "Pendente",
+    "administracao": "Administração",
+    "buscarPrestadores": "Buscar prestadores",
+    "meuPerfil": "Meu perfil",
+    "cadastrarEmpresa": "Cadastrar empresa",
+    "centralAjuda": "Central de Ajuda",
+    "sair": "Sair",
+    "saiuDaConta": "Você saiu da sua conta."
+  },
+  "planos": {
+    "selo": "{{dias}} dias grátis, cancele quando quiser",
+    "titulo": "Comece seu teste gratuito",
+    "subtitulo": "Cadastre seu cartão agora — você só é cobrado depois de {{dias}} dias, e pode cancelar antes disso sem pagar nada.",
+    "promocaoTitulo": "PROMOÇÃO DE LANÇAMENTO — APENAS OS {{vagas}} PRIMEIROS ASSINANTES",
+    "promocaoRestam": "Restam {{restantes}} de {{total}} vagas com preço especial. Depois disso, o valor volta ao normal.",
+    "promocao": "Promoção",
+    "desconto": "{{percentual}}% OFF",
+    "porMes": "/mês",
+    "cobradoMensalmente": "Cobrado mensalmente",
+    "cobradoACada": "{{valor}} a cada {{meses}} meses",
+    "creditosPorMes": "{{quantidade}} créditos por mês",
+    "naoExpiram": "Não expiram — o que sobrar acumula",
+    "incluido": "O que está incluído (já no período de teste)",
+    "beneficios": [
+      "Perfil completo visível no diretório",
+      "WhatsApp e e-mail liberados para quem buscar seu serviço",
+      "Upload de portfólio, propostas e panfletos",
+      "Disparo de mensagem com seu portfólio direto para os leads",
+      "Acesso completo à ferramenta de prospecção de clientes"
+    ],
+    "cobrancaIndisponivel": "A cobrança ainda não está disponível {{pais}}. Você pode usar a busca normalmente enquanto liberamos o pagamento por aqui.",
+    "trialIniciado": "Teste grátis de {{dias}} dias iniciado!"
+  },
+  "auth": {
+    "chamada": "Cadastre sua empresa — jateamento, pintura industrial, locação de equipamentos, qualquer ramo — e fique visível para quem está, agora, procurando exatamente o seu serviço.",
+    "criarConta": "Criar conta",
+    "jaTenhoConta": "Já tenho conta",
+    "email": "E-mail",
+    "placeholderEmail": "seu@email.com",
+    "senha": "Senha",
+    "confirmarSenha": "Confirmar senha",
+    "criarMinhaConta": "Criar minha conta",
+    "entrar": "Entrar",
+    "termos": "Ao continuar, você concorda com nossos termos de uso e política de privacidade.",
+    "erro": {
+      "preenchaCampos": "Preencha e-mail e senha.",
+      "senhaCurta": "A senha deve ter no mínimo 6 caracteres.",
+      "senhasDiferentes": "As senhas não coincidem."
+    },
+    "ok": {
+      "login": "Login realizado com sucesso!",
+      "contaCriada": "Conta criada! Vamos montar seu perfil de prestador."
+    }
+  },
   "busca": {
     "chamada": "Esqueça anúncio esperando alguém ver. O ProspectX vai direto até quem, agora, precisa do serviço que você presta — em qualquer cidade {{regiao}}.",
     "regiaoDoPais": "do país escolhido",

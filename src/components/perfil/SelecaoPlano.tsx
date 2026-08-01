@@ -9,11 +9,16 @@ import { Badge } from "@/components/ui/badge"
 import { iniciarAssinaturaComTrial, aplicarCodigoCortesia } from "@/lib/pagamento"
 import { useAuthStore } from "@/store/useAuthStore"
 import { usePromocaoStore } from "@/store/usePromocaoStore"
+import { useTranslation } from "react-i18next"
+import { usePreferenciasStore } from "@/store/usePreferenciasStore"
 import {
   PLANOS,
   ORDEM_PLANOS,
   economiaPercentual,
   precoMensalEquivalente,
+  precoTotalNoPais,
+  formatarMoeda,
+  obterPais,
   type TipoPlano,
 } from "@/types/prestador"
 import type { DadosCartaoForm } from "@/lib/mercadopago"
@@ -29,13 +34,7 @@ const PROMOCAO_ATIVA = import.meta.env.VITE_PROMOCAO_ATIVA === "true"
 /** 0.5 = 50% de desconto (ex: plano mensal de R$497 sai por R$248,50) */
 const DESCONTO_PROMOCIONAL = Number(import.meta.env.VITE_PROMOCAO_DESCONTO ?? "0.5")
 
-const BENEFICIOS = [
-  "Perfil completo visível no diretório nacional",
-  "WhatsApp e e-mail liberados para quem buscar seu serviço",
-  "Upload de portfólio, propostas e panfletos",
-  "Disparo de mensagem com seu portfólio direto para os leads",
-  "Acesso completo à ferramenta de prospecção de clientes",
-]
+/** Os benefícios vêm da tradução — ver chave `planos.beneficios` */
 
 const CARTAO_VAZIO: DadosCartaoForm = {
   numero: "",
@@ -48,7 +47,16 @@ const CARTAO_VAZIO: DadosCartaoForm = {
 
 export function SelecaoPlano() {
   const navigate = useNavigate()
-  const { carregarPerfil } = useAuthStore()
+  const { carregarPerfil, perfil } = useAuthStore()
+  const { t, i18n } = useTranslation()
+
+  /** País define moeda, preço e se já existe gateway para cobrar aqui */
+  const paisPreferido = usePreferenciasStore((s) => s.pais)
+  const pais = perfil?.pais_foco ?? paisPreferido
+  const configPais = obterPais(pais)
+  const moeda = (valor: number) => formatarMoeda(valor, pais, i18n.language)
+
+  const beneficios = t("planos.beneficios", { returnObjects: true }) as string[]
   const { ativa: promocaoAtivaNoBanco, vagasUsadas, vagasTotais, carregarStatus } = usePromocaoStore()
   const [planoSelecionado, setPlanoSelecionado] = useState<TipoPlano>("anual")
   const [cartao, setCartao] = useState<DadosCartaoForm>(CARTAO_VAZIO)
@@ -139,7 +147,7 @@ export function SelecaoPlano() {
       return
     }
 
-    toast.success(`Teste grátis de ${resultado.trialDias} dias iniciado! 🎉`)
+    toast.success(t("planos.trialIniciado", { dias: resultado.trialDias }) + " 🎉")
     navigate("/buscar")
   }
 
@@ -149,28 +157,42 @@ export function SelecaoPlano() {
         <div className="inline-flex items-center gap-1.5 bg-dourado-900/30 border border-dourado-800/50 rounded-full px-3 py-1 mb-4">
           <Sparkles className="w-3.5 h-3.5 text-dourado-400" />
           <span className="text-xs text-dourado-400 font-medium">
-            {DIAS_TRIAL} dias grátis, cancele quando quiser
+            {t("planos.selo", { dias: DIAS_TRIAL })}
           </span>
         </div>
         <h1 className="text-2xl md:text-3xl font-bold text-foreground">
-          Comece seu teste gratuito
+          {t("planos.titulo")}
         </h1>
         <p className="text-muted-foreground mt-2">
-          Cadastre seu cartão agora — você só é cobrado depois de {DIAS_TRIAL} dias, e pode
-          cancelar antes disso sem pagar nada.
+          {t("planos.subtitulo", { dias: DIAS_TRIAL })}
         </p>
       </div>
+
+      {/* Aviso honesto quando ainda não há gateway para o país escolhido:
+          melhor dizer antes do que deixar a pessoa preencher o cartão e
+          descobrir no fim que não dá para cobrar ali. */}
+      {configPais.gateway === null && (
+        <div className="mb-6 rounded-lg border border-dourado-700/40 bg-dourado-900/10 px-4 py-3">
+          <p className="text-xs text-dourado-200/90 leading-relaxed">
+            {t("planos.cobrancaIndisponivel", {
+              pais: t(`paisesEm.${configPais.codigo}`),
+            })}
+          </p>
+        </div>
+      )}
 
       {/* Banner de promoção — bem explícito, só aparece quando ativada */}
       {promocaoDisponivel && (
         <div className="mb-6 rounded-xl border-2 border-dourado-500 bg-gradient-to-r from-dourado-900/30 to-dourado-900/10 p-4 text-center">
           <p className="flex items-center justify-center gap-1.5 text-sm font-bold text-dourado-300">
             <Flame className="w-4 h-4" />
-            PROMOÇÃO DE LANÇAMENTO — APENAS OS {vagasTotais} PRIMEIROS ASSINANTES
+            {t("planos.promocaoTitulo", { vagas: vagasTotais })}
           </p>
           <p className="text-xs text-dourado-200/80 mt-1">
-            Restam <span className="font-bold">{vagasRestantes}</span> de {vagasTotais} vagas com preço especial.
-            Depois disso, o valor volta ao normal.
+            {t("planos.promocaoRestam", {
+              restantes: vagasRestantes,
+              total: vagasTotais,
+            })}
           </p>
         </div>
       )}
@@ -182,11 +204,12 @@ export function SelecaoPlano() {
         {ORDEM_PLANOS.map((idPlano) => {
           const config = PLANOS[idPlano]
           const selecionado = planoSelecionado === idPlano
-          const economia = economiaPercentual(idPlano)
-          const equivalenteMensal = precoMensalEquivalente(idPlano)
+          const economia = economiaPercentual(idPlano, pais)
+          const equivalenteMensal = precoMensalEquivalente(idPlano, pais)
+          const precoTotal = precoTotalNoPais(idPlano, pais)
           const precoExibido = promocaoDisponivel
-            ? config.precoTotal * (1 - DESCONTO_PROMOCIONAL)
-            : config.precoTotal
+            ? precoTotal * (1 - DESCONTO_PROMOCIONAL)
+            : precoTotal
 
           return (
             <Card
@@ -200,7 +223,9 @@ export function SelecaoPlano() {
             >
               {economia > 0 && (
                 <Badge className="absolute -top-2.5 right-3 text-[10px] bg-dourado-600 text-background">
-                  {promocaoDisponivel ? "Promoção" : `${economia}% OFF`}
+                  {promocaoDisponivel
+                    ? t("planos.promocao")
+                    : t("planos.desconto", { percentual: economia })}
                 </Badge>
               )}
 
@@ -222,28 +247,38 @@ export function SelecaoPlano() {
                 {/* O número que o cliente usa para comparar planos */}
                 <div className="flex items-baseline gap-1">
                   <span className="text-2xl font-bold text-foreground">
-                    R$ {(promocaoDisponivel
-                      ? equivalenteMensal * (1 - DESCONTO_PROMOCIONAL)
-                      : equivalenteMensal
-                    ).toFixed(0)}
+                    {moeda(
+                      Math.round(
+                        promocaoDisponivel
+                          ? equivalenteMensal * (1 - DESCONTO_PROMOCIONAL)
+                          : equivalenteMensal
+                      )
+                    )}
                   </span>
-                  <span className="text-muted-foreground text-xs">/mês</span>
+                  <span className="text-muted-foreground text-xs">
+                    {t("planos.porMes")}
+                  </span>
                 </div>
 
                 <p className="text-[11px] text-muted-foreground mt-1.5">
                   {config.meses === 1
-                    ? "Cobrado mensalmente"
-                    : `R$ ${precoExibido.toFixed(2).replace(".", ",")} a cada ${config.meses} meses`}
+                    ? t("planos.cobradoMensalmente")
+                    : t("planos.cobradoACada", {
+                        valor: moeda(precoExibido),
+                        meses: config.meses,
+                      })}
                 </p>
 
                 <p className="text-[11px] text-dourado-300/90 mt-2 flex items-center gap-1">
                   <Zap className="w-3 h-3" />
-                  {config.creditosMensais} créditos por mês
+                  {t("planos.creditosPorMes", {
+                    quantidade: config.creditosMensais,
+                  })}
                 </p>
                 {/* Acúmulo é diferencial de venda: o cliente não perde
                     o que não usou, então não precisa correr contra o mês */}
                 <p className="text-[11px] text-muted-foreground mt-0.5">
-                  Não expiram — o que sobrar acumula
+                  {t("planos.naoExpiram")}
                 </p>
               </CardContent>
             </Card>
@@ -274,10 +309,10 @@ export function SelecaoPlano() {
         <CardContent className="p-6">
           <h3 className="font-medium text-foreground mb-4 flex items-center gap-2">
             <TrendingUp className="w-4 h-4 text-dourado-400" />
-            O que está incluído (já no período de teste)
+            {t("planos.incluido")}
           </h3>
           <div className="space-y-2.5">
-            {BENEFICIOS.map((beneficio) => (
+            {beneficios.map((beneficio) => (
               <div key={beneficio} className="flex items-start gap-2.5">
                 <Check className="w-4 h-4 text-green-400 mt-0.5 flex-shrink-0" />
                 <span className="text-sm text-muted-foreground">{beneficio}</span>

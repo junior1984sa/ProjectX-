@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 import { Lock, Mail, Loader2, Eye, EyeOff } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -14,6 +15,7 @@ interface TelaAuthProps {
 
 export function TelaAuth({ onSucesso }: TelaAuthProps) {
   const { entrar, cadastrar } = useAuthStore()
+  const { t } = useTranslation()
 
   const [aba, setAba] = useState<"entrar" | "cadastrar">("cadastrar")
   const [email, setEmail] = useState("")
@@ -24,7 +26,7 @@ export function TelaAuth({ onSucesso }: TelaAuthProps) {
 
   async function handleEntrar() {
     if (!email.trim() || !senha.trim()) {
-      toast.error("Preencha e-mail e senha.")
+      toast.error(t("auth.erro.preenchaCampos"))
       return
     }
 
@@ -37,21 +39,21 @@ export function TelaAuth({ onSucesso }: TelaAuthProps) {
       return
     }
 
-    toast.success("Login realizado com sucesso!")
+    toast.success(t("auth.ok.login"))
     onSucesso?.()
   }
 
   async function handleCadastrar() {
     if (!email.trim() || !senha.trim()) {
-      toast.error("Preencha e-mail e senha.")
+      toast.error(t("auth.erro.preenchaCampos"))
       return
     }
     if (senha.length < 6) {
-      toast.error("A senha deve ter no mínimo 6 caracteres.")
+      toast.error(t("auth.erro.senhaCurta"))
       return
     }
     if (senha !== confirmarSenha) {
-      toast.error("As senhas não coincidem.")
+      toast.error(t("auth.erro.senhasDiferentes"))
       return
     }
 
@@ -64,7 +66,7 @@ export function TelaAuth({ onSucesso }: TelaAuthProps) {
       return
     }
 
-    toast.success("Conta criada! Vamos montar seu perfil de prestador.")
+    toast.success(t("auth.ok.contaCriada"))
     onSucesso?.()
   }
 
@@ -89,8 +91,7 @@ export function TelaAuth({ onSucesso }: TelaAuthProps) {
           </h1>
         </div>
         <p className="text-muted-foreground max-w-sm mx-auto">
-          Cadastre sua empresa — jateamento, pintura industrial, locação de equipamentos,
-          qualquer ramo — e fique visível para quem está, agora, procurando exatamente o seu serviço.
+          {t("auth.chamada")}
         </p>
       </div>
 
@@ -98,22 +99,22 @@ export function TelaAuth({ onSucesso }: TelaAuthProps) {
         <CardContent className="p-6 md:p-8">
           <Tabs value={aba} onValueChange={(v) => setAba(v as "entrar" | "cadastrar")}>
             <TabsList className="grid w-full grid-cols-2 mb-6">
-              <TabsTrigger value="cadastrar">Criar conta</TabsTrigger>
-              <TabsTrigger value="entrar">Já tenho conta</TabsTrigger>
+              <TabsTrigger value="cadastrar">{t("auth.criarConta")}</TabsTrigger>
+              <TabsTrigger value="entrar">{t("auth.jaTenhoConta")}</TabsTrigger>
             </TabsList>
 
             {/* Campos comuns às duas abas */}
             <div className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email" className="text-sm text-muted-foreground">
-                  E-mail
+                  {t("auth.email")}
                 </Label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                   <Input
                     id="email"
                     type="email"
-                    placeholder="seu@email.com"
+                    placeholder={t("auth.placeholderEmail")}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     onKeyDown={handleKeyDown}
@@ -125,7 +126,7 @@ export function TelaAuth({ onSucesso }: TelaAuthProps) {
 
               <div className="space-y-2">
                 <Label htmlFor="senha" className="text-sm text-muted-foreground">
-                  Senha
+                  {t("auth.senha")}
                 </Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -152,7 +153,7 @@ export function TelaAuth({ onSucesso }: TelaAuthProps) {
               <TabsContent value="cadastrar" className="mt-0 space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="confirmar-senha" className="text-sm text-muted-foreground">
-                    Confirmar senha
+                    {t("auth.confirmarSenha")}
                   </Label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
@@ -178,7 +179,7 @@ export function TelaAuth({ onSucesso }: TelaAuthProps) {
                   {carregando ? (
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                   ) : null}
-                  Criar minha conta
+                  {t("auth.criarMinhaConta")}
                 </Button>
               </TabsContent>
 
@@ -192,14 +193,14 @@ export function TelaAuth({ onSucesso }: TelaAuthProps) {
                   {carregando ? (
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                   ) : null}
-                  Entrar
+                  {t("auth.entrar")}
                 </Button>
               </TabsContent>
             </div>
           </Tabs>
 
           <p className="text-xs text-muted-foreground text-center mt-6">
-            Ao continuar, você concorda com nossos termos de uso e política de privacidade.
+            {t("auth.termos")}
           </p>
         </CardContent>
       </Card>

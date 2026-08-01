@@ -28,6 +28,64 @@
     "GB": "in the United Kingdom",
     "PT": "in Portugal"
   },
+  "nav": {
+    "emTesteGratis": "Free trial",
+    "creditos": "credits",
+    "proximaRecarga": "Next top-up on {{data}}. Unused credits never expire.",
+    "pendente": "Pending",
+    "administracao": "Admin",
+    "buscarPrestadores": "Find providers",
+    "meuPerfil": "My profile",
+    "cadastrarEmpresa": "Register your company",
+    "centralAjuda": "Help center",
+    "sair": "Sign out",
+    "saiuDaConta": "You've been signed out."
+  },
+  "planos": {
+    "selo": "{{dias}} days free, cancel anytime",
+    "titulo": "Start your free trial",
+    "subtitulo": "Add your card now — you're only charged after {{dias}} days, and you can cancel before that without paying anything.",
+    "promocaoTitulo": "LAUNCH OFFER — FIRST {{vagas}} SUBSCRIBERS ONLY",
+    "promocaoRestam": "{{restantes}} of {{total}} special-price spots left. After that, the price goes back to normal.",
+    "promocao": "Launch offer",
+    "desconto": "{{percentual}}% OFF",
+    "porMes": "/month",
+    "cobradoMensalmente": "Billed monthly",
+    "cobradoACada": "{{valor}} every {{meses}} months",
+    "creditosPorMes": "{{quantidade}} credits per month",
+    "naoExpiram": "Never expire — unused credits roll over",
+    "incluido": "What's included (from day one of the trial)",
+    "beneficios": [
+      "Full profile visible in the directory",
+      "WhatsApp and email unlocked for people searching your service",
+      "Upload portfolio, proposals and flyers",
+      "Send your portfolio straight to leads",
+      "Full access to the client prospecting tool"
+    ],
+    "cobrancaIndisponivel": "Billing isn't available {{pais}} yet. You can keep using search normally while we enable payments here.",
+    "trialIniciado": "{{dias}}-day free trial started!"
+  },
+  "auth": {
+    "chamada": "Register your company — sandblasting, industrial painting, equipment rental, any trade — and become visible to the businesses looking for exactly your service right now.",
+    "criarConta": "Create account",
+    "jaTenhoConta": "I have an account",
+    "email": "Email",
+    "placeholderEmail": "you@email.com",
+    "senha": "Password",
+    "confirmarSenha": "Confirm password",
+    "criarMinhaConta": "Create my account",
+    "entrar": "Sign in",
+    "termos": "By continuing, you agree to our terms of use and privacy policy.",
+    "erro": {
+      "preenchaCampos": "Enter your email and password.",
+      "senhaCurta": "Password must be at least 6 characters.",
+      "senhasDiferentes": "Passwords don't match."
+    },
+    "ok": {
+      "login": "Signed in successfully!",
+      "contaCriada": "Account created! Let's set up your provider profile."
+    }
+  },
   "busca": {
     "chamada": "Forget ads waiting for someone to notice them. ProspectX goes straight to the companies that need your service right now — in any city {{regiao}}.",
     "regiaoDoPais": "in your chosen country",

@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import { LogOut, User, Building2, Zap, Gift, HelpCircle, Search, LayoutDashboard } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -13,6 +14,7 @@ export function NavegacaoTopo() {
   const location = useLocation()
   const { usuarioId, email, perfil, sair } = useAuthStore()
   const { creditos, carregarCreditos } = useCreditosStore()
+  const { t, i18n } = useTranslation()
 
   const estaLogado = !!usuarioId
   const acessoLiberado = temAcessoLiberado(perfil)
@@ -26,7 +28,7 @@ export function NavegacaoTopo() {
 
   async function handleSair() {
     await sair()
-    toast.success("Você saiu da sua conta.")
+    toast.success(t("nav.saiuDaConta"))
     navigate("/")
   }
 
@@ -56,7 +58,7 @@ export function NavegacaoTopo() {
               {emTrial && (
                 <Badge variant="secondary" className="text-xs hidden sm:inline-flex items-center gap-1 bg-dourado-900/20 text-dourado-300 border border-dourado-700/40">
                   <Gift className="w-3 h-3" />
-                  Em teste grátis
+                  {t("nav.emTesteGratis")}
                 </Badge>
               )}
 
@@ -65,14 +67,18 @@ export function NavegacaoTopo() {
                 <button
                   onClick={() => navigate("/perfil")}
                   className="flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-full border border-dourado-700/40 bg-dourado-900/15 text-dourado-300 hover:bg-dourado-900/25 transition-colors"
-                  title={`Próxima recarga em ${new Date(creditos.ciclo_fim).toLocaleDateString("pt-BR")}. O que sobrar não expira.`}
+                  title={t("nav.proximaRecarga", {
+                    // A data segue o idioma da interface: "01/08/2026"
+                    // para pt-BR e "8/1/2026" para en-US
+                    data: new Date(creditos.ciclo_fim).toLocaleDateString(i18n.language),
+                  })}
                 >
                   <Zap className="w-3 h-3" />
                   <span className="font-semibold">{creditos.creditos_disponiveis}</span>
                   {/* Sem "X / Y": com créditos acumulativos o saldo pode
                       passar da franquia do ciclo, e "150 / 100" confunde */}
                   <span className="hidden sm:inline text-dourado-400/70">
-                    créditos
+                    {t("nav.creditos")}
                   </span>
                 </button>
               )}
@@ -80,7 +86,7 @@ export function NavegacaoTopo() {
               {/* Status da assinatura */}
               {perfil && !acessoLiberado && (
                 <Badge variant="warning" className="text-xs hidden sm:inline-flex">
-                  Pendente
+                  {t("nav.pendente")}
                 </Badge>
               )}
 
@@ -91,7 +97,7 @@ export function NavegacaoTopo() {
                   size="icon"
                   onClick={() => navigate("/admin")}
                   className={`h-8 w-8 ${location.pathname === "/admin" ? "text-dourado-400" : "text-muted-foreground"}`}
-                  title="Administração"
+                  title={t("nav.administracao")}
                 >
                   <LayoutDashboard className="w-4 h-4" />
                 </Button>
@@ -106,7 +112,7 @@ export function NavegacaoTopo() {
                   className={`h-8 text-xs ${location.pathname === "/diretorio" ? "text-dourado-400" : "text-muted-foreground"}`}
                 >
                   <Search className="w-3.5 h-3.5 mr-1.5" />
-                  <span className="hidden sm:inline">Buscar prestadores</span>
+                  <span className="hidden sm:inline">{t("nav.buscarPrestadores")}</span>
                 </Button>
               )}
 
@@ -119,7 +125,7 @@ export function NavegacaoTopo() {
               >
                 <Building2 className="w-3.5 h-3.5 mr-1.5" />
                 <span className="hidden sm:inline">
-                  {perfil ? "Meu perfil" : "Cadastrar empresa"}
+                  {perfil ? t("nav.meuPerfil") : t("nav.cadastrarEmpresa")}
                 </span>
               </Button>
 
@@ -129,7 +135,7 @@ export function NavegacaoTopo() {
                 size="icon"
                 onClick={() => navigate("/ajuda")}
                 className={`h-8 w-8 ${location.pathname === "/ajuda" ? "text-dourado-400" : "text-muted-foreground"}`}
-                title="Central de Ajuda"
+                title={t("nav.centralAjuda")}
               >
                 <HelpCircle className="w-4 h-4" />
               </Button>
@@ -145,7 +151,7 @@ export function NavegacaoTopo() {
                 size="icon"
                 onClick={handleSair}
                 className="h-8 w-8 text-muted-foreground hover:text-red-400"
-                title="Sair"
+                title={t("nav.sair")}
               >
                 <LogOut className="w-4 h-4" />
               </Button>
@@ -157,7 +163,7 @@ export function NavegacaoTopo() {
                 size="icon"
                 onClick={() => navigate("/ajuda")}
                 className={`h-8 w-8 ${location.pathname === "/ajuda" ? "text-dourado-400" : "text-muted-foreground"}`}
-                title="Central de Ajuda"
+                title={t("nav.centralAjuda")}
               >
                 <HelpCircle className="w-4 h-4" />
               </Button>
@@ -167,7 +173,7 @@ export function NavegacaoTopo() {
                 className="h-8 text-xs bg-dourado-600 hover:bg-dourado-700 text-white"
               >
                 <User className="w-3.5 h-3.5 mr-1.5" />
-                Cadastrar empresa
+                {t("nav.cadastrarEmpresa")}
               </Button>
             </>
           )}
