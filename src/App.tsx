@@ -159,9 +159,10 @@ function ConteudoApp() {
       {location.pathname !== "/" && <NavegacaoTopo />}
       <PromptInstalarApp />
 
-      {/* pb-14 reserva a altura exata do banner fixo do rodapé,
-          garantindo que nenhum conteúdo fique escondido atrás dele */}
-      <div className="pb-14">
+      {/* Reserva a altura exata da faixa de anúncios do rodapé
+          (80px no celular, 96px no computador), garantindo que nenhum
+          conteúdo fique escondido atrás dela */}
+      <div className="pb-20 md:pb-24">
       <Routes>
         <Route path="/" element={<TelaAbertura />} />
         <Route path="/buscar" element={<PaginaBusca />} />
@@ -178,9 +179,11 @@ function ConteudoApp() {
       </Routes>
       </div>
 
-      {/* Banner contextual — fixo no rodapé, em todas as páginas.
-          Mostra apenas anunciantes que vendem para o ramo de quem
-          está navegando. Não bloqueia nada: é uma faixa fina, sem
+      {/* Banner contextual — faixa no rodapé, em todas as páginas.
+          Mostra apenas anunciantes que vendem para o ramo de quem está
+          navegando. Fica no rodapé de propósito: a lateral tem espaço
+          sobrando, mas fica ao lado do formulário de busca e disputaria
+          atenção com a ação principal do site. Não bloqueia nada: sem
           pop-up e sem exigir clique para dispensar. */}
       <BannerContextual />
     </>
