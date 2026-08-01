@@ -53,12 +53,34 @@ function mapearSegmentoParaTagsOSM(segmento: string): string[] {
   return ["office=company", "shop=yes", "craft=yes"]
 }
 
+/**
+ * Países atendidos pela busca. `nome` entra na consulta ao Nominatim e
+ * `iso2` restringe o resultado àquele país — sem a restrição, uma
+ * cidade de nome comum ("Springfield", "Santiago") cai em qualquer
+ * lugar do mundo.
+ *
+ * Esta tabela espelha PAISES_DISPONIVEIS em src/types/prestador.ts.
+ * Edge Function não compartilha código com o frontend, por isso a
+ * duplicação: ao incluir um país novo, atualize os dois lugares.
+ */
+const PAISES: Record<string, { nome: string; iso2: string }> = {
+  BR: { nome: "Brasil", iso2: "br" },
+  US: { nome: "United States", iso2: "us" },
+  AU: { nome: "Australia", iso2: "au" },
+  GB: { nome: "United Kingdom", iso2: "gb" },
+  PT: { nome: "Portugal", iso2: "pt" },
+}
+
 async function geocodificarCidade(
   cidade: string,
-  estado: string
+  estado: string,
+  pais: string
 ): Promise<{ lat: number; lng: number } | null> {
-  const query = estado ? `${cidade}, ${estado}, Brasil` : `${cidade}, Brasil`
-  const url = `${NOMINATIM_URL}?q=${encodeURIComponent(query)}&format=json&limit=1&countrycodes=br`
+  const p = PAISES[pais] ?? PAISES.BR
+  const query = estado
+    ? `${cidade}, ${estado}, ${p.nome}`
+    : `${cidade}, ${p.nome}`
+  const url = `${NOMINATIM_URL}?q=${encodeURIComponent(query)}&format=json&limit=1&countrycodes=${p.iso2}`
 
   const resposta = await fetch(url, { headers: HEADERS_OSM })
   if (!resposta.ok) return null
@@ -111,7 +133,9 @@ Deno.serve(async (req: Request) => {
   }
 
   try {
-    const { cidade, estado, raioKm, segmento } = await req.json()
+    // `pais` é opcional e cai em BR quando ausente, para não quebrar
+    // chamadas de versões anteriores do app que ainda não o enviam.
+    const { cidade, estado, raioKm, segmento, pais } = await req.json()
 
     if (!cidade || !segmento) {
       return new Response(
@@ -120,7 +144,7 @@ Deno.serve(async (req: Request) => {
       )
     }
 
-    const ponto = await geocodificarCidade(cidade, estado ?? "")
+    const ponto = await geocodificarCidade(cidade, estado ?? "", pais ?? "BR")
     if (!ponto) {
       return new Response(
         JSON.stringify({ encontrado: false, motivo: "cidade_nao_localizada" }),

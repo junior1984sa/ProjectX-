@@ -48,12 +48,37 @@ interface PlaceResult {
   businessStatus?: string
 }
 
+/**
+ * Países atendidos pela busca.
+ *   nome/iso2      → geocodificação no Nominatim
+ *   idioma/regiao  → em que língua e mercado o Google Places responde
+ *   preposicao     → monta "jateamento EM Joinville" / "sandblasting IN Miami"
+ *
+ * Espelha PAISES_DISPONIVEIS em src/types/prestador.ts. Edge Function
+ * não compartilha código com o frontend, daí a duplicação: ao incluir
+ * um país novo, atualize os dois lugares.
+ */
+const PAISES: Record<
+  string,
+  { nome: string; iso2: string; idioma: string; regiao: string; preposicao: string }
+> = {
+  BR: { nome: "Brasil", iso2: "br", idioma: "pt-BR", regiao: "BR", preposicao: "em" },
+  US: { nome: "United States", iso2: "us", idioma: "en-US", regiao: "US", preposicao: "in" },
+  AU: { nome: "Australia", iso2: "au", idioma: "en-AU", regiao: "AU", preposicao: "in" },
+  GB: { nome: "United Kingdom", iso2: "gb", idioma: "en-GB", regiao: "GB", preposicao: "in" },
+  PT: { nome: "Portugal", iso2: "pt", idioma: "pt-PT", regiao: "PT", preposicao: "em" },
+}
+
 async function geocodificarCidadeGratis(
   cidade: string,
-  estado: string
+  estado: string,
+  pais: string
 ): Promise<{ lat: number; lng: number } | null> {
-  const query = estado ? `${cidade}, ${estado}, Brasil` : `${cidade}, Brasil`
-  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1&countrycodes=br`
+  const p = PAISES[pais] ?? PAISES.BR
+  const query = estado
+    ? `${cidade}, ${estado}, ${p.nome}`
+    : `${cidade}, ${p.nome}`
+  const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1&countrycodes=${p.iso2}`
 
   try {
     const resposta = await fetch(url, {
@@ -76,16 +101,19 @@ async function buscarNoGooglePlaces(
   estado: string,
   ponto: { lat: number; lng: number } | null,
   raioMetros: number,
-  maxResultados: number
+  maxResultados: number,
+  pais: string
 ): Promise<PlaceResult[]> {
+  const p = PAISES[pais] ?? PAISES.BR
+
   const textQuery = estado
-    ? `${segmento} em ${cidade}, ${estado}`
-    : `${segmento} em ${cidade}`
+    ? `${segmento} ${p.preposicao} ${cidade}, ${estado}`
+    : `${segmento} ${p.preposicao} ${cidade}`
 
   const corpo: Record<string, unknown> = {
     textQuery,
-    languageCode: "pt-BR",
-    regionCode: "BR",
+    languageCode: p.idioma,
+    regionCode: p.regiao,
     maxResultCount: Math.min(20, maxResultados),
   }
 
@@ -150,7 +178,10 @@ Deno.serve(async (req: Request) => {
       )
     }
 
-    const { cidade, estado, raioKm, segmento, quantidadeDesejada } = await req.json()
+    // `pais` é opcional e cai em BR quando ausente, para não quebrar
+    // chamadas de versões anteriores do app que ainda não o enviam.
+    const { cidade, estado, raioKm, segmento, quantidadeDesejada, pais } =
+      await req.json()
 
     if (!cidade || !segmento) {
       return new Response(
@@ -159,7 +190,8 @@ Deno.serve(async (req: Request) => {
       )
     }
 
-    const ponto = await geocodificarCidadeGratis(cidade, estado ?? "")
+    const paisBusca = pais ?? "BR"
+    const ponto = await geocodificarCidadeGratis(cidade, estado ?? "", paisBusca)
     const raioMetros = (raioKm ?? 10) * 1000
 
     const places = await buscarNoGooglePlaces(
@@ -168,7 +200,8 @@ Deno.serve(async (req: Request) => {
       estado ?? "",
       ponto,
       raioMetros,
-      quantidadeDesejada ?? 20
+      quantidadeDesejada ?? 20,
+      paisBusca
     )
 
     if (places.length === 0) {

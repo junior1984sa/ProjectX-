@@ -46,6 +46,12 @@ export interface ParametrosBusca {
   raioKm: number
   quantidadeDesejada: number
   /**
+   * País onde procurar (BR, US, AU, PT). Vem do `pais_foco` do perfil.
+   * Sem ele a geocodificação assume Brasil e uma busca por "Miami, FL"
+   * não encontra nada — o sistema procuraria "Miami, FL, Brasil".
+   */
+  pais?: string
+  /**
    * Quando a busca é no modo "clientes potenciais", esta lista contém
    * os termos reais usados na busca (ex: segmentos-clientes mapeados a
    * partir do segmento do prestador). Quando ausente ou vazia, a busca

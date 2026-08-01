@@ -50,6 +50,7 @@ async function buscarPorTermo(
         raioKm: params.raioKm,
         segmento: termoBusca,
         quantidadeDesejada: quantidade,
+        pais: params.pais ?? "BR",
       }),
     })
 

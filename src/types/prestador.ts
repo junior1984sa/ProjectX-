@@ -134,14 +134,83 @@ export interface PlanoRegiao {
 
 /**
  * Países disponíveis para foco de prospecção.
- * Apenas 'BR' está funcional agora — os demais aparecem na UI
- * como "em breve" até a internacionalização ser implementada.
+ *
+ * DOIS NÍVEIS DE DISPONIBILIDADE, de propósito:
+ *
+ *   buscaDisponivel — o motor de busca sabe geocodificar e procurar
+ *     empresas naquele país. Independe de pagamento.
+ *
+ *   gateway — qual meio de pagamento atende o país. `null` significa
+ *     que ainda não há como cobrar ali: a pessoa navega e testa, mas a
+ *     tela de planos avisa que a cobrança ainda não está disponível.
+ *     Vira "stripe" (EUA) e "paypal"/"stripe" (Portugal) assim que as
+ *     credenciais forem aprovadas.
+ *
+ * `nomeGeocodificacao` é o nome usado na consulta ao Nominatim, e
+ * `codigoISO2` restringe o resultado àquele país — sem isso, "Springfield"
+ * cai em qualquer lugar do mundo.
  */
 export const PAISES_DISPONIVEIS = [
-  { codigo: "BR", nome: "Brasil", moeda: "BRL", idioma: "pt-BR", disponivel: true },
-  { codigo: "US", nome: "Estados Unidos", moeda: "USD", idioma: "en-US", disponivel: false },
-  { codigo: "PT", nome: "Portugal", moeda: "EUR", idioma: "pt-PT", disponivel: false },
+  {
+    codigo: "BR",
+    nome: "Brasil",
+    nomeGeocodificacao: "Brasil",
+    codigoISO2: "br",
+    moeda: "BRL",
+    idioma: "pt-BR",
+    buscaDisponivel: true,
+    gateway: "mercadopago",
+  },
+  {
+    codigo: "US",
+    nome: "Estados Unidos",
+    nomeGeocodificacao: "United States",
+    codigoISO2: "us",
+    moeda: "USD",
+    idioma: "en-US",
+    buscaDisponivel: true,
+    gateway: null,
+  },
+  {
+    codigo: "AU",
+    nome: "Austrália",
+    nomeGeocodificacao: "Australia",
+    codigoISO2: "au",
+    moeda: "AUD",
+    idioma: "en-AU",
+    buscaDisponivel: true,
+    gateway: null,
+  },
+  {
+    codigo: "GB",
+    nome: "Reino Unido",
+    nomeGeocodificacao: "United Kingdom",
+    codigoISO2: "gb",
+    moeda: "GBP",
+    idioma: "en-GB",
+    buscaDisponivel: true,
+    gateway: null,
+  },
+  {
+    codigo: "PT",
+    nome: "Portugal",
+    nomeGeocodificacao: "Portugal",
+    codigoISO2: "pt",
+    moeda: "EUR",
+    idioma: "pt-PT",
+    buscaDisponivel: true,
+    gateway: null,
+  },
 ] as const
+
+export type CodigoPais = (typeof PAISES_DISPONIVEIS)[number]["codigo"]
+
+/** Busca a configuração de um país, caindo no Brasil se o código for desconhecido */
+export function obterPais(codigo: string | null | undefined) {
+  return (
+    PAISES_DISPONIVEIS.find((p) => p.codigo === codigo) ?? PAISES_DISPONIVEIS[0]
+  )
+}
 
 /**
  * Dados necessários para criar/editar um perfil (sem campos gerados pelo banco)

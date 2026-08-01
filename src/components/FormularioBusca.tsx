@@ -103,6 +103,9 @@ export function FormularioBusca() {
         raioKm,
         quantidadeDesejada: 10,
         segmentosBusca,
+        // Sem o país, a geocodificação assume Brasil e uma busca em
+        // "Miami, FL" não encontra nada
+        pais: perfil?.pais_foco ?? "BR",
         timestamp: new Date(),
       }
 
@@ -143,6 +146,7 @@ export function FormularioBusca() {
       raioKm,
       quantidadeDesejada: faixa.max,
       segmentosBusca,
+      pais: perfil?.pais_foco ?? "BR",
       timestamp: new Date(),
     }
 

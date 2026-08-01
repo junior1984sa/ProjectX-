@@ -171,27 +171,33 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
             </p>
           </div>
 
-          {/* País de foco — preparado para expansão internacional futura */}
+          {/* País de foco — define onde a busca procura empresas e, no
+              futuro, qual gateway cobra a assinatura. A busca já funciona
+              nos quatro países; o que ainda falta em alguns é a cobrança. */}
           <div className="space-y-2">
             <Label>País de atuação</Label>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {PAISES_DISPONIVEIS.map((pais) => (
                 <button
                   key={pais.codigo}
                   type="button"
-                  disabled={!pais.disponivel}
-                  onClick={() => pais.disponivel && atualizarCampo("paisFoco", pais.codigo)}
+                  disabled={!pais.buscaDisponivel}
+                  onClick={() =>
+                    pais.buscaDisponivel && atualizarCampo("paisFoco", pais.codigo)
+                  }
                   className={`flex flex-col items-center justify-center py-2.5 rounded-md text-xs font-medium border transition-all ${
                     form.paisFoco === pais.codigo
                       ? "bg-dourado-900/30 border-dourado-600 text-dourado-300"
-                      : pais.disponivel
+                      : pais.buscaDisponivel
                       ? "bg-secondary border-transparent text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
                       : "bg-secondary/40 border-transparent text-muted-foreground/40 cursor-not-allowed"
                   }`}
                 >
                   <span>{pais.nome}</span>
-                  {!pais.disponivel && (
-                    <span className="text-[9px] opacity-70 mt-0.5">em breve</span>
+                  {pais.gateway === null && (
+                    <span className="text-[9px] opacity-70 mt-0.5">
+                      pagamento em breve
+                    </span>
                   )}
                 </button>
               ))}
