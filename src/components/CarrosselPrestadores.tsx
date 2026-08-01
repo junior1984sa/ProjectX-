@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react"
 import { useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import { MapPin } from "lucide-react"
 import { buscarItensCarrossel, type ItemCarrossel } from "@/lib/diretorio"
 
@@ -55,6 +56,7 @@ const ITENS_DEMONSTRACAO: ItemCarrossel[] = [
  */
 export function CarrosselPrestadores() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
   const [itens, setItens] = useState<ItemCarrossel[]>([])
   const [usandoDemo, setUsandoDemo] = useState(false)
   const [indiceAtivo, setIndiceAtivo] = useState(0)
@@ -94,7 +96,7 @@ export function CarrosselPrestadores() {
     <div className="w-full max-w-3xl mx-auto px-4">
       <div className="flex items-center justify-center gap-2 mb-3">
         <p className="text-center text-xs text-muted-foreground uppercase tracking-wide">
-          Prestadores em destaque
+          {t("abertura.prestadoresEmDestaque")}
         </p>
         {usandoDemo && (
           <span className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-foreground">

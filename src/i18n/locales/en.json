@@ -1,0 +1,24 @@
+{
+  "abertura": {
+    "toqueParaEntrar": "Tap to enter",
+    "chamada": "Active prospecting for any service provider.",
+    "prestadoresEmDestaque": "FEATURED PROVIDERS"
+  },
+  "preferencias": {
+    "titulo": "Where do you want to prospect?",
+    "subtitulo": "This sets which country we search for companies in, and the language of the app. You can change it later.",
+    "idioma": "Language",
+    "pais": "Country",
+    "confirmar": "Get started",
+    "alterar": "Change language and country",
+    "pagamentoEmBreve": "billing coming soon",
+    "avisoPagamento": "Search already works in this country. Subscription billing isn't available here yet — feel free to explore and test."
+  },
+  "paises": {
+    "BR": "Brazil",
+    "US": "United States",
+    "AU": "Australia",
+    "GB": "United Kingdom",
+    "PT": "Portugal"
+  }
+}

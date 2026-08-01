@@ -1,0 +1,24 @@
+{
+  "abertura": {
+    "toqueParaEntrar": "Toque para entrar",
+    "chamada": "Prospecção ativa para qualquer prestador de serviço.",
+    "prestadoresEmDestaque": "PRESTADORES EM DESTAQUE"
+  },
+  "preferencias": {
+    "titulo": "Onde você quer prospectar?",
+    "subtitulo": "Isso define em que país buscamos empresas e em que idioma o sistema aparece. Dá para mudar depois.",
+    "idioma": "Idioma",
+    "pais": "País",
+    "confirmar": "Começar",
+    "alterar": "Alterar idioma e país",
+    "pagamentoEmBreve": "pagamento em breve",
+    "avisoPagamento": "A busca já funciona neste país. A cobrança da assinatura ainda não está disponível aqui — você pode usar e testar à vontade."
+  },
+  "paises": {
+    "BR": "Brasil",
+    "US": "Estados Unidos",
+    "AU": "Austrália",
+    "GB": "Reino Unido",
+    "PT": "Portugal"
+  }
+}

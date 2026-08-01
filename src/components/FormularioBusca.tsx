@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { useAppStore } from "@/store/useAppStore"
 import { useAuthStore } from "@/store/useAuthStore"
+import { usePreferenciasStore } from "@/store/usePreferenciasStore"
 import { useCreditosStore } from "@/store/useCreditosStore"
 import { FAIXAS_CREDITO, temAcessoLiberado, obterSegmentosClientes as obterSegmentosClientesPreview, obterSegmentosClientesComFallback, type ModoBusca } from "@/types/prestador"
 import { type ParametrosBusca } from "@/types/empresa"
@@ -31,6 +32,14 @@ export function FormularioBusca() {
   const navigate = useNavigate()
   const { buscarEmpresas, historicoBuscas, removerBuscaSalva, carregando } = useAppStore()
   const { usuarioId, perfil } = useAuthStore()
+
+  /**
+   * País da busca. O perfil manda quando existe (é o dado oficial, que
+   * define moeda e cobrança); antes do cadastro vale a escolha feita na
+   * tela de abertura. Sem isso, um visitante dos EUA buscaria no Brasil.
+   */
+  const paisPreferido = usePreferenciasStore((s) => s.pais)
+  const paisDaBusca = perfil?.pais_foco ?? paisPreferido
   const { creditos, carregarCreditos, consumirCreditos } = useCreditosStore()
 
   const [segmento, setSegmento] = useState("")
@@ -103,9 +112,7 @@ export function FormularioBusca() {
         raioKm,
         quantidadeDesejada: 10,
         segmentosBusca,
-        // Sem o país, a geocodificação assume Brasil e uma busca em
-        // "Miami, FL" não encontra nada
-        pais: perfil?.pais_foco ?? "BR",
+        pais: paisDaBusca,
         timestamp: new Date(),
       }
 
@@ -146,7 +153,7 @@ export function FormularioBusca() {
       raioKm,
       quantidadeDesejada: faixa.max,
       segmentosBusca,
-      pais: perfil?.pais_foco ?? "BR",
+      pais: paisDaBusca,
       timestamp: new Date(),
     }
 

@@ -17,6 +17,7 @@ import { SelecaoPlano } from "@/components/perfil/SelecaoPlano"
 import { StatusAssinatura } from "@/components/perfil/StatusAssinatura"
 import { useAppStore } from "@/store/useAppStore"
 import { useAuthStore } from "@/store/useAuthStore"
+import { usePreferenciasStore } from "@/store/usePreferenciasStore"
 import { temAcessoLiberado } from "@/types/prestador"
 
 /** Página de busca: formulário livre (sem login) ou dashboard de resultados */
@@ -131,12 +132,20 @@ function TelaCarregando() {
 
 /** Componente interno que inicializa autenticação e define as rotas */
 function ConteudoApp() {
-  const { inicializar, inicializado, backendIndisponivel } = useAuthStore()
+  const { inicializar, inicializado, backendIndisponivel, perfil } = useAuthStore()
+  const sincronizarComPerfil = usePreferenciasStore((s) => s.sincronizarComPerfil)
   const location = useLocation()
 
   useEffect(() => {
     inicializar()
   }, [])
+
+  // Depois do login, o país do perfil é a fonte oficial e substitui a
+  // escolha provisória feita na tela de abertura — é ele que define
+  // moeda e gateway de cobrança.
+  useEffect(() => {
+    sincronizarComPerfil(perfil?.pais_foco)
+  }, [perfil?.pais_foco])
 
   if (!inicializado) {
     return <TelaCarregando />

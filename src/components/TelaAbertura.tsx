@@ -1,6 +1,10 @@
 import { useNavigate } from "react-router-dom"
-import { ChevronRight } from "lucide-react"
+import { useTranslation } from "react-i18next"
+import { ChevronRight, Globe } from "lucide-react"
 import { CarrosselPrestadores } from "@/components/CarrosselPrestadores"
+import { EscolhaIdiomaPais } from "@/components/EscolhaIdiomaPais"
+import { usePreferenciasStore } from "@/store/usePreferenciasStore"
+import { obterPais } from "@/types/prestador"
 
 /**
  * Tela de abertura: o logo grande funciona como um portal de entrada.
@@ -8,9 +12,20 @@ import { CarrosselPrestadores } from "@/components/CarrosselPrestadores"
  * prospecção, que já funciona livremente, sem exigir login. Abaixo,
  * um carrossel mostra prestadores em destaque — clicar nele leva
  * direto para o cadastro/login, já que ver detalhes exige conta.
+ *
+ * Na PRIMEIRA visita, antes de tudo isso, pergunta idioma e país. O
+ * país não é enfeite: é ele que faz a busca procurar no lugar certo.
  */
 export function TelaAbertura() {
   const navigate = useNavigate()
+  const { t } = useTranslation()
+  const { pais, escolheu, reabrirEscolha } = usePreferenciasStore()
+
+  if (!escolheu) {
+    return <EscolhaIdiomaPais />
+  }
+
+  const paisAtual = obterPais(pais)
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden py-12 gap-10">
@@ -28,16 +43,30 @@ export function TelaAbertura() {
         />
 
         <span className="flex items-center gap-1.5 text-sm text-muted-foreground group-hover:text-dourado-300 transition-colors">
-          Toque para entrar
+          {t("abertura.toqueParaEntrar")}
           <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
         </span>
       </button>
 
       <CarrosselPrestadores />
 
-      <p className="text-xs text-muted-foreground/60 max-w-sm text-center px-6">
-        Prospecção ativa para qualquer prestador de serviço do Brasil.
-      </p>
+      <div className="flex flex-col items-center gap-3 px-6">
+        <p className="text-xs text-muted-foreground/60 max-w-sm text-center">
+          {t("abertura.chamada")}
+        </p>
+
+        {/* Trocar idioma/país — discreto, mas sempre acessível */}
+        <button
+          onClick={reabrirEscolha}
+          className="flex items-center gap-1.5 text-[11px] text-muted-foreground/60 hover:text-dourado-300 transition-colors"
+          title={t("preferencias.alterar")}
+        >
+          <Globe className="w-3 h-3" />
+          {t(`paises.${paisAtual.codigo}`)}
+          <span className="opacity-50">·</span>
+          {paisAtual.moeda}
+        </button>
+      </div>
     </div>
   )
 }
