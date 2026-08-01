@@ -82,15 +82,17 @@ $$ language plpgsql security definer;
 
 -- ═══ 4. Cadastrar os novos planos na tabela de preços por região ═══
 
-insert into public.planos_regiao (pais, plano, moeda, preco, gateway, ativo)
+-- A coluna de preço na tabela chama-se `valor` (ver 003_fundacao_internacional.sql),
+-- e a restrição de unicidade é (pais, plano).
+insert into public.planos_regiao (pais, plano, moeda, valor, gateway, ativo)
 values
   ('BR', 'trimestral', 'BRL', 1341.00, 'mercadopago', true),
   ('BR', 'semestral',  'BRL', 2532.00, 'mercadopago', true)
-on conflict do nothing;
+on conflict (pais, plano) do nothing;
 
 -- Atualiza os valores dos planos que já existiam
-update public.planos_regiao set preco =  497.00 where pais = 'BR' and plano = 'mensal';
-update public.planos_regiao set preco = 4764.00 where pais = 'BR' and plano = 'anual';
+update public.planos_regiao set valor =  497.00 where pais = 'BR' and plano = 'mensal';
+update public.planos_regiao set valor = 4764.00 where pais = 'BR' and plano = 'anual';
 
 -- ═══════════════════════════════════════════════════════════
 -- FIM DA MIGRATION DE QUATRO PLANOS
