@@ -41,6 +41,26 @@
     "sair": "Sign out",
     "saiuDaConta": "You've been signed out."
   },
+  "resultados": {
+    "novaBusca": "New search",
+    "em": "in",
+    "resultados": "{{quantidade}} results",
+    "fonteGoogle": "Real data (Google)",
+    "fonteOSM": "Real data (OpenStreetMap)",
+    "fonteSimulada": "Simulated example",
+    "fonteSimuladaAviso": "We couldn't find real businesses registered for this area/trade. Showing a simulated example.",
+    "alvosIdentificados": "Targets identified",
+    "nesteRaio": "within this search radius",
+    "comFiltros": "{{total}} total, {{filtrados}} after filters",
+    "contatoDireto": "Direct contact available",
+    "temTelefone": "↑ {{percentual}}% have a phone number",
+    "emailConfirmado": "Email confirmed",
+    "doTotal": "{{percentual}}% of total",
+    "qualidadeMedia": "Average lead quality",
+    "aderenciaExcelente": "excellent match",
+    "aderenciaBoa": "good match to your profile",
+    "aderenciaBaixa": "weak match"
+  },
   "planos": {
     "selo": "{{dias}} days free, cancel anytime",
     "titulo": "Start your free trial",

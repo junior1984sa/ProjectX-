@@ -41,6 +41,26 @@
     "sair": "Sair",
     "saiuDaConta": "Você saiu da sua conta."
   },
+  "resultados": {
+    "novaBusca": "Nova busca",
+    "em": "em",
+    "resultados": "{{quantidade}} resultados",
+    "fonteGoogle": "Dados reais (Google)",
+    "fonteOSM": "Dados reais (OpenStreetMap)",
+    "fonteSimulada": "Exemplo simulado",
+    "fonteSimuladaAviso": "Não encontramos estabelecimentos reais cadastrados nessa região/segmento. Mostrando exemplo simulado.",
+    "alvosIdentificados": "Alvos identificados",
+    "nesteRaio": "neste raio de busca",
+    "comFiltros": "{{total}} no total, {{filtrados}} com filtros",
+    "contatoDireto": "Contato direto disponível",
+    "temTelefone": "↑ {{percentual}}% têm telefone",
+    "emailConfirmado": "E-mail confirmado",
+    "doTotal": "{{percentual}}% do total",
+    "qualidadeMedia": "Qualidade média do lead",
+    "aderenciaExcelente": "excelente aderência",
+    "aderenciaBoa": "boa aderência ao perfil",
+    "aderenciaBaixa": "aderência baixa"
+  },
   "planos": {
     "selo": "{{dias}} dias grátis, cancele quando quiser",
     "titulo": "Comece seu teste gratuito",

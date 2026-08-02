@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
 import { Globe, AlertTriangle, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { HeroMetricas } from "@/components/HeroMetricas"
@@ -15,6 +16,7 @@ export function Dashboard() {
   const navigate = useNavigate()
   const { buscaAtual, limparResultados, empresas, fonteDados } = useAppStore()
   const { usuarioId, perfil } = useAuthStore()
+  const { t } = useTranslation()
 
   function handleAssinar() {
     if (!usuarioId) {
@@ -39,7 +41,7 @@ export function Dashboard() {
                 onClick={limparResultados}
                 className="h-8 px-2 text-muted-foreground hover:text-foreground flex-shrink-0"
               >
-                ← <span className="hidden sm:inline ml-1">Nova busca</span>
+                ← <span className="hidden sm:inline ml-1">{t("resultados.novaBusca")}</span>
               </Button>
 
               <div className="h-4 w-px bg-border" />
@@ -52,7 +54,7 @@ export function Dashboard() {
                   <span className="text-sm font-semibold text-foreground truncate">
                     {buscaAtual.segmento}
                   </span>
-                  <span className="text-muted-foreground text-sm">em</span>
+                  <span className="text-muted-foreground text-sm">{t("resultados.em")}</span>
                   <span className="text-sm text-muted-foreground">
                     {buscaAtual.cidade}{buscaAtual.estado ? `, ${buscaAtual.estado}` : ""}
                   </span>
@@ -60,7 +62,7 @@ export function Dashboard() {
                     {buscaAtual.raioKm}km
                   </Badge>
                   <Badge variant="secondary" className="text-xs hidden sm:inline-flex">
-                    {empresas.length} resultados
+                    {t("resultados.resultados", { quantidade: empresas.length })}
                   </Badge>
                 </div>
               )}
@@ -71,17 +73,17 @@ export function Dashboard() {
                 fonteDados === "google" ? (
                   <Badge variant="success" className="text-xs flex items-center gap-1">
                     <Globe className="w-3 h-3" />
-                    Dados reais (Google)
+                    {t("resultados.fonteGoogle")}
                   </Badge>
                 ) : fonteDados === "openstreetmap" ? (
                   <Badge variant="secondary" className="text-xs flex items-center gap-1">
                     <MapPin className="w-3 h-3" />
-                    Dados reais (OpenStreetMap)
+                    {t("resultados.fonteOSM")}
                   </Badge>
                 ) : (
-                  <Badge variant="warning" className="text-xs flex items-center gap-1" title="Não encontramos estabelecimentos reais cadastrados nessa região/segmento. Mostrando exemplo simulado.">
+                  <Badge variant="warning" className="text-xs flex items-center gap-1" title={t("resultados.fonteSimuladaAviso")}>
                     <AlertTriangle className="w-3 h-3" />
-                    Exemplo simulado
+                    {t("resultados.fonteSimulada")}
                   </Badge>
                 )
               )}

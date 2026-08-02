@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useAppStore } from "@/store/useAppStore"
 import { calcularEstatisticas } from "@/lib/utils"
@@ -23,6 +24,7 @@ function MiniBarras() {
 
 export function HeroMetricas() {
   const { empresasFiltradas, empresas, carregando } = useAppStore()
+  const { t } = useTranslation()
   const stats = calcularEstatisticas(empresasFiltradas)
   const totalOriginal = empresas.length
 
@@ -53,12 +55,15 @@ export function HeroMetricas() {
           {stats.total}
         </p>
         <p className="relative text-[11px] text-muted-foreground uppercase tracking-wide mt-2.5">
-          Alvos identificados
+          {t("resultados.alvosIdentificados")}
         </p>
         <p className="relative text-xs text-muted-foreground/70 mt-1">
           {totalOriginal !== stats.total
-            ? `${totalOriginal} no total, ${stats.total} com filtros`
-            : "neste raio de busca"}
+            ? t("resultados.comFiltros", {
+                total: totalOriginal,
+                filtrados: stats.total,
+              })
+            : t("resultados.nesteRaio")}
         </p>
         <MiniBarras />
       </div>
@@ -69,11 +74,13 @@ export function HeroMetricas() {
           {stats.comTelefone}
         </p>
         <p className="text-[11px] text-muted-foreground uppercase tracking-wide mt-2.5">
-          Contato direto disponível
+          {t("resultados.contatoDireto")}
         </p>
         <p className="text-xs text-green-400/80 mt-2.5">
           {stats.total > 0
-            ? `↑ ${Math.round((stats.comTelefone / stats.total) * 100)}% têm telefone`
+            ? t("resultados.temTelefone", {
+                percentual: Math.round((stats.comTelefone / stats.total) * 100),
+              })
             : "—"}
         </p>
       </div>
@@ -84,11 +91,13 @@ export function HeroMetricas() {
           {stats.comEmail}
         </p>
         <p className="text-[11px] text-muted-foreground uppercase tracking-wide mt-2.5">
-          E-mail confirmado
+          {t("resultados.emailConfirmado")}
         </p>
         <p className="text-xs text-muted-foreground mt-2.5">
           {stats.total > 0
-            ? `${Math.round((stats.comEmail / stats.total) * 100)}% do total`
+            ? t("resultados.doTotal", {
+                percentual: Math.round((stats.comEmail / stats.total) * 100),
+              })
             : "—"}
         </p>
       </div>
@@ -99,14 +108,14 @@ export function HeroMetricas() {
           {stats.total > 0 ? stats.scoreMedia.toFixed(1) : "—"}
         </p>
         <p className="text-[11px] text-muted-foreground uppercase tracking-wide mt-2.5">
-          Qualidade média do lead
+          {t("resultados.qualidadeMedia")}
         </p>
         <p className="text-xs text-muted-foreground/70 mt-1">
           {stats.scoreMedia >= 4
-            ? "excelente aderência"
+            ? t("resultados.aderenciaExcelente")
             : stats.scoreMedia >= 2.5
-            ? "boa aderência ao perfil"
-            : "aderência baixa"}
+            ? t("resultados.aderenciaBoa")
+            : t("resultados.aderenciaBaixa")}
         </p>
       </div>
     </div>
