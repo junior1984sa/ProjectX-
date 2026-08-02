@@ -12,15 +12,30 @@
 // de o contêiner ficar pronto, a chamada falha — por isso existe a
 // espera com verificação de status aqui embaixo.
 //
-// EXIGÊNCIAS DA META (não dá para contornar):
-//   • conta Instagram PROFISSIONAL do tipo Business (Creator não publica)
-//   • vinculada a uma Página do Facebook
+// DOIS CAMINHOS POSSÍVEIS, e a escolha muda o endereço da API:
+//
+//   Instagram Login (padrão aqui, mais simples)
+//     host graph.instagram.com · NÃO exige Página do Facebook
+//     permissões: instagram_business_basic, instagram_business_content_publish
+//
+//   Facebook Login (clássico)
+//     host graph.facebook.com · EXIGE Página do Facebook vinculada
+//     permissões: instagram_basic, instagram_content_publish,
+//                 pages_read_engagement
+//
+// O padrão é o primeiro, que dispensa criar e manter uma Página só
+// para satisfazer a API. Para usar o clássico, defina o segredo
+// IG_API_HOST como graph.facebook.com.
+//
+// EXIGÊNCIAS COMUNS AOS DOIS (não dá para contornar):
+//   • conta Instagram PROFISSIONAL
 //   • imagem em JPEG, acessível por URL pública (não é upload)
 //   • máximo de 25 publicações por API a cada 24 horas
 //
 // SEGREDOS NECESSÁRIOS (defina no painel do Supabase, nunca no código):
-//   IG_USER_ID       id numérico da conta Instagram Business
+//   IG_USER_ID       id numérico da conta Instagram
 //   IG_ACCESS_TOKEN  token de acesso de longa duração
+//   IG_API_HOST      opcional — só se usar o caminho clássico
 //
 // O token de longa duração expira a cada 60 dias. A função avisa no
 // log quando a resposta da Meta indicar token inválido, para você
@@ -29,6 +44,7 @@
 
 const IG_USER_ID = Deno.env.get("IG_USER_ID") ?? ""
 const IG_ACCESS_TOKEN = Deno.env.get("IG_ACCESS_TOKEN") ?? ""
+const IG_API_HOST = Deno.env.get("IG_API_HOST") ?? "graph.instagram.com"
 const VERSAO_API = "v21.0"
 
 const corsHeaders = {
@@ -57,7 +73,7 @@ async function aguardarContainerPronto(
 ): Promise<{ pronto: boolean; motivo?: string }> {
   for (let i = 0; i < tentativas; i++) {
     const url =
-      `https://graph.facebook.com/${VERSAO_API}/${containerId}` +
+      `https://${IG_API_HOST}/${VERSAO_API}/${containerId}` +
       `?fields=status_code,status&access_token=${IG_ACCESS_TOKEN}`
 
     const resposta = await fetch(url)
@@ -102,7 +118,7 @@ Deno.serve(async (req: Request) => {
 
     // ═══ Passo 1: criar o contêiner ═══
     const criacao = await fetch(
-      `https://graph.facebook.com/${VERSAO_API}/${IG_USER_ID}/media`,
+      `https://${IG_API_HOST}/${VERSAO_API}/${IG_USER_ID}/media`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -148,7 +164,7 @@ Deno.serve(async (req: Request) => {
 
     // ═══ Passo 3: publicar ═══
     const publicacao = await fetch(
-      `https://graph.facebook.com/${VERSAO_API}/${IG_USER_ID}/media_publish`,
+      `https://${IG_API_HOST}/${VERSAO_API}/${IG_USER_ID}/media_publish`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
