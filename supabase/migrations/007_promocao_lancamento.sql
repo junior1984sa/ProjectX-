@@ -65,11 +65,21 @@ create policy "Qualquer um pode ver o status da promoção"
 --
 -- 2. Na Vercel, em Settings > Environment Variables, adicione:
 --    VITE_PROMOCAO_ATIVA = true
---    VITE_PROMOCAO_PRECO_MENSAL = 247.00
---    VITE_PROMOCAO_PRECO_ANUAL = 2499.00
 --
 -- 3. Redeploy o projeto na Vercel para a variável entrar em vigor.
 --
 -- Para DESATIVAR a promoção (esgotada ou encerrada por decisão sua):
 --    update public.promocao_vagas set ativa = false where id = 1;
+--
+-- ONDE FICAM OS VALORES (atualizado):
+-- Este comentário mandava definir VITE_PROMOCAO_PRECO_MENSAL e
+-- VITE_PROMOCAO_PRECO_ANUAL, mas o código nunca leu essas chaves — e
+-- elas também não dariam conta dos quatro planos nem das cinco moedas.
+-- Os valores de fundador agora ficam em PRECOS_LANCAMENTO_POR_PAIS,
+-- em src/types/prestador.ts, como preços absolutos por país e plano.
+--
+-- AS DUAS TRAVAS SÃO PROPOSITAIS: a promoção só aparece se `ativa` for
+-- true NO BANCO e VITE_PROMOCAO_ATIVA for true na Vercel. Assim um
+-- deploy acidental não liga desconto sozinho, e desligar pelo banco
+-- surte efeito imediato, sem esperar novo deploy.
 -- ═══════════════════════════════════════════════════════════

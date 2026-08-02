@@ -18,6 +18,8 @@ import {
   economiaPercentual,
   precoMensalEquivalente,
   precoTotalNoPais,
+  precoLancamentoNoPais,
+  economiaLancamento,
   formatarMoeda,
   obterPais,
   type TipoPlano,
@@ -33,7 +35,10 @@ const DIAS_TRIAL = 7
 // no banco (tabela promocao_vagas) — as duas travas precisam estar abertas.
 const PROMOCAO_ATIVA = import.meta.env.VITE_PROMOCAO_ATIVA === "true"
 /** 0.5 = 50% de desconto (ex: plano mensal de R$497 sai por R$248,50) */
-const DESCONTO_PROMOCIONAL = Number(import.meta.env.VITE_PROMOCAO_DESCONTO ?? "0.5")
+// Os valores de fundador ficam em PRECOS_LANCAMENTO_POR_PAIS, como
+// preços absolutos. Percentual sobre a tabela cheia geraria números
+// quebrados (R$ 198,80) justamente na faixa em que o número redondo
+// mais importa para a conversão.
 
 /** Os benefícios vêm da tradução — ver chave `planos.beneficios` */
 
@@ -131,11 +136,10 @@ export function SelecaoPlano() {
     if (promocaoDisponivel) {
       const reserva = await usePromocaoStore.getState().reservarVaga()
       if (reserva.sucesso) {
-        // Aplica o desconto sobre o preço real do plano escolhido, no
-        // país do assinante — usar o preço do Brasil aqui cobraria R$ 497
-        // com desconto de alguém que está vendo $97 na tela.
-        precoPromocionalConfirmado =
-          precoTotalNoPais(planoSelecionado, pais) * (1 - DESCONTO_PROMOCIONAL)
+        // Preço de fundador do plano escolhido, no país do assinante —
+        // usar o preço do Brasil aqui cobraria em reais de alguém que
+        // está vendo dólar na tela.
+        precoPromocionalConfirmado = precoLancamentoNoPais(planoSelecionado, pais)
       }
       // Se a reserva falhar (vagas esgotaram nesse instante), segue
       // normalmente com o preço de tabela — não trava a assinatura.
@@ -233,7 +237,7 @@ export function SelecaoPlano() {
           const equivalenteMensal = precoMensalEquivalente(idPlano, pais)
           const precoTotal = precoTotalNoPais(idPlano, pais)
           const precoExibido = promocaoDisponivel
-            ? precoTotal * (1 - DESCONTO_PROMOCIONAL)
+            ? precoLancamentoNoPais(idPlano, pais)
             : precoTotal
 
           return (
@@ -246,10 +250,14 @@ export function SelecaoPlano() {
                   : "border-border/60 hover:border-border"
               }`}
             >
-              {economia > 0 && (
+              {/* Na promoção, o selo mostra a economia REAL de fundador
+                  (que é maior), não a economia entre planos */}
+              {(promocaoDisponivel || economia > 0) && (
                 <Badge className="absolute -top-2.5 right-3 text-[10px] bg-dourado-600 text-background">
                   {promocaoDisponivel
-                    ? t("planos.promocao")
+                    ? t("planos.desconto", {
+                        percentual: economiaLancamento(idPlano, pais),
+                      })
                     : t("planos.desconto", { percentual: economia })}
                 </Badge>
               )}
@@ -269,17 +277,25 @@ export function SelecaoPlano() {
                   )}
                 </div>
 
-                {/* O número que o cliente usa para comparar planos */}
-                <div className="flex items-baseline gap-1">
+                {/* O número que o cliente usa para comparar planos.
+                    Na promoção, o preço cheio aparece riscado ao lado:
+                    sem a âncora, R$ 197 é só um preço; com ela, é uma
+                    economia visível. */}
+                <div className="flex items-baseline gap-1.5">
                   <span className="text-2xl font-bold text-foreground">
                     {moeda(
                       Math.round(
                         promocaoDisponivel
-                          ? equivalenteMensal * (1 - DESCONTO_PROMOCIONAL)
+                          ? precoLancamentoNoPais(idPlano, pais) / config.meses
                           : equivalenteMensal
                       )
                     )}
                   </span>
+                  {promocaoDisponivel && (
+                    <span className="text-xs text-muted-foreground/70 line-through">
+                      {moeda(Math.round(equivalenteMensal))}
+                    </span>
+                  )}
                   <span className="text-muted-foreground text-xs">
                     {t("planos.porMes")}
                   </span>

@@ -99,6 +99,46 @@ export function precoTotalNoPais(plano: TipoPlano, pais: string): number {
 }
 
 /**
+ * PREÇO DE FUNDADOR — os 100 primeiros assinantes.
+ *
+ * São valores ABSOLUTOS, não um percentual sobre a tabela cheia. Um
+ * desconto de 60% sobre R$ 497 daria R$ 198,80: número quebrado, e
+ * acima da barreira psicológica dos R$ 200. R$ 197 fica abaixo dela e
+ * converte melhor — a diferença de R$ 1,80 não paga o custo dessa
+ * quebra na conversão.
+ *
+ * A escada entre os planos é a mesma da tabela cheia (anual ~20% mais
+ * barato que o mensal equivalente), para a lógica de comparação que o
+ * cliente faz continuar valendo.
+ *
+ * ESTE PREÇO É VITALÍCIO para quem entrar nas 100 primeiras vagas: é o
+ * que transforma desconto em compromisso. Quem entra sabendo que o
+ * preço nunca sobe vira defensor do produto, não caçador de promoção.
+ */
+export const PRECOS_LANCAMENTO_POR_PAIS: Record<
+  string,
+  Record<TipoPlano, number>
+> = {
+  BR: { mensal: 197, trimestral: 537, semestral: 997, anual: 1897 },
+  US: { mensal: 37, trimestral: 99, semestral: 187, anual: 357 },
+  AU: { mensal: 57, trimestral: 153, semestral: 288, anual: 549 },
+  GB: { mensal: 29, trimestral: 78, semestral: 147, anual: 279 },
+  PT: { mensal: 35, trimestral: 94, semestral: 177, anual: 337 },
+}
+
+/** Preço de fundador do plano no país informado */
+export function precoLancamentoNoPais(plano: TipoPlano, pais: string): number {
+  return (PRECOS_LANCAMENTO_POR_PAIS[pais] ?? PRECOS_LANCAMENTO_POR_PAIS.BR)[plano]
+}
+
+/** Quanto por cento o preço de fundador economiza, para exibir no selo */
+export function economiaLancamento(plano: TipoPlano, pais: string): number {
+  const cheio = precoTotalNoPais(plano, pais)
+  const lancamento = precoLancamentoNoPais(plano, pais)
+  return Math.round((1 - lancamento / cheio) * 100)
+}
+
+/**
  * Formata um valor na moeda e no formato do país/idioma.
  * Intl cuida das diferenças reais: R$ 1.341,00 no Brasil, $261.00 nos
  * EUA, 1 341,00 € em Portugal.
