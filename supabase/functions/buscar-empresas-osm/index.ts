@@ -25,23 +25,63 @@ const HEADERS_OSM = {
 }
 
 function mapearSegmentoParaTagsOSM(segmento: string): string[] {
-  const s = segmento.toLowerCase()
+  // Acentos fora antes de comparar: quem digita "construcao" ou
+  // "caminhao" — a maioria — nao casava com "construção"/"caminhão" e
+  // caia no filtro generico, recebendo "qualquer empresa da regiao".
+  const s = segmento
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
 
   const mapeamentos: Array<{ palavras: string[]; tags: string[] }> = [
-    { palavras: ["marmoraria", "granito", "marmore"], tags: ["shop=doityourself", "craft=stonemason"] },
+    // ── Construcao e reforma ──
+    // marmoraria NAO leva shop=doityourself: essa etiqueta significa
+    // loja de material de construcao no OSM, e trazia Balaroti e Leroy
+    // Merlin no lugar de marmorarias.
+    { palavras: ["marmoraria", "marmorista", "granito", "marmore"], tags: ["craft=stonemason"] },
+    { palavras: ["material de construcao", "materiais de construcao", "ferragem"], tags: ["shop=doityourself", "shop=hardware", "shop=trade"] },
+    { palavras: ["construtora", "construcao civil", "engenharia", "empreiteira"], tags: ["office=engineering", "craft=builder", "office=architect"] },
+    { palavras: ["marcenaria", "marceneiro", "movei"], tags: ["craft=carpenter", "shop=furniture"] },
+    { palavras: ["serralheria", "serralheiro", "esquadria", "solda"], tags: ["craft=metal_construction", "craft=blacksmith"] },
+    { palavras: ["vidracaria", "vidraceiro"], tags: ["craft=glaziery"] },
+    { palavras: ["eletricista", "eletrica"], tags: ["craft=electrician"] },
+    { palavras: ["encanador", "hidraulica", "bombeiro hidraulico"], tags: ["craft=plumber"] },
+    { palavras: ["telhado", "cobertura", "telhadista"], tags: ["craft=roofer"] },
+    { palavras: ["gesso", "drywall", "gesseiro"], tags: ["craft=plasterer"] },
+    { palavras: ["piscina"], tags: ["shop=swimming_pool", "craft=pool_maintenance"] },
+
+    // ── Servicos industriais (o nucleo do publico) ──
+    { palavras: ["jateamento", "pintura industrial", "tratamento de superficie"], tags: ["craft=painter", "craft=metal_construction"] },
+    { palavras: ["caldeiraria", "usinagem", "metalurgica", "metalurgia"], tags: ["craft=metal_construction", "man_made=works"] },
+    { palavras: ["industria", "fabrica", "industrial"], tags: ["man_made=works", "office=company"] },
+    { palavras: ["andaime", "isolamento termico", "refratario"], tags: ["craft=scaffolder", "shop=trade"] },
+
+    // ── Locacao e logistica ──
+    { palavras: ["container", "locacao", "aluguel de equip", "betoneira", "guindaste"], tags: ["shop=trade", "office=company"] },
+    { palavras: ["caminhao", "transporte", "frete", "transportadora", "logistica"], tags: ["office=logistics", "shop=trade"] },
+
+    // ── Saude ──
     { palavras: ["odontolog", "dentista"], tags: ["amenity=dentist"] },
-    { palavras: ["restaurante", "comida"], tags: ["amenity=restaurant"] },
-    { palavras: ["academia", "fitness", "ginastica"], tags: ["leisure=fitness_centre"] },
-    { palavras: ["mecanic", "auto"], tags: ["shop=car_repair"] },
+    { palavras: ["clinica", "consultorio", "medic"], tags: ["amenity=clinic", "amenity=doctors"] },
+    { palavras: ["hospital"], tags: ["amenity=hospital"] },
     { palavras: ["farmacia", "drogaria"], tags: ["amenity=pharmacy"] },
     { palavras: ["pet shop", "veterinari", "pet "], tags: ["shop=pet", "amenity=veterinary"] },
-    { palavras: ["construtora", "construção", "engenharia"], tags: ["office=engineering", "craft=builder"] },
-    { palavras: ["advocacia", "advogado", "jurídic"], tags: ["office=lawyer"] },
-    { palavras: ["contabilidade", "contador", "contábil"], tags: ["office=accountant"] },
-    { palavras: ["jateamento", "pintura industrial"], tags: ["craft=metal_construction", "craft=painter"] },
-    { palavras: ["container", "locação", "aluguel de equip"], tags: ["shop=trade", "office=company"] },
-    { palavras: ["caminhão", "betoneira", "transporte"], tags: ["shop=trade", "office=logistics"] },
-    { palavras: ["hotel", "pousada"], tags: ["tourism=hotel"] },
+
+    // ── Comercio e alimentacao ──
+    { palavras: ["restaurante", "comida", "lanchonete"], tags: ["amenity=restaurant", "amenity=fast_food"] },
+    { palavras: ["padaria", "confeitaria"], tags: ["shop=bakery", "shop=confectionery"] },
+    { palavras: ["mercado", "supermercado", "atacad"], tags: ["shop=supermarket", "shop=wholesale"] },
+    { palavras: ["hotel", "pousada", "motel"], tags: ["tourism=hotel", "tourism=guest_house"] },
+
+    // ── Servicos ──
+    { palavras: ["academia", "fitness", "ginastica", "crossfit"], tags: ["leisure=fitness_centre"] },
+    { palavras: ["mecanic", "auto center", "funilaria", "oficina"], tags: ["shop=car_repair"] },
+    { palavras: ["advocacia", "advogado", "juridic"], tags: ["office=lawyer"] },
+    { palavras: ["contabilidade", "contador", "contabil"], tags: ["office=accountant"] },
+    { palavras: ["imobiliaria", "corretor de imove"], tags: ["office=estate_agent"] },
+    { palavras: ["salao", "cabeleireiro", "barbearia", "estetica"], tags: ["shop=hairdresser", "shop=beauty"] },
+    { palavras: ["escola", "colegio", "curso"], tags: ["amenity=school", "amenity=college"] },
+    { palavras: ["condominio", "administradora"], tags: ["office=property_management"] },
   ]
 
   for (const m of mapeamentos) {
@@ -50,6 +90,9 @@ function mapearSegmentoParaTagsOSM(segmento: string): string[] {
     }
   }
 
+  // Sem correspondencia: devolve empresas em geral na regiao. E menos
+  // preciso, mas melhor que nada — e a busca do Google, quando houver
+  // chave, cobre justamente esses casos com precisao de categoria.
   return ["office=company", "shop=yes", "craft=yes"]
 }
 
