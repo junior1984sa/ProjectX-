@@ -187,12 +187,12 @@ async function geocodificarCidade(
   return { lat: parseFloat(dados[0].lat), lng: parseFloat(dados[0].lon) }
 }
 
-async function buscarEstabelecimentosOverpass(
+async function consultarOverpass(
   lat: number,
   lng: number,
   raioMetros: number,
   tagsOSM: string[]
-): Promise<any[]> {
+): Promise<{ elementos: any[]; excedeuTempo: boolean }> {
   const filtrosTag = tagsOSM
     .map((tag) => {
       const [chave, valor] = tag.split("=")
@@ -215,12 +215,56 @@ async function buscarEstabelecimentosOverpass(
   })
 
   if (!resposta.ok) {
-    console.error("Overpass API respondeu com erro:", resposta.status)
-    return []
+    // 429 = uso excessivo, 504 = a consulta demorou demais no servidor.
+    // Os dois pedem raio menor, não desistência.
+    const excedeuTempo = resposta.status === 504 || resposta.status === 429
+    console.error(`Overpass respondeu ${resposta.status} (raio ${raioMetros}m)`)
+    return { elementos: [], excedeuTempo }
   }
 
   const dados = await resposta.json()
-  return dados.elements ?? []
+  return { elementos: dados.elements ?? [], excedeuTempo: false }
+}
+
+/**
+ * Busca com redução automática de raio.
+ *
+ * Em cidades densas (São Paulo, Miami, Toronto), um raio de 10km cobre
+ * dezenas de milhares de estabelecimentos e a consulta estoura o limite
+ * de 25 segundos do Overpass — devolvendo VAZIO. Para o cliente isso é
+ * pior do que devolver pouco: ele busca na maior cidade do país e conclui
+ * que a ferramenta não funciona.
+ *
+ * Quando isso acontece, tentar de novo com raio menor resolve, porque o
+ * que sobra é justamente o que está mais perto — e mais perto é melhor
+ * para quem vai visitar o cliente.
+ */
+async function buscarEstabelecimentosOverpass(
+  lat: number,
+  lng: number,
+  raioMetros: number,
+  tagsOSM: string[]
+): Promise<{ elementos: any[]; raioUsado: number }> {
+  const raios = [raioMetros, Math.round(raioMetros / 2), Math.round(raioMetros / 4)]
+
+  for (const raio of raios) {
+    if (raio < 500) break
+
+    const { elementos, excedeuTempo } = await consultarOverpass(lat, lng, raio, tagsOSM)
+
+    if (elementos.length > 0) {
+      if (raio !== raioMetros) {
+        console.log(`Raio reduzido de ${raioMetros}m para ${raio}m — região muito densa.`)
+      }
+      return { elementos, raioUsado: raio }
+    }
+
+    // Vazio sem estouro de tempo significa que realmente não há nada
+    // ali; reduzir o raio só encontraria menos ainda.
+    if (!excedeuTempo) break
+  }
+
+  return { elementos: [], raioUsado: raioMetros }
 }
 
 Deno.serve(async (req: Request) => {
@@ -281,15 +325,30 @@ Deno.serve(async (req: Request) => {
     const tagsOSM = mapearSegmentoParaTagsOSM(segmento)
     const raioMetros = (raioKm ?? 10) * 1000
 
-    const elementos = await buscarEstabelecimentosOverpass(ponto.lat, ponto.lng, raioMetros, tagsOSM)
-    const resultado = { encontrado: true, elementos, ponto }
+    const { elementos, raioUsado } = await buscarEstabelecimentosOverpass(
+      ponto.lat,
+      ponto.lng,
+      raioMetros,
+      tagsOSM
+    )
 
-    // Sem await: a resposta ao cliente não deve esperar a gravação
+    // `raioUsado` sobe para o app avisar quando a área foi reduzida —
+    // sem isso, o cliente acharia que a busca cobriu os 10km pedidos.
+    const resultado = {
+      encontrado: true,
+      elementos,
+      ponto,
+      raioKmUsado: Math.round(raioUsado / 1000),
+      raioReduzido: raioUsado !== raioMetros,
+    }
+
+    // Resultado vazio guarda por menos tempo: pode ter sido o Overpass
+    // sobrecarregado no momento, e não ausência real de empresas.
     chamarRpc("gravar_cache_busca", {
       p_chave: chave,
       p_fonte: "openstreetmap",
       p_resposta: resultado,
-      p_dias_validade: DIAS_VALIDADE_CACHE,
+      p_dias_validade: elementos.length > 0 ? DIAS_VALIDADE_CACHE : 1,
     })
 
     return new Response(JSON.stringify(resultado), {
