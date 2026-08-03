@@ -155,6 +155,7 @@ const PAISES: Record<string, { nome: string; iso2: string }> = {
   NZ: { nome: "New Zealand", iso2: "nz" },
   GB: { nome: "United Kingdom", iso2: "gb" },
   PT: { nome: "Portugal", iso2: "pt" },
+  CA: { nome: "Canada", iso2: "ca" },
   MX: { nome: "México", iso2: "mx" },
   PY: { nome: "Paraguay", iso2: "py" },
 }

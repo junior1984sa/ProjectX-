@@ -90,6 +90,7 @@ export const PRECOS_POR_PAIS: Record<string, Record<TipoPlano, number>> = {
   US: { mensal: 97, trimestral: 261, semestral: 492, anual: 924 },
   AU: { mensal: 147, trimestral: 396, semestral: 744, anual: 1404 },
   NZ: { mensal: 157, trimestral: 427, semestral: 797, anual: 1497 },
+  CA: { mensal: 137, trimestral: 369, semestral: 697, anual: 1317 },
   GB: { mensal: 77, trimestral: 207, semestral: 390, anual: 732 },
   PT: { mensal: 89, trimestral: 240, semestral: 450, anual: 852 },
   // México e Paraguai têm poder de compra menor que EUA/Europa: o
@@ -129,14 +130,42 @@ export const PRECOS_LANCAMENTO_POR_PAIS: Record<
   US: { mensal: 37, trimestral: 99, semestral: 187, anual: 357 },
   AU: { mensal: 57, trimestral: 153, semestral: 288, anual: 549 },
   NZ: { mensal: 67, trimestral: 179, semestral: 337, anual: 637 },
+  CA: { mensal: 57, trimestral: 153, semestral: 287, anual: 547 },
   GB: { mensal: 29, trimestral: 78, semestral: 147, anual: 279 },
   PT: { mensal: 35, trimestral: 94, semestral: 177, anual: 337 },
   MX: { mensal: 597, trimestral: 1597, semestral: 2997, anual: 5697 },
   PY: { mensal: 157000, trimestral: 423000, semestral: 797000, anual: 1507000 },
 }
 
-/** Preço de fundador do plano no país informado */
+/**
+ * Planos que dão direito ao preço de fundador.
+ *
+ * O mensal fica de fora de propósito, por três motivos que se somam:
+ *
+ *   CAIXA — 100 fundadores no semestral são cerca de R$ 99.700 à vista,
+ *     contra R$ 19.700 por mês no mensal. O dinheiro para pagar Google,
+ *     Vercel e Supabase precisa entrar agora, não daqui a seis meses.
+ *
+ *   REEMBOLSO — quem paga seis meses adiantado pensou mais do que quem
+ *     paga um mês. O compromisso maior filtra o comprador impulsivo,
+ *     que é justamente quem exerce o direito de arrependimento.
+ *
+ *   CLAREZA DA OFERTA — desconto que vale para tudo não é oferta, é
+ *     tabela de preço. Restringir deixa a troca explícita: quer o preço
+ *     de fundador, assume o compromisso.
+ */
+export const PLANOS_COM_PRECO_FUNDADOR: TipoPlano[] = ["semestral", "anual"]
+
+export function temPrecoFundador(plano: TipoPlano): boolean {
+  return PLANOS_COM_PRECO_FUNDADOR.includes(plano)
+}
+
+/**
+ * Preço de fundador do plano no país informado. Planos fora da lista
+ * acima devolvem o preço cheio — não existe fundador no mensal.
+ */
 export function precoLancamentoNoPais(plano: TipoPlano, pais: string): number {
+  if (!temPrecoFundador(plano)) return precoTotalNoPais(plano, pais)
   return (PRECOS_LANCAMENTO_POR_PAIS[pais] ?? PRECOS_LANCAMENTO_POR_PAIS.BR)[plano]
 }
 
@@ -335,6 +364,26 @@ export const PAISES_DISPONIVEIS: ConfiguracaoPais[] = [
     codigoTelefone: "61",
     moeda: "AUD",
     idioma: "en-AU",
+    buscaDisponivel: true,
+    gateway: null,
+  },
+  {
+    codigo: "CA",
+    nome: "Canadá",
+    nomeGeocodificacao: "Canada",
+    exemploCidade: "Toronto, ON",
+    cidadesSugeridas: [
+      "Toronto, ON",
+      "Vancouver, BC",
+      "Montréal, QC",
+      "Calgary, AB",
+      "Ottawa, ON",
+      "Edmonton, AB",
+    ],
+    codigoISO2: "ca",
+    codigoTelefone: "1",
+    moeda: "CAD",
+    idioma: "en-CA",
     buscaDisponivel: true,
     gateway: null,
   },

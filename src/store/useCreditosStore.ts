@@ -2,10 +2,19 @@ import { create } from "zustand"
 import { supabase } from "@/lib/supabase"
 import type { CreditosUsuario, HistoricoBusca } from "@/types/prestador"
 
+/**
+ * `motivo` distingue as duas recusas possíveis, que exigem mensagens
+ * opostas: "sem_creditos" pede recarga ou upgrade; "limite_diario"
+ * significa que o saldo existe, mas o teto do dia foi atingido — e o
+ * cliente só precisa voltar amanhã.
+ */
+export type MotivoConsumo = "ok" | "sem_creditos" | "limite_diario"
+
 interface ResultadoConsumo {
   sucesso: boolean
   creditos_restantes: number
   custo: number
+  motivo: MotivoConsumo
 }
 
 interface CreditosState {
@@ -74,7 +83,7 @@ export const useCreditosStore = create<CreditosState>((set, get) => ({
     const usuarioId = sessao.session?.user.id
 
     if (!usuarioId) {
-      return { sucesso: false, creditos_restantes: 0, custo: 0 }
+      return { sucesso: false, creditos_restantes: 0, custo: 0, motivo: "sem_creditos" }
     }
 
     const { data, error } = await supabase.rpc("consumir_creditos", {
@@ -88,12 +97,12 @@ export const useCreditosStore = create<CreditosState>((set, get) => ({
 
     if (error) {
       console.error("Erro ao consumir créditos:", error.message)
-      return { sucesso: false, creditos_restantes: 0, custo: 0 }
+      return { sucesso: false, creditos_restantes: 0, custo: 0, motivo: "sem_creditos" }
     }
 
     const resultado = data?.[0] as ResultadoConsumo | undefined
     if (!resultado) {
-      return { sucesso: false, creditos_restantes: 0, custo: 0 }
+      return { sucesso: false, creditos_restantes: 0, custo: 0, motivo: "sem_creditos" }
     }
 
     if (resultado.sucesso) {

@@ -20,6 +20,7 @@ import {
   precoTotalNoPais,
   precoLancamentoNoPais,
   economiaLancamento,
+  temPrecoFundador,
   formatarMoeda,
   obterPais,
   type TipoPlano,
@@ -129,11 +130,15 @@ export function SelecaoPlano() {
 
     setCarregando(true)
 
-    // Se a promoção estiver disponível, reserva a vaga ANTES de cobrar —
-    // a reserva é atômica no banco, então mesmo com várias pessoas
-    // assinando ao mesmo tempo, ninguém passa do limite de vagas.
+    // Reserva a vaga ANTES de cobrar — a reserva é atômica no banco,
+    // então mesmo com várias pessoas assinando ao mesmo tempo ninguém
+    // passa do limite de vagas.
+    //
+    // Só reserva se o plano dá direito ao preço de fundador: quem
+    // assina o mensal não pode consumir uma das 100 vagas sem receber
+    // o benefício — isso esgotaria a promoção sem entregar nada.
     let precoPromocionalConfirmado: number | null = null
-    if (promocaoDisponivel) {
+    if (promocaoDisponivel && temPrecoFundador(planoSelecionado)) {
       const reserva = await usePromocaoStore.getState().reservarVaga()
       if (reserva.sucesso) {
         // Preço de fundador do plano escolhido, no país do assinante —
@@ -218,10 +223,18 @@ export function SelecaoPlano() {
             {t("planos.promocaoTitulo", { vagas: vagasTotais })}
           </p>
           <p className="text-xs text-dourado-200/80 mt-1">
-            {t("planos.promocaoRestam", {
-              restantes: vagasRestantes,
-              total: vagasTotais,
-            })}
+            {/* Abaixo de 20 vagas a mensagem fica curta e direta. A
+                escassez só funciona se for verdadeira: o número vem do
+                contador real no banco, não de um texto fixo. */}
+            {vagasRestantes <= 20
+              ? t("planos.promocaoUltimas", { restantes: vagasRestantes })
+              : t("planos.promocaoRestam", {
+                  restantes: vagasRestantes,
+                  total: vagasTotais,
+                })}
+          </p>
+          <p className="text-[11px] text-dourado-200/60 mt-1.5">
+            {t("planos.promocaoSoLongos")}
           </p>
         </div>
       )}
@@ -236,7 +249,12 @@ export function SelecaoPlano() {
           const economia = economiaPercentual(idPlano, pais)
           const equivalenteMensal = precoMensalEquivalente(idPlano, pais)
           const precoTotal = precoTotalNoPais(idPlano, pais)
-          const precoExibido = promocaoDisponivel
+
+          // Fundador só existe no semestral e anual. No mensal e no
+          // trimestral o card segue mostrando a tabela cheia mesmo com
+          // a promoção ligada — é isso que torna a oferta uma escolha.
+          const ehFundador = promocaoDisponivel && temPrecoFundador(idPlano)
+          const precoExibido = ehFundador
             ? precoLancamentoNoPais(idPlano, pais)
             : precoTotal
 
@@ -250,12 +268,18 @@ export function SelecaoPlano() {
                   : "border-border/60 hover:border-border"
               }`}
             >
-              {/* Na promoção, o selo mostra a economia REAL de fundador
-                  (que é maior), não a economia entre planos */}
-              {(promocaoDisponivel || economia > 0) && (
-                <Badge className="absolute -top-2.5 right-3 text-[10px] bg-dourado-600 text-background">
-                  {promocaoDisponivel
-                    ? t("planos.desconto", {
+              {/* No plano de fundador o selo mostra a economia real
+                  (bem maior); nos demais, a economia entre planos */}
+              {(ehFundador || economia > 0) && (
+                <Badge
+                  className={`absolute -top-2.5 right-3 text-[10px] ${
+                    ehFundador
+                      ? "bg-dourado-500 text-background font-bold"
+                      : "bg-dourado-600 text-background"
+                  }`}
+                >
+                  {ehFundador
+                    ? t("planos.seloFundador", {
                         percentual: economiaLancamento(idPlano, pais),
                       })
                     : t("planos.desconto", { percentual: economia })}
@@ -285,13 +309,13 @@ export function SelecaoPlano() {
                   <span className="text-2xl font-bold text-foreground">
                     {moeda(
                       Math.round(
-                        promocaoDisponivel
+                        ehFundador
                           ? precoLancamentoNoPais(idPlano, pais) / config.meses
                           : equivalenteMensal
                       )
                     )}
                   </span>
-                  {promocaoDisponivel && (
+                  {ehFundador && (
                     <span className="text-xs text-muted-foreground/70 line-through">
                       {moeda(Math.round(equivalenteMensal))}
                     </span>

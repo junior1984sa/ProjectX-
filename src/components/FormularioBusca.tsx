@@ -133,11 +133,16 @@ export function FormularioBusca() {
     })
 
     if (!resultado.sucesso) {
+      // Duas recusas bem diferentes: sem saldo pede recarga; teto do
+      // dia significa que o saldo existe e só precisa voltar amanhã.
+      // Dar a mensagem errada aqui faria o cliente achar que acabou.
       toast.error(
-        t("busca.erro.creditosInsuficientes", {
-          custo: resultado.custo,
-          saldo: resultado.creditos_restantes,
-        })
+        resultado.motivo === "limite_diario"
+          ? t("busca.erro.limiteDiario", { restantes: resultado.creditos_restantes })
+          : t("busca.erro.creditosInsuficientes", {
+              custo: resultado.custo,
+              saldo: resultado.creditos_restantes,
+            })
       )
       return
     }

@@ -131,6 +131,7 @@ const PAISES: Record<
   GB: { nome: "United Kingdom", iso2: "gb", idioma: "en-GB", regiao: "GB", preposicao: "in" },
   PT: { nome: "Portugal", iso2: "pt", idioma: "pt-PT", regiao: "PT", preposicao: "em" },
   // Espanhol usa "en" como preposição de lugar: "marmolería EN Guadalajara"
+  CA: { nome: "Canada", iso2: "ca", idioma: "en-CA", regiao: "CA", preposicao: "in" },
   MX: { nome: "México", iso2: "mx", idioma: "es-MX", regiao: "MX", preposicao: "en" },
   PY: { nome: "Paraguay", iso2: "py", idioma: "es-PY", regiao: "PY", preposicao: "en" },
 }
