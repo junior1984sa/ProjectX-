@@ -1062,6 +1062,39 @@ const MAPA_SEGMENTOS_CLIENTES: Record<string, string[]> = {
   "regularização de imóveis": ["Proprietário de imóvel", "Incorporadora", "Loteamento", "Construtora"],
   "corretagem comercial": ["Franquia", "Indústria", "Comércio", "Investidor imobiliário"],
   "home staging e decoração para venda": ["Imobiliária", "Incorporadora", "Corretor de imóveis"],
+
+  // ── Fornecedores dos próprios prestadores ──
+  // Sem estes, quem presta serviço industrial não via anúncio nenhum:
+  // ninguém listava "jateamento abrasivo" ou "caldeiraria" como cliente.
+  "distribuidora de abrasivos": ["Jateamento abrasivo", "Marmoraria", "Serralheria", "Caldeiraria"],
+  "distribuidora de tintas industriais": ["Pintura industrial", "Jateamento abrasivo", "Serralheria", "Construtora"],
+  "consumíveis de solda": ["Solda industrial", "Caldeiraria", "Serralheria", "Estrutura metálica"],
+  "distribuidora de aço e metais": ["Serralheria", "Caldeiraria", "Estrutura metálica", "Usinagem"],
+  "peças para máquinas pesadas": ["Terraplanagem", "Demolição", "Locação de equipamentos", "Mineração"],
+  "seguro de frota": ["Transportadora", "Transporte de cargas", "Aluguel de caminhões", "Locadora de veículos"],
+  "combustível e arla para frotas": ["Transportadora", "Transporte de cargas", "Frota de veículos", "Terraplanagem"],
+  "produtos químicos para limpeza": ["Dedetização e controle de pragas", "Limpeza industrial", "Conservação e zeladoria", "Lavanderia industrial"],
+  "distribuidora de material elétrico": ["Elétrica industrial", "Instalação de ar-condicionado", "Automação residencial", "Construtora"],
+  "distribuidora de material hidráulico": ["Desentupimento", "Impermeabilização", "Construtora", "Manutenção predial"],
+  "fornecedor de andaimes e escoras": ["Andaimes e acesso", "Construtora", "Pintura predial", "Manutenção predial"],
+  "locação de plataformas elevatórias": ["Limpeza de fachadas", "Pintura predial", "Manutenção predial", "Montagem industrial"],
+  "distribuidora de epi": ["Jateamento abrasivo", "Caldeiraria", "Demolição", "Dedetização e controle de pragas"],
+  "software de gestão de obras": ["Construtora", "Empreiteira", "Terraplanagem", "Incorporadora"],
+  "software para transportadoras": ["Transportadora", "Transporte de cargas", "Agenciamento de cargas", "Armazém geral"],
+  "software para escritórios": ["Advocacia", "Contabilidade", "Arquitetura e design de interiores", "Empresa em geral"],
+
+  // ── Universais: atendem qualquer empresa em operação ──
+  "contabilidade digital": ["Empresa em geral", "Startup", "Profissional autônomo"],
+  "abertura e regularização de empresas": ["Empresa em geral", "Profissional autônomo", "Startup"],
+  "seguro empresarial": ["Empresa em geral", "Indústria", "Comércio"],
+  "plano de saúde empresarial": ["Empresa em geral", "Indústria", "Comércio"],
+  "vale-refeição e benefícios": ["Empresa em geral", "Indústria", "Comércio"],
+  "consultoria de marketing": ["Empresa em geral", "Comércio", "Clínica"],
+  "criação de site e landing page": ["Empresa em geral", "Comércio", "Clínica"],
+  "telefonia empresarial": ["Empresa em geral", "Escritório", "Comércio"],
+  "energia no mercado livre": ["Indústria", "Empresa em geral", "Supermercado", "Shopping"],
+  "consultoria de crédito empresarial": ["Empresa em geral", "Indústria", "Comércio"],
+  "maquininha de cartão e meios de pagamento": ["Comércio", "Restaurante", "Clínica", "Empresa em geral"],
 }
 
 /**
@@ -1098,15 +1131,59 @@ export async function obterSegmentosClientesPorIA(
 }
 
 /**
+ * Normaliza para comparação: minúsculas, sem acento, sem espaço extra.
+ *
+ * Sem tirar os acentos, "industrial" não casava com "Indústria" e um
+ * assinante de manutenção industrial nunca via fornecedor nenhum — o
+ * `includes` compara caractere a caractere, e "ú" não é "u". Era a
+ * causa de 75% dos segmentos ficarem sem anúncio direcionado.
+ */
+function normalizarSegmento(texto: string): string {
+  return texto
+    .toLowerCase()
+    .trim()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+}
+
+/**
+ * Rótulos de cliente que valem para QUALQUER empresa.
+ *
+ * Contabilidade, seguro, uniforme e TI atendem todo mundo — uma agência
+ * de marketing é "empresa em geral" tanto quanto uma metalúrgica. Sem
+ * esta regra, a comparação por substring nunca ligava as duas pontas
+ * ("marketing digital" não contém "empresa em geral"), e 71% dos
+ * segmentos ficavam sem nenhum anunciante direcionado.
+ *
+ * É o que sustenta a ideia central do produto: os serviços se cruzam.
+ * Um condomínio contrata rede de proteção, jardinagem e piscina; uma
+ * marmoraria contrata contador, seguro e uniforme.
+ */
+const CLIENTES_UNIVERSAIS = [
+  "empresa em geral",
+  "empresa",
+  "pme",
+  "pequena empresa",
+  "escritorio",
+]
+
+function ehClienteUniversal(clienteNormalizado: string): boolean {
+  return CLIENTES_UNIVERSAIS.some(
+    (u) => clienteNormalizado === u || clienteNormalizado.startsWith(u + " (")
+  )
+}
+
+/**
  * Retorna os segmentos-clientes típicos para um segmento de prestador.
- * Faz correspondência por substring (case-insensitive) para tolerar
- * pequenas variações no texto digitado.
+ * Faz correspondência por substring (sem acento, case-insensitive) para
+ * tolerar variações no texto digitado.
  */
 export function obterSegmentosClientes(segmentoPrestador: string): string[] {
-  const chave = segmentoPrestador.toLowerCase().trim()
+  const chave = normalizarSegmento(segmentoPrestador)
 
   for (const [seg, clientes] of Object.entries(MAPA_SEGMENTOS_CLIENTES)) {
-    if (chave.includes(seg) || seg.includes(chave)) {
+    const segNorm = normalizarSegmento(seg)
+    if (chave.includes(segNorm) || segNorm.includes(chave)) {
       return clientes
     }
   }
@@ -1129,26 +1206,44 @@ export function obterSegmentosClientes(segmentoPrestador: string): string[] {
  * "dentista" na sua lista de clientes, então X vende para dentistas.
  */
 export function obterFornecedoresPara(segmentoDoVisitante: string): string[] {
-  const alvo = segmentoDoVisitante.toLowerCase().trim()
+  const alvo = normalizarSegmento(segmentoDoVisitante)
   if (!alvo) return []
 
-  const fornecedores: string[] = []
+  // Separa em duas listas porque a ordem importa: um distribuidor de
+  // rochas ornamentais é muito mais relevante para uma marmoraria do
+  // que um seguro empresarial. Misturados, o específico se perderia
+  // entre dezenas de universais e o banner viraria ruído.
+  const especificos: string[] = []
+  const universais: string[] = []
 
   for (const [segmentoFornecedor, clientes] of Object.entries(MAPA_SEGMENTOS_CLIENTES)) {
     // Ignora o próprio segmento — não faz sentido anunciar concorrente
-    if (segmentoFornecedor === alvo) continue
+    if (normalizarSegmento(segmentoFornecedor) === alvo) continue
 
-    const atendeEsseSegmento = clientes.some((cliente) => {
-      const c = cliente.toLowerCase()
-      return c.includes(alvo) || alvo.includes(c)
-    })
+    let casouEspecifico = false
+    let casouUniversal = false
 
-    if (atendeEsseSegmento) {
-      fornecedores.push(segmentoFornecedor)
+    for (const cliente of clientes) {
+      const c = normalizarSegmento(cliente)
+
+      if (ehClienteUniversal(c)) {
+        casouUniversal = true
+        continue
+      }
+      // Termos muito curtos casariam com quase tudo por substring
+      // ("ti" dentro de "construtora"), então exige igualdade neles.
+      const casa = c.length <= 3 ? c === alvo : c.includes(alvo) || alvo.includes(c)
+      if (casa) {
+        casouEspecifico = true
+        break
+      }
     }
+
+    if (casouEspecifico) especificos.push(segmentoFornecedor)
+    else if (casouUniversal) universais.push(segmentoFornecedor)
   }
 
-  return fornecedores
+  return [...especificos, ...universais]
 }
 
 /**
