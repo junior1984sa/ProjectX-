@@ -148,13 +148,21 @@ export function economiaLancamento(plano: TipoPlano, pais: string): number {
 }
 
 /**
- * Formata um valor na moeda e no formato do país/idioma.
- * Intl cuida das diferenças reais: R$ 1.341,00 no Brasil, $261.00 nos
- * EUA, 1 341,00 € em Portugal.
+ * Formata um valor na moeda e no formato do PAÍS, não no da interface.
+ *
+ * O dinheiro é local, então a convenção também é: um preço mexicano se
+ * escreve à maneira mexicana mesmo que a pessoa esteja navegando em
+ * inglês. Usar o idioma da interface quebrava dois mercados:
+ *
+ *   México   "1497 MXN"     →  "$1,497"      (separador e símbolo certos)
+ *   Paraguai "397.000 PYG"  →  "Gs. 397.000" (símbolo real do guarani)
+ *
+ * O idioma genérico ("es") aplica convenção da Espanha, que não é a de
+ * nenhum dos dois.
  */
-export function formatarMoeda(valor: number, pais: string, idioma: string): string {
+export function formatarMoeda(valor: number, pais: string): string {
   const config = obterPais(pais)
-  return new Intl.NumberFormat(idioma, {
+  return new Intl.NumberFormat(config.idioma, {
     style: "currency",
     currency: config.moeda,
     maximumFractionDigits: valor % 1 === 0 ? 0 : 2,

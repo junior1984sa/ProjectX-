@@ -54,13 +54,13 @@ const CARTAO_VAZIO: DadosCartaoForm = {
 export function SelecaoPlano() {
   const navigate = useNavigate()
   const { carregarPerfil, perfil } = useAuthStore()
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   /** País define moeda, preço e se já existe gateway para cobrar aqui */
   const paisPreferido = usePreferenciasStore((s) => s.pais)
   const pais = perfil?.pais_foco ?? paisPreferido
   const configPais = obterPais(pais)
-  const moeda = (valor: number) => formatarMoeda(valor, pais, i18n.language)
+  const moeda = (valor: number) => formatarMoeda(valor, pais)
 
   const beneficios = t("planos.beneficios", { returnObjects: true }) as string[]
   const { ativa: promocaoAtivaNoBanco, vagasUsadas, vagasTotais, carregarStatus } = usePromocaoStore()
