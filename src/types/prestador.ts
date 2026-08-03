@@ -252,6 +252,8 @@ export interface ConfiguracaoPais {
   cidadesSugeridas: string[]
   /** Restringe a geocodificação a este país */
   codigoISO2: string
+  /** Código telefônico internacional, usado para montar links do WhatsApp */
+  codigoTelefone: string
   moeda: string
   idioma: string
   buscaDisponivel: boolean
@@ -273,6 +275,7 @@ export const PAISES_DISPONIVEIS: ConfiguracaoPais[] = [
       "Porto Alegre, RS",
     ],
     codigoISO2: "br",
+    codigoTelefone: "55",
     moeda: "BRL",
     idioma: "pt-BR",
     buscaDisponivel: true,
@@ -292,6 +295,7 @@ export const PAISES_DISPONIVEIS: ConfiguracaoPais[] = [
       "Atlanta, GA",
     ],
     codigoISO2: "us",
+    codigoTelefone: "1",
     moeda: "USD",
     idioma: "en-US",
     buscaDisponivel: true,
@@ -311,6 +315,7 @@ export const PAISES_DISPONIVEIS: ConfiguracaoPais[] = [
       "Gold Coast, QLD",
     ],
     codigoISO2: "au",
+    codigoTelefone: "61",
     moeda: "AUD",
     idioma: "en-AU",
     buscaDisponivel: true,
@@ -330,6 +335,7 @@ export const PAISES_DISPONIVEIS: ConfiguracaoPais[] = [
       "Bristol",
     ],
     codigoISO2: "gb",
+    codigoTelefone: "44",
     moeda: "GBP",
     idioma: "en-GB",
     buscaDisponivel: true,
@@ -342,6 +348,7 @@ export const PAISES_DISPONIVEIS: ConfiguracaoPais[] = [
     exemploCidade: "Lisboa",
     cidadesSugeridas: ["Lisboa", "Porto", "Braga", "Coimbra", "Faro", "Aveiro"],
     codigoISO2: "pt",
+    codigoTelefone: "351",
     moeda: "EUR",
     idioma: "pt-PT",
     buscaDisponivel: true,

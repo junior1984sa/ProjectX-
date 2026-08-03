@@ -9,6 +9,7 @@ import { copiarParaClipboard, exportarCSV, gerarLinkWhatsAppComNumero, gerarLink
 import { listarArquivosPortfolio } from "@/lib/storage"
 import { ContatoComPaywall } from "@/components/ContatoComPaywall"
 import { NomeComPaywall } from "@/components/NomeComPaywall"
+import { FilaProspeccao } from "@/components/FilaProspeccao"
 import type { Empresa } from "@/types/empresa"
 import { temAcessoLiberado } from "@/types/prestador"
 import toast from "react-hot-toast"
@@ -52,6 +53,7 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
 
   const [pagina, setPagina] = useState(1)
   const [urlPortfolio, setUrlPortfolio] = useState<string | null>(null)
+  const [filaAberta, setFilaAberta] = useState(false)
 
   useEffect(() => {
     if (!perfil?.id) return
@@ -142,6 +144,20 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
               className="pl-8 h-9 text-xs w-52 bg-white/[0.02]"
             />
           </div>
+          {/* Só faz sentido oferecer a fila para quem tem acesso: sem
+              assinatura os telefones estão protegidos, e a fila existe
+              justamente para usá-los. */}
+          {temAcesso && (
+            <Button
+              size="sm"
+              onClick={() => setFilaAberta(true)}
+              disabled={ordenadas.filter((e) => e.telefone).length === 0 || carregando}
+              className="h-9 text-xs bg-gradient-to-r from-dourado-600 to-dourado-700 text-white hover:from-dourado-700 hover:to-dourado-800"
+            >
+              <MessageCircle className="w-3.5 h-3.5 mr-1.5" />
+              Prospectar em sequência
+            </Button>
+          )}
           <Button
             variant="outline"
             size="sm"
@@ -154,6 +170,14 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
           </Button>
         </div>
       </div>
+
+      {filaAberta && (
+        <FilaProspeccao
+          empresas={ordenadas}
+          urlPortfolio={urlPortfolio}
+          onFechar={() => setFilaAberta(false)}
+        />
+      )}
 
       {!temAcesso && !carregando && ordenadas.length > 0 && (
         <div className="rounded-xl border border-dourado-700/40 bg-gradient-to-r from-dourado-900/10 to-prata-700/5 px-5 py-3.5 mb-5 flex items-center justify-between flex-wrap gap-3">

@@ -190,11 +190,22 @@ export function gerarLinkWhatsAppComNumero(
   telefone: string,
   nomeEmpresa: string,
   nomeContatoPrestador: string,
-  urlPortfolio?: string | null
+  urlPortfolio?: string | null,
+  codigoTelefonePais = "55"
 ): string {
-  // Remove tudo que não é dígito e garante o código do país (55 = Brasil)
+  // O código vem do país da busca: prefixar 55 num telefone de Miami
+  // ou Sydney gera link para um número brasileiro que não existe.
   const numeros = telefone.replace(/\D/g, "")
-  const numeroComPais = numeros.startsWith("55") ? numeros : `55${numeros}`
+
+  // Austrália (0412...) e Reino Unido (07700...) escrevem o número
+  // local com um zero na frente, que NÃO entra no formato
+  // internacional. Mantê-lo geraria 610412... em vez de 61412...,
+  // e o link não abriria conversa nenhuma.
+  const semZeroInicial = numeros.replace(/^0+/, "")
+
+  const numeroComPais = semZeroInicial.startsWith(codigoTelefonePais)
+    ? semZeroInicial
+    : `${codigoTelefonePais}${semZeroInicial}`
 
   const linhas = [
     `Olá! Sou ${nomeContatoPrestador}.`,
