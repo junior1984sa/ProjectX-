@@ -838,6 +838,230 @@ const MAPA_SEGMENTOS_CLIENTES: Record<string, string[]> = {
   "consultoria ambiental": ["Indústria", "Construtora", "Mineração", "Agroindústria"],
   "gestão de resíduos": ["Indústria", "Construtora", "Hospital", "Condomínio comercial"],
   "tratamento de água e efluentes": ["Indústria", "Condomínio residencial", "Agroindústria", "Hospital"],
+
+  // ═══════════════════════════════════════════════════════════
+  // EXPANSÃO — o princípio é sempre o mesmo: para toda empresa em
+  // operação existe outra que precisa do serviço dela. Uma empresa de
+  // redes de proteção não vende para outra de redes; vende para
+  // condomínio, construtora e escola.
+  //
+  // Por isso a lista de clientes NUNCA repete o próprio segmento: é
+  // exatamente o que obterFornecedoresPara() usa para nunca mostrar
+  // concorrente como oportunidade.
+  // ═══════════════════════════════════════════════════════════
+
+  // ── Segurança predial e patrimonial ──
+  "redes de proteção": ["Condomínio residencial", "Construtora", "Escola", "Creche"],
+  "instalação de câmeras e cftv": ["Condomínio residencial", "Condomínio comercial", "Comércio", "Indústria"],
+  "alarme e monitoramento": ["Comércio", "Condomínio residencial", "Indústria", "Escritório"],
+  "controle de acesso e portaria": ["Condomínio residencial", "Condomínio comercial", "Indústria", "Escola"],
+  "portaria remota": ["Condomínio residencial", "Condomínio comercial", "Loteamento"],
+  "segurança patrimonial": ["Indústria", "Condomínio comercial", "Shopping", "Evento"],
+  "vigilância eletrônica": ["Comércio", "Indústria", "Condomínio comercial", "Banco"],
+  "cerca elétrica e concertina": ["Condomínio residencial", "Indústria", "Depósito", "Escola"],
+  "brigada de incêndio": ["Indústria", "Condomínio comercial", "Shopping", "Hospital"],
+  "extintores e combate a incêndio": ["Indústria", "Condomínio comercial", "Comércio", "Frota de veículos"],
+  "sprinklers e hidrantes": ["Construtora", "Indústria", "Condomínio comercial", "Shopping"],
+  "para-raios e spda": ["Indústria", "Condomínio residencial", "Construtora", "Telecomunicações"],
+  "laudo técnico e avcb": ["Condomínio comercial", "Indústria", "Comércio", "Escola"],
+  "blindagem de veículos": ["Empresa (frota executiva)", "Segurança patrimonial", "Família/Pessoa física"],
+  "insulfilm e película de segurança": ["Condomínio comercial", "Comércio", "Escritório", "Frota de veículos"],
+
+  // ── Serviços prediais e facilities ──
+  "limpeza de fachadas": ["Condomínio comercial", "Condomínio residencial", "Hotel", "Shopping"],
+  "limpeza pós-obra": ["Construtora", "Incorporadora", "Reforma comercial", "Imobiliária"],
+  "limpeza de caixa d'água": ["Condomínio residencial", "Escola", "Restaurante", "Indústria alimentícia"],
+  "desentupimento": ["Condomínio residencial", "Restaurante", "Comércio", "Escola"],
+  "jardinagem e paisagismo": ["Condomínio residencial", "Condomínio comercial", "Hotel", "Prefeitura"],
+  "poda de árvores": ["Condomínio residencial", "Prefeitura", "Loteamento", "Indústria"],
+  "conservação e zeladoria": ["Condomínio residencial", "Condomínio comercial", "Escola", "Hospital"],
+  "portaria e recepção terceirizada": ["Condomínio comercial", "Escritório", "Clínica", "Escola"],
+  "manutenção de elevadores": ["Condomínio residencial", "Condomínio comercial", "Hotel", "Hospital"],
+  "manutenção de ar-condicionado": ["Condomínio comercial", "Escritório", "Clínica", "Restaurante"],
+  "instalação de ar-condicionado": ["Construtora", "Escritório", "Comércio", "Condomínio residencial"],
+  "climatização industrial": ["Indústria", "Frigorífico", "Data center", "Hospital"],
+  "refrigeração comercial": ["Supermercado", "Restaurante", "Padaria", "Farmácia"],
+  "câmara fria": ["Frigorífico", "Supermercado", "Indústria alimentícia", "Restaurante"],
+  "manutenção de geradores": ["Hospital", "Data center", "Indústria", "Condomínio comercial"],
+  "locação de geradores": ["Evento", "Construtora", "Indústria", "Hospital"],
+  "nobreak e energia de emergência": ["Data center", "Hospital", "Escritório", "Comércio"],
+
+  // ── Construção: acabamento e especialidades ──
+  "vidraçaria": ["Construtora", "Comércio", "Condomínio residencial", "Arquitetura"],
+  "esquadrias de alumínio": ["Construtora", "Incorporadora", "Reforma comercial", "Condomínio residencial"],
+  "serralheria": ["Construtora", "Indústria", "Condomínio residencial", "Comércio"],
+  "gesso e drywall": ["Construtora", "Arquitetura e design de interiores", "Reforma comercial", "Loja"],
+  "forro de pvc e modular": ["Construtora", "Comércio", "Escritório", "Clínica"],
+  "piso vinílico e laminado": ["Arquitetura e design de interiores", "Escritório", "Clínica", "Academia"],
+  "piso industrial e epóxi": ["Indústria", "Depósito", "Estacionamento", "Frigorífico"],
+  "porcelanato e revestimento": ["Construtora", "Arquitetura e design de interiores", "Reforma residencial"],
+  "pintura predial": ["Condomínio residencial", "Condomínio comercial", "Construtora", "Escola"],
+  "textura e grafiato": ["Construtora", "Condomínio residencial", "Reforma residencial"],
+  "impermeabilização de lajes": ["Condomínio residencial", "Construtora", "Indústria", "Estacionamento"],
+  "telhado e cobertura metálica": ["Indústria", "Construtora", "Depósito", "Comércio"],
+  "estrutura metálica": ["Construtora", "Indústria", "Depósito", "Agroindústria"],
+  "pré-moldados de concreto": ["Construtora", "Loteamento", "Indústria", "Prefeitura"],
+  "concreto usinado": ["Construtora", "Empreiteira", "Loteamento", "Prefeitura"],
+  "sondagem de solo": ["Construtora", "Incorporadora", "Engenharia civil", "Mineração"],
+  "fundações e estacas": ["Construtora", "Incorporadora", "Indústria", "Engenharia civil"],
+  "escavação e movimentação de terra": ["Construtora", "Loteamento", "Mineração", "Prefeitura"],
+  "drenagem e saneamento": ["Construtora", "Loteamento", "Prefeitura", "Indústria"],
+  "pavimentação asfáltica": ["Prefeitura", "Loteamento", "Indústria", "Condomínio comercial"],
+  "marcenaria sob medida": ["Arquitetura e design de interiores", "Escritório", "Clínica", "Comércio"],
+  "móveis planejados": ["Incorporadora", "Arquitetura e design de interiores", "Escritório"],
+  "vidro temperado e box": ["Construtora", "Comércio", "Hotel", "Academia"],
+  "persianas e cortinas": ["Escritório", "Clínica", "Hotel", "Condomínio residencial"],
+  "papel de parede e adesivagem": ["Comércio", "Escritório", "Clínica", "Arquitetura"],
+  "iluminação e luminotécnica": ["Arquitetura e design de interiores", "Comércio", "Hotel", "Restaurante"],
+  "automação residencial": ["Incorporadora", "Arquitetura e design de interiores", "Condomínio de alto padrão"],
+
+  // ── Indústria: mais especialidades ──
+  "corte e dobra de chapas": ["Indústria metalúrgica", "Serralheria", "Construtora", "Fabricante de máquinas"],
+  "corte a laser": ["Indústria metalúrgica", "Serralheria", "Fabricante de máquinas", "Comunicação visual"],
+  "galvanização e zincagem": ["Indústria metalúrgica", "Serralheria", "Construtora", "Estrutura metálica"],
+  "anodização": ["Indústria de alumínio", "Esquadrias de alumínio", "Fabricante de máquinas"],
+  "pintura eletrostática": ["Indústria metalúrgica", "Serralheria", "Fabricante de móveis", "Esquadrias"],
+  "tratamento térmico de metais": ["Indústria metalúrgica", "Usinagem", "Fabricante de máquinas", "Autopeças"],
+  "injeção plástica": ["Indústria de embalagens", "Fabricante de eletrodomésticos", "Autopeças", "Brinquedos"],
+  "sopro de plásticos": ["Indústria de embalagens", "Distribuidora de bebidas", "Cosméticos", "Alimentícia"],
+  "termoformagem": ["Indústria alimentícia", "Embalagens", "Cosméticos", "Farmacêutica"],
+  "fabricação de embalagens": ["Indústria alimentícia", "Cosméticos", "Farmacêutica", "Comércio"],
+  "rotulagem e etiquetas": ["Indústria alimentícia", "Cosméticos", "Farmacêutica", "Vinícola"],
+  "borracha e vedação": ["Indústria", "Autopeças", "Manutenção industrial", "Petroquímica"],
+  "mangueiras industriais": ["Indústria", "Mineração", "Agroindústria", "Petroquímica"],
+  "correias transportadoras": ["Mineração", "Indústria alimentícia", "Logística", "Agroindústria"],
+  "rolamentos e transmissão": ["Indústria", "Manutenção industrial", "Agroindústria", "Mineração"],
+  "manutenção de motores elétricos": ["Indústria", "Mineração", "Saneamento", "Agroindústria"],
+  "bombas industriais": ["Saneamento", "Petroquímica", "Indústria química", "Mineração"],
+  "compressores de ar": ["Indústria", "Oficina mecânica", "Hospital", "Mineração"],
+  "vasos de pressão": ["Petroquímica", "Indústria alimentícia", "Usina", "Frigorífico"],
+  "tubulação industrial": ["Petroquímica", "Indústria química", "Usina", "Saneamento"],
+  "calibração de instrumentos": ["Indústria", "Laboratório", "Farmacêutica", "Metrologia"],
+  "manutenção preditiva": ["Indústria", "Mineração", "Usina", "Papel e celulose"],
+  "lubrificação industrial": ["Indústria", "Mineração", "Frota de veículos", "Agroindústria"],
+  "abrasivos e ferramentas de corte": ["Indústria metalúrgica", "Usinagem", "Serralheria", "Marmoraria"],
+  "epi e segurança do trabalho": ["Indústria", "Construtora", "Mineração", "Frigorífico"],
+  "sinalização industrial": ["Indústria", "Construtora", "Logística", "Estacionamento"],
+
+  // ── Automotivo ──
+  "funilaria e pintura automotiva": ["Frota de veículos", "Locadora de veículos", "Seguradora", "Transportadora"],
+  "auto elétrica": ["Transportadora", "Frota de veículos", "Locadora de veículos", "Ônibus"],
+  "retífica de motores": ["Transportadora", "Frota de veículos", "Maquinário agrícola", "Ônibus"],
+  "borracharia e pneus": ["Transportadora", "Frota de veículos", "Locadora de veículos", "Construtora"],
+  "guincho e reboque": ["Seguradora", "Locadora de veículos", "Transportadora", "Concessionária"],
+  "rastreamento veicular": ["Transportadora", "Locadora de veículos", "Frota de veículos", "Seguradora"],
+  "higienização de veículos": ["Locadora de veículos", "Concessionária", "Frota de veículos", "Aplicativo de transporte"],
+  "adesivagem de frota": ["Transportadora", "Distribuidora", "Franquia", "Frota de veículos"],
+  "manutenção de empilhadeiras": ["Logística e armazenagem", "Indústria", "Supermercado", "Construtora"],
+  "locação de empilhadeiras": ["Logística e armazenagem", "Indústria", "Evento", "Construtora"],
+
+  // ── Tecnologia e comunicação ──
+  "cabeamento estruturado": ["Escritório", "Indústria", "Condomínio comercial", "Escola"],
+  "infraestrutura de rede": ["Escritório", "Indústria", "Hotel", "Hospital"],
+  "provedor de internet": ["Condomínio residencial", "Escritório", "Comércio", "Indústria"],
+  "telefonia voip e pabx": ["Escritório", "Clínica", "Call center", "Hotel"],
+  "suporte técnico de ti": ["Escritório", "Clínica", "Comércio", "Escola"],
+  "backup e nuvem": ["Escritório", "Clínica", "Contabilidade", "Advocacia"],
+  "manutenção de computadores": ["Escritório", "Escola", "Comércio", "Clínica"],
+  "locação de equipamentos de ti": ["Evento", "Escritório", "Escola", "Call center"],
+  "outsourcing de impressão": ["Escritório", "Escola", "Clínica", "Contabilidade"],
+  "digitalização de documentos": ["Contabilidade", "Advocacia", "Cartório", "Hospital"],
+  "assinatura digital e certificado": ["Contabilidade", "Advocacia", "Empresa em geral", "Cartório"],
+  "erp e sistemas de gestão": ["Indústria", "Comércio", "Distribuidora", "Construtora"],
+  "automação comercial e pdv": ["Comércio", "Restaurante", "Farmácia", "Supermercado"],
+  "e-commerce e marketplace": ["Indústria", "Distribuidora", "Comércio", "Confecção"],
+
+  // ── Marketing e comunicação ──
+  "comunicação visual e fachadas": ["Comércio", "Franquia", "Restaurante", "Condomínio comercial"],
+  "produção de vídeo institucional": ["Indústria", "Construtora", "Franquia", "Escola"],
+  "assessoria de imprensa": ["Indústria", "Startup", "Hospital", "Instituição de ensino"],
+  "gestão de redes sociais": ["Comércio", "Restaurante", "Clínica", "Academia"],
+  "tráfego pago": ["E-commerce", "Clínica", "Imobiliária", "Escola"],
+  "brindes corporativos": ["Indústria", "Empresa em geral", "Evento", "Franquia"],
+  "uniformes profissionais": ["Indústria", "Restaurante", "Hospital", "Construtora"],
+  "sinalização e placas": ["Condomínio comercial", "Comércio", "Indústria", "Prefeitura"],
+
+  // ── Eventos ──
+  "locação de tendas e estruturas": ["Evento", "Prefeitura", "Construtora", "Feira"],
+  "locação de mobiliário para eventos": ["Buffet de eventos", "Evento corporativo", "Hotel", "Feira"],
+  "montagem de estandes": ["Feira e exposição", "Indústria", "Franquia", "Shopping"],
+  "segurança para eventos": ["Evento", "Casa de shows", "Prefeitura", "Feira"],
+  "banheiro químico": ["Construtora", "Evento", "Prefeitura", "Feira"],
+  "catering corporativo": ["Empresa em geral", "Indústria", "Escritório", "Evento"],
+
+  // ── Logística e comércio exterior ──
+  "armazém geral": ["Indústria", "Distribuidora", "E-commerce", "Importadora"],
+  "fulfillment e-commerce": ["E-commerce", "Marketplace", "Confecção", "Cosméticos"],
+  "transporte refrigerado": ["Indústria alimentícia", "Frigorífico", "Farmacêutica", "Supermercado"],
+  "transporte de cargas perigosas": ["Petroquímica", "Indústria química", "Mineração", "Posto de combustível"],
+  "agenciamento de cargas": ["Importadora", "Exportadora", "Indústria", "Distribuidora"],
+  "assessoria em importação": ["Importadora", "Indústria", "Comércio", "Distribuidora"],
+  "paletes e embalagem para transporte": ["Indústria", "Logística e armazenagem", "Exportadora", "Distribuidora"],
+
+  // ── Agro ──
+  "pulverização agrícola com drone": ["Fazenda", "Agroindústria", "Cooperativa agrícola", "Usina de cana"],
+  "colheita mecanizada": ["Fazenda", "Usina de cana", "Cooperativa agrícola", "Agroindústria"],
+  "manutenção de máquinas agrícolas": ["Fazenda", "Cooperativa agrícola", "Usina de cana", "Agroindústria"],
+  "silos e armazenagem de grãos": ["Fazenda", "Cooperativa agrícola", "Agroindústria", "Cerealista"],
+  "análise de solo": ["Fazenda", "Cooperativa agrícola", "Consultoria agronômica", "Agroindústria"],
+  "sementes e mudas": ["Fazenda", "Cooperativa agrícola", "Paisagismo", "Reflorestamento"],
+  "nutrição animal": ["Fazenda", "Frigorífico", "Cooperativa agrícola", "Avicultura"],
+  "medicamentos veterinários": ["Clínica veterinária", "Fazenda", "Pet shop", "Frigorífico"],
+  "cercas e currais": ["Fazenda", "Cooperativa agrícola", "Haras", "Frigorífico"],
+
+  // ── Saúde ──
+  "manutenção de equipamentos médicos": ["Hospital", "Clínica médica", "Laboratório", "Clínica odontológica"],
+  "gases medicinais": ["Hospital", "Clínica médica", "Home care", "Laboratório"],
+  "esterilização de materiais": ["Hospital", "Clínica odontológica", "Clínica médica", "Laboratório"],
+  "descarte de resíduos hospitalares": ["Hospital", "Clínica médica", "Laboratório", "Clínica veterinária"],
+  "software para clínicas": ["Clínica médica", "Clínica odontológica", "Laboratório", "Fisioterapia"],
+  "prótese dentária": ["Clínica odontológica", "Dentista", "Hospital"],
+  "óptica e lentes": ["Clínica oftalmológica", "Plano de saúde", "Família/Pessoa física"],
+  "equipamentos de fisioterapia": ["Clínica de fisioterapia", "Hospital", "Academia", "Home care"],
+  "medicina do trabalho": ["Indústria", "Construtora", "Transportadora", "Empresa em geral"],
+  "exames ocupacionais": ["Indústria", "Construtora", "Empresa em geral", "Transportadora"],
+
+  // ── Serviços empresariais ──
+  "consultoria tributária": ["Indústria", "Comércio", "Distribuidora", "Construtora"],
+  "perícia contábil": ["Advocacia", "Empresa em geral", "Seguradora"],
+  "assessoria trabalhista": ["Indústria", "Construtora", "Comércio", "Transportadora"],
+  "terceirização de mão de obra": ["Indústria", "Condomínio comercial", "Construtora", "Hospital"],
+  "cobrança e recuperação de crédito": ["Comércio", "Clínica", "Escola", "Distribuidora"],
+  "consultoria em lgpd": ["E-commerce", "Clínica", "Escola", "Empresa em geral"],
+  "certificação iso": ["Indústria", "Construtora", "Laboratório", "Transportadora"],
+  "consultoria em processos": ["Indústria", "Distribuidora", "Comércio", "Hospital"],
+  "pesquisa de mercado": ["Indústria", "Franquia", "E-commerce", "Incorporadora"],
+  "coworking e escritório virtual": ["Startup", "Profissional autônomo", "Empresa em geral", "Representante comercial"],
+  "locação de impressoras": ["Escritório", "Escola", "Contabilidade", "Clínica"],
+  "arquivo e guarda de documentos": ["Contabilidade", "Advocacia", "Hospital", "Cartório"],
+
+  // ── Educação e capacitação ──
+  "treinamento nr (segurança)": ["Indústria", "Construtora", "Transportadora", "Mineração"],
+  "escola de idiomas corporativa": ["Empresa em geral", "Indústria", "Multinacional", "Hotel"],
+  "cursos técnicos": ["Indústria", "Empresa em geral", "Prefeitura", "Sindicato"],
+  "consultoria pedagógica": ["Escola", "Creche", "Instituição de ensino", "Editora"],
+
+  // ── Alimentação e bebidas ──
+  "distribuidora de bebidas": ["Restaurante", "Bar", "Hotel", "Supermercado"],
+  "distribuidora de embalagens": ["Restaurante", "Padaria", "E-commerce", "Indústria alimentícia"],
+  "fornecedor de hortifruti": ["Restaurante", "Supermercado", "Hotel", "Buffet de eventos"],
+  "frigorífico e distribuição de carnes": ["Restaurante", "Supermercado", "Açougue", "Buffet de eventos"],
+  "torrefação de café": ["Cafeteria", "Restaurante", "Hotel", "Empresa (café corporativo)"],
+  "manutenção de equipamentos de cozinha": ["Restaurante", "Hotel", "Padaria", "Buffet de eventos"],
+  "consultoria em segurança alimentar": ["Restaurante", "Indústria alimentícia", "Supermercado", "Hotel"],
+
+  // ── Têxtil e confecção ──
+  "confecção de uniformes": ["Indústria", "Escola", "Hospital", "Restaurante"],
+  "bordado e estamparia": ["Confecção", "Franquia", "Escola", "Evento"],
+  "lavanderia industrial": ["Hotel", "Hospital", "Restaurante", "Indústria"],
+  "tinturaria e acabamento têxtil": ["Confecção", "Indústria têxtil", "Malharia"],
+
+  // ── Imobiliário ──
+  "administração de imóveis": ["Proprietário de imóvel", "Incorporadora", "Investidor imobiliário"],
+  "vistoria de imóveis": ["Imobiliária", "Construtora", "Seguradora", "Administradora de condomínios"],
+  "regularização de imóveis": ["Proprietário de imóvel", "Incorporadora", "Loteamento", "Construtora"],
+  "corretagem comercial": ["Franquia", "Indústria", "Comércio", "Investidor imobiliário"],
+  "home staging e decoração para venda": ["Imobiliária", "Incorporadora", "Corretor de imóveis"],
 }
 
 /**
