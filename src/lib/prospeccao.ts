@@ -109,6 +109,85 @@ export async function registrarContato(
   return { sucesso: true, erro: null }
 }
 
+export interface ResultadoDisparo {
+  sucesso: boolean
+  enviados: number
+  bloqueados: number
+  falhas: number
+  erro: string | null
+}
+
+/**
+ * Dispara o e-mail para várias empresas de uma vez.
+ *
+ * O rodapé com identificação e link de descadastro é montado no
+ * SERVIDOR, não aqui — se dependesse do frontend, bastaria uma chamada
+ * fora da tela para enviar sem ele, e o disparo deixaria de ser
+ * legítimo interesse para virar infração.
+ */
+export async function dispararEmails(params: {
+  empresas: Empresa[]
+  assunto: string
+  corpo: string
+  remetente: { empresa: string; contato: string; cidade: string; email: string }
+}): Promise<ResultadoDisparo> {
+  const { data: sessao } = await supabase.auth.getSession()
+  const token = sessao.session?.access_token
+
+  if (!token) {
+    return { sucesso: false, enviados: 0, bloqueados: 0, falhas: 0, erro: "Sessão expirada." }
+  }
+
+  const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string
+
+  try {
+    const resposta = await fetch(`${supabaseUrl}/functions/v1/enviar-email-lote`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        assunto: params.assunto,
+        corpo: params.corpo,
+        remetente: params.remetente,
+        destinatarios: params.empresas
+          .filter((e) => e.email)
+          .map((e) => ({
+            nome: e.nome,
+            email: e.email,
+            cidade: e.cidade,
+            estado: e.estado,
+            chaveEmpresa: chaveDaEmpresa(e),
+          })),
+      }),
+    })
+
+    const dados = await resposta.json()
+
+    if (!resposta.ok || dados.erro) {
+      return {
+        sucesso: false,
+        enviados: 0,
+        bloqueados: 0,
+        falhas: 0,
+        erro: dados.erro ?? "Não foi possível enviar.",
+      }
+    }
+
+    return {
+      sucesso: true,
+      enviados: dados.enviados ?? 0,
+      bloqueados: dados.bloqueados ?? 0,
+      falhas: dados.falhas ?? 0,
+      erro: null,
+    }
+  } catch (erro) {
+    console.error("Erro ao disparar e-mails:", erro)
+    return { sucesso: false, enviados: 0, bloqueados: 0, falhas: 0, erro: "Erro de conexão." }
+  }
+}
+
 /** Atualiza o desfecho de um contato já feito */
 export async function atualizarStatusContato(
   chaveEmpresa: string,

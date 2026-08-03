@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Heart, Copy, Download, Search, MessageCircle } from "lucide-react"
+import { Heart, Copy, Download, Search, MessageCircle, Mail } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -10,6 +10,7 @@ import { listarArquivosPortfolio } from "@/lib/storage"
 import { ContatoComPaywall } from "@/components/ContatoComPaywall"
 import { NomeComPaywall } from "@/components/NomeComPaywall"
 import { FilaProspeccao } from "@/components/FilaProspeccao"
+import { DisparoEmail } from "@/components/DisparoEmail"
 import type { Empresa } from "@/types/empresa"
 import { temAcessoLiberado } from "@/types/prestador"
 import toast from "react-hot-toast"
@@ -54,6 +55,7 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
   const [pagina, setPagina] = useState(1)
   const [urlPortfolio, setUrlPortfolio] = useState<string | null>(null)
   const [filaAberta, setFilaAberta] = useState(false)
+  const [disparoAberto, setDisparoAberto] = useState(false)
 
   useEffect(() => {
     if (!perfil?.id) return
@@ -158,6 +160,20 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
               Prospectar em sequência
             </Button>
           )}
+          {/* WhatsApp é um a um por obrigação (disparo em massa banisce
+              o número); e-mail é em lote porque pode, legalmente. */}
+          {temAcesso && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setDisparoAberto(true)}
+              disabled={ordenadas.filter((e) => e.email).length === 0 || carregando}
+              className="h-9 text-xs border-dourado-700 bg-dourado-900/10 text-dourado-300 hover:bg-dourado-900/20"
+            >
+              <Mail className="w-3.5 h-3.5 mr-1.5" />
+              Enviar e-mail em lote
+            </Button>
+          )}
           <Button
             variant="outline"
             size="sm"
@@ -176,6 +192,13 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
           empresas={ordenadas}
           urlPortfolio={urlPortfolio}
           onFechar={() => setFilaAberta(false)}
+        />
+      )}
+
+      {disparoAberto && (
+        <DisparoEmail
+          empresas={ordenadas}
+          onFechar={() => setDisparoAberto(false)}
         />
       )}
 
