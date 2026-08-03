@@ -17,6 +17,68 @@
 const GOOGLE_PLACES_API_KEY = Deno.env.get("GOOGLE_PLACES_API_KEY") ?? ""
 const TEXT_SEARCH_URL = "https://places.googleapis.com/v1/places:searchText"
 
+// ═══ CACHE DE BUSCAS ═══
+// A mesma pergunta feita duas vezes não pode custar duas chamadas de
+// API. O ganho é coletivo: a busca de um assinante serve todos os
+// outros até expirar — e num produto onde gente da mesma região
+// procura os mesmos segmentos, isso se repete muito.
+//
+// Fica no SERVIDOR de propósito. No navegador, cada cliente teria o
+// próprio cache e a economia seria quase nenhuma.
+
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? ""
+const SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+const DIAS_VALIDADE_CACHE = 30
+
+/** Chave normalizada: mesma pergunta escrita de formas diferentes vira a mesma chave */
+function chaveDeCache(partes: (string | number)[]): string {
+  return partes
+    .map((p) =>
+      String(p)
+        .toLowerCase()
+        .trim()
+        .normalize("NFD")
+        .replace(/\p{Diacritic}/gu, "")
+        .replace(/\s+/g, "-")
+    )
+    .join("__")
+}
+
+async function chamarRpc(nome: string, corpo: unknown): Promise<unknown> {
+  if (!SUPABASE_URL || !SERVICE_ROLE_KEY) return null
+
+  try {
+    const resposta = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${nome}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: SERVICE_ROLE_KEY,
+        Authorization: `Bearer ${SERVICE_ROLE_KEY}`,
+      },
+      body: JSON.stringify(corpo),
+    })
+    if (!resposta.ok) return null
+    return await resposta.json()
+  } catch {
+    // Cache indisponível nunca pode derrubar a busca: se falhar, o
+    // fluxo segue chamando a API normalmente.
+    return null
+  }
+}
+
+async function lerCache(chave: string): Promise<unknown | null> {
+  return await chamarRpc("ler_cache_busca", { p_chave: chave })
+}
+
+async function gravarCache(chave: string, resposta: unknown): Promise<void> {
+  await chamarRpc("gravar_cache_busca", {
+    p_chave: chave,
+    p_fonte: "google",
+    p_resposta: resposta,
+    p_dias_validade: DIAS_VALIDADE_CACHE,
+  })
+}
+
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
@@ -195,6 +257,35 @@ Deno.serve(async (req: Request) => {
     }
 
     const paisBusca = pais ?? "BR"
+    const quantidade = quantidadeDesejada ?? 20
+
+    // A chave inclui tudo que muda o resultado. Faltando qualquer um
+    // desses, duas buscas diferentes colidiriam e a segunda receberia
+    // a resposta errada.
+    const chave = chaveDeCache([
+      "google",
+      segmento,
+      cidade,
+      estado ?? "",
+      raioKm ?? 10,
+      quantidade,
+      paisBusca,
+    ])
+
+    const doCache = await lerCache(chave)
+    if (doCache) {
+      console.log(`Cache aproveitado: ${chave}`)
+      return new Response(JSON.stringify(doCache), {
+        status: 200,
+        headers: {
+          ...corsHeaders,
+          "Content-Type": "application/json",
+          // Ajuda a diagnosticar sem precisar abrir os logs
+          "X-Cache": "hit",
+        },
+      })
+    }
+
     const ponto = await geocodificarCidadeGratis(cidade, estado ?? "", paisBusca)
     const raioMetros = (raioKm ?? 10) * 1000
 
@@ -204,15 +295,26 @@ Deno.serve(async (req: Request) => {
       estado ?? "",
       ponto,
       raioMetros,
-      quantidadeDesejada ?? 20,
+      quantidade,
       paisBusca
     )
 
     if (places.length === 0) {
-      return new Response(
-        JSON.stringify({ encontrado: false, motivo: "sem_resultados" }),
-        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      )
+      // Busca vazia também vai para o cache, com validade menor: sem
+      // isso, um segmento sem resultados custaria uma chamada de API a
+      // cada tentativa, que é justamente o caso mais desperdiçado.
+      const vazio = { encontrado: false, motivo: "sem_resultados" }
+      await chamarRpc("gravar_cache_busca", {
+        p_chave: chave,
+        p_fonte: "google",
+        p_resposta: vazio,
+        p_dias_validade: 7,
+      })
+
+      return new Response(JSON.stringify(vazio), {
+        status: 200,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      })
     }
 
     const empresas = places.map((place) => ({
@@ -228,10 +330,16 @@ Deno.serve(async (req: Request) => {
       score: calcularScore(place),
     }))
 
-    return new Response(
-      JSON.stringify({ encontrado: true, empresas }),
-      { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    )
+    const resultado = { encontrado: true, empresas }
+
+    // Grava sem esperar: a resposta do cliente não deve ficar mais
+    // lenta por causa da escrita no cache.
+    gravarCache(chave, resultado)
+
+    return new Response(JSON.stringify(resultado), {
+      status: 200,
+      headers: { ...corsHeaders, "Content-Type": "application/json", "X-Cache": "miss" },
+    })
   } catch (erro) {
     console.error("Erro inesperado na busca Google Places:", erro)
     return new Response(

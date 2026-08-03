@@ -106,6 +106,48 @@ function mapearSegmentoParaTagsOSM(segmento: string): string[] {
  * Edge Function não compartilha código com o frontend, por isso a
  * duplicação: ao incluir um país novo, atualize os dois lugares.
  */
+// ═══ CACHE DE BUSCAS ═══
+// O Nominatim e o Overpass são gratuitos, mas bloqueiam sob uso
+// intenso — com vários assinantes buscando ao mesmo tempo, o bloqueio
+// atinge todos de uma vez. O cache reduz drasticamente as chamadas.
+
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? ""
+const SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
+const DIAS_VALIDADE_CACHE = 30
+
+function chaveDeCache(partes: (string | number)[]): string {
+  return partes
+    .map((p) =>
+      String(p)
+        .toLowerCase()
+        .trim()
+        .normalize("NFD")
+        .replace(/\p{Diacritic}/gu, "")
+        .replace(/\s+/g, "-")
+    )
+    .join("__")
+}
+
+async function chamarRpc(nome: string, corpo: unknown): Promise<unknown> {
+  if (!SUPABASE_URL || !SERVICE_ROLE_KEY) return null
+  try {
+    const resposta = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${nome}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: SERVICE_ROLE_KEY,
+        Authorization: `Bearer ${SERVICE_ROLE_KEY}`,
+      },
+      body: JSON.stringify(corpo),
+    })
+    if (!resposta.ok) return null
+    return await resposta.json()
+  } catch {
+    // Cache fora do ar nunca pode derrubar a busca
+    return null
+  }
+}
+
 const PAISES: Record<string, { nome: string; iso2: string }> = {
   BR: { nome: "Brasil", iso2: "br" },
   US: { nome: "United States", iso2: "us" },
@@ -190,23 +232,62 @@ Deno.serve(async (req: Request) => {
       )
     }
 
-    const ponto = await geocodificarCidade(cidade, estado ?? "", pais ?? "BR")
+    const paisBusca = pais ?? "BR"
+    const chave = chaveDeCache([
+      "osm",
+      segmento,
+      cidade,
+      estado ?? "",
+      raioKm ?? 10,
+      paisBusca,
+    ])
+
+    const doCache = await chamarRpc("ler_cache_busca", { p_chave: chave })
+    if (doCache) {
+      console.log(`Cache aproveitado: ${chave}`)
+      return new Response(JSON.stringify(doCache), {
+        status: 200,
+        headers: { ...corsHeaders, "Content-Type": "application/json", "X-Cache": "hit" },
+      })
+    }
+
+    const ponto = await geocodificarCidade(cidade, estado ?? "", paisBusca)
     if (!ponto) {
-      return new Response(
-        JSON.stringify({ encontrado: false, motivo: "cidade_nao_localizada" }),
-        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      )
+      // Cidade não localizada costuma ser erro de digitação, que a
+      // pessoa repete. Guardar por pouco tempo evita martelar o
+      // Nominatim com a mesma consulta inválida.
+      const naoLocalizada = { encontrado: false, motivo: "cidade_nao_localizada" }
+      await chamarRpc("gravar_cache_busca", {
+        p_chave: chave,
+        p_fonte: "openstreetmap",
+        p_resposta: naoLocalizada,
+        p_dias_validade: 1,
+      })
+
+      return new Response(JSON.stringify(naoLocalizada), {
+        status: 200,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      })
     }
 
     const tagsOSM = mapearSegmentoParaTagsOSM(segmento)
     const raioMetros = (raioKm ?? 10) * 1000
 
     const elementos = await buscarEstabelecimentosOverpass(ponto.lat, ponto.lng, raioMetros, tagsOSM)
+    const resultado = { encontrado: true, elementos, ponto }
 
-    return new Response(
-      JSON.stringify({ encontrado: true, elementos, ponto }),
-      { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-    )
+    // Sem await: a resposta ao cliente não deve esperar a gravação
+    chamarRpc("gravar_cache_busca", {
+      p_chave: chave,
+      p_fonte: "openstreetmap",
+      p_resposta: resultado,
+      p_dias_validade: DIAS_VALIDADE_CACHE,
+    })
+
+    return new Response(JSON.stringify(resultado), {
+      status: 200,
+      headers: { ...corsHeaders, "Content-Type": "application/json", "X-Cache": "miss" },
+    })
   } catch (erro) {
     console.error("Erro inesperado na busca OSM:", erro)
     return new Response(
