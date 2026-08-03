@@ -33,55 +33,62 @@ function mapearSegmentoParaTagsOSM(segmento: string): string[] {
     .normalize("NFD")
     .replace(/\p{Diacritic}/gu, "")
 
+  // As etiquetas do OSM são universais — craft=stonemason vale em
+  // Curitiba e em Austin. O que faltava era reconhecer o TERMO em
+  // outros idiomas: até aqui só português casava, então "stonemason"
+  // ou "dental clinic" caíam no filtro genérico e devolviam sempre a
+  // mesma lista de empresas quaisquer. Medido em Austin: "dental
+  // clinic" retornava exatamente os mesmos 29 estabelecimentos que
+  // "office" — o segmento era simplesmente ignorado fora do Brasil.
   const mapeamentos: Array<{ palavras: string[]; tags: string[] }> = [
     // ── Construcao e reforma ──
     // marmoraria NAO leva shop=doityourself: essa etiqueta significa
     // loja de material de construcao no OSM, e trazia Balaroti e Leroy
     // Merlin no lugar de marmorarias.
-    { palavras: ["marmoraria", "marmorista", "granito", "marmore"], tags: ["craft=stonemason"] },
-    { palavras: ["material de construcao", "materiais de construcao", "ferragem"], tags: ["shop=doityourself", "shop=hardware", "shop=trade"] },
-    { palavras: ["construtora", "construcao civil", "engenharia", "empreiteira"], tags: ["office=engineering", "craft=builder", "office=architect"] },
-    { palavras: ["marcenaria", "marceneiro", "movei"], tags: ["craft=carpenter", "shop=furniture"] },
-    { palavras: ["serralheria", "serralheiro", "esquadria", "solda"], tags: ["craft=metal_construction", "craft=blacksmith"] },
-    { palavras: ["vidracaria", "vidraceiro"], tags: ["craft=glaziery"] },
-    { palavras: ["eletricista", "eletrica"], tags: ["craft=electrician"] },
-    { palavras: ["encanador", "hidraulica", "bombeiro hidraulico"], tags: ["craft=plumber"] },
-    { palavras: ["telhado", "cobertura", "telhadista"], tags: ["craft=roofer"] },
-    { palavras: ["gesso", "drywall", "gesseiro"], tags: ["craft=plasterer"] },
-    { palavras: ["piscina"], tags: ["shop=swimming_pool", "craft=pool_maintenance"] },
+    { palavras: ["marmoraria", "marmorista", "granito", "marmore", "stonemason", "stone mason", "granite", "marble", "countertop", "marmoleria", "marmol"], tags: ["craft=stonemason"] },
+    { palavras: ["material de construcao", "materiais de construcao", "ferragem", "hardware store", "building supply", "builders merchant", "ferreteria", "materiales de construccion"], tags: ["shop=doityourself", "shop=hardware", "shop=trade"] },
+    { palavras: ["construtora", "construcao civil", "engenharia", "empreiteira", "construction", "builder", "contractor", "engineering", "constructora", "constructora civil", "ingenieria"], tags: ["office=engineering", "craft=builder", "office=architect"] },
+    { palavras: ["marcenaria", "marceneiro", "movei", "carpenter", "carpentry", "joinery", "cabinet maker", "furniture", "carpinteria", "mueble"], tags: ["craft=carpenter", "shop=furniture"] },
+    { palavras: ["serralheria", "serralheiro", "esquadria", "solda", "welding", "welder", "metalwork", "blacksmith", "herreria", "soldadura"], tags: ["craft=metal_construction", "craft=blacksmith"] },
+    { palavras: ["vidracaria", "vidraceiro", "glazier", "glass", "vidrieria"], tags: ["craft=glaziery"] },
+    { palavras: ["eletricista", "eletrica", "electrician", "electrical", "electricista"], tags: ["craft=electrician"] },
+    { palavras: ["encanador", "hidraulica", "bombeiro hidraulico", "plumber", "plumbing", "plomero", "fontanero"], tags: ["craft=plumber"] },
+    { palavras: ["telhado", "cobertura", "telhadista", "roofer", "roofing", "techador", "techos"], tags: ["craft=roofer"] },
+    { palavras: ["gesso", "drywall", "gesseiro", "plasterer", "plastering", "yesero", "pladur"], tags: ["craft=plasterer"] },
+    { palavras: ["piscina", "pool", "swimming pool", "alberca"], tags: ["shop=swimming_pool", "craft=pool_maintenance"] },
 
     // ── Servicos industriais (o nucleo do publico) ──
-    { palavras: ["jateamento", "pintura industrial", "tratamento de superficie"], tags: ["craft=painter", "craft=metal_construction"] },
-    { palavras: ["caldeiraria", "usinagem", "metalurgica", "metalurgia"], tags: ["craft=metal_construction", "man_made=works"] },
-    { palavras: ["industria", "fabrica", "industrial"], tags: ["man_made=works", "office=company"] },
-    { palavras: ["andaime", "isolamento termico", "refratario"], tags: ["craft=scaffolder", "shop=trade"] },
+    { palavras: ["jateamento", "pintura industrial", "tratamento de superficie", "sandblasting", "abrasive blasting", "industrial painting", "surface treatment", "arenado", "chorreado", "pintura industrial"], tags: ["craft=painter", "craft=metal_construction"] },
+    { palavras: ["caldeiraria", "usinagem", "metalurgica", "metalurgia", "boilermaking", "machining", "machine shop", "metallurgy", "calderería", "metalurgica"], tags: ["craft=metal_construction", "man_made=works"] },
+    { palavras: ["industria", "fabrica", "industrial", "factory", "manufacturing", "plant", "fabrica", "industria"], tags: ["man_made=works", "office=company"] },
+    { palavras: ["andaime", "isolamento termico", "refratario", "scaffolding", "scaffolder", "thermal insulation", "refractory", "andamio", "aislamiento"], tags: ["craft=scaffolder", "shop=trade"] },
 
     // ── Locacao e logistica ──
-    { palavras: ["container", "locacao", "aluguel de equip", "betoneira", "guindaste"], tags: ["shop=trade", "office=company"] },
-    { palavras: ["caminhao", "transporte", "frete", "transportadora", "logistica"], tags: ["office=logistics", "shop=trade"] },
+    { palavras: ["container", "locacao", "aluguel de equip", "betoneira", "guindaste", "equipment rental", "plant hire", "crane", "concrete mixer", "alquiler de equipos", "renta de equipo", "grua"], tags: ["shop=trade", "office=company"] },
+    { palavras: ["caminhao", "transporte", "frete", "transportadora", "logistica", "trucking", "freight", "haulage", "logistics", "shipping", "transporte", "fletes", "logistica"], tags: ["office=logistics", "shop=trade"] },
 
     // ── Saude ──
-    { palavras: ["odontolog", "dentista"], tags: ["amenity=dentist"] },
-    { palavras: ["clinica", "consultorio", "medic"], tags: ["amenity=clinic", "amenity=doctors"] },
+    { palavras: ["odontolog", "dentista", "dental", "dentist", "orthodont"], tags: ["amenity=dentist"] },
+    { palavras: ["clinica", "consultorio", "medic", "clinic", "medical", "doctor", "physician", "consultorio"], tags: ["amenity=clinic", "amenity=doctors"] },
     { palavras: ["hospital"], tags: ["amenity=hospital"] },
-    { palavras: ["farmacia", "drogaria"], tags: ["amenity=pharmacy"] },
-    { palavras: ["pet shop", "veterinari", "pet "], tags: ["shop=pet", "amenity=veterinary"] },
+    { palavras: ["farmacia", "drogaria", "pharmacy", "drugstore", "chemist", "farmacia"], tags: ["amenity=pharmacy"] },
+    { palavras: ["pet shop", "veterinari", "pet ", "veterinary", "vet clinic", "veterinaria"], tags: ["shop=pet", "amenity=veterinary"] },
 
     // ── Comercio e alimentacao ──
-    { palavras: ["restaurante", "comida", "lanchonete"], tags: ["amenity=restaurant", "amenity=fast_food"] },
-    { palavras: ["padaria", "confeitaria"], tags: ["shop=bakery", "shop=confectionery"] },
-    { palavras: ["mercado", "supermercado", "atacad"], tags: ["shop=supermarket", "shop=wholesale"] },
-    { palavras: ["hotel", "pousada", "motel"], tags: ["tourism=hotel", "tourism=guest_house"] },
+    { palavras: ["restaurante", "comida", "lanchonete", "restaurant", "diner", "cafe", "food", "comida", "restaurante"], tags: ["amenity=restaurant", "amenity=fast_food"] },
+    { palavras: ["padaria", "confeitaria", "bakery", "pastry", "panaderia", "pasteleria"], tags: ["shop=bakery", "shop=confectionery"] },
+    { palavras: ["mercado", "supermercado", "atacad", "supermarket", "grocery", "wholesale", "supermercado", "mayorista"], tags: ["shop=supermarket", "shop=wholesale"] },
+    { palavras: ["hotel", "pousada", "motel", "guest house", "inn", "hosteria", "posada"], tags: ["tourism=hotel", "tourism=guest_house"] },
 
     // ── Servicos ──
-    { palavras: ["academia", "fitness", "ginastica", "crossfit"], tags: ["leisure=fitness_centre"] },
-    { palavras: ["mecanic", "auto center", "funilaria", "oficina"], tags: ["shop=car_repair"] },
-    { palavras: ["advocacia", "advogado", "juridic"], tags: ["office=lawyer"] },
-    { palavras: ["contabilidade", "contador", "contabil"], tags: ["office=accountant"] },
-    { palavras: ["imobiliaria", "corretor de imove"], tags: ["office=estate_agent"] },
-    { palavras: ["salao", "cabeleireiro", "barbearia", "estetica"], tags: ["shop=hairdresser", "shop=beauty"] },
-    { palavras: ["escola", "colegio", "curso"], tags: ["amenity=school", "amenity=college"] },
-    { palavras: ["condominio", "administradora"], tags: ["office=property_management"] },
+    { palavras: ["academia", "fitness", "ginastica", "crossfit", "gym", "gimnasio"], tags: ["leisure=fitness_centre"] },
+    { palavras: ["mecanic", "auto center", "funilaria", "oficina", "auto repair", "car repair", "mechanic", "body shop", "taller mecanico", "mecanico"], tags: ["shop=car_repair"] },
+    { palavras: ["advocacia", "advogado", "juridic", "law firm", "lawyer", "attorney", "solicitor", "abogado", "juridico"], tags: ["office=lawyer"] },
+    { palavras: ["contabilidade", "contador", "contabil", "accounting", "accountant", "bookkeeping", "contaduria", "contable"], tags: ["office=accountant"] },
+    { palavras: ["imobiliaria", "corretor de imove", "real estate", "estate agent", "realtor", "inmobiliaria"], tags: ["office=estate_agent"] },
+    { palavras: ["salao", "cabeleireiro", "barbearia", "estetica", "hair salon", "barber", "beauty salon", "peluqueria", "barberia"], tags: ["shop=hairdresser", "shop=beauty"] },
+    { palavras: ["escola", "colegio", "curso", "school", "college", "academy", "escuela", "colegio"], tags: ["amenity=school", "amenity=college"] },
+    { palavras: ["condominio", "administradora", "property management", "facility management", "administracion de propiedades"], tags: ["office=property_management"] },
   ]
 
   for (const m of mapeamentos) {
