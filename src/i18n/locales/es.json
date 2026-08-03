@@ -1,0 +1,168 @@
+{
+  "abertura": {
+    "toqueParaEntrar": "Toca para entrar",
+    "chamada": "Prospección activa para cualquier prestador de servicios.",
+    "prestadoresEmDestaque": "PRESTADORES DESTACADOS"
+  },
+  "preferencias": {
+    "titulo": "¿Dónde quieres prospectar?",
+    "subtitulo": "Esto define en qué país buscamos empresas y en qué idioma aparece el sistema. Puedes cambiarlo después.",
+    "idioma": "Idioma",
+    "pais": "País",
+    "confirmar": "Empezar",
+    "alterar": "Cambiar idioma y país",
+    "pagamentoEmBreve": "cobro próximamente",
+    "avisoPagamento": "La búsqueda ya funciona en este país. El cobro de la suscripción todavía no está disponible aquí — puedes usarlo y probarlo sin problema."
+  },
+  "paises": {
+    "BR": "Brasil",
+    "US": "Estados Unidos",
+    "AU": "Australia",
+    "NZ": "Nueva Zelanda",
+    "GB": "Reino Unido",
+    "PT": "Portugal",
+    "MX": "México",
+    "PY": "Paraguay"
+  },
+  "paisesEm": {
+    "BR": "de Brasil",
+    "US": "de Estados Unidos",
+    "AU": "de Australia",
+    "NZ": "de Nueva Zelanda",
+    "GB": "del Reino Unido",
+    "PT": "de Portugal",
+    "MX": "de México",
+    "PY": "de Paraguay"
+  },
+  "nav": {
+    "emTesteGratis": "Prueba gratis",
+    "creditos": "créditos",
+    "proximaRecarga": "Próxima recarga el {{data}}. Lo que sobre no vence.",
+    "pendente": "Pendiente",
+    "administracao": "Administración",
+    "buscarPrestadores": "Buscar prestadores",
+    "meuPerfil": "Mi perfil",
+    "cadastrarEmpresa": "Registrar mi empresa",
+    "centralAjuda": "Centro de ayuda",
+    "sair": "Salir",
+    "saiuDaConta": "Cerraste sesión."
+  },
+  "resultados": {
+    "novaBusca": "Nueva búsqueda",
+    "em": "en",
+    "resultados": "{{quantidade}} resultados",
+    "fonteGoogle": "Datos reales (Google)",
+    "fonteOSM": "Datos reales (OpenStreetMap)",
+    "fonteSimulada": "Ejemplo simulado",
+    "fonteSimuladaAviso": "No encontramos empresas reales registradas en esta zona o rubro. Mostrando un ejemplo simulado.",
+    "alvosIdentificados": "Objetivos identificados",
+    "nesteRaio": "en este radio de búsqueda",
+    "comFiltros": "{{total}} en total, {{filtrados}} con filtros",
+    "contatoDireto": "Contacto directo disponible",
+    "temTelefone": "↑ {{percentual}}% tienen teléfono",
+    "emailConfirmado": "Correo confirmado",
+    "doTotal": "{{percentual}}% del total",
+    "qualidadeMedia": "Calidad media del lead",
+    "aderenciaExcelente": "excelente afinidad",
+    "aderenciaBoa": "buena afinidad con tu perfil",
+    "aderenciaBaixa": "afinidad baja"
+  },
+  "planos": {
+    "selo": "{{dias}} días gratis, cancela cuando quieras",
+    "titulo": "Empieza tu prueba gratuita",
+    "subtitulo": "Registra tu tarjeta ahora — solo te cobramos después de {{dias}} días, y puedes cancelar antes sin pagar nada.",
+    "promocaoTitulo": "OFERTA DE LANZAMIENTO — SOLO LOS PRIMEROS {{vagas}} SUSCRIPTORES",
+    "promocaoRestam": "Quedan {{restantes}} de {{total}} lugares con precio especial. Después de eso, el precio vuelve a la normalidad.",
+    "promocao": "Lanzamiento",
+    "desconto": "{{percentual}}% OFF",
+    "porMes": "/mes",
+    "cobradoMensalmente": "Cobro mensual",
+    "cobradoACada": "{{valor}} cada {{meses}} meses",
+    "creditosPorMes": "{{quantidade}} créditos por mes",
+    "naoExpiram": "No vencen — lo que sobra se acumula",
+    "incluido": "Qué incluye (ya durante la prueba)",
+    "beneficios": [
+      "Perfil completo visible en el directorio",
+      "WhatsApp y correo liberados para quien busque tu servicio",
+      "Carga de portafolio, propuestas y folletos",
+      "Envío de tu portafolio directo a los leads",
+      "Acceso completo a la herramienta de prospección de clientes"
+    ],
+    "dadosCartao": "Datos de la tarjeta",
+    "cobrancaIndisponivel": "El cobro todavía no está disponible {{pais}}. Puedes seguir usando la búsqueda mientras habilitamos los pagos aquí.",
+    "trialIniciado": "¡Prueba gratuita de {{dias}} días iniciada!"
+  },
+  "auth": {
+    "chamada": "Registra tu empresa — arenado, pintura industrial, alquiler de equipos, cualquier rubro — y hazte visible para quienes buscan justo tu servicio ahora mismo.",
+    "criarConta": "Crear cuenta",
+    "jaTenhoConta": "Ya tengo cuenta",
+    "email": "Correo electrónico",
+    "placeholderEmail": "tu@correo.com",
+    "senha": "Contraseña",
+    "confirmarSenha": "Confirmar contraseña",
+    "criarMinhaConta": "Crear mi cuenta",
+    "entrar": "Entrar",
+    "termos": "Al continuar, aceptas nuestros términos de uso y política de privacidad.",
+    "erro": {
+      "preenchaCampos": "Ingresa tu correo y contraseña.",
+      "senhaCurta": "La contraseña debe tener al menos 6 caracteres.",
+      "senhasDiferentes": "Las contraseñas no coinciden."
+    },
+    "ok": {
+      "login": "¡Sesión iniciada!",
+      "contaCriada": "¡Cuenta creada! Vamos a armar tu perfil de prestador."
+    }
+  },
+  "busca": {
+    "chamada": "Olvídate del anuncio esperando que alguien lo vea. ProspectX va directo a quien necesita tu servicio ahora — en cualquier ciudad {{regiao}}.",
+    "regiaoDoPais": "del país que elijas",
+    "oQueEncontrar": "¿Qué quieres encontrar?",
+    "modoClientes": "Clientes potenciales",
+    "modoClientesDescricao": "Empresas que contratan tu servicio",
+    "modoDireta": "Un servicio que necesito",
+    "modoDiretaDescricao": "Búsqueda directa de lo que estás buscando",
+    "seuRamo": "Tu rubro / sector",
+    "ramoABuscar": "Rubro / sector a buscar",
+    "placeholderRamoClientes": "Ej: marmolería, arenado, clínica dental...",
+    "placeholderRamoDireta": "Ej: constructora, hospital, restaurante — ¿qué necesitas contratar?",
+    "foraDaLista": "No está en nuestra lista — al buscar, usaremos IA para identificar los clientes potenciales.",
+    "vamosBuscar": "Vamos a buscar:",
+    "segmentosSugeridos": [
+      "Marmolería",
+      "Clínica dental",
+      "Restaurante",
+      "Gimnasio",
+      "Taller mecánico",
+      "Farmacia",
+      "Pet shop",
+      "Constructora",
+      "Estudio jurídico",
+      "Contaduría"
+    ],
+    "cidade": "Ciudad",
+    "placeholderCidade": "Ej: {{exemplo}}",
+    "raioDeBusca": "Radio de búsqueda",
+    "tamanhoDaBusca": "Tamaño de la búsqueda",
+    "creditosDisponiveis": "{{quantidade}} créditos disponibles",
+    "ateEmpresas": "Hasta {{quantidade}} empresas",
+    "custoEmCreditos": "{{quantidade}} créditos",
+    "dicaCreditos": "Las búsquedas más grandes rinden más empresas por crédito gastado. Lo que sobra no vence: se suma a la próxima recarga.",
+    "identificandoClientes": "Identificando clientes potenciales...",
+    "buscandoEmpresas": "Buscando empresas...",
+    "buscarEmpresas": "Buscar empresas · {{quantidade}} créditos",
+    "buscasRecentes": "Búsquedas recientes",
+    "erro": {
+      "informeRamo": "Ingresa el rubro o sector de la empresa.",
+      "informeCidade": "Ingresa la ciudad para la búsqueda.",
+      "semClientesPotenciais": "No pudimos identificar clientes potenciales para ese rubro. Prueba el modo \"Un servicio que necesito\".",
+      "demoUsada": "Ya usaste tu búsqueda de demostración. Crea tu cuenta para seguir buscando.",
+      "assineParaLiberar": "Suscríbete a un plan para liberar tus búsquedas.",
+      "creditosInsuficientes": "Créditos insuficientes (necesitas {{custo}}, tienes {{saldo}}). Espera la próxima recarga de tu plan."
+    },
+    "ok": {
+      "iaIdentificou": "Identificamos los clientes potenciales con ayuda de IA.",
+      "demonstracao": "Esto es una demostración — crea tu cuenta para ver los contactos y buscar sin límites.",
+      "creditosUsados": "{{custo}} créditos usados · {{saldo}} restantes"
+    }
+  }
+}

@@ -89,8 +89,14 @@ export const PRECOS_POR_PAIS: Record<string, Record<TipoPlano, number>> = {
   BR: { mensal: 497, trimestral: 1341, semestral: 2532, anual: 4764 },
   US: { mensal: 97, trimestral: 261, semestral: 492, anual: 924 },
   AU: { mensal: 147, trimestral: 396, semestral: 744, anual: 1404 },
+  NZ: { mensal: 157, trimestral: 427, semestral: 797, anual: 1497 },
   GB: { mensal: 77, trimestral: 207, semestral: 390, anual: 732 },
   PT: { mensal: 89, trimestral: 240, semestral: 450, anual: 852 },
+  // México e Paraguai têm poder de compra menor que EUA/Europa: o
+  // preço é ancorado no mercado local, não convertido do dólar, senão
+  // sai caro demais para a realidade de uma marmoraria em Asunción.
+  MX: { mensal: 1497, trimestral: 3997, semestral: 7497, anual: 13997 },
+  PY: { mensal: 397000, trimestral: 1071000, semestral: 2024000, anual: 3811000 },
 }
 
 /** Preço total do plano no país informado, caindo no Brasil se desconhecido */
@@ -122,8 +128,11 @@ export const PRECOS_LANCAMENTO_POR_PAIS: Record<
   BR: { mensal: 197, trimestral: 537, semestral: 997, anual: 1897 },
   US: { mensal: 37, trimestral: 99, semestral: 187, anual: 357 },
   AU: { mensal: 57, trimestral: 153, semestral: 288, anual: 549 },
+  NZ: { mensal: 67, trimestral: 179, semestral: 337, anual: 637 },
   GB: { mensal: 29, trimestral: 78, semestral: 147, anual: 279 },
   PT: { mensal: 35, trimestral: 94, semestral: 177, anual: 337 },
+  MX: { mensal: 597, trimestral: 1597, semestral: 2997, anual: 5697 },
+  PY: { mensal: 157000, trimestral: 423000, semestral: 797000, anual: 1507000 },
 }
 
 /** Preço de fundador do plano no país informado */
@@ -318,6 +327,66 @@ export const PAISES_DISPONIVEIS: ConfiguracaoPais[] = [
     codigoTelefone: "61",
     moeda: "AUD",
     idioma: "en-AU",
+    buscaDisponivel: true,
+    gateway: null,
+  },
+  {
+    codigo: "MX",
+    nome: "México",
+    nomeGeocodificacao: "México",
+    exemploCidade: "Guadalajara, JAL",
+    cidadesSugeridas: [
+      "Ciudad de México, CDMX",
+      "Guadalajara, JAL",
+      "Monterrey, NL",
+      "Puebla, PUE",
+      "Querétaro, QRO",
+      "Tijuana, BC",
+    ],
+    codigoISO2: "mx",
+    codigoTelefone: "52",
+    moeda: "MXN",
+    idioma: "es-MX",
+    buscaDisponivel: true,
+    gateway: null,
+  },
+  {
+    codigo: "NZ",
+    nome: "Nova Zelândia",
+    nomeGeocodificacao: "New Zealand",
+    exemploCidade: "Auckland",
+    cidadesSugeridas: [
+      "Auckland",
+      "Wellington",
+      "Christchurch",
+      "Hamilton",
+      "Tauranga",
+      "Dunedin",
+    ],
+    codigoISO2: "nz",
+    codigoTelefone: "64",
+    moeda: "NZD",
+    idioma: "en-NZ",
+    buscaDisponivel: true,
+    gateway: null,
+  },
+  {
+    codigo: "PY",
+    nome: "Paraguai",
+    nomeGeocodificacao: "Paraguay",
+    exemploCidade: "Asunción",
+    cidadesSugeridas: [
+      "Asunción",
+      "Ciudad del Este",
+      "Encarnación",
+      "San Lorenzo",
+      "Luque",
+      "Pedro Juan Caballero",
+    ],
+    codigoISO2: "py",
+    codigoTelefone: "595",
+    moeda: "PYG",
+    idioma: "es-PY",
     buscaDisponivel: true,
     gateway: null,
   },

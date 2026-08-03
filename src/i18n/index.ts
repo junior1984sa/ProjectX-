@@ -3,13 +3,15 @@ import { initReactI18next } from "react-i18next"
 import DetectorDeIdioma from "i18next-browser-languagedetector"
 import pt from "./locales/pt.json"
 import en from "./locales/en.json"
+import es from "./locales/es.json"
 
 /**
  * FUNDAÇÃO DE TRADUÇÃO
  *
- * Dois idiomas cobrem os cinco países atendidos:
- *   pt-BR → Brasil e Portugal
- *   en    → Estados Unidos, Austrália e Reino Unido
+ * Três idiomas cobrem os oito países atendidos:
+ *   pt → Brasil e Portugal
+ *   en → Estados Unidos, Austrália, Nova Zelândia e Reino Unido
+ *   es → México e Paraguai
  *
  * `nonExplicitSupportedLngs` faz en-US, en-AU e en-GB caírem todos em
  * `en`, e pt-PT cair em pt-BR. Assim não é preciso manter um arquivo de
@@ -26,6 +28,7 @@ export const CHAVE_IDIOMA = "prospectx:idioma"
 export const IDIOMAS_DISPONIVEIS = [
   { codigo: "pt", nome: "Português", nomeNativo: "Português" },
   { codigo: "en", nome: "Inglês", nomeNativo: "English" },
+  { codigo: "es", nome: "Espanhol", nomeNativo: "Español" },
 ] as const
 
 export type CodigoIdioma = (typeof IDIOMAS_DISPONIVEIS)[number]["codigo"]
@@ -42,9 +45,10 @@ i18n
     resources: {
       pt: { translation: pt },
       en: { translation: en },
+      es: { translation: es },
     },
     fallbackLng: "pt",
-    supportedLngs: ["pt", "en"],
+    supportedLngs: ["pt", "en", "es"],
     nonExplicitSupportedLngs: true,
     interpolation: {
       // React já escapa o que renderiza; escapar de novo geraria

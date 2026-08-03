@@ -110,8 +110,11 @@ const PAISES: Record<string, { nome: string; iso2: string }> = {
   BR: { nome: "Brasil", iso2: "br" },
   US: { nome: "United States", iso2: "us" },
   AU: { nome: "Australia", iso2: "au" },
+  NZ: { nome: "New Zealand", iso2: "nz" },
   GB: { nome: "United Kingdom", iso2: "gb" },
   PT: { nome: "Portugal", iso2: "pt" },
+  MX: { nome: "México", iso2: "mx" },
+  PY: { nome: "Paraguay", iso2: "py" },
 }
 
 async function geocodificarCidade(

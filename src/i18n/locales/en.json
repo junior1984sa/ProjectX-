@@ -18,15 +18,21 @@
     "BR": "Brazil",
     "US": "United States",
     "AU": "Australia",
+    "NZ": "New Zealand",
     "GB": "United Kingdom",
-    "PT": "Portugal"
+    "PT": "Portugal",
+    "MX": "Mexico",
+    "PY": "Paraguay"
   },
   "paisesEm": {
     "BR": "in Brazil",
     "US": "in the United States",
     "AU": "in Australia",
+    "NZ": "in New Zealand",
     "GB": "in the United Kingdom",
-    "PT": "in Portugal"
+    "PT": "in Portugal",
+    "MX": "in Mexico",
+    "PY": "in Paraguay"
   },
   "nav": {
     "emTesteGratis": "Free trial",

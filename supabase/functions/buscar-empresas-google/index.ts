@@ -65,8 +65,12 @@ const PAISES: Record<
   BR: { nome: "Brasil", iso2: "br", idioma: "pt-BR", regiao: "BR", preposicao: "em" },
   US: { nome: "United States", iso2: "us", idioma: "en-US", regiao: "US", preposicao: "in" },
   AU: { nome: "Australia", iso2: "au", idioma: "en-AU", regiao: "AU", preposicao: "in" },
+  NZ: { nome: "New Zealand", iso2: "nz", idioma: "en-NZ", regiao: "NZ", preposicao: "in" },
   GB: { nome: "United Kingdom", iso2: "gb", idioma: "en-GB", regiao: "GB", preposicao: "in" },
   PT: { nome: "Portugal", iso2: "pt", idioma: "pt-PT", regiao: "PT", preposicao: "em" },
+  // Espanhol usa "en" como preposição de lugar: "marmolería EN Guadalajara"
+  MX: { nome: "México", iso2: "mx", idioma: "es-MX", regiao: "MX", preposicao: "en" },
+  PY: { nome: "Paraguay", iso2: "py", idioma: "es-PY", regiao: "PY", preposicao: "en" },
 }
 
 async function geocodificarCidadeGratis(

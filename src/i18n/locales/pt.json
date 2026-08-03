@@ -18,15 +18,21 @@
     "BR": "Brasil",
     "US": "Estados Unidos",
     "AU": "Austrália",
+    "NZ": "Nova Zelândia",
     "GB": "Reino Unido",
-    "PT": "Portugal"
+    "PT": "Portugal",
+    "MX": "México",
+    "PY": "Paraguai"
   },
   "paisesEm": {
     "BR": "do Brasil",
     "US": "dos Estados Unidos",
     "AU": "da Austrália",
+    "NZ": "da Nova Zelândia",
     "GB": "do Reino Unido",
-    "PT": "de Portugal"
+    "PT": "de Portugal",
+    "MX": "do México",
+    "PY": "do Paraguai"
   },
   "nav": {
     "emTesteGratis": "Em teste grátis",
