@@ -136,15 +136,19 @@ const PAISES: Record<
   PY: { nome: "Paraguay", iso2: "py", idioma: "es-PY", regiao: "PY", preposicao: "en" },
 }
 
+/**
+ * `bairro` é opcional e muda muito o resultado em cidade grande: o
+ * centro de São Paulo fica a 40 km da Vila Olímpia, então buscar só
+ * "São Paulo" devolve empresas que ninguém vai visitar.
+ */
 async function geocodificarCidadeGratis(
   cidade: string,
   estado: string,
-  pais: string
+  pais: string,
+  bairro?: string
 ): Promise<{ lat: number; lng: number } | null> {
   const p = PAISES[pais] ?? PAISES.BR
-  const query = estado
-    ? `${cidade}, ${estado}, ${p.nome}`
-    : `${cidade}, ${p.nome}`
+  const query = [bairro, cidade, estado, p.nome].filter(Boolean).join(", ")
   const url = `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1&countrycodes=${p.iso2}`
 
   try {
@@ -247,7 +251,7 @@ Deno.serve(async (req: Request) => {
 
     // `pais` é opcional e cai em BR quando ausente, para não quebrar
     // chamadas de versões anteriores do app que ainda não o enviam.
-    const { cidade, estado, raioKm, segmento, quantidadeDesejada, pais } =
+    const { cidade, estado, raioKm, segmento, quantidadeDesejada, pais, bairro } =
       await req.json()
 
     if (!cidade || !segmento) {
@@ -263,9 +267,12 @@ Deno.serve(async (req: Request) => {
     // A chave inclui tudo que muda o resultado. Faltando qualquer um
     // desses, duas buscas diferentes colidiriam e a segunda receberia
     // a resposta errada.
+    // `bairro` entra na chave: Vila Olímpia e Itaim são buscas
+    // diferentes, e sem ele a segunda receberia o cache da primeira.
     const chave = chaveDeCache([
       "google",
       segmento,
+      bairro ?? "",
       cidade,
       estado ?? "",
       raioKm ?? 10,
@@ -287,12 +294,14 @@ Deno.serve(async (req: Request) => {
       })
     }
 
-    const ponto = await geocodificarCidadeGratis(cidade, estado ?? "", paisBusca)
+    const ponto = await geocodificarCidadeGratis(cidade, estado ?? "", paisBusca, bairro)
     const raioMetros = (raioKm ?? 10) * 1000
 
     const places = await buscarNoGooglePlaces(
       segmento,
-      cidade,
+      // Com bairro, a consulta ao Google fica "marmoraria em Vila
+      // Olímpia, São Paulo" — bem mais precisa que só a cidade
+      bairro ? `${bairro}, ${cidade}` : cidade,
       estado ?? "",
       ponto,
       raioMetros,

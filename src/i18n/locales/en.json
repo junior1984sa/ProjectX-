@@ -146,6 +146,7 @@
     ],
     "cidade": "City",
     "placeholderCidade": "e.g. {{exemplo}}",
+    "dicaBairro": "In large cities, start with the neighbourhood: \"Downtown, Austin, TX\". Leads stay close to you and your credits go further.",
     "raioDeBusca": "Search radius",
     "tamanhoDaBusca": "Search size",
     "creditosDisponiveis": "{{quantidade}} credits available",

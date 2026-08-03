@@ -51,6 +51,7 @@ async function buscarPorTermo(
         segmento: termoBusca,
         quantidadeDesejada: quantidade,
         pais: params.pais ?? "BR",
+        bairro: params.bairro || undefined,
       }),
     })
 

@@ -167,15 +167,23 @@ const PAISES: Record<string, { nome: string; iso2: string }> = {
   PY: { nome: "Paraguay", iso2: "py" },
 }
 
+/**
+ * Localiza o ponto central da busca.
+ *
+ * `bairro` é opcional e muda muito o resultado em cidade grande: o
+ * centro de São Paulo fica a 40 km da Vila Olímpia, então buscar "São
+ * Paulo" devolve empresas que ninguém vai visitar. Com o bairro, o
+ * ponto cai onde o prestador realmente atende.
+ */
 async function geocodificarCidade(
   cidade: string,
   estado: string,
-  pais: string
+  pais: string,
+  bairro?: string
 ): Promise<{ lat: number; lng: number } | null> {
   const p = PAISES[pais] ?? PAISES.BR
-  const query = estado
-    ? `${cidade}, ${estado}, ${p.nome}`
-    : `${cidade}, ${p.nome}`
+  const partes = [bairro, cidade, estado, p.nome].filter(Boolean)
+  const query = partes.join(", ")
   const url = `${NOMINATIM_URL}?q=${encodeURIComponent(query)}&format=json&limit=1&countrycodes=${p.iso2}`
 
   const resposta = await fetch(url, { headers: HEADERS_OSM })
@@ -275,7 +283,7 @@ Deno.serve(async (req: Request) => {
   try {
     // `pais` é opcional e cai em BR quando ausente, para não quebrar
     // chamadas de versões anteriores do app que ainda não o enviam.
-    const { cidade, estado, raioKm, segmento, pais } = await req.json()
+    const { cidade, estado, raioKm, segmento, pais, bairro } = await req.json()
 
     if (!cidade || !segmento) {
       return new Response(
@@ -285,9 +293,13 @@ Deno.serve(async (req: Request) => {
     }
 
     const paisBusca = pais ?? "BR"
+    // `bairro` entra na chave: buscar na Vila Olímpia e no Itaim são
+    // buscas diferentes, e sem ele a segunda receberia o cache da
+    // primeira.
     const chave = chaveDeCache([
       "osm",
       segmento,
+      bairro ?? "",
       cidade,
       estado ?? "",
       raioKm ?? 10,
@@ -303,7 +315,7 @@ Deno.serve(async (req: Request) => {
       })
     }
 
-    const ponto = await geocodificarCidade(cidade, estado ?? "", paisBusca)
+    const ponto = await geocodificarCidade(cidade, estado ?? "", paisBusca, bairro)
     if (!ponto) {
       // Cidade não localizada costuma ser erro de digitação, que a
       // pessoa repete. Guardar por pouco tempo evita martelar o

@@ -65,9 +65,17 @@ export function FormularioBusca() {
     }
 
     // Extrai cidade e estado do campo (ex: "São Paulo, SP")
-    const partes = cidade.split(",")
-    const nomeCidade = partes[0].trim()
-    const estado = partes[1]?.trim() || ""
+    // Aceita "Cidade", "Cidade, UF" e "Bairro, Cidade, UF".
+    //
+    // Com três partes assume que a primeira é bairro: em cidade grande
+    // é o que faz a busca render, porque leads a 40 km do prestador não
+    // são visitados. Com duas, mantém o formato antigo — quem já usava
+    // "São Paulo, SP" não vê diferença.
+    const partes = cidade.split(",").map((p) => p.trim()).filter(Boolean)
+    const temBairro = partes.length >= 3
+    const bairro = temBairro ? partes[0] : ""
+    const nomeCidade = temBairro ? partes[1] : partes[0] ?? ""
+    const estado = temBairro ? partes[2] : partes[1] ?? ""
 
     // No modo "clientes potenciais", traduz o segmento do prestador
     // para os segmentos que tipicamente CONTRATAM esse serviço — usa
@@ -106,6 +114,7 @@ export function FormularioBusca() {
         quantidadeDesejada: 10,
         segmentosBusca,
         pais: paisDaBusca,
+        bairro,
         timestamp: new Date(),
       }
 
@@ -155,6 +164,7 @@ export function FormularioBusca() {
       quantidadeDesejada: faixa.max,
       segmentosBusca,
       pais: paisDaBusca,
+      bairro,
       timestamp: new Date(),
     }
 
@@ -361,6 +371,13 @@ export function FormularioBusca() {
                 ))}
               </div>
             )}
+
+            {/* A busca por bairro é o que salva cidade grande, mas
+                ninguém adivinha que o campo aceita — por isso a dica
+                fica visível, e não escondida num ícone de ajuda. */}
+            <p className="text-[11px] text-muted-foreground/80 leading-snug">
+              {t("busca.dicaBairro")}
+            </p>
           </div>
 
           {/* Campo: Raio */}

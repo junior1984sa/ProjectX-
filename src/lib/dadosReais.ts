@@ -104,6 +104,7 @@ async function buscarPorTermo(
         raioKm: params.raioKm,
         segmento: termoBusca,
         pais: params.pais ?? "BR",
+        bairro: params.bairro || undefined,
       }),
     })
 

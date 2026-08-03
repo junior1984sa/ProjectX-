@@ -146,6 +146,7 @@
     ],
     "cidade": "Ciudad",
     "placeholderCidade": "Ej: {{exemplo}}",
+    "dicaBairro": "En ciudades grandes, empieza por el barrio: \"Providencia, Santiago\". Los leads quedan cerca de ti y el crédito rinde más.",
     "raioDeBusca": "Radio de búsqueda",
     "tamanhoDaBusca": "Tamaño de la búsqueda",
     "creditosDisponiveis": "{{quantidade}} créditos disponibles",

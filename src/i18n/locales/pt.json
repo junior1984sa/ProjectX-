@@ -146,6 +146,7 @@
     ],
     "cidade": "Cidade",
     "placeholderCidade": "Ex: {{exemplo}}",
+    "dicaBairro": "Em cidade grande, comece pelo bairro: \"Vila Olímpia, São Paulo, SP\". Os leads ficam perto de você e o crédito rende mais.",
     "raioDeBusca": "Raio de busca",
     "tamanhoDaBusca": "Tamanho da busca",
     "creditosDisponiveis": "{{quantidade}} créditos disponíveis",

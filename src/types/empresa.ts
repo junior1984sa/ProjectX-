@@ -52,6 +52,12 @@ export interface ParametrosBusca {
    */
   pais?: string
   /**
+   * Bairro ou região, opcional. Em cidade grande muda tudo: o centro
+   * de São Paulo fica a 40 km da Vila Olímpia, e leads a 40 km não são
+   * visitados. Com bairro, o crédito rende leads que dá para atender.
+   */
+  bairro?: string
+  /**
    * Quando a busca é no modo "clientes potenciais", esta lista contém
    * os termos reais usados na busca (ex: segmentos-clientes mapeados a
    * partir do segmento do prestador). Quando ausente ou vazia, a busca
