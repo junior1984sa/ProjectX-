@@ -15,7 +15,7 @@ import { EscolhaIdiomaPais } from "@/components/EscolhaIdiomaPais"
 import { usePreferenciasStore } from "@/store/usePreferenciasStore"
 import { usePromocaoStore } from "@/store/usePromocaoStore"
 import { obterPais } from "@/types/prestador"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 /**
  * PÁGINA DE APRESENTAÇÃO — a primeira coisa que um visitante vê.
@@ -42,23 +42,59 @@ export function TelaAbertura() {
   const { pais, escolheu, reabrirEscolha } = usePreferenciasStore()
   const { ativa, vagasUsadas, vagasTotais, carregarStatus } = usePromocaoStore()
 
+  /**
+   * Guarda POR QUE a escolha foi aberta. Quem clicou em "buscar" quer
+   * seguir para a busca depois de escolher; quem clicou no país no
+   * rodapé só quer trocar e continuar lendo a página.
+   */
+  const [escolhaAberta, setEscolhaAberta] = useState<null | "busca" | "trocar">(null)
+
   useEffect(() => {
     carregarStatus()
   }, [])
 
-  if (!escolheu) {
-    return <EscolhaIdiomaPais />
-  }
+  useEffect(() => {
+    if (!escolhaAberta || !escolheu) return
 
+    const destino = escolhaAberta
+    setEscolhaAberta(null)
+    if (destino === "busca") navigate("/buscar")
+  }, [escolhaAberta, escolheu])
+
+  /**
+   * A escolha de país NÃO bloqueia a entrada, de propósito.
+   *
+   * Antes ela vinha primeiro, e um visitante que clicou num anúncio
+   * caía direto num formulário perguntando país e idioma — sem saber
+   * o que o produto faz. Ninguém preenche formulário de quem ainda não
+   * sabe se quer. País é parâmetro de busca; a pergunta certa é feita
+   * no momento de buscar, não na porta.
+   */
   const paisAtual = obterPais(pais)
   const vagasRestantes = Math.max(0, vagasTotais - vagasUsadas)
   const promocaoVisivel = ativa && vagasRestantes > 0
+
+  /**
+   * Só pergunta o país na hora de buscar — e só se ainda não souber.
+   * Sem país a busca assume Brasil e alguém em Sydney não encontra nada.
+   */
+  function irParaBusca() {
+    if (!escolheu) {
+      setEscolhaAberta("busca")
+      return
+    }
+    navigate("/buscar")
+  }
 
   const passos = [
     { icone: Search, titulo: t("apresentacao.passo1Titulo"), texto: t("apresentacao.passo1Texto") },
     { icone: Target, titulo: t("apresentacao.passo2Titulo"), texto: t("apresentacao.passo2Texto") },
     { icone: MessageCircle, titulo: t("apresentacao.passo3Titulo"), texto: t("apresentacao.passo3Texto") },
   ]
+
+  if (escolhaAberta) {
+    return <EscolhaIdiomaPais />
+  }
 
   return (
     <div className="min-h-screen">
@@ -87,7 +123,7 @@ export function TelaAbertura() {
 
           <div className="flex flex-col items-center gap-2.5 mt-1 w-full sm:w-auto">
             <Button
-              onClick={() => navigate("/buscar")}
+              onClick={irParaBusca}
               size="xl"
               className="w-full sm:w-auto sm:px-10 bg-gradient-to-r from-dourado-600 to-dourado-700 hover:from-dourado-700 hover:to-dourado-800 text-white font-semibold shadow-lg shadow-dourado-900/30"
             >
@@ -236,7 +272,10 @@ export function TelaAbertura() {
             {t("abertura.chamada")}
           </p>
           <button
-            onClick={reabrirEscolha}
+            onClick={() => {
+              reabrirEscolha()
+              setEscolhaAberta("trocar")
+            }}
             className="flex items-center gap-1.5 text-[11px] text-muted-foreground/60 hover:text-dourado-300 transition-colors"
             title={t("preferencias.alterar")}
           >
