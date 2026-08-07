@@ -1174,6 +1174,14 @@ function ehClienteUniversal(clienteNormalizado: string): boolean {
 }
 
 /**
+ * Quantos ramos o mapa cobre. Exposto para a página de apresentação
+ * poder mostrar o número real — se um segmento for adicionado ou
+ * removido, o texto da vitrine acompanha sozinho, sem virar promessa
+ * desatualizada.
+ */
+export const TOTAL_SEGMENTOS_MAPEADOS = Object.keys(MAPA_SEGMENTOS_CLIENTES).length
+
+/**
  * Retorna os segmentos-clientes típicos para um segmento de prestador.
  * Faz correspondência por substring (sem acento, case-insensitive) para
  * tolerar variações no texto digitado.

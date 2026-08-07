@@ -28,7 +28,23 @@
     "planosTitulo": "Founder pricing for the first ones in",
     "planosTexto": "The first spots lock the price for life. After that, standard pricing applies.",
     "verPlanos": "See plans",
-    "criarConta": "Create my account"
+    "criarConta": "Create my account",
+    "statPaises": "Countries covered",
+    "statSegmentos": "Trades mapped",
+    "statTeste": "Days of trial"
+  },
+  "previa": {
+    "consulta": "Clients for: Stonemason",
+    "local": "Austin, TX · 10 km radius",
+    "encontradas": "34 companies",
+    "falar": "Message",
+    "rodape": "Illustrative example of the result format",
+    "ramos": {
+      "construtora": "Builder",
+      "arquitetura": "Architecture",
+      "incorporadora": "Developer",
+      "reformas": "Renovations"
+    }
   },
   "preferencias": {
     "titulo": "Where do you want to prospect?",

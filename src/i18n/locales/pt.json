@@ -28,7 +28,23 @@
     "planosTitulo": "Preço de fundador para os primeiros",
     "planosTexto": "As primeiras vagas entram com preço travado para sempre. Depois disso, valor de tabela.",
     "verPlanos": "Ver planos",
-    "criarConta": "Criar minha conta"
+    "criarConta": "Criar minha conta",
+    "statPaises": "Países atendidos",
+    "statSegmentos": "Ramos mapeados",
+    "statTeste": "Dias de teste"
+  },
+  "previa": {
+    "consulta": "Clientes para: Marmoraria",
+    "local": "Curitiba, PR · raio de 10 km",
+    "encontradas": "34 empresas",
+    "falar": "Falar",
+    "rodape": "Exemplo ilustrativo do formato do resultado",
+    "ramos": {
+      "construtora": "Construtora",
+      "arquitetura": "Arquitetura",
+      "incorporadora": "Incorporadora",
+      "reformas": "Reformas"
+    }
   },
   "preferencias": {
     "titulo": "Onde você quer prospectar?",

@@ -28,7 +28,23 @@
     "planosTitulo": "Precio fundador para los primeros",
     "planosTexto": "Los primeros lugares fijan el precio para siempre. Después de eso, precio de lista.",
     "verPlanos": "Ver planes",
-    "criarConta": "Crear mi cuenta"
+    "criarConta": "Crear mi cuenta",
+    "statPaises": "Países atendidos",
+    "statSegmentos": "Rubros mapeados",
+    "statTeste": "Días de prueba"
+  },
+  "previa": {
+    "consulta": "Clientes para: Marmolería",
+    "local": "Guadalajara, JAL · radio de 10 km",
+    "encontradas": "34 empresas",
+    "falar": "Hablar",
+    "rodape": "Ejemplo ilustrativo del formato del resultado",
+    "ramos": {
+      "construtora": "Constructora",
+      "arquitetura": "Arquitectura",
+      "incorporadora": "Inmobiliaria",
+      "reformas": "Remodelaciones"
+    }
   },
   "preferencias": {
     "titulo": "¿Dónde quieres prospectar?",

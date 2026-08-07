@@ -11,10 +11,11 @@ import {
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { CarrosselPrestadores } from "@/components/CarrosselPrestadores"
+import { PreviaResultados } from "@/components/PreviaResultados"
 import { EscolhaIdiomaPais } from "@/components/EscolhaIdiomaPais"
 import { usePreferenciasStore } from "@/store/usePreferenciasStore"
 import { usePromocaoStore } from "@/store/usePromocaoStore"
-import { obterPais } from "@/types/prestador"
+import { obterPais, PAISES_DISPONIVEIS, TOTAL_SEGMENTOS_MAPEADOS } from "@/types/prestador"
 import { useEffect, useState } from "react"
 
 /**
@@ -99,25 +100,29 @@ export function TelaAbertura() {
   return (
     <div className="min-h-screen">
       {/* ═══ Tese ═══ */}
-      <section className="relative overflow-hidden px-5 pt-16 pb-12 sm:pt-24 sm:pb-16">
-        <div className="absolute left-1/2 -translate-x-1/2 -top-20 w-[680px] h-[680px] rounded-full bg-dourado-500/[0.06] blur-3xl pointer-events-none" />
+      <section className="relative overflow-hidden px-5 pt-14 pb-10 sm:pt-20 sm:pb-14">
+        {/* Dois halos sobrepostos dão profundidade ao fundo escuro; um só
+            achata a composição e o topo fica com cara de página vazia. */}
+        <div className="absolute left-1/2 -translate-x-1/2 -top-32 w-[820px] h-[820px] rounded-full bg-dourado-500/[0.07] blur-3xl pointer-events-none" />
+        <div className="absolute left-1/2 -translate-x-1/2 top-40 w-[520px] h-[420px] rounded-full bg-prata-500/[0.04] blur-3xl pointer-events-none" />
 
-        <div className="relative max-w-2xl mx-auto text-center flex flex-col items-center gap-6">
+        <div className="relative max-w-2xl mx-auto text-center flex flex-col items-center gap-5 animate-fadeIn">
           <img
             src="/logo-projectx.png"
             alt="ProspectX"
-            className="w-40 sm:w-48 drop-shadow-[0_0_40px_rgba(212,176,106,0.15)]"
+            className="w-44 sm:w-56 drop-shadow-[0_0_50px_rgba(212,176,106,0.2)]"
           />
 
-          <span className="text-[11px] uppercase tracking-[0.16em] text-dourado-400">
+          <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-dourado-300 border border-dourado-800/40 bg-dourado-900/20 rounded-full px-3 py-1">
+            <span className="w-1 h-1 rounded-full bg-dourado-400 animate-pulse" />
             {t("apresentacao.eyebrow")}
           </span>
 
-          <h1 className="text-3xl sm:text-5xl font-bold text-foreground tracking-tight leading-[1.08] text-balance">
+          <h1 className="text-[2rem] leading-[1.05] sm:text-[3.4rem] font-bold tracking-tight text-balance bg-gradient-to-b from-white via-prata-100 to-prata-400 bg-clip-text text-transparent">
             {t("apresentacao.titulo")}
           </h1>
 
-          <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-xl">
+          <p className="text-base sm:text-[1.0625rem] text-muted-foreground leading-relaxed max-w-xl text-pretty">
             {t("apresentacao.subtitulo")}
           </p>
 
@@ -125,7 +130,7 @@ export function TelaAbertura() {
             <Button
               onClick={irParaBusca}
               size="xl"
-              className="w-full sm:w-auto sm:px-10 bg-gradient-to-r from-dourado-600 to-dourado-700 hover:from-dourado-700 hover:to-dourado-800 text-white font-semibold shadow-lg shadow-dourado-900/30"
+              className="w-full sm:w-auto sm:px-11 bg-gradient-to-r from-dourado-500 to-dourado-700 hover:from-dourado-400 hover:to-dourado-600 text-prata-900 font-semibold shadow-xl shadow-dourado-900/40 transition-all hover:shadow-dourado-800/50 hover:-translate-y-0.5"
             >
               {t("apresentacao.ctaPrincipal")}
               <ArrowRight className="w-4 h-4 ml-2" />
@@ -134,6 +139,40 @@ export function TelaAbertura() {
               {t("apresentacao.ctaObservacao")}
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* ═══ Prévia do produto ═══
+          Vem logo depois da tese, antes de qualquer explicação: mostrar
+          o formato da entrega convence mais rápido que descrevê-la. */}
+      <section className="px-5 pb-12">
+        <div className="max-w-lg mx-auto">
+          <PreviaResultados />
+        </div>
+      </section>
+
+      {/* ═══ Números reais ═══
+          Todos calculados a partir da configuração do sistema, não
+          digitados à mão: se mudarmos a cobertura, o texto acompanha. */}
+      <section className="px-5 pb-14">
+        <div className="max-w-2xl mx-auto grid grid-cols-3 gap-3">
+          {[
+            { valor: String(PAISES_DISPONIVEIS.length), rotulo: t("apresentacao.statPaises") },
+            { valor: `${TOTAL_SEGMENTOS_MAPEADOS}+`, rotulo: t("apresentacao.statSegmentos") },
+            { valor: "7", rotulo: t("apresentacao.statTeste") },
+          ].map((stat) => (
+            <div
+              key={stat.rotulo}
+              className="rounded-xl border border-border/50 bg-card/30 px-3 py-4 text-center"
+            >
+              <p className="text-2xl sm:text-3xl font-bold text-dourado-400 tabular-nums">
+                {stat.valor}
+              </p>
+              <p className="text-[10px] sm:text-[11px] text-muted-foreground uppercase tracking-wide mt-1 leading-tight">
+                {stat.rotulo}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 

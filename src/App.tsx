@@ -151,6 +151,10 @@ function ConteudoApp() {
     return <TelaCarregando />
   }
 
+  // A página inicial é a vitrine da marca: sem header e sem faixa de
+  // anúncio, para que nada dispute atenção com a apresentação.
+  const naPaginaInicial = location.pathname === "/"
+
   return (
     <>
       {/* Aviso de backend fora do ar — a causa mais comum é o projeto
@@ -165,13 +169,14 @@ function ConteudoApp() {
       )}
 
       {/* O header de navegação não aparece na tela de abertura (splash) */}
-      {location.pathname !== "/" && <NavegacaoTopo />}
+      {!naPaginaInicial && <NavegacaoTopo />}
       <PromptInstalarApp />
 
       {/* Reserva a altura exata da faixa de anúncios do rodapé
           (80px no celular, 96px no computador), garantindo que nenhum
-          conteúdo fique escondido atrás dela */}
-      <div className="pb-20 md:pb-24">
+          conteúdo fique escondido atrás dela. Na página inicial não há
+          faixa, então também não há altura a reservar. */}
+      <div className={naPaginaInicial ? "" : "pb-20 md:pb-24"}>
       <Routes>
         <Route path="/" element={<TelaAbertura />} />
         <Route path="/buscar" element={<PaginaBusca />} />
@@ -188,13 +193,18 @@ function ConteudoApp() {
       </Routes>
       </div>
 
-      {/* Banner contextual — faixa no rodapé, em todas as páginas.
+      {/* Banner contextual — faixa no rodapé das páginas internas.
           Mostra apenas anunciantes que vendem para o ramo de quem está
           navegando. Fica no rodapé de propósito: a lateral tem espaço
           sobrando, mas fica ao lado do formulário de busca e disputaria
           atenção com a ação principal do site. Não bloqueia nada: sem
-          pop-up e sem exigir clique para dispensar. */}
-      <BannerContextual />
+          pop-up e sem exigir clique para dispensar.
+
+          NÃO aparece na página inicial. Ali a única marca à vista deve
+          ser a nossa: quem chega de anúncio decide em segundos se o
+          produto é sério, e uma faixa vendendo outra empresa na
+          primeira dobra entrega a atenção que acabamos de comprar. */}
+      {!naPaginaInicial && <BannerContextual />}
     </>
   )
 }

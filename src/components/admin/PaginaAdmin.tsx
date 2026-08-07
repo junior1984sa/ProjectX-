@@ -5,6 +5,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { VisaoGeralAdmin } from "@/components/admin/VisaoGeralAdmin"
 import { ListaAssociados } from "@/components/admin/ListaAssociados"
 import { GestaoCustos } from "@/components/admin/GestaoCustos"
+import { PainelFinanceiro } from "@/components/admin/PainelFinanceiro"
 import { verificarSeEhAdmin } from "@/lib/admin"
 
 /**
@@ -60,14 +61,22 @@ export function PaginaAdmin() {
       </div>
 
       <Tabs defaultValue="visao-geral">
-        <TabsList className="grid w-full grid-cols-3 mb-6">
+        <TabsList className="grid w-full grid-cols-2 sm:grid-cols-4 mb-6">
           <TabsTrigger value="visao-geral">Visão geral</TabsTrigger>
+          <TabsTrigger value="financeiro">Financeiro</TabsTrigger>
           <TabsTrigger value="associados">Associados</TabsTrigger>
           <TabsTrigger value="custos">Custos</TabsTrigger>
         </TabsList>
 
         <TabsContent value="visao-geral" className="mt-0">
           <VisaoGeralAdmin />
+        </TabsContent>
+
+        {/* Projeção — separada da visão geral de propósito: uma mostra o
+            que já aconteceu, a outra o que pode acontecer. Antes da
+            primeira venda, só a segunda informa alguma coisa. */}
+        <TabsContent value="financeiro" className="mt-0">
+          <PainelFinanceiro />
         </TabsContent>
 
         <TabsContent value="associados" className="mt-0">
