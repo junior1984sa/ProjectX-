@@ -93,24 +93,23 @@ function PaginaDiretorio() {
   return <BuscaDiretorio />
 }
 
-/** Página de seleção de plano: exige login + perfil criado */
+/**
+ * Página de planos — PÚBLICA.
+ *
+ * Antes exigia login e perfil, e ainda mandava para /buscar quem já
+ * tinha assinatura ativa. O efeito era que o botão "Ver planos" nunca
+ * mostrava plano nenhum: visitante ia parar no login, e assinante ia
+ * parar na busca. Preço escondido atrás de cadastro derruba conversão,
+ * porque ninguém cria conta para descobrir quanto custa.
+ *
+ * A trava de assinar continua existindo, mas dentro do SelecaoPlano:
+ * ver o preço é livre, contratar é que pede conta.
+ */
 function PaginaPlanos() {
-  const { usuarioId, perfil, carregandoAuth } = useAuthStore()
+  const { carregandoAuth } = useAuthStore()
 
   if (carregandoAuth) {
     return <TelaCarregando />
-  }
-
-  if (!usuarioId) {
-    return <Navigate to="/entrar" replace />
-  }
-
-  if (!perfil) {
-    return <Navigate to="/perfil" replace />
-  }
-
-  if (temAcessoLiberado(perfil)) {
-    return <Navigate to="/buscar" replace />
   }
 
   return <SelecaoPlano />

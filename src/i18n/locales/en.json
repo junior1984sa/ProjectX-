@@ -137,7 +137,9 @@
     ],
     "dadosCartao": "Card details",
     "cobrancaIndisponivel": "Billing isn't available {{pais}} yet. You can keep using search normally while we enable payments here.",
-    "trialIniciado": "{{dias}}-day free trial started!"
+    "trialIniciado": "{{dias}}-day free trial started!",
+    "precisaConta": "Create your account to start the free trial.",
+    "criarContaParaAssinar": "Create account and start the trial"
   },
   "auth": {
     "chamada": "Register your company — sandblasting, industrial painting, equipment rental, any trade — and become visible to the businesses looking for exactly your service right now.",

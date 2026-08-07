@@ -54,7 +54,7 @@ const CARTAO_VAZIO: DadosCartaoForm = {
 
 export function SelecaoPlano() {
   const navigate = useNavigate()
-  const { carregarPerfil, perfil } = useAuthStore()
+  const { carregarPerfil, perfil, usuarioId } = useAuthStore()
   const { t } = useTranslation()
 
   /** País define moeda, preço e se já existe gateway para cobrar aqui */
@@ -122,6 +122,16 @@ export function SelecaoPlano() {
   }
 
   async function handleAssinar() {
+    // A página de preços é pública, mas assinar exige conta e perfil.
+    // A checagem fica AQUI, e não na rota, porque bloquear a rota
+    // inteira escondia o preço de quem ainda não tem conta — e ninguém
+    // cria conta para descobrir quanto custa.
+    if (!perfil) {
+      toast(t("planos.precisaConta"))
+      navigate(usuarioId ? "/perfil" : "/entrar")
+      return
+    }
+
     const erroValidacao = validarFormulario()
     if (erroValidacao) {
       toast.error(erroValidacao)
@@ -393,7 +403,7 @@ export function SelecaoPlano() {
           como cobrar: em ambos os casos pedir cartão aqui seria pior que
           inútil, assustaria o cliente e criaria risco de conformidade
           sem necessidade. */}
-      {formaDeCobranca(pais) === "cartao-no-app" && (
+      {perfil && formaDeCobranca(pais) === "cartao-no-app" && (
       <Card className="border-border/60 mb-6">
         <CardContent className="p-6 space-y-4">
           <h3 className="font-medium text-foreground flex items-center gap-2 mb-2">
@@ -479,13 +489,20 @@ export function SelecaoPlano() {
         ) : (
           <ShieldCheck className="w-5 h-5 mr-2" />
         )}
-        Começar teste grátis de {DIAS_TRIAL} dias
+        {perfil
+          ? `Começar teste grátis de ${DIAS_TRIAL} dias`
+          : t("planos.criarContaParaAssinar")}
       </Button>
 
-      <p className="text-xs text-muted-foreground text-center mt-4">
-        Seus dados de cartão são processados com segurança pelo Mercado Pago — nunca passam
-        pelos nossos servidores. Cancele em um clique antes do fim do teste e não pague nada.
-      </p>
+      {/* Quem ainda não tem conta não vê o aviso de cartão: não há
+          cartão nesta etapa, e falar em cobrança antes da hora só
+          assusta quem só queria saber o preço. */}
+      {perfil && (
+        <p className="text-xs text-muted-foreground text-center mt-4">
+          Seus dados de cartão são processados com segurança pelo Mercado Pago — nunca passam
+          pelos nossos servidores. Cancele em um clique antes do fim do teste e não pague nada.
+        </p>
+      )}
 
       {/* Código de cortesia — caminho alternativo discreto, sem cartão */}
       <div className="mt-8 pt-6 border-t border-border/60">

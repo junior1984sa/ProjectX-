@@ -137,7 +137,9 @@
     ],
     "dadosCartao": "Datos de la tarjeta",
     "cobrancaIndisponivel": "El cobro todavía no está disponible {{pais}}. Puedes seguir usando la búsqueda mientras habilitamos los pagos aquí.",
-    "trialIniciado": "¡Prueba gratuita de {{dias}} días iniciada!"
+    "trialIniciado": "¡Prueba gratuita de {{dias}} días iniciada!",
+    "precisaConta": "Crea tu cuenta para empezar la prueba gratuita.",
+    "criarContaParaAssinar": "Crear cuenta y empezar la prueba"
   },
   "auth": {
     "chamada": "Registra tu empresa — arenado, pintura industrial, alquiler de equipos, cualquier rubro — y hazte visible para quienes buscan justo tu servicio ahora mismo.",

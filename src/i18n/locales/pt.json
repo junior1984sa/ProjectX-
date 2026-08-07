@@ -137,7 +137,9 @@
     ],
     "dadosCartao": "Dados do cartão",
     "cobrancaIndisponivel": "A cobrança ainda não está disponível {{pais}}. Você pode usar a busca normalmente enquanto liberamos o pagamento por aqui.",
-    "trialIniciado": "Teste grátis de {{dias}} dias iniciado!"
+    "trialIniciado": "Teste grátis de {{dias}} dias iniciado!",
+    "precisaConta": "Crie sua conta para começar o teste grátis.",
+    "criarContaParaAssinar": "Criar conta e começar o teste"
   },
   "auth": {
     "chamada": "Cadastre sua empresa — jateamento, pintura industrial, locação de equipamentos, qualquer ramo — e fique visível para quem está, agora, procurando exatamente o seu serviço.",
