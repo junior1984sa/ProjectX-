@@ -1,329 +1,336 @@
-import { useNavigate } from "react-router-dom"
+import { useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import {
-  ArrowRight,
-  Globe,
-  Search,
-  Target,
-  MessageCircle,
-  Megaphone,
-  Crosshair,
-} from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { CarrosselPrestadores } from "@/components/CarrosselPrestadores"
-import { PreviaResultados } from "@/components/PreviaResultados"
-import { EscolhaIdiomaPais } from "@/components/EscolhaIdiomaPais"
+import { Search, MapPin, Globe, Loader2, Clock } from "lucide-react"
+import { useAppStore } from "@/store/useAppStore"
 import { usePreferenciasStore } from "@/store/usePreferenciasStore"
-import { usePromocaoStore } from "@/store/usePromocaoStore"
-import { obterPais, PAISES_DISPONIVEIS, TOTAL_SEGMENTOS_MAPEADOS } from "@/types/prestador"
-import { useEffect, useState } from "react"
+import { useAuthStore } from "@/store/useAuthStore"
+import { useExecutarBusca } from "@/hooks/useExecutarBusca"
+import { EscolhaIdiomaPais } from "@/components/EscolhaIdiomaPais"
+import {
+  obterPais,
+  obterSegmentosClientes,
+  PAISES_DISPONIVEIS,
+  TOTAL_SEGMENTOS_MAPEADOS,
+  type ModoBusca,
+} from "@/types/prestador"
 
 /**
- * PÁGINA DE APRESENTAÇÃO — a primeira coisa que um visitante vê.
+ * PÁGINA INICIAL — o instrumento, não o folheto.
  *
- * Antes, quem chegava pelo link caía direto na busca, sem nenhuma
- * explicação do que o produto faz nem motivo para criar conta. Como
- * toda a estratégia de captação aponta para cá, levar tráfego a uma
- * página que não convence é queimar o esforço de prospecção.
+ * A versão anterior era uma landing de vendas com seis seções: manchete,
+ * prévia, números, passos, comparativo e planos. Isso faz sentido para
+ * quem compra tráfego frio, que precisa ser convencido do zero. Não é o
+ * nosso caso: sem anúncios, quem chega aqui já ouviu falar do produto, e
+ * argumentar com quem já está convencido só atrasa a ação.
  *
- * A ordem dos blocos segue a objeção que o visitante levanta:
- *   1. o que é isso           → tese em uma frase
- *   2. será que funciona      → demonstração SEM cadastro
- *   3. como funciona          → três passos
- *   4. em que isso é diferente → anúncio espera, ProspectX vai
- *   5. quanto custa            → a conta ANTES do preço
+ * Então a home É a prospecção. O argumento de venda mudou de endereço:
+ * mora em /como-funciona, alcançável pelo rodapé por quem quiser.
  *
- * O botão principal leva para a busca, não para o cadastro. A maior
- * arma do produto é deixar a pessoa ver empresas reais antes de
- * qualquer compromisso — pedir cadastro primeiro joga isso fora.
+ * O X da marca é usado como DIAGRAMA, não como enfeite. Os dois braços
+ * de cima nascem acima da barra e mergulham nela — um sobre o campo de
+ * ramo, outro sobre o de cidade. Os de baixo começam invisíveis e se
+ * desenham conforme cada campo é preenchido. Com os dois preenchidos, a
+ * marca fica inteira e a busca está pronta: é a validação do formulário
+ * contada pela própria identidade visual, em vez de um botão que acende.
  */
+
+/** Comprimento de cada braço no viewBox — usado para animar o traçado */
+const COMPRIMENTO_BRACO = 114
+
 export function TelaAbertura() {
   const navigate = useNavigate()
   const { t } = useTranslation()
   const { pais, escolheu, reabrirEscolha } = usePreferenciasStore()
-  const { ativa, vagasUsadas, vagasTotais, carregarStatus } = usePromocaoStore()
+  const { usuarioId } = useAuthStore()
+  const { historicoBuscas } = useAppStore()
+  const { executarBusca, buscandoMapeamento, carregando } = useExecutarBusca()
+
+  const [segmento, setSegmento] = useState("")
+  const [cidade, setCidade] = useState("")
+  const [modoBusca, setModoBusca] = useState<ModoBusca>("clientes")
+  const [trocandoPais, setTrocandoPais] = useState(false)
+
+  const configPais = obterPais(pais)
+  const temRamo = segmento.trim().length > 0
+  const temCidade = cidade.trim().length > 0
+  const pronto = temRamo && temCidade
+  const ocupado = carregando || buscandoMapeamento
 
   /**
-   * Guarda POR QUE a escolha foi aberta. Quem clicou em "buscar" quer
-   * seguir para a busca depois de escolher; quem clicou no país no
-   * rodapé só quer trocar e continuar lendo a página.
+   * A linha-tradução é o único conceito do produto que não é
+   * auto-evidente: que buscamos quem CONTRATA o serviço, não quem o
+   * presta. Mostrá-la enquanto a pessoa digita dispensa uma seção
+   * "como funciona" — ela vê o mecanismo em vez de ler sobre ele.
    */
-  const [escolhaAberta, setEscolhaAberta] = useState<null | "busca" | "trocar">(null)
+  const clientesPrevistos =
+    modoBusca === "clientes" && temRamo ? obterSegmentosClientes(segmento).slice(0, 3) : []
 
-  useEffect(() => {
-    carregarStatus()
-  }, [])
-
-  useEffect(() => {
-    if (!escolhaAberta || !escolheu) return
-
-    const destino = escolhaAberta
-    setEscolhaAberta(null)
-    if (destino === "busca") navigate("/buscar")
-  }, [escolhaAberta, escolheu])
-
-  /**
-   * A escolha de país NÃO bloqueia a entrada, de propósito.
-   *
-   * Antes ela vinha primeiro, e um visitante que clicou num anúncio
-   * caía direto num formulário perguntando país e idioma — sem saber
-   * o que o produto faz. Ninguém preenche formulário de quem ainda não
-   * sabe se quer. País é parâmetro de busca; a pergunta certa é feita
-   * no momento de buscar, não na porta.
-   */
-  const paisAtual = obterPais(pais)
-  const vagasRestantes = Math.max(0, vagasTotais - vagasUsadas)
-  const promocaoVisivel = ativa && vagasRestantes > 0
-
-  /**
-   * Só pergunta o país na hora de buscar — e só se ainda não souber.
-   * Sem país a busca assume Brasil e alguém em Sydney não encontra nada.
-   */
-  function irParaBusca() {
-    if (!escolheu) {
-      setEscolhaAberta("busca")
-      return
-    }
+  async function handleBuscar() {
+    // Raio e tamanho ficam no padrão aqui de propósito: a home pede duas
+    // informações, não seis. Quem quiser ajustar faz isso em /buscar.
+    await executarBusca({ segmento, cidade, raioKm: 10, faixaSelecionada: 0, modoBusca })
     navigate("/buscar")
   }
 
-  const passos = [
-    { icone: Search, titulo: t("apresentacao.passo1Titulo"), texto: t("apresentacao.passo1Texto") },
-    { icone: Target, titulo: t("apresentacao.passo2Titulo"), texto: t("apresentacao.passo2Texto") },
-    { icone: MessageCircle, titulo: t("apresentacao.passo3Titulo"), texto: t("apresentacao.passo3Texto") },
-  ]
+  function handleTecla(e: React.KeyboardEvent) {
+    if (e.key === "Enter" && pronto && !ocupado) handleBuscar()
+  }
 
-  if (escolhaAberta) {
-    return <EscolhaIdiomaPais />
+  if (trocandoPais || !escolheu) {
+    return <EscolhaIdiomaPais aoConcluir={() => setTrocandoPais(false)} />
   }
 
   return (
-    <div className="min-h-screen">
-      {/* ═══ Tese ═══ */}
-      <section className="relative overflow-hidden px-5 pt-14 pb-10 sm:pt-20 sm:pb-14">
-        {/* Dois halos sobrepostos dão profundidade ao fundo escuro; um só
-            achata a composição e o topo fica com cara de página vazia. */}
-        <div className="absolute left-1/2 -translate-x-1/2 -top-32 w-[820px] h-[820px] rounded-full bg-dourado-500/[0.07] blur-3xl pointer-events-none" />
-        <div className="absolute left-1/2 -translate-x-1/2 top-40 w-[520px] h-[420px] rounded-full bg-prata-500/[0.04] blur-3xl pointer-events-none" />
+    <div className="min-h-[100svh] flex flex-col">
+      {/* ═══ A · Barra utilitária ═══ */}
+      <header className="h-14 flex items-center justify-between px-4 sm:px-6 flex-shrink-0">
+        <button
+          onClick={() => {
+            reabrirEscolha()
+            setTrocandoPais(true)
+          }}
+          className="flex items-center gap-1.5 text-[13px] text-prata-400 hover:text-prata-200 transition-colors rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(40_38%_58%)]"
+        >
+          <Globe className="w-3.5 h-3.5" />
+          {configPais.idioma.split("-")[0].toUpperCase()}
+        </button>
 
-        <div className="relative max-w-2xl mx-auto text-center flex flex-col items-center gap-5 animate-fadeIn">
-          <img
-            src="/logo-projectx.png"
-            alt="ProspectX"
-            className="w-44 sm:w-56 drop-shadow-[0_0_50px_rgba(212,176,106,0.2)]"
-          />
+        <div className="flex items-center gap-3">
+          {usuarioId ? (
+            <Link
+              to="/perfil"
+              className="text-[13px] text-prata-400 hover:text-prata-200 transition-colors rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(40_38%_58%)]"
+            >
+              {t("home.meuPerfil")}
+            </Link>
+          ) : (
+            <>
+              <Link
+                to="/entrar"
+                className="text-[13px] text-prata-400 hover:text-prata-200 transition-colors rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(40_38%_58%)]"
+              >
+                {t("home.entrar")}
+              </Link>
+              <Link
+                to="/entrar"
+                className="h-8 px-3 inline-flex items-center rounded-lg border border-prata-600 text-[13px] text-prata-200 hover:border-prata-500 hover:text-prata-100 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(40_38%_58%)]"
+              >
+                {t("home.criarConta")}
+              </Link>
+            </>
+          )}
+        </div>
+      </header>
 
-          <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-dourado-300 border border-dourado-800/40 bg-dourado-900/20 rounded-full px-3 py-1">
-            <span className="w-1 h-1 rounded-full bg-dourado-400 animate-pulse" />
-            {t("apresentacao.eyebrow")}
-          </span>
+      {/* ═══ B · O instrumento ═══ */}
+      <main className="flex-1 flex flex-col items-center px-4 pt-[10svh] sm:pt-0 sm:justify-center fundo-conteudo">
+        {/* Halo único, centrado no vértice. O próprio X fornece a
+            segunda massa focal, então dois halos só borrariam o centro. */}
+        <div className="absolute left-1/2 -translate-x-1/2 top-1/3 w-[720px] h-[720px] max-w-[100vw] rounded-full bg-dourado-500/[0.06] blur-3xl pointer-events-none" />
 
-          <h1 className="text-[2rem] leading-[1.05] sm:text-[3.4rem] font-bold tracking-tight text-balance bg-gradient-to-b from-white via-prata-100 to-prata-400 bg-clip-text text-transparent">
-            {t("apresentacao.titulo")}
+        <div className="relative w-full max-w-[880px] flex flex-col items-center">
+          {/* Marca */}
+          <h1 className="text-[1.75rem] sm:text-[2.75rem] font-bold tracking-[0.14em] text-prata-100 leading-none">
+            PROSPECT<span className="text-dourado-400">X</span>
           </h1>
 
-          <p className="text-base sm:text-[1.0625rem] text-muted-foreground leading-relaxed max-w-xl text-pretty">
-            {t("apresentacao.subtitulo")}
+          <p className="mt-3 sm:mt-4 text-[1.125rem] sm:text-[1.375rem] text-prata-300 text-center leading-snug">
+            {t("home.slogan")}
           </p>
 
-          <div className="flex flex-col items-center gap-2.5 mt-1 w-full sm:w-auto">
-            <Button
-              onClick={irParaBusca}
-              size="xl"
-              className="w-full sm:w-auto sm:px-11 bg-gradient-to-r from-dourado-500 to-dourado-700 hover:from-dourado-400 hover:to-dourado-600 text-prata-900 font-semibold shadow-xl shadow-dourado-900/40 transition-all hover:shadow-dourado-800/50 hover:-translate-y-0.5"
-            >
-              {t("apresentacao.ctaPrincipal")}
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Button>
-            <p className="text-xs text-muted-foreground/70">
-              {t("apresentacao.ctaObservacao")}
-            </p>
+          {/* Comutador de modo */}
+          <div className="mt-8 sm:mt-12 inline-flex rounded-lg border border-prata-700 p-0.5" role="group">
+            {(["clientes", "direta"] as const).map((modo) => (
+              <button
+                key={modo}
+                onClick={() => setModoBusca(modo)}
+                aria-pressed={modoBusca === modo}
+                className={`h-9 px-3.5 rounded-[6px] text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(40_38%_58%)] ${
+                  modoBusca === modo
+                    ? "bg-prata-800 text-prata-100"
+                    : "text-prata-400 hover:text-prata-200"
+                }`}
+              >
+                {modo === "clientes" ? t("busca.modoClientes") : t("busca.modoDireta")}
+              </button>
+            ))}
           </div>
-        </div>
-      </section>
 
-      {/* ═══ Prévia do produto ═══
-          Vem logo depois da tese, antes de qualquer explicação: mostrar
-          o formato da entrega convence mais rápido que descrevê-la. */}
-      <section className="px-5 pb-12">
-        <div className="max-w-lg mx-auto">
-          <PreviaResultados />
-        </div>
-      </section>
+          {/* ── A barra, com o X atrás ── */}
+          <div className="relative w-full mt-4">
+            {/* O X vive atrás da barra. A barra é opaca e corta os
+                braços no vértice — é o que faz a sobreposição ler como
+                "duas entradas convergindo" em vez de logo decorativo. */}
+            <svg
+              viewBox="0 0 200 200"
+              aria-hidden="true"
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[240px] sm:w-[360px] lg:w-[460px] pointer-events-none -z-10"
+            >
+              {/* Braços de cima: sempre visíveis, em prata */}
+              <path d="M20 20 L100 100" stroke="#7b828b" strokeWidth="3" strokeLinecap="round" opacity="0.5" />
+              <path d="M180 20 L100 100" stroke="#7b828b" strokeWidth="3" strokeLinecap="round" opacity="0.5" />
 
-      {/* ═══ Números reais ═══
-          Todos calculados a partir da configuração do sistema, não
-          digitados à mão: se mudarmos a cobertura, o texto acompanha. */}
-      <section className="px-5 pb-14">
-        <div className="max-w-2xl mx-auto grid grid-cols-3 gap-3">
-          {[
-            { valor: String(PAISES_DISPONIVEIS.length), rotulo: t("apresentacao.statPaises") },
-            { valor: `${TOTAL_SEGMENTOS_MAPEADOS}+`, rotulo: t("apresentacao.statSegmentos") },
-            { valor: "7", rotulo: t("apresentacao.statTeste") },
-          ].map((stat) => (
+              {/* Braços de baixo: cada um se desenha quando o campo
+                  correspondente é preenchido. São o indicador de estado. */}
+              <path
+                d="M100 100 L20 180"
+                stroke="#d4b06a"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeDasharray={COMPRIMENTO_BRACO}
+                strokeDashoffset={temRamo ? 0 : COMPRIMENTO_BRACO}
+                className="transition-[stroke-dashoffset] duration-[220ms] ease-out motion-reduce:transition-none"
+              />
+              <path
+                d="M100 100 L180 180"
+                stroke="#d4b06a"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeDasharray={COMPRIMENTO_BRACO}
+                strokeDashoffset={temCidade ? 0 : COMPRIMENTO_BRACO}
+                className="transition-[stroke-dashoffset] duration-[220ms] ease-out motion-reduce:transition-none"
+              />
+            </svg>
+
+            {/* A barra: poço mais escuro que o card, borda prata-500
+                (4,65:1 — a borda padrão do sistema dá 1,51:1 e reprova) */}
             <div
-              key={stat.rotulo}
-              className="rounded-xl border border-border/50 bg-card/30 px-3 py-4 text-center"
+              aria-busy={ocupado}
+              className="relative flex flex-col sm:flex-row gap-2 sm:gap-0 sm:h-16 sm:rounded-xl sm:border sm:border-prata-500 sm:bg-[hsl(220_9%_11%)] sm:shadow-[0_24px_48px_-12px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.06)] sm:overflow-hidden"
             >
-              <p className="text-2xl sm:text-3xl font-bold text-dourado-400 tabular-nums">
-                {stat.valor}
-              </p>
-              <p className="text-[10px] sm:text-[11px] text-muted-foreground uppercase tracking-wide mt-1 leading-tight">
-                {stat.rotulo}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ═══ Prova: prestadores reais no diretório ═══ */}
-      <section className="pb-14">
-        <CarrosselPrestadores />
-      </section>
-
-      {/* ═══ Como funciona ═══ */}
-      <section className="px-5 py-14 border-t border-border/50">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-xl sm:text-2xl font-bold text-foreground text-center mb-9">
-            {t("apresentacao.comoFunciona")}
-          </h2>
-
-          <div className="grid gap-6 sm:grid-cols-3">
-            {passos.map((passo, i) => {
-              const Icone = passo.icone
-              return (
-                <div key={i} className="flex flex-col gap-2.5">
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-8 h-8 rounded-lg bg-dourado-900/30 border border-dourado-800/40 flex items-center justify-center flex-shrink-0">
-                      <Icone className="w-4 h-4 text-dourado-400" />
-                    </span>
-                    <span className="text-[11px] font-mono text-muted-foreground/60">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3 className="text-sm font-semibold text-foreground leading-snug">
-                    {passo.titulo}
-                  </h3>
-                  <p className="text-[13px] text-muted-foreground leading-relaxed">
-                    {passo.texto}
-                  </p>
-                </div>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ O que muda em relação a anunciar ═══ */}
-      <section className="px-5 py-14 border-t border-border/50">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-xl sm:text-2xl font-bold text-foreground text-center mb-9">
-            {t("apresentacao.diferencialTitulo")}
-          </h2>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-xl border border-border/60 bg-card/40 p-5 space-y-2.5">
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Megaphone className="w-4 h-4" />
-                <span className="text-sm font-semibold">
-                  {t("apresentacao.difEsperar")}
+              {/* Zona 1 — ramo */}
+              <label className="flex-[1.4] flex items-center gap-3 px-5 py-3 sm:py-0 h-14 sm:h-auto rounded-xl sm:rounded-none border border-prata-500 sm:border-0 bg-[hsl(220_9%_11%)] cursor-text focus-within:bg-[hsl(220_9%_13%)] transition-colors">
+                <Search className={`w-[18px] h-[18px] flex-shrink-0 ${temRamo ? "text-prata-300" : "text-prata-500"}`} />
+                <span className="sr-only">
+                  {modoBusca === "clientes" ? t("busca.seuRamo") : t("busca.ramoABuscar")}
                 </span>
-              </div>
-              <p className="text-[13px] text-muted-foreground/80 leading-relaxed">
-                {t("apresentacao.difEsperarTexto")}
-              </p>
-            </div>
+                <input
+                  value={segmento}
+                  onChange={(e) => setSegmento(e.target.value)}
+                  onKeyDown={handleTecla}
+                  placeholder={t("home.placeholderRamo")}
+                  className="w-full bg-transparent text-[1.125rem] text-prata-100 font-medium placeholder:text-prata-400 placeholder:font-normal outline-none"
+                />
+              </label>
 
-            <div className="rounded-xl border-2 border-dourado-600/50 bg-dourado-900/10 p-5 space-y-2.5">
-              <div className="flex items-center gap-2 text-dourado-300">
-                <Crosshair className="w-4 h-4" />
-                <span className="text-sm font-semibold">
-                  {t("apresentacao.difIr")}
+              <div className="hidden sm:block w-px h-8 self-center bg-prata-700 flex-shrink-0" />
+
+              {/* Zona 2 — cidade, com o país à direita dentro do campo */}
+              <label className="flex-1 flex items-center gap-3 px-5 py-3 sm:py-0 h-14 sm:h-auto rounded-xl sm:rounded-none border border-prata-500 sm:border-0 bg-[hsl(220_9%_11%)] cursor-text focus-within:bg-[hsl(220_9%_13%)] transition-colors">
+                <MapPin className={`w-[18px] h-[18px] flex-shrink-0 ${temCidade ? "text-prata-300" : "text-prata-500"}`} />
+                <span className="sr-only">{t("busca.cidade")}</span>
+                <input
+                  value={cidade}
+                  onChange={(e) => setCidade(e.target.value)}
+                  onKeyDown={handleTecla}
+                  placeholder={t("busca.placeholderCidade", { exemplo: configPais.exemploCidade })}
+                  className="w-full bg-transparent text-[1.125rem] text-prata-100 font-medium placeholder:text-prata-400 placeholder:font-normal outline-none"
+                />
+                {/* Código ISO em texto, nunca emoji de bandeira: no
+                    Windows a bandeira vira as duas letras mesmo, e o
+                    leitor de tela não anuncia nada. */}
+                <span
+                  className="flex-shrink-0 text-[11px] font-medium text-prata-400 border border-prata-700 rounded px-1.5 py-0.5"
+                  aria-label={t(`paises.${configPais.codigo}`)}
+                >
+                  {configPais.codigo}
                 </span>
-              </div>
-              <p className="text-[13px] text-dourado-200/80 leading-relaxed">
-                {t("apresentacao.difIrTexto")}
-              </p>
+              </label>
+
+              <button
+                onClick={handleBuscar}
+                disabled={!pronto || ocupado}
+                className="h-13 sm:h-auto py-3.5 sm:py-0 sm:w-[216px] flex-shrink-0 flex items-center justify-center gap-2 rounded-xl sm:rounded-none text-[1.125rem] font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(40_38%_58%)] disabled:cursor-not-allowed bg-dourado-500 text-prata-900 hover:bg-dourado-400 active:bg-dourado-600 disabled:bg-prata-700 disabled:text-prata-400"
+              >
+                {ocupado ? (
+                  <>
+                    <Loader2 className="w-[18px] h-[18px] animate-spin" />
+                    {t("home.buscando")}
+                  </>
+                ) : (
+                  t("home.buscar")
+                )}
+              </button>
             </div>
           </div>
-        </div>
-      </section>
 
-      {/* ═══ A conta, antes do preço ═══ */}
-      <section className="px-5 py-14 border-t border-border/50">
-        <div className="max-w-xl mx-auto text-center space-y-4">
-          <h2 className="text-xl sm:text-2xl font-bold text-foreground">
-            {t("apresentacao.contaTitulo")}
-          </h2>
-          <p className="text-[15px] text-muted-foreground leading-relaxed">
-            {t("apresentacao.contaTexto")}
-          </p>
-          <p className="text-[13px] text-muted-foreground/70">
-            {t("apresentacao.contaRodape")}
-          </p>
-        </div>
-      </section>
-
-      {/* ═══ Planos ═══ */}
-      <section className="px-5 py-14 border-t border-border/50">
-        <div className="max-w-xl mx-auto text-center space-y-5">
-          <div className="space-y-2.5">
-            <h2 className="text-xl sm:text-2xl font-bold text-foreground">
-              {t("apresentacao.planosTitulo")}
-            </h2>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              {t("apresentacao.planosTexto")}
-            </p>
-
-            {/* O número vem do contador real no banco. Escassez só
-                funciona se for verdadeira — e some quando esgota. */}
-            {promocaoVisivel && (
-              <p className="text-sm font-semibold text-dourado-300">
-                {t("planos.promocaoUltimas", { restantes: vagasRestantes })}
-              </p>
+          {/* Linha-tradução — altura reservada mesmo vazia, senão os
+              chips empurram o botão para baixo no meio do clique */}
+          <div className="h-8 mt-3 w-full flex items-center justify-center gap-1.5 overflow-x-auto">
+            {clientesPrevistos.length > 0 && (
+              <>
+                <span className="text-[13px] text-prata-500 flex-shrink-0">
+                  {t("home.vamosProcurar")}
+                </span>
+                {clientesPrevistos.map((cliente) => (
+                  <span
+                    key={cliente}
+                    className="flex-shrink-0 text-[13px] text-dourado-300 bg-dourado-900/25 border border-dourado-700/50 rounded-full px-2.5 py-0.5"
+                  >
+                    {cliente}
+                  </span>
+                ))}
+              </>
             )}
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-2.5 justify-center">
-            <Button
-              onClick={() => navigate("/planos")}
-              size="lg"
-              className="bg-gradient-to-r from-dourado-600 to-dourado-700 hover:from-dourado-700 hover:to-dourado-800 text-white font-semibold"
-            >
-              {t("apresentacao.verPlanos")}
-            </Button>
-            <Button
-              onClick={() => navigate("/entrar")}
-              size="lg"
-              variant="outline"
-              className="border-dourado-700/50 text-dourado-300 hover:bg-dourado-900/20"
-            >
-              {t("apresentacao.criarConta")}
-            </Button>
-          </div>
-        </div>
-      </section>
+          <p className="mt-5 text-[13px] text-muted-foreground">{t("home.microlinha")}</p>
 
-      {/* ═══ Rodapé: idioma e país ═══ */}
-      <footer className="px-5 py-8 border-t border-border/50">
-        <div className="max-w-3xl mx-auto flex flex-col items-center gap-3">
-          <p className="text-xs text-muted-foreground/60 text-center">
-            {t("abertura.chamada")}
-          </p>
-          <button
-            onClick={() => {
-              reabrirEscolha()
-              setEscolhaAberta("trocar")
-            }}
-            className="flex items-center gap-1.5 text-[11px] text-muted-foreground/60 hover:text-dourado-300 transition-colors"
-            title={t("preferencias.alterar")}
-          >
-            <Globe className="w-3 h-3" />
-            {t(`paises.${paisAtual.codigo}`)}
-            <span className="opacity-50">·</span>
-            {paisAtual.moeda}
-          </button>
+          {/* ═══ C · Buscas recentes (só quando existem) ═══ */}
+          {historicoBuscas.length > 0 && (
+            <div className="mt-16 w-full max-w-md">
+              <p className="text-[12px] uppercase tracking-[0.08em] font-semibold text-prata-500 mb-2">
+                {t("busca.buscasRecentes")}
+              </p>
+              <div className="divide-y divide-border/40">
+                {historicoBuscas.slice(0, 3).map((busca, i) => (
+                  <button
+                    key={i}
+                    onClick={() => {
+                      setSegmento(busca.segmento)
+                      setCidade(busca.estado ? `${busca.cidade}, ${busca.estado}` : busca.cidade)
+                    }}
+                    className="w-full h-11 flex items-center gap-2.5 text-left text-[13px] text-prata-400 hover:text-prata-200 transition-colors"
+                  >
+                    <Clock className="w-3.5 h-3.5 flex-shrink-0 text-prata-600" />
+                    <span className="truncate">
+                      {busca.segmento} · {busca.cidade}
+                    </span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
+      </main>
+
+      {/* ═══ D · Rodapé mínimo ═══ */}
+      <footer className="flex-shrink-0 py-6 px-4 flex flex-col items-center gap-1.5">
+        <nav className="flex items-center gap-x-4 gap-y-1 flex-wrap justify-center text-[13px]">
+          {[
+            { para: "/como-funciona", texto: t("home.comoFunciona") },
+            { para: "/planos", texto: t("home.planos") },
+            { para: "/ajuda", texto: t("home.ajuda") },
+          ].map((link) => (
+            <Link
+              key={link.para}
+              to={link.para}
+              className="text-prata-400 hover:text-prata-200 transition-colors rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(40_38%_58%)]"
+            >
+              {link.texto}
+            </Link>
+          ))}
+        </nav>
+        {/* Escopo verificável do produto — não é prova social. Os três
+            números saem da configuração real, então não desatualizam. */}
+        <p className="text-[12px] text-prata-500">
+          {t("home.escopo", {
+            paises: PAISES_DISPONIVEIS.length,
+            idiomas: 3,
+            ramos: TOTAL_SEGMENTOS_MAPEADOS,
+          })}
+        </p>
       </footer>
     </div>
   )

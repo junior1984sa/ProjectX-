@@ -4,6 +4,21 @@
     "chamada": "Prospecção ativa para qualquer prestador de serviço.",
     "prestadoresEmDestaque": "PRESTADORES EM DESTAQUE"
   },
+  "home": {
+    "slogan": "Conectando empresas à demanda.",
+    "entrar": "Entrar",
+    "criarConta": "Criar conta",
+    "meuPerfil": "Meu perfil",
+    "placeholderRamo": "Seu ramo — ex: marmoraria",
+    "buscar": "Buscar",
+    "buscando": "Buscando…",
+    "vamosProcurar": "vamos procurar:",
+    "microlinha": "7 dias grátis · cancele antes e não pague nada",
+    "comoFunciona": "Como funciona",
+    "planos": "Planos",
+    "ajuda": "Ajuda",
+    "escopo": "{{paises}} países · {{idiomas}} idiomas · {{ramos}} ramos mapeados"
+  },
   "apresentacao": {
     "eyebrow": "Prospecção B2B ativa",
     "titulo": "Seu próximo cliente já existe.",

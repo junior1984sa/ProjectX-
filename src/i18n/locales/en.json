@@ -4,6 +4,21 @@
     "chamada": "Active prospecting for any service provider.",
     "prestadoresEmDestaque": "FEATURED PROVIDERS"
   },
+  "home": {
+    "slogan": "Connecting companies to demand.",
+    "entrar": "Sign in",
+    "criarConta": "Create account",
+    "meuPerfil": "My profile",
+    "placeholderRamo": "Your trade — e.g. stonemason",
+    "buscar": "Search",
+    "buscando": "Searching…",
+    "vamosProcurar": "we'll look for:",
+    "microlinha": "7 days free · cancel before and pay nothing",
+    "comoFunciona": "How it works",
+    "planos": "Pricing",
+    "ajuda": "Help",
+    "escopo": "{{paises}} countries · {{idiomas}} languages · {{ramos}} trades mapped"
+  },
   "apresentacao": {
     "eyebrow": "Active B2B prospecting",
     "titulo": "Your next client already exists.",

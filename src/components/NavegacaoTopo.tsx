@@ -170,7 +170,7 @@ export function NavegacaoTopo() {
               <Button
                 size="sm"
                 onClick={() => navigate("/entrar")}
-                className="h-8 text-xs bg-dourado-600 hover:bg-dourado-700 text-white"
+                className="h-8 text-xs bg-dourado-500 hover:bg-dourado-400 text-prata-900"
               >
                 <User className="w-3.5 h-3.5 mr-1.5" />
                 {t("nav.cadastrarEmpresa")}

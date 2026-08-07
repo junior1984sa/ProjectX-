@@ -17,7 +17,17 @@ import { PAISES_DISPONIVEIS, obterPais } from "@/types/prestador"
  * cadastro, o `pais_foco` do perfil assume. Quem quiser trocar usa o
  * botão discreto que fica na própria tela de abertura.
  */
-export function EscolhaIdiomaPais() {
+interface EscolhaIdiomaPaisProps {
+  /**
+   * Chamado depois de confirmar. Existe porque quem abriu a escolha só
+   * para TROCAR de país precisa voltar para onde estava — sem isso a
+   * tela ficaria presa, já que `escolheu` volta a ser verdadeiro mas o
+   * componente que a abriu não fica sabendo.
+   */
+  aoConcluir?: () => void
+}
+
+export function EscolhaIdiomaPais({ aoConcluir }: EscolhaIdiomaPaisProps = {}) {
   const { t } = useTranslation()
   const { pais, idioma, definirPais, definirIdioma, confirmarEscolha } =
     usePreferenciasStore()
@@ -117,7 +127,10 @@ export function EscolhaIdiomaPais() {
 
         <button
           type="button"
-          onClick={confirmarEscolha}
+          onClick={() => {
+            confirmarEscolha()
+            aoConcluir?.()
+          }}
           className="w-full py-3 rounded-md bg-gradient-to-r from-dourado-700 to-dourado-500 text-prata-900 text-sm font-semibold hover:opacity-90 transition-opacity"
         >
           {t("preferencias.confirmar")}

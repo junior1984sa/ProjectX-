@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation } from
 import { Toaster } from "react-hot-toast"
 import { Loader2 } from "lucide-react"
 import { TelaAbertura } from "@/components/TelaAbertura"
+import { PaginaComoFunciona } from "@/components/PaginaComoFunciona"
 import { FormularioBusca } from "@/components/FormularioBusca"
 import { Dashboard } from "@/components/Dashboard"
 import { NavegacaoTopo } from "@/components/NavegacaoTopo"
@@ -179,6 +180,7 @@ function ConteudoApp() {
       <Routes>
         <Route path="/" element={<TelaAbertura />} />
         <Route path="/buscar" element={<PaginaBusca />} />
+        <Route path="/como-funciona" element={<PaginaComoFunciona />} />
         <Route path="/ajuda" element={<PaginaSAC />} />
         <Route path="/diretorio" element={<PaginaDiretorio />} />
         <Route path="/admin" element={<PaginaAdministracao />} />

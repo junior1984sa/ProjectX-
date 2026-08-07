@@ -4,6 +4,21 @@
     "chamada": "Prospección activa para cualquier prestador de servicios.",
     "prestadoresEmDestaque": "PRESTADORES DESTACADOS"
   },
+  "home": {
+    "slogan": "Conectando empresas con la demanda.",
+    "entrar": "Entrar",
+    "criarConta": "Crear cuenta",
+    "meuPerfil": "Mi perfil",
+    "placeholderRamo": "Tu rubro — ej: marmolería",
+    "buscar": "Buscar",
+    "buscando": "Buscando…",
+    "vamosProcurar": "vamos a buscar:",
+    "microlinha": "7 días gratis · cancela antes y no pagas nada",
+    "comoFunciona": "Cómo funciona",
+    "planos": "Planes",
+    "ajuda": "Ayuda",
+    "escopo": "{{paises}} países · {{idiomas}} idiomas · {{ramos}} rubros mapeados"
+  },
   "apresentacao": {
     "eyebrow": "Prospección B2B activa",
     "titulo": "Tu próximo cliente ya existe.",

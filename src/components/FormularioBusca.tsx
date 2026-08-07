@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
 import { Search, MapPin, Clock, Trash2, ChevronRight, Sparkles, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,10 +9,9 @@ import { useAppStore } from "@/store/useAppStore"
 import { useAuthStore } from "@/store/useAuthStore"
 import { usePreferenciasStore } from "@/store/usePreferenciasStore"
 import { useCreditosStore } from "@/store/useCreditosStore"
-import { FAIXAS_CREDITO, temAcessoLiberado, obterSegmentosClientes as obterSegmentosClientesPreview, obterSegmentosClientesComFallback, obterPais, type ModoBusca } from "@/types/prestador"
+import { FAIXAS_CREDITO, temAcessoLiberado, obterSegmentosClientes as obterSegmentosClientesPreview, obterPais, type ModoBusca } from "@/types/prestador"
 import { useTranslation } from "react-i18next"
-import { type ParametrosBusca } from "@/types/empresa"
-import toast from "react-hot-toast"
+import { useExecutarBusca } from "@/hooks/useExecutarBusca"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
 
@@ -22,9 +20,9 @@ import { ptBR } from "date-fns/locale"
 // prospecta em Chicago seria pior do que não sugerir nada.
 
 export function FormularioBusca() {
-  const navigate = useNavigate()
-  const { buscarEmpresas, historicoBuscas, removerBuscaSalva, carregando } = useAppStore()
+  const { historicoBuscas, removerBuscaSalva } = useAppStore()
   const { usuarioId, perfil } = useAuthStore()
+  const { executarBusca, buscandoMapeamento, carregando } = useExecutarBusca()
 
   /**
    * País da busca. O perfil manda quando existe (é o dado oficial, que
@@ -35,14 +33,13 @@ export function FormularioBusca() {
   const paisDaBusca = perfil?.pais_foco ?? paisPreferido
   const configPais = obterPais(paisDaBusca)
   const { t } = useTranslation()
-  const { creditos, carregarCreditos, consumirCreditos } = useCreditosStore()
+  const { creditos, carregarCreditos } = useCreditosStore()
 
   const [segmento, setSegmento] = useState("")
   const [cidade, setCidade] = useState("")
   const [raioKm, setRaioKm] = useState(10)
   const [faixaSelecionada, setFaixaSelecionada] = useState(0) // índice em FAIXAS_CREDITO
   const [modoBusca, setModoBusca] = useState<ModoBusca>("clientes")
-  const [buscandoMapeamento, setBuscandoMapeamento] = useState(false)
   const [mostrarSugestoesSegmento, setMostrarSugestoesSegmento] = useState(false)
   const [mostrarSugestoesCidade, setMostrarSugestoesCidade] = useState(false)
 
@@ -55,126 +52,7 @@ export function FormularioBusca() {
   }, [usuarioId, temAcesso])
 
   async function handleBuscar() {
-    if (!segmento.trim()) {
-      toast.error(t("busca.erro.informeRamo"))
-      return
-    }
-    if (!cidade.trim()) {
-      toast.error(t("busca.erro.informeCidade"))
-      return
-    }
-
-    // Extrai cidade e estado do campo (ex: "São Paulo, SP")
-    // Aceita "Cidade", "Cidade, UF" e "Bairro, Cidade, UF".
-    //
-    // Com três partes assume que a primeira é bairro: em cidade grande
-    // é o que faz a busca render, porque leads a 40 km do prestador não
-    // são visitados. Com duas, mantém o formato antigo — quem já usava
-    // "São Paulo, SP" não vê diferença.
-    const partes = cidade.split(",").map((p) => p.trim()).filter(Boolean)
-    const temBairro = partes.length >= 3
-    const bairro = temBairro ? partes[0] : ""
-    const nomeCidade = temBairro ? partes[1] : partes[0] ?? ""
-    const estado = temBairro ? partes[2] : partes[1] ?? ""
-
-    // No modo "clientes potenciais", traduz o segmento do prestador
-    // para os segmentos que tipicamente CONTRATAM esse serviço — usa
-    // a tabela fixa primeiro e, se não achar, recorre à inferência por IA.
-    let segmentosBusca: string[] | undefined
-    if (modoBusca === "clientes") {
-      setBuscandoMapeamento(true)
-      const { segmentos, fonte } = await obterSegmentosClientesComFallback(segmento.trim())
-      setBuscandoMapeamento(false)
-
-      if (segmentos.length === 0) {
-        toast.error(t("busca.erro.semClientesPotenciais"))
-        return
-      }
-      if (fonte === "ia") {
-        toast.success(t("busca.ok.iaIdentificou"))
-      }
-      segmentosBusca = segmentos
-    }
-
-    // Visitante sem login: libera uma busca de demonstração, sem gastar
-    // créditos, para que a pessoa sinta a ferramenta antes de criar conta.
-    // O tamanho fica fixo em 10 empresas e fica marcado como "demo" na sessão.
-    if (!usuarioId) {
-      if (sessionStorage.getItem("prospectx_demo_usado")) {
-        toast.error(t("busca.erro.demoUsada"))
-        navigate("/entrar")
-        return
-      }
-
-      const params: ParametrosBusca = {
-        segmento: segmento.trim(),
-        cidade: nomeCidade,
-        estado,
-        raioKm,
-        quantidadeDesejada: 10,
-        segmentosBusca,
-        pais: paisDaBusca,
-        bairro,
-        timestamp: new Date(),
-      }
-
-      sessionStorage.setItem("prospectx_demo_usado", "true")
-      toast.success(t("busca.ok.demonstracao"))
-      await buscarEmpresas(params)
-      return
-    }
-
-    if (!temAcesso) {
-      toast.error(t("busca.erro.assineParaLiberar"))
-      navigate(perfil ? "/planos" : "/perfil")
-      return
-    }
-
-    const faixa = FAIXAS_CREDITO[faixaSelecionada]
-
-    // Verifica e debita créditos de forma atômica no banco antes de gerar a busca
-    const resultado = await consumirCreditos({
-      quantidadeEmpresas: faixa.max,
-      segmento: segmento.trim(),
-      cidade: nomeCidade,
-      estado,
-      raioKm,
-    })
-
-    if (!resultado.sucesso) {
-      // Duas recusas bem diferentes: sem saldo pede recarga; teto do
-      // dia significa que o saldo existe e só precisa voltar amanhã.
-      // Dar a mensagem errada aqui faria o cliente achar que acabou.
-      toast.error(
-        resultado.motivo === "limite_diario"
-          ? t("busca.erro.limiteDiario", { restantes: resultado.creditos_restantes })
-          : t("busca.erro.creditosInsuficientes", {
-              custo: resultado.custo,
-              saldo: resultado.creditos_restantes,
-            })
-      )
-      return
-    }
-
-    const params: ParametrosBusca = {
-      segmento: segmento.trim(),
-      cidade: nomeCidade,
-      estado,
-      raioKm,
-      quantidadeDesejada: faixa.max,
-      segmentosBusca,
-      pais: paisDaBusca,
-      bairro,
-      timestamp: new Date(),
-    }
-
-    toast.success(
-      t("busca.ok.creditosUsados", {
-        custo: resultado.custo,
-        saldo: resultado.creditos_restantes,
-      })
-    )
-    await buscarEmpresas(params)
+    await executarBusca({ segmento, cidade, raioKm, faixaSelecionada, modoBusca })
   }
 
   function handleKeyDown(e: React.KeyboardEvent) {
@@ -392,7 +270,7 @@ export function FormularioBusca() {
                   onClick={() => setRaioKm(km)}
                   className={`flex-1 py-2 rounded-md text-sm font-medium transition-all ${
                     raioKm === km
-                      ? "bg-dourado-600 text-white"
+                      ? "bg-dourado-500 text-prata-900"
                       : "bg-secondary text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
                   }`}
                 >
@@ -447,7 +325,7 @@ export function FormularioBusca() {
             onClick={handleBuscar}
             disabled={carregando || buscandoMapeamento}
             size="xl"
-            className="w-full bg-gradient-to-r from-dourado-600 to-dourado-700 hover:from-dourado-700 hover:to-dourado-800 text-white font-semibold shadow-lg shadow-dourado-900/30"
+            className="w-full bg-dourado-500 hover:bg-dourado-400 active:bg-dourado-600 text-prata-900 font-semibold shadow-lg shadow-dourado-900/30"
           >
             {buscandoMapeamento ? (
               <div className="flex items-center gap-2">
