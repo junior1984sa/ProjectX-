@@ -16,13 +16,14 @@ import {
   formatarTamanhoArquivo,
 } from "@/lib/storage"
 import type { ArquivoPortfolio, TipoArquivo } from "@/types/prestador"
+import { useTranslation } from "react-i18next"
 import toast from "react-hot-toast"
 
 const LABELS_TIPO: Record<TipoArquivo, string> = {
-  portfolio: "Portfólio",
-  proposta: "Proposta comercial",
-  panfleto: "Panfleto / Folder",
-  outro: "Outro documento",
+  portfolio: "arquivos.portfolio",
+  proposta: "arquivos.proposta",
+  panfleto: "arquivos.panfleto",
+  outro: "arquivos.outro",
 }
 
 interface UploadPortfolioProps {
@@ -32,6 +33,7 @@ interface UploadPortfolioProps {
 export function UploadPortfolio({ profileId }: UploadPortfolioProps) {
   const [arquivos, setArquivos] = useState<ArquivoPortfolio[]>([])
   const [enviando, setEnviando] = useState(false)
+  const { t } = useTranslation()
   const [tipoSelecionado, setTipoSelecionado] = useState<TipoArquivo>("portfolio")
   const [carregandoLista, setCarregandoLista] = useState(true)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -62,7 +64,7 @@ export function UploadPortfolio({ profileId }: UploadPortfolioProps) {
 
     if (dados) {
       setArquivos((prev) => [dados, ...prev])
-      toast.success("Arquivo enviado com sucesso!")
+      toast.success(t("arquivos.enviadoOk"))
     }
 
     // Limpa o input para permitir reenvio do mesmo arquivo se necessário
@@ -72,11 +74,11 @@ export function UploadPortfolio({ profileId }: UploadPortfolioProps) {
   async function handleRemover(arquivo: ArquivoPortfolio) {
     const { erro } = await removerArquivoPortfolio(arquivo)
     if (erro) {
-      toast.error("Erro ao remover arquivo.")
+      toast.error(t("arquivos.erroRemover"))
       return
     }
     setArquivos((prev) => prev.filter((a) => a.id !== arquivo.id))
-    toast.success("Arquivo removido.")
+    toast.success(t("arquivos.removidoOk"))
   }
 
   function iconePorTipo(nomeArquivo: string) {
@@ -94,9 +96,9 @@ export function UploadPortfolio({ profileId }: UploadPortfolioProps) {
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            {Object.entries(LABELS_TIPO).map(([valor, label]) => (
+            {Object.entries(LABELS_TIPO).map(([valor, chaveLabel]) => (
               <SelectItem key={valor} value={valor}>
-                {label}
+                {t(chaveLabel)}
               </SelectItem>
             ))}
           </SelectContent>
@@ -122,24 +124,24 @@ export function UploadPortfolio({ profileId }: UploadPortfolioProps) {
           ) : (
             <Upload className="w-4 h-4 mr-2" />
           )}
-          {enviando ? "Enviando..." : "Enviar arquivo"}
+          {enviando ? t("arquivos.enviando") : t("arquivos.enviarArquivo")}
         </Button>
       </div>
 
       <p className="text-xs text-muted-foreground">
-        Formatos aceitos: PDF, JPG, PNG, WEBP. Tamanho máximo: 10MB.
+        {t("arquivos.formatosAceitos")}
       </p>
 
       {/* Lista de arquivos enviados */}
       <div className="space-y-2">
         {carregandoLista ? (
-          <p className="text-xs text-muted-foreground">Carregando arquivos...</p>
+          <p className="text-xs text-muted-foreground">{t("arquivos.carregandoArquivos")}</p>
         ) : arquivos.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-8 border border-dashed border-border rounded-lg">
             <FilePlus2 className="w-8 h-8 text-muted-foreground/40 mb-2" />
-            <p className="text-sm text-muted-foreground">Nenhum arquivo enviado ainda</p>
+            <p className="text-sm text-muted-foreground">{t("arquivos.nenhumArquivo")}</p>
             <p className="text-xs text-muted-foreground/70 mt-1">
-              Envie seu portfólio, proposta ou panfleto
+              {t("arquivos.envieSeuPortfolio")}
             </p>
           </div>
         ) : (
@@ -171,7 +173,7 @@ export function UploadPortfolio({ profileId }: UploadPortfolioProps) {
               <button
                 onClick={() => handleRemover(arquivo)}
                 className="text-muted-foreground hover:text-red-400 flex-shrink-0"
-                title="Remover arquivo"
+                title={t("arquivos.removerArquivo")}
               >
                 <X className="w-4 h-4" />
               </button>

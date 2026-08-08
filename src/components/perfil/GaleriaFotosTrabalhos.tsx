@@ -6,6 +6,7 @@ import {
   removerFotoTrabalho,
 } from "@/lib/diretorio"
 import type { FotoTrabalho } from "@/types/prestador"
+import { useTranslation } from "react-i18next"
 import toast from "react-hot-toast"
 
 interface GaleriaFotosTrabalhosProps {
@@ -15,6 +16,7 @@ interface GaleriaFotosTrabalhosProps {
 const MAX_FOTOS = 6
 
 export function GaleriaFotosTrabalhos({ profileId }: GaleriaFotosTrabalhosProps) {
+  const { t } = useTranslation()
   const [fotos, setFotos] = useState<FotoTrabalho[]>([])
   const [enviando, setEnviando] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -48,7 +50,7 @@ export function GaleriaFotosTrabalhos({ profileId }: GaleriaFotosTrabalhosProps)
 
     if (dados) {
       setFotos((prev) => [...prev, dados])
-      toast.success("Foto adicionada!")
+      toast.success(t("arquivos.fotoAdicionada"))
     }
 
     if (inputRef.current) inputRef.current.value = ""
@@ -57,11 +59,11 @@ export function GaleriaFotosTrabalhos({ profileId }: GaleriaFotosTrabalhosProps)
   async function handleRemover(foto: FotoTrabalho) {
     const { erro } = await removerFotoTrabalho(foto)
     if (erro) {
-      toast.error("Erro ao remover foto.")
+      toast.error(t("arquivos.erroRemoverFoto"))
       return
     }
     setFotos((prev) => prev.filter((f) => f.id !== foto.id))
-    toast.success("Foto removida.")
+    toast.success(t("arquivos.fotoRemovida"))
   }
 
   return (
@@ -69,7 +71,7 @@ export function GaleriaFotosTrabalhos({ profileId }: GaleriaFotosTrabalhosProps)
       <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
         {fotos.map((foto) => (
           <div key={foto.id} className="relative aspect-square rounded-lg overflow-hidden border border-border group">
-            <img src={foto.url_foto} alt="Trabalho realizado" className="w-full h-full object-cover" />
+            <img src={foto.url_foto} alt={t("arquivos.trabalhoRealizado")} className="w-full h-full object-cover" />
             <button
               onClick={() => handleRemover(foto)}
               className="absolute top-1 right-1 w-5 h-5 rounded-full bg-black/70 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
@@ -90,7 +92,7 @@ export function GaleriaFotosTrabalhos({ profileId }: GaleriaFotosTrabalhosProps)
             ) : (
               <>
                 <ImagePlus className="w-5 h-5" />
-                <span className="text-[10px]">Adicionar</span>
+                <span className="text-[10px]">{t("arquivos.adicionar")}</span>
               </>
             )}
           </button>
@@ -106,7 +108,7 @@ export function GaleriaFotosTrabalhos({ profileId }: GaleriaFotosTrabalhosProps)
       />
 
       <p className="text-xs text-muted-foreground">
-        {fotos.length}/{MAX_FOTOS} fotos · JPG, PNG ou WEBP, até 8MB cada
+        {t("arquivos.contagemFotos", { atual: fotos.length, max: MAX_FOTOS })}
       </p>
     </div>
   )

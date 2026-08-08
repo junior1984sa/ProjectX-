@@ -6,11 +6,16 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { buscarNoDiretorio } from "@/lib/diretorio"
 import { gerarLinkWhatsAppComNumero, gerarLinkWhatsAppSemNumero } from "@/lib/utils"
-import type { ResultadoBuscaDiretorio } from "@/types/prestador"
+import { obterPais, type ResultadoBuscaDiretorio } from "@/types/prestador"
 import { useAuthStore } from "@/store/useAuthStore"
+import { usePreferenciasStore } from "@/store/usePreferenciasStore"
+import { useTranslation } from "react-i18next"
 
 export function BuscaDiretorio() {
   const { perfil } = useAuthStore()
+  const { t } = useTranslation()
+  const paisPreferido = usePreferenciasStore((s) => s.pais)
+  const configPais = obterPais(perfil?.pais_foco ?? paisPreferido)
   const [segmento, setSegmento] = useState("")
   const [cidade, setCidade] = useState("")
   const [resultados, setResultados] = useState<ResultadoBuscaDiretorio[]>([])
@@ -45,9 +50,9 @@ export function BuscaDiretorio() {
   return (
     <div className="max-w-4xl mx-auto p-4 md:p-8">
       <div className="mb-6">
-        <h1 className="text-2xl font-bold text-foreground">Encontre um prestador</h1>
+        <h1 className="text-2xl font-bold text-foreground">{t("diretorio.titulo")}</h1>
         <p className="text-muted-foreground text-sm mt-1">
-          Busque diretamente entre prestadores verificados e assinantes ativos do ProspectX.
+          {t("diretorio.subtitulo")}
         </p>
       </div>
 
@@ -56,7 +61,7 @@ export function BuscaDiretorio() {
           <div className="relative flex-1">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
-              placeholder="Segmento (ex: jateamento abrasivo)"
+              placeholder={t("diretorio.placeholderSegmento")}
               value={segmento}
               onChange={(e) => setSegmento(e.target.value)}
               onKeyDown={handleKeyDown}
@@ -66,7 +71,7 @@ export function BuscaDiretorio() {
           <div className="relative flex-1">
             <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
-              placeholder="Cidade (ex: Florianópolis)"
+              placeholder={t("diretorio.placeholderCidade", { exemplo: configPais.exemploCidade })}
               value={cidade}
               onChange={(e) => setCidade(e.target.value)}
               onKeyDown={handleKeyDown}
@@ -79,7 +84,7 @@ export function BuscaDiretorio() {
             className="bg-gradient-to-r from-dourado-600 to-dourado-500 text-background font-semibold flex-shrink-0"
           >
             {carregando ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Search className="w-4 h-4 mr-2" />}
-            Buscar
+            {t("diretorio.buscar")}
           </Button>
         </CardContent>
       </Card>
@@ -90,9 +95,9 @@ export function BuscaDiretorio() {
         </div>
       ) : buscou && resultados.length === 0 ? (
         <div className="text-center py-16">
-          <p className="text-sm text-muted-foreground">Nenhum prestador encontrado para essa busca.</p>
+          <p className="text-sm text-muted-foreground">{t("diretorio.nenhumEncontrado")}</p>
           <p className="text-xs text-muted-foreground/70 mt-1">
-            Tente um termo mais genérico ou outra cidade próxima.
+            {t("diretorio.tenteOutro")}
           </p>
         </div>
       ) : (
@@ -116,7 +121,7 @@ export function BuscaDiretorio() {
                     </h3>
                     <Badge variant="success" className="text-[10px] flex items-center gap-1 flex-shrink-0">
                       <ShieldCheck className="w-3 h-3" />
-                      Verificado
+                      {t("diretorio.verificado")}
                     </Badge>
                   </div>
                   <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
@@ -133,7 +138,7 @@ export function BuscaDiretorio() {
                   {resultado.diretorio.anos_de_mercado && (
                     <span className="flex items-center gap-1">
                       <Award className="w-3 h-3" />
-                      {resultado.diretorio.anos_de_mercado} anos de mercado
+                      {t("diretorio.anosDeMercado", { count: resultado.diretorio.anos_de_mercado })}
                     </span>
                   )}
                   {resultado.diretorio.tempo_resposta_estimado && (
@@ -150,7 +155,7 @@ export function BuscaDiretorio() {
                   className="w-full bg-green-600 hover:bg-green-700 text-white"
                 >
                   <Phone className="w-3.5 h-3.5 mr-1.5" />
-                  Entrar em contato
+                  {t("diretorio.entrarEmContato")}
                 </Button>
               </CardContent>
             </Card>

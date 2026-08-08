@@ -6,47 +6,14 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent } from "@/components/ui/card"
 import { useAuthStore } from "@/store/useAuthStore"
+import { useTranslation } from "react-i18next"
 import toast from "react-hot-toast"
 
-interface PerguntaFrequente {
-  pergunta: string
-  resposta: string
-}
+/** Só as chaves: o texto vive nas traduções, em pt/en/es. */
+const CHAVES_FAQ = ["1", "2", "3", "4", "5", "6"]
 
-const PERGUNTAS_FREQUENTES: PerguntaFrequente[] = [
-  {
-    pergunta: "Como funciona o período de teste gratuito?",
-    resposta:
-      "Você cadastra seu cartão e tem 7 dias para usar a ferramenta sem nenhuma cobrança. Se não cancelar antes do fim do período, a primeira cobrança é feita automaticamente. Você pode cancelar a qualquer momento, em um clique, dentro da sua área de perfil, e receber de volta qualquer valor já pago — sem desconto e sem justificativa, conforme o artigo 49 do Código de Defesa do Consumidor.",
-  },
-  {
-    pergunta: "Como funcionam os créditos de busca?",
-    resposta:
-      "Cada busca consome créditos de acordo com a quantidade de empresas retornadas: até 10 empresas custam 10 créditos, até 20 custam 18, até 30 custam 25, e até 40 custam 30. Seu plano recarrega o saldo a cada ciclo (de 100 a 150 créditos, conforme o plano) e os créditos NÃO expiram: o que você não usar continua na conta e soma à próxima recarga. Se num mês você usar 50 de 100, entra no mês seguinte com 150.",
-  },
-  {
-    pergunta: "Posso cancelar quando quiser?",
-    resposta:
-      "Sim. O cancelamento é feito em um único clique, dentro da sua área de perfil, sem precisar justificar o motivo. Depois de cancelar, você não é cobrado novamente.",
-  },
-  {
-    pergunta: "Os dados das empresas encontradas são reais?",
-    resposta:
-      "Atualmente a busca usa dados simulados para demonstração. A ferramenta já está estruturada para conectar a APIs reais (Google Places, CNPJ.ws, etc.) — veja o botão 'Usar APIs reais' dentro do painel de busca para mais detalhes.",
-  },
-  {
-    pergunta: "Como envio meu portfólio para os leads encontrados?",
-    resposta:
-      "Depois de assinar, envie seu portfólio ou proposta na área 'Meu perfil'. Cada empresa encontrada na busca tem um botão 'Enviar panfleto', que abre o WhatsApp já com uma mensagem pronta e o link do seu material mais recente.",
-  },
-  {
-    pergunta: "Meus dados de cartão são seguros?",
-    resposta:
-      "Sim. O número do cartão e o código de segurança são processados diretamente pelo Mercado Pago, dentro do seu navegador — eles nunca chegam aos nossos servidores.",
-  },
-]
-
-function ItemFAQ({ item }: { item: PerguntaFrequente }) {
+function ItemFAQ({ chave }: { chave: string }) {
+  const { t } = useTranslation()
   const [aberto, setAberto] = useState(false)
 
   return (
@@ -55,14 +22,14 @@ function ItemFAQ({ item }: { item: PerguntaFrequente }) {
         onClick={() => setAberto(!aberto)}
         className="w-full flex items-center justify-between p-4 text-left hover:bg-secondary/30 transition-colors"
       >
-        <span className="text-sm font-medium text-foreground">{item.pergunta}</span>
+        <span className="text-sm font-medium text-foreground">{t(`sac.faq.p${chave}`)}</span>
         <ChevronDown
           className={`w-4 h-4 text-muted-foreground flex-shrink-0 transition-transform ${aberto ? "rotate-180" : ""}`}
         />
       </button>
       {aberto && (
         <div className="px-4 pb-4 text-sm text-muted-foreground leading-relaxed">
-          {item.resposta}
+          {t(`sac.faq.r${chave}`)}
         </div>
       )}
     </div>
@@ -71,6 +38,7 @@ function ItemFAQ({ item }: { item: PerguntaFrequente }) {
 
 export function PaginaSAC() {
   const { email } = useAuthStore()
+  const { t } = useTranslation()
   const [nome, setNome] = useState("")
   const [emailContato, setEmailContato] = useState(email ?? "")
   const [assunto, setAssunto] = useState("")
@@ -89,7 +57,7 @@ export function PaginaSAC() {
 
   function handleEnviarEmail() {
     if (!nome.trim() || !mensagem.trim()) {
-      toast.error("Preencha seu nome e a mensagem antes de enviar.")
+      toast.error(t("sac.erroPreencha"))
       return
     }
 
@@ -98,12 +66,12 @@ export function PaginaSAC() {
       `Nome: ${nome}\nE-mail para retorno: ${emailContato}\n\n${mensagem}`
     )
     const linkMailto = `mailto:${emailSuporte}?subject=${encodeURIComponent(
-      assunto || "Suporte ProspectX"
+      assunto || t("sac.assuntoPadrao")
     )}&body=${corpo}`
 
     window.location.href = linkMailto
     setEnviando(false)
-    toast.success("Abrindo seu aplicativo de e-mail...")
+    toast.success(t("sac.abrindoEmail"))
   }
 
   return (
@@ -111,10 +79,10 @@ export function PaginaSAC() {
       <div>
         <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
           <HelpCircle className="w-6 h-6 text-dourado-400" />
-          Central de Ajuda
+          {t("sac.titulo")}
         </h1>
         <p className="text-muted-foreground text-sm mt-1">
-          Tire suas dúvidas ou entre em contato direto com nosso suporte.
+          {t("sac.subtitulo")}
         </p>
       </div>
 
@@ -126,14 +94,14 @@ export function PaginaSAC() {
             </div>
             <div className="flex-1">
               <p className="text-sm font-medium text-foreground">WhatsApp</p>
-              <p className="text-xs text-muted-foreground">Resposta mais rápida</p>
+              <p className="text-xs text-muted-foreground">{t("sac.respostaRapida")}</p>
             </div>
             <Button
               size="sm"
               onClick={handleEnviarWhatsApp}
               className="bg-green-600 hover:bg-green-700 text-white flex-shrink-0"
             >
-              Abrir chat
+              {t("sac.abrirChat")}
             </Button>
           </CardContent>
         </Card>
@@ -144,7 +112,7 @@ export function PaginaSAC() {
               <Mail className="w-5 h-5 text-muted-foreground" />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-medium text-foreground">E-mail</p>
+              <p className="text-sm font-medium text-foreground">{t("sac.email")}</p>
               <p className="text-xs text-muted-foreground">{emailSuporte}</p>
             </div>
           </CardContent>
@@ -153,11 +121,11 @@ export function PaginaSAC() {
 
       <div>
         <h2 className="text-sm font-semibold text-foreground uppercase tracking-wide mb-3">
-          Perguntas frequentes
+          {t("sac.perguntasFrequentes")}
         </h2>
         <div className="space-y-2">
-          {PERGUNTAS_FREQUENTES.map((item) => (
-            <ItemFAQ key={item.pergunta} item={item} />
+          {CHAVES_FAQ.map((chave) => (
+            <ItemFAQ key={chave} chave={chave} />
           ))}
         </div>
       </div>
@@ -165,14 +133,14 @@ export function PaginaSAC() {
       <Card className="border-border/60">
         <CardContent className="p-6 space-y-4">
           <h2 className="text-sm font-semibold text-foreground uppercase tracking-wide">
-            Ainda precisa de ajuda? Envie uma mensagem
+            {t("sac.aindaPrecisaAjuda")}
           </h2>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label>Seu nome</Label>
+              <Label>{t("sac.seuNome")}</Label>
               <Input
-                placeholder="Como podemos te chamar?"
+                placeholder={t("sac.placeholderNome")}
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
                 className="bg-background/60"
@@ -182,7 +150,7 @@ export function PaginaSAC() {
               <Label>E-mail para retorno</Label>
               <Input
                 type="email"
-                placeholder="seu@email.com"
+                placeholder={t("sac.placeholderEmail")}
                 value={emailContato}
                 onChange={(e) => setEmailContato(e.target.value)}
                 className="bg-background/60"
@@ -193,7 +161,7 @@ export function PaginaSAC() {
           <div className="space-y-2">
             <Label>Assunto</Label>
             <Input
-              placeholder="Ex: Dúvida sobre cobrança, problema técnico..."
+              placeholder={t("sac.placeholderAssunto")}
               value={assunto}
               onChange={(e) => setAssunto(e.target.value)}
               className="bg-background/60"
@@ -201,9 +169,9 @@ export function PaginaSAC() {
           </div>
 
           <div className="space-y-2">
-            <Label>Mensagem</Label>
+            <Label>{t("sac.mensagem")}</Label>
             <Textarea
-              placeholder="Descreva sua dúvida ou problema com o máximo de detalhes possível..."
+              placeholder={t("sac.placeholderMensagem")}
               value={mensagem}
               onChange={(e) => setMensagem(e.target.value)}
               className="bg-background/60 min-h-[120px]"
@@ -213,10 +181,10 @@ export function PaginaSAC() {
           <Button
             onClick={handleEnviarEmail}
             disabled={enviando}
-            className="w-full bg-gradient-to-r from-dourado-600 to-dourado-500 text-background font-semibold"
+            className="w-full bg-dourado-500 hover:bg-dourado-400 active:bg-dourado-600 text-prata-900 font-semibold"
           >
             <Send className="w-4 h-4 mr-2" />
-            Enviar mensagem
+            {t("sac.enviarMensagem")}
           </Button>
         </CardContent>
       </Card>

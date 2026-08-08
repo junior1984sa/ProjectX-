@@ -3,6 +3,7 @@ import { MapPin } from "lucide-react"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useAppStore } from "@/store/useAppStore"
 import { corMarcadorPorScore } from "@/lib/utils"
+import i18n from "@/i18n"
 
 // Importação dinâmica do Leaflet para evitar problemas com SSR
 let L: typeof import("leaflet") | null = null
@@ -117,7 +118,7 @@ export function MapaProspeccao() {
           </p>
           ${empresa.telefone
             ? `<p style="font-size: 12px; color: #68d391; margin-bottom: 4px;">📞 ${empresa.telefone}</p>`
-            : '<p style="font-size: 11px; color: #64748b; margin-bottom: 4px;">Sem telefone</p>'
+            : `<p style="font-size: 11px; color: #64748b; margin-bottom: 4px;">${i18n.t("mapa.semTelefone")}</p>`
           }
           <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #34383f; display: flex; align-items: center; justify-content: space-between;">
             <span style="font-size: 14px; color: #d4b06a; letter-spacing: 1px;">${estrelas}</span>

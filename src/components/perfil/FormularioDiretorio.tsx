@@ -15,6 +15,7 @@ import {
 } from "@/lib/diretorio"
 import { GaleriaFotosTrabalhos } from "@/components/perfil/GaleriaFotosTrabalhos"
 import { temAcessoLiberado, type DadosPerfilDiretorioForm, type PerfilDiretorio } from "@/types/prestador"
+import { useTranslation } from "react-i18next"
 import toast from "react-hot-toast"
 
 const FORM_VAZIO: DadosPerfilDiretorioForm = {
@@ -28,6 +29,7 @@ const FORM_VAZIO: DadosPerfilDiretorioForm = {
 
 export function FormularioDiretorio() {
   const { usuarioId, perfil } = useAuthStore()
+  const { t } = useTranslation()
   const [perfilDiretorio, setPerfilDiretorio] = useState<PerfilDiretorio | null>(null)
   const [form, setForm] = useState<DadosPerfilDiretorioForm>(FORM_VAZIO)
   const [carregando, setCarregando] = useState(true)
@@ -61,9 +63,9 @@ export function FormularioDiretorio() {
   }
 
   function validar(): string | null {
-    if (!form.titulo_publico.trim()) return "Informe um título público para o seu perfil."
+    if (!form.titulo_publico.trim()) return t("perfilDiretorio.erroTitulo")
     if (!form.descricao_completa.trim() || form.descricao_completa.trim().length < 30) {
-      return "Escreva uma descrição com pelo menos 30 caracteres — é o que convence quem está buscando."
+      return t("perfilDiretorio.erroDescricao")
     }
     return null
   }
@@ -83,7 +85,7 @@ export function FormularioDiretorio() {
 
     if (url) {
       setPerfilDiretorio((prev) => (prev ? { ...prev, logo_url: url } : prev))
-      toast.success("Imagem de capa atualizada!")
+      toast.success(t("perfilDiretorio.capaOk"))
     }
 
     if (inputCapaRef.current) inputCapaRef.current.value = ""
@@ -107,7 +109,7 @@ export function FormularioDiretorio() {
       return
     }
 
-    toast.success("Perfil do diretório salvo!")
+    toast.success(t("perfilDiretorio.salvoOk"))
     const atualizado = await carregarPerfilDiretorio(usuarioId)
     setPerfilDiretorio(atualizado)
   }
@@ -116,7 +118,7 @@ export function FormularioDiretorio() {
     if (!usuarioId || !perfilDiretorio) return
 
     if (!acessoLiberado) {
-      toast.error("Assine um plano para publicar seu perfil no diretório.")
+      toast.error(t("perfilDiretorio.erroAssine"))
       return
     }
 
@@ -125,15 +127,15 @@ export function FormularioDiretorio() {
     setAlternandoPublicacao(false)
 
     if (erro) {
-      toast.error("Erro ao atualizar publicação.")
+      toast.error(t("perfilDiretorio.erroPublicar"))
       return
     }
 
     setPerfilDiretorio((prev) => (prev ? { ...prev, publicado: !prev.publicado } : prev))
     toast.success(
       perfilDiretorio.publicado
-        ? "Perfil removido do diretório."
-        : "Perfil publicado! Agora você pode ser encontrado diretamente."
+        ? t("perfilDiretorio.removidoOk")
+        : t("perfilDiretorio.publicadoOk")
     )
   }
 
@@ -151,7 +153,7 @@ export function FormularioDiretorio() {
         <p className="text-sm text-dourado-300 flex items-start gap-2">
           <Sparkles className="w-4 h-4 mt-0.5 flex-shrink-0" />
           <span>
-            Esse perfil é o que outras empresas veem quando buscam um prestador como você
+            {t("perfilDiretorio.aviso")}
             diretamente no diretório — diferente do perfil de prospecção, aqui você pode
             ser mais detalhado e persuasivo.
           </span>
@@ -165,17 +167,17 @@ export function FormularioDiretorio() {
               {perfilDiretorio.publicado ? (
                 <Badge variant="success" className="text-xs flex items-center gap-1">
                   <Eye className="w-3 h-3" />
-                  Publicado no diretório
+                  {t("perfilDiretorio.publicado")}
                 </Badge>
               ) : (
                 <Badge variant="muted" className="text-xs flex items-center gap-1">
                   <EyeOff className="w-3 h-3" />
-                  Não publicado
+                  {t("perfilDiretorio.naoPublicado")}
                 </Badge>
               )}
               {!acessoLiberado && (
                 <span className="text-xs text-muted-foreground">
-                  Assine um plano para publicar
+                  {t("perfilDiretorio.assineParaPublicar")}
                 </span>
               )}
             </div>
@@ -189,9 +191,9 @@ export function FormularioDiretorio() {
               {alternandoPublicacao ? (
                 <Loader2 className="w-4 h-4 animate-spin" />
               ) : perfilDiretorio.publicado ? (
-                "Remover do diretório"
+                t("perfilDiretorio.removerDoDiretorio")
               ) : (
-                "Publicar no diretório"
+                t("perfilDiretorio.publicarNoDiretorio")
               )}
             </Button>
           </CardContent>
@@ -200,13 +202,13 @@ export function FormularioDiretorio() {
 
       <Card className="border-border/60">
         <CardHeader>
-          <CardTitle className="text-base">Apresentação pública</CardTitle>
+          <CardTitle className="text-base">{t("perfilDiretorio.apresentacaoPublica")}</CardTitle>
           <CardDescription>O que aparece em destaque no seu perfil do diretório</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Imagem de capa/destaque — também usada no carrossel da página inicial */}
           <div className="space-y-2">
-            <Label>Imagem de capa/destaque</Label>
+            <Label>{t("perfilDiretorio.imagemCapa")}</Label>
             <div className="flex items-center gap-3">
               <div className="w-24 h-24 rounded-lg overflow-hidden border border-border bg-secondary/40 flex-shrink-0 flex items-center justify-center">
                 {perfilDiretorio?.logo_url ? (
@@ -228,10 +230,10 @@ export function FormularioDiretorio() {
                   ) : (
                     <Camera className="w-3.5 h-3.5 mr-1.5" />
                   )}
-                  {perfilDiretorio?.logo_url ? "Trocar imagem" : "Enviar imagem"}
+                  {perfilDiretorio?.logo_url ? t("perfilDiretorio.trocarImagem") : t("perfilDiretorio.enviarImagem")}
                 </Button>
                 <p className="text-xs text-muted-foreground">
-                  Essa imagem também pode aparecer no carrossel de destaque da página inicial.
+                  {t("perfilDiretorio.avisoCarrossel")}
                   {!perfilDiretorio && " Salve o perfil primeiro para liberar o envio."}
                 </p>
               </div>
@@ -246,22 +248,22 @@ export function FormularioDiretorio() {
           </div>
 
           <div className="space-y-2">
-            <Label>Título público *</Label>
+            <Label>{t("perfilDiretorio.tituloPublico")}</Label>
             <Input
-              placeholder="Ex: Jateamento Industrial Santos — Especialistas em Estruturas Metálicas"
+              placeholder={t("perfilDiretorio.placeholderTitulo")}
               value={form.titulo_publico}
               onChange={(e) => atualizarCampo("titulo_publico", e.target.value)}
               className="bg-background/60"
             />
             <p className="text-xs text-muted-foreground">
-              Mais persuasivo que o nome simples — destaque sua especialidade.
+              {t("perfilDiretorio.dicaTitulo")}
             </p>
           </div>
 
           <div className="space-y-2">
-            <Label>Descrição completa *</Label>
+            <Label>{t("perfilDiretorio.descricaoCompleta")}</Label>
             <Textarea
-              placeholder="Conte sua história, diferenciais, tipos de projeto que já realizou..."
+              placeholder={t("perfilDiretorio.placeholderDescricao")}
               value={form.descricao_completa}
               onChange={(e) => atualizarCampo("descricao_completa", e.target.value)}
               className="bg-background/60 min-h-[120px]"
@@ -269,9 +271,9 @@ export function FormularioDiretorio() {
           </div>
 
           <div className="space-y-2">
-            <Label>Área de atendimento</Label>
+            <Label>{t("perfilDiretorio.areaAtendimento")}</Label>
             <Input
-              placeholder="Ex: Grande Florianópolis e litoral de SC"
+              placeholder={t("perfilDiretorio.placeholderArea")}
               value={form.area_atendimento}
               onChange={(e) => atualizarCampo("area_atendimento", e.target.value)}
               className="bg-background/60"
@@ -280,19 +282,19 @@ export function FormularioDiretorio() {
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label>Anos de mercado</Label>
+              <Label>{t("perfilDiretorio.anosMercado")}</Label>
               <Input
                 type="number"
-                placeholder="Ex: 12"
+                placeholder={t("perfilDiretorio.placeholderAnos")}
                 value={form.anos_de_mercado}
                 onChange={(e) => atualizarCampo("anos_de_mercado", e.target.value)}
                 className="bg-background/60"
               />
             </div>
             <div className="space-y-2">
-              <Label>Tempo médio de resposta</Label>
+              <Label>{t("perfilDiretorio.tempoResposta")}</Label>
               <Input
-                placeholder="Ex: Responde em até 2 horas"
+                placeholder={t("perfilDiretorio.placeholderTempo")}
                 value={form.tempo_resposta_estimado}
                 onChange={(e) => atualizarCampo("tempo_resposta_estimado", e.target.value)}
                 className="bg-background/60"
@@ -301,9 +303,9 @@ export function FormularioDiretorio() {
           </div>
 
           <div className="space-y-2">
-            <Label>Certificações e registros (opcional)</Label>
+            <Label>{t("perfilDiretorio.certificacoes")}</Label>
             <Textarea
-              placeholder="Ex: ISO 9001, CREA ativo, NR-35..."
+              placeholder={t("perfilDiretorio.placeholderCertificacoes")}
               value={form.certificacoes}
               onChange={(e) => atualizarCampo("certificacoes", e.target.value)}
               className="bg-background/60 min-h-[70px]"
@@ -317,10 +319,10 @@ export function FormularioDiretorio() {
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
               <ImageIcon className="w-4 h-4 text-dourado-400" />
-              Fotos de trabalhos realizados
+              {t("perfilDiretorio.fotosTrabalhos")}
             </CardTitle>
             <CardDescription>
-              Prova visual do seu trabalho — quem está buscando confia mais ao ver fotos reais
+              {t("perfilDiretorio.fotosDesc")}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -335,7 +337,7 @@ export function FormularioDiretorio() {
         className="w-full bg-gradient-to-r from-dourado-600 to-dourado-500 text-background font-semibold"
       >
         {salvando ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
-        {perfilDiretorio ? "Salvar alterações" : "Criar perfil do diretório"}
+        {perfilDiretorio ? t("perfilDiretorio.salvarAlteracoes") : t("perfilDiretorio.criarPerfil")}
       </Button>
     </div>
   )
