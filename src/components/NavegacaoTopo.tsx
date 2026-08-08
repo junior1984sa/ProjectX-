@@ -41,7 +41,7 @@ export function NavegacaoTopo() {
           className="flex items-center gap-2 flex-shrink-0"
         >
           <img
-            src="/logo-x-apenas.png"
+            src="/logo-x.png"
             alt="ProjectX"
             className="w-7 h-7 object-contain"
           />

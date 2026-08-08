@@ -35,9 +35,6 @@ import {
  * contada pela própria identidade visual, em vez de um botão que acende.
  */
 
-/** Comprimento de cada braço no viewBox — usado para animar o traçado */
-const COMPRIMENTO_BRACO = 114
-
 export function TelaAbertura() {
   const navigate = useNavigate()
   const { t } = useTranslation()
@@ -130,9 +127,18 @@ export function TelaAbertura() {
         <div className="absolute left-1/2 -translate-x-1/2 top-1/3 w-[720px] h-[720px] max-w-[100vw] rounded-full bg-dourado-500/[0.06] blur-3xl pointer-events-none" />
 
         <div className="relative w-full max-w-[880px] flex flex-col items-center">
-          {/* Marca */}
-          <h1 className="text-[1.75rem] sm:text-[2.75rem] font-bold tracking-[0.14em] text-prata-100 leading-none">
-            PROSPECT<span className="text-dourado-400">X</span>
+          {/* Marca.
+              O h1 continua existindo por baixo da imagem: buscador e
+              leitor de tela leem texto, não pixels, e uma home cuja
+              única identificação é um PNG não é encontrada por ninguém. */}
+          <h1 className="leading-none">
+            <img
+              src="/logo-prospectx.png"
+              alt="ProspectX"
+              width={599}
+              height={579}
+              className="w-52 sm:w-72 h-auto drop-shadow-[0_0_60px_rgba(212,176,106,0.18)]"
+            />
           </h1>
 
           <p className="mt-3 sm:mt-4 text-[1.125rem] sm:text-[1.375rem] text-prata-300 text-center leading-snug">
@@ -159,40 +165,6 @@ export function TelaAbertura() {
 
           {/* ── A barra, com o X atrás ── */}
           <div className="relative w-full mt-4">
-            {/* O X vive atrás da barra. A barra é opaca e corta os
-                braços no vértice — é o que faz a sobreposição ler como
-                "duas entradas convergindo" em vez de logo decorativo. */}
-            <svg
-              viewBox="0 0 200 200"
-              aria-hidden="true"
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[240px] sm:w-[360px] lg:w-[460px] pointer-events-none -z-10"
-            >
-              {/* Braços de cima: sempre visíveis, em prata */}
-              <path d="M20 20 L100 100" stroke="#7b828b" strokeWidth="3" strokeLinecap="round" opacity="0.5" />
-              <path d="M180 20 L100 100" stroke="#7b828b" strokeWidth="3" strokeLinecap="round" opacity="0.5" />
-
-              {/* Braços de baixo: cada um se desenha quando o campo
-                  correspondente é preenchido. São o indicador de estado. */}
-              <path
-                d="M100 100 L20 180"
-                stroke="#d4b06a"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeDasharray={COMPRIMENTO_BRACO}
-                strokeDashoffset={temRamo ? 0 : COMPRIMENTO_BRACO}
-                className="transition-[stroke-dashoffset] duration-[220ms] ease-out motion-reduce:transition-none"
-              />
-              <path
-                d="M100 100 L180 180"
-                stroke="#d4b06a"
-                strokeWidth="3"
-                strokeLinecap="round"
-                strokeDasharray={COMPRIMENTO_BRACO}
-                strokeDashoffset={temCidade ? 0 : COMPRIMENTO_BRACO}
-                className="transition-[stroke-dashoffset] duration-[220ms] ease-out motion-reduce:transition-none"
-              />
-            </svg>
-
             {/* A barra: poço mais escuro que o card, borda prata-500
                 (4,65:1 — a borda padrão do sistema dá 1,51:1 e reprova) */}
             <div
@@ -253,6 +225,7 @@ export function TelaAbertura() {
                 )}
               </button>
             </div>
+
           </div>
 
           {/* Linha-tradução — altura reservada mesmo vazia, senão os
