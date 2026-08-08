@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useNavigate, useLocation } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import { LogOut, User, Building2, Zap, Gift, HelpCircle, Search, LayoutDashboard } from "lucide-react"
+import { LogOut, User, Building2, Zap, Gift, HelpCircle, Search, LayoutDashboard, ListChecks } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { useAuthStore } from "@/store/useAuthStore"
@@ -113,6 +113,20 @@ export function NavegacaoTopo() {
                 >
                   <Search className="w-3.5 h-3.5 mr-1.5" />
                   <span className="hidden sm:inline">{t("nav.buscarPrestadores")}</span>
+                </Button>
+              )}
+
+              {/* Funil de contatos — só faz sentido para quem já abordou
+                  alguém, ou seja, para quem tem acesso liberado */}
+              {acessoLiberado && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => navigate("/contatos")}
+                  className={`h-8 text-xs ${location.pathname === "/contatos" ? "text-dourado-400" : "text-muted-foreground"}`}
+                >
+                  <ListChecks className="w-3.5 h-3.5 mr-1.5" />
+                  <span className="hidden sm:inline">{t("nav.meusContatos")}</span>
                 </Button>
               )}
 

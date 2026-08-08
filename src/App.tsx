@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast"
 import { Loader2 } from "lucide-react"
 import { TelaAbertura } from "@/components/TelaAbertura"
 import { PaginaComoFunciona } from "@/components/PaginaComoFunciona"
+import { FunilProspeccao } from "@/components/FunilProspeccao"
 import { FormularioBusca } from "@/components/FormularioBusca"
 import { Dashboard } from "@/components/Dashboard"
 import { NavegacaoTopo } from "@/components/NavegacaoTopo"
@@ -77,6 +78,24 @@ function PaginaAdministracao() {
   }
 
   return <PaginaAdmin />
+}
+
+/**
+ * Funil de contatos: exige login. Não exige assinatura ativa — quem
+ * cancelou ainda tem direito de ver o histórico do que já abordou.
+ */
+function PaginaFunil() {
+  const { usuarioId, carregandoAuth } = useAuthStore()
+
+  if (carregandoAuth) {
+    return <TelaCarregando />
+  }
+
+  if (!usuarioId) {
+    return <Navigate to="/entrar" replace />
+  }
+
+  return <FunilProspeccao />
 }
 
 /** Página de busca no diretório: exige login (qualquer empresa cadastrada, mesmo sem assinatura) */
@@ -181,6 +200,7 @@ function ConteudoApp() {
         <Route path="/" element={<TelaAbertura />} />
         <Route path="/buscar" element={<PaginaBusca />} />
         <Route path="/como-funciona" element={<PaginaComoFunciona />} />
+        <Route path="/contatos" element={<PaginaFunil />} />
         <Route path="/ajuda" element={<PaginaSAC />} />
         <Route path="/diretorio" element={<PaginaDiretorio />} />
         <Route path="/admin" element={<PaginaAdministracao />} />

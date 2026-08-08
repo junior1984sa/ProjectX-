@@ -104,7 +104,8 @@
     "cadastrarEmpresa": "Cadastrar empresa",
     "centralAjuda": "Central de Ajuda",
     "sair": "Sair",
-    "saiuDaConta": "Você saiu da sua conta."
+    "saiuDaConta": "Você saiu da sua conta.",
+    "meusContatos": "Meus contatos"
   },
   "resultados": {
     "novaBusca": "Nova busca",
@@ -531,5 +532,30 @@
     "erroPublicar": "Erro ao atualizar publicação.",
     "removidoOk": "Perfil removido do diretório.",
     "publicadoOk": "Perfil publicado! Agora você pode ser encontrado diretamente."
+  },
+  "funil": {
+    "titulo": "Meus contatos",
+    "subtitulo": "O que aconteceu depois que você abordou cada empresa.",
+    "vazio": "Você ainda não abordou nenhuma empresa.",
+    "vazioDica": "Faça uma busca e use \"Enviar panfleto\" ou o disparo por e-mail. As empresas aparecem aqui automaticamente.",
+    "retornoGerado": "Retorno gerado",
+    "fechadosDeAbordadas": "{{fechados}} negócios fechados de {{total}} empresas abordadas.",
+    "buscarEmpresa": "Buscar empresa...",
+    "nenhumNesteFiltro": "Nenhuma empresa neste estágio.",
+    "abordadoEm": "abordado em {{data}}",
+    "paradoHa": "parado há {{dias}} dias",
+    "informarValor": "informar valor",
+    "quantoFaturou": "Quanto faturou?",
+    "valorInvalido": "Informe um valor válido.",
+    "erroSalvar": "Não foi possível salvar. Tente de novo.",
+    "estagio": {
+      "pendente": "Pendente",
+      "contatado": "Abordado",
+      "respondeu": "Respondeu",
+      "negociando": "Negociando",
+      "fechou": "Fechou",
+      "sem_resposta": "Sem resposta",
+      "descartado": "Descartado"
+    }
   }
 }

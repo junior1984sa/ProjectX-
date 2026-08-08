@@ -20,15 +20,46 @@ export type StatusContato =
   | "pendente"
   | "contatado"
   | "respondeu"
-  | "sem_resposta"
+  | "negociando"
   | "fechou"
+  | "sem_resposta"
   | "descartado"
+
+/**
+ * Ordem em que os estágios aparecem no funil, do primeiro contato ao
+ * desfecho. Os dois últimos são saídas, não avanços.
+ */
+export const ORDEM_FUNIL: StatusContato[] = [
+  "contatado",
+  "respondeu",
+  "negociando",
+  "fechou",
+  "sem_resposta",
+  "descartado",
+]
+
+/** Resumo do funil, calculado no banco pela função resumo_funil() */
+export interface ResumoFunil {
+  contatado: number
+  respondeu: number
+  negociando: number
+  fechou: number
+  sem_resposta: number
+  descartado: number
+  total: number
+  valor_total: number
+}
 
 export interface ContatoRegistrado {
   chave_empresa: string
   empresa_nome: string
   status: StatusContato
   contatado_em: string | null
+  empresa_telefone: string | null
+  empresa_email: string | null
+  cidade: string | null
+  valor_fechado: number | null
+  status_mudou_em: string | null
 }
 
 /**
@@ -71,7 +102,7 @@ export async function carregarJaContatadas(): Promise<Set<string>> {
 export async function carregarHistoricoContatos(): Promise<ContatoRegistrado[]> {
   const { data, error } = await supabase
     .from("prospeccao_contatos")
-    .select("chave_empresa, empresa_nome, status, contatado_em")
+    .select("chave_empresa, empresa_nome, status, contatado_em, empresa_telefone, empresa_email, cidade, valor_fechado, status_mudou_em")
     .order("contatado_em", { ascending: false })
 
   if (error) {
@@ -195,11 +226,23 @@ export async function dispararEmails(params: {
 /** Atualiza o desfecho de um contato já feito */
 export async function atualizarStatusContato(
   chaveEmpresa: string,
-  status: StatusContato
+  status: StatusContato,
+  valorFechado?: number | null
 ): Promise<boolean> {
+  // `atualizado_em` e `status_mudou_em` são carimbados por gatilho no
+  // banco. Mandar do cliente permitiria que um relógio errado no
+  // navegador registrasse uma data no futuro.
+  const mudanca: { status: StatusContato; valor_fechado?: number | null } = { status }
+
+  // Só mexe no valor quando ele foi informado: passar undefined aqui
+  // apagaria um valor já registrado a cada troca de estágio.
+  if (valorFechado !== undefined) {
+    mudanca.valor_fechado = valorFechado
+  }
+
   const { error } = await supabase
     .from("prospeccao_contatos")
-    .update({ status, atualizado_em: new Date().toISOString() })
+    .update(mudanca)
     .eq("chave_empresa", chaveEmpresa)
 
   if (error) {
@@ -207,4 +250,20 @@ export async function atualizarStatusContato(
     return false
   }
   return true
+}
+
+/**
+ * Resumo do funil. Vem do banco em vez de ser contado no cliente
+ * porque um assinante ativo acumula milhares de contatos ao longo do
+ * ano — baixar tudo só para contar seria desperdício crescente.
+ */
+export async function carregarResumoFunil(): Promise<ResumoFunil | null> {
+  const { data, error } = await supabase.rpc("resumo_funil")
+
+  if (error) {
+    console.error("Erro ao carregar resumo do funil:", error.message)
+    return null
+  }
+
+  return data as ResumoFunil
 }

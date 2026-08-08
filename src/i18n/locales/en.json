@@ -104,7 +104,8 @@
     "cadastrarEmpresa": "Register your company",
     "centralAjuda": "Help center",
     "sair": "Sign out",
-    "saiuDaConta": "You've been signed out."
+    "saiuDaConta": "You've been signed out.",
+    "meusContatos": "My contacts"
   },
   "resultados": {
     "novaBusca": "New search",
@@ -531,5 +532,30 @@
     "erroPublicar": "Couldn't update the publication.",
     "removidoOk": "Profile removed from the directory.",
     "publicadoOk": "Profile published! You can now be found directly."
+  },
+  "funil": {
+    "titulo": "My contacts",
+    "subtitulo": "What happened after you reached out to each company.",
+    "vazio": "You haven't contacted any company yet.",
+    "vazioDica": "Run a search and use \"Send flyer\" or the bulk email. Companies show up here automatically.",
+    "retornoGerado": "Revenue generated",
+    "fechadosDeAbordadas": "{{fechados}} deals closed out of {{total}} companies contacted.",
+    "buscarEmpresa": "Search company...",
+    "nenhumNesteFiltro": "No company at this stage.",
+    "abordadoEm": "contacted on {{data}}",
+    "paradoHa": "idle for {{dias}} days",
+    "informarValor": "add amount",
+    "quantoFaturou": "How much?",
+    "valorInvalido": "Enter a valid amount.",
+    "erroSalvar": "Couldn't save. Please try again.",
+    "estagio": {
+      "pendente": "Pending",
+      "contatado": "Contacted",
+      "respondeu": "Replied",
+      "negociando": "In talks",
+      "fechou": "Closed",
+      "sem_resposta": "No reply",
+      "descartado": "Dropped"
+    }
   }
 }

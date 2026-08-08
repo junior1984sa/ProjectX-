@@ -104,7 +104,8 @@
     "cadastrarEmpresa": "Registrar mi empresa",
     "centralAjuda": "Centro de ayuda",
     "sair": "Salir",
-    "saiuDaConta": "Cerraste sesión."
+    "saiuDaConta": "Cerraste sesión.",
+    "meusContatos": "Mis contactos"
   },
   "resultados": {
     "novaBusca": "Nueva búsqueda",
@@ -531,5 +532,30 @@
     "erroPublicar": "No se pudo actualizar la publicación.",
     "removidoOk": "Perfil quitado del directorio.",
     "publicadoOk": "¡Perfil publicado! Ahora pueden encontrarte directamente."
+  },
+  "funil": {
+    "titulo": "Mis contactos",
+    "subtitulo": "Qué pasó después de que contactaste a cada empresa.",
+    "vazio": "Todavía no contactaste ninguna empresa.",
+    "vazioDica": "Haz una búsqueda y usa \"Enviar folleto\" o el envío por correo. Las empresas aparecen aquí automáticamente.",
+    "retornoGerado": "Retorno generado",
+    "fechadosDeAbordadas": "{{fechados}} negocios cerrados de {{total}} empresas contactadas.",
+    "buscarEmpresa": "Buscar empresa...",
+    "nenhumNesteFiltro": "Ninguna empresa en esta etapa.",
+    "abordadoEm": "contactado el {{data}}",
+    "paradoHa": "sin avance hace {{dias}} días",
+    "informarValor": "indicar monto",
+    "quantoFaturou": "¿Cuánto facturaste?",
+    "valorInvalido": "Ingresa un monto válido.",
+    "erroSalvar": "No se pudo guardar. Inténtalo de nuevo.",
+    "estagio": {
+      "pendente": "Pendiente",
+      "contatado": "Contactado",
+      "respondeu": "Respondió",
+      "negociando": "Negociando",
+      "fechou": "Cerró",
+      "sem_resposta": "Sin respuesta",
+      "descartado": "Descartado"
+    }
   }
 }
