@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import type { Empresa, Estatisticas, ExportacaoCSV } from "@/types/empresa"
+import i18n from "@/i18n"
 
 /**
  * Combina classes CSS com suporte a Tailwind (shadcn/ui padrão)
@@ -186,6 +187,31 @@ export function formatarNumero(num: number): string {
  * usado quando o lead tem um telefone celular válido cadastrado.
  * Inclui a mensagem com o link do portfólio/panfleto do prestador.
  */
+/**
+ * Texto da abordagem por WhatsApp, no idioma da interface.
+ *
+ * A mensagem é lida pela EMPRESA ABORDADA, não pelo assinante. Um
+ * prestador em Sydney mandando "Olá! Sou..." para uma construtora
+ * australiana não é só estranho: é mensagem descartada. Como o idioma
+ * da interface já acompanha o país da prospecção, ele é a melhor
+ * aproximação disponível do idioma de quem recebe.
+ */
+export function montarMensagemAbordagem(
+  nomeEmpresa: string,
+  nomeContatoPrestador: string,
+  urlPortfolio?: string | null
+): string[] {
+  const linhas = [
+    i18n.t("whatsapp.saudacao", { contato: nomeContatoPrestador }),
+    i18n.t("whatsapp.motivo", { empresa: nomeEmpresa }),
+  ]
+  if (urlPortfolio) {
+    linhas.push(i18n.t("whatsapp.portfolio", { url: urlPortfolio }))
+  }
+  linhas.push(i18n.t("whatsapp.fecho"))
+  return linhas
+}
+
 export function gerarLinkWhatsAppComNumero(
   telefone: string,
   nomeEmpresa: string,
@@ -207,14 +233,7 @@ export function gerarLinkWhatsAppComNumero(
     ? semZeroInicial
     : `${codigoTelefonePais}${semZeroInicial}`
 
-  const linhas = [
-    `Olá! Sou ${nomeContatoPrestador}.`,
-    `Vi que a ${nomeEmpresa} pode ter interesse no nosso serviço.`,
-  ]
-  if (urlPortfolio) {
-    linhas.push(`Segue nosso portfólio: ${urlPortfolio}`)
-  }
-  linhas.push("Posso te passar mais detalhes?")
+  const linhas = montarMensagemAbordagem(nomeEmpresa, nomeContatoPrestador, urlPortfolio)
 
   const mensagem = encodeURIComponent(linhas.join("\n"))
   return `https://wa.me/${numeroComPais}?text=${mensagem}`
@@ -230,14 +249,7 @@ export function gerarLinkWhatsAppSemNumero(
   nomeContatoPrestador: string,
   urlPortfolio?: string | null
 ): string {
-  const linhas = [
-    `Olá! Sou ${nomeContatoPrestador}.`,
-    `Vi que a ${nomeEmpresa} pode ter interesse no nosso serviço.`,
-  ]
-  if (urlPortfolio) {
-    linhas.push(`Segue nosso portfólio: ${urlPortfolio}`)
-  }
-  linhas.push("Posso te passar mais detalhes?")
+  const linhas = montarMensagemAbordagem(nomeEmpresa, nomeContatoPrestador, urlPortfolio)
 
   const mensagem = encodeURIComponent(linhas.join("\n"))
   return `https://wa.me/?text=${mensagem}`

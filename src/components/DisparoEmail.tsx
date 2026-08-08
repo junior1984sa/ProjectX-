@@ -10,6 +10,7 @@ import {
   dispararEmails,
 } from "@/lib/prospeccao"
 import type { Empresa } from "@/types/empresa"
+import { useTranslation } from "react-i18next"
 import toast from "react-hot-toast"
 
 /** Teto do plano gratuito do Resend, espelhado da Edge Function */
@@ -34,6 +35,7 @@ interface DisparoEmailProps {
  */
 export function DisparoEmail({ empresas, onFechar }: DisparoEmailProps) {
   const { perfil } = useAuthStore()
+  const { t } = useTranslation()
 
   const [jaContatadas, setJaContatadas] = useState<Set<string> | null>(null)
   const [assunto, setAssunto] = useState("")
@@ -48,12 +50,22 @@ export function DisparoEmail({ empresas, onFechar }: DisparoEmailProps) {
     if (!perfil) return
     // Rascunho inicial: abre com prova, não com pedido. É a mesma
     // lógica da abordagem por WhatsApp que funciona melhor a frio.
-    setAssunto("Encontrei a {{empresa}} procurando parceiros na região")
+    //
+    // O texto sai no idioma da interface porque é ele que CHEGA na
+    // empresa abordada. Um prestador em Sydney disparando em português
+    // não seria lido — e o disparo, além de inútil, queima o domínio.
+    //
+    // `{{empresa}}` fica escapado de propósito: quem substitui pelo
+    // nome de cada destinatário é o servidor, na hora do envio.
+    const marcador = "{{empresa}}"
+    setAssunto(t("disparo.rascunhoAssunto", { empresa: marcador }))
     setCorpo(
-      `Olá! Sou ${perfil.nome_contato}, da ${perfil.nome_empresa}.\n\n` +
-        `Trabalhamos com ${perfil.segmento} e encontrei a {{empresa}} ao mapear empresas da região que podem precisar desse serviço.\n\n` +
-        `Se fizer sentido, posso enviar nossa proposta e alguns trabalhos que já entregamos. Basta responder este e-mail.\n\n` +
-        `Obrigado pela atenção.`
+      t("disparo.rascunhoCorpo", {
+        contato: perfil.nome_contato,
+        empresaRemetente: perfil.nome_empresa,
+        segmento: perfil.segmento,
+        empresa: marcador,
+      })
     )
   }, [perfil])
 
@@ -74,11 +86,11 @@ export function DisparoEmail({ empresas, onFechar }: DisparoEmailProps) {
     if (!perfil) return
 
     if (!assunto.trim() || !corpo.trim()) {
-      toast.error("Preencha o assunto e a mensagem.")
+      toast.error(t("disparo.erroCampos"))
       return
     }
     if (elegiveis.length === 0) {
-      toast.error("Nenhuma empresa nova com e-mail nesta busca.")
+      toast.error(t("disparo.erroNenhuma"))
       return
     }
 
@@ -97,7 +109,7 @@ export function DisparoEmail({ empresas, onFechar }: DisparoEmailProps) {
     setEnviando(false)
 
     if (!r.sucesso) {
-      toast.error(r.erro ?? "Não foi possível enviar.")
+      toast.error(r.erro ?? t("disparo.erroEnvio"))
       return
     }
 
@@ -123,10 +135,10 @@ export function DisparoEmail({ empresas, onFechar }: DisparoEmailProps) {
         <div className="min-w-0">
           <p className="text-sm font-semibold text-foreground flex items-center gap-1.5">
             <Mail className="w-4 h-4 text-dourado-400" />
-            Disparo por e-mail
+            {t("disparo.titulo")}
           </p>
           <p className="text-[11px] text-muted-foreground">
-            {elegiveis.length} {elegiveis.length === 1 ? "empresa" : "empresas"} nesta lista
+            {t("disparo.naLista", { count: elegiveis.length })}
           </p>
         </div>
 
@@ -135,7 +147,7 @@ export function DisparoEmail({ empresas, onFechar }: DisparoEmailProps) {
           size="icon"
           onClick={onFechar}
           className="h-8 w-8 text-muted-foreground flex-shrink-0"
-          title="Fechar"
+          title={t("disparo.fechar")}
         >
           <X className="w-4 h-4" />
         </Button>
@@ -147,39 +159,33 @@ export function DisparoEmail({ empresas, onFechar }: DisparoEmailProps) {
           {(semEmail > 0 || jaAbordadas > 0) && (
             <div className="text-[11px] text-muted-foreground/80 space-y-1">
               {semEmail > 0 && (
-                <p>
-                  {semEmail} {semEmail === 1 ? "empresa ficou" : "empresas ficaram"} de fora
-                  por não ter e-mail cadastrado.
-                </p>
+                <p>{t("disparo.semEmail", { count: semEmail })}</p>
               )}
               {jaAbordadas > 0 && (
-                <p>
-                  {jaAbordadas} {jaAbordadas === 1 ? "já foi abordada" : "já foram abordadas"}{" "}
-                  antes e não {jaAbordadas === 1 ? "entra" : "entram"} de novo.
-                </p>
+                <p>{t("disparo.jaAbordadas", { count: jaAbordadas })}</p>
               )}
             </div>
           )}
 
           <div className="space-y-2">
             <Label className="text-xs uppercase tracking-wide text-muted-foreground">
-              Assunto
+              {t("disparo.assunto")}
             </Label>
             <Input
               value={assunto}
               onChange={(e) => setAssunto(e.target.value)}
               className="bg-background/60"
-              placeholder="Assunto do e-mail"
+              placeholder={t("disparo.placeholderAssunto")}
             />
           </div>
 
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <Label className="text-xs uppercase tracking-wide text-muted-foreground">
-                Mensagem
+                {t("disparo.mensagem")}
               </Label>
               <span className="text-[10px] text-dourado-400/80">
-                {"{{empresa}}"} vira o nome de cada uma
+                {"{{empresa}}"} {t("disparo.viraNome")}
               </span>
             </div>
             <textarea
@@ -195,7 +201,7 @@ export function DisparoEmail({ empresas, onFechar }: DisparoEmailProps) {
           <div className="rounded-lg border border-border/60 bg-card p-3.5 space-y-2">
             <p className="text-[10px] uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
               <ShieldCheck className="w-3 h-3 text-green-400" />
-              Adicionado automaticamente ao final
+              {t("disparo.adicionadoAutomaticamente")}
             </p>
             <div className="text-[11px] text-muted-foreground/80 leading-relaxed border-t border-border/60 pt-2">
               <p className="font-medium text-muted-foreground">
@@ -203,39 +209,35 @@ export function DisparoEmail({ empresas, onFechar }: DisparoEmailProps) {
                 {perfil?.estado ? `/${perfil.estado}` : ""}
               </p>
               <p>
-                Contato: {perfil?.nome_contato} — {perfil?.email_contato}
+                {t("disparo.rodapeContato")}: {perfil?.nome_contato} — {perfil?.email_contato}
               </p>
               <p className="mt-1">
-                Você recebeu este e-mail porque sua empresa atua em um segmento
-                relacionado ao nosso serviço.{" "}
-                <span className="text-dourado-400 underline">Não quero mais receber</span>.
+                {t("disparo.rodapeMotivo")}{" "}
+                <span className="text-dourado-400 underline">{t("disparo.rodapeDescadastrar")}</span>.
               </p>
             </div>
           </div>
 
           <p className="text-[11px] text-muted-foreground/80 flex items-start gap-1.5 leading-relaxed">
             <AlertCircle className="w-3.5 h-3.5 flex-shrink-0 mt-px" />
-            Use apenas para oferta relevante à atividade da empresa. Quem clicar em
-            descadastrar não recebe mais nada, de nenhum assinante — e isso é
-            definitivo.
+            {t("disparo.aviso")}
           </p>
 
           <Button
             onClick={handleEnviar}
             disabled={enviando || elegiveis.length === 0}
             size="lg"
-            className="w-full bg-gradient-to-r from-dourado-600 to-dourado-700 hover:from-dourado-700 hover:to-dourado-800 text-white font-semibold"
+            className="w-full bg-dourado-500 hover:bg-dourado-400 active:bg-dourado-600 text-prata-900 font-semibold"
           >
             {enviando ? (
               <>
                 <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                Enviando...
+                {t("disparo.enviando")}
               </>
             ) : (
               <>
                 <Send className="w-4 h-4 mr-2" />
-                Enviar para {elegiveis.length}{" "}
-                {elegiveis.length === 1 ? "empresa" : "empresas"}
+                {t("disparo.enviarPara", { count: elegiveis.length })}
               </>
             )}
           </Button>

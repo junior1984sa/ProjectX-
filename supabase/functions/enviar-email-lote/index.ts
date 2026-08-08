@@ -98,11 +98,46 @@ async function chamarRpc(nome: string, corpo: unknown): Promise<unknown> {
  * e vira infração. Por isso ele é concatenado aqui no servidor, e não
  * deixado a cargo de quem escreve a mensagem.
  */
+const RODAPE_POR_IDIOMA: Record<string, { contato: string; motivo: string; descadastrar: string }> = {
+  pt: {
+    contato: "Contato",
+    motivo:
+      "Você recebeu este e-mail porque sua empresa atua em um segmento relacionado ao nosso serviço.",
+    descadastrar: "Não quero mais receber",
+  },
+  en: {
+    contato: "Contact",
+    motivo:
+      "You received this email because your company works in a field related to our service.",
+    descadastrar: "Unsubscribe",
+  },
+  es: {
+    contato: "Contacto",
+    motivo:
+      "Recibiste este correo porque tu empresa trabaja en un rubro relacionado con nuestro servicio.",
+    descadastrar: "No quiero recibir más",
+  },
+}
+
+/**
+ * O rodapé precisa ser lido por QUEM RECEBE, não por quem envia. Um
+ * prestador australiano abordando empresas de Sydney com um aviso de
+ * descadastro em português não cumpre o dever de informar: o
+ * destinatário não entende como sair da lista, e o disparo deixa de
+ * se sustentar como legítimo interesse.
+ */
+function rodapeDoIdioma(idioma: string | undefined) {
+  const base = (idioma ?? "pt").split("-")[0]
+  return RODAPE_POR_IDIOMA[base] ?? RODAPE_POR_IDIOMA.pt
+}
+
 async function montarHtml(
   corpoTexto: string,
   destinatario: Destinatario,
-  remetente: { empresa: string; contato: string; cidade: string; email: string }
+  remetente: { empresa: string; contato: string; cidade: string; email: string },
+  idioma: string | undefined
 ): Promise<string> {
+  const rodape = rodapeDoIdioma(idioma)
   const token = await assinarEmail(destinatario.email)
   const linkDescadastro =
     `${SUPABASE_URL}/functions/v1/descadastrar` +
@@ -124,12 +159,11 @@ async function montarHtml(
 
   <div style="margin-top:28px;padding-top:16px;border-top:1px solid #d8d8d4;font-size:12px;line-height:1.6;color:#7a7f86">
     <p style="margin:0 0 6px"><strong>${remetente.empresa}</strong> · ${remetente.cidade}</p>
-    <p style="margin:0 0 6px">Contato: ${remetente.contato} — ${remetente.email}</p>
+    <p style="margin:0 0 6px">${rodape.contato}: ${remetente.contato} — ${remetente.email}</p>
     <p style="margin:0">
-      Você recebeu este e-mail porque sua empresa atua em um segmento
-      relacionado ao nosso serviço.
+      ${rodape.motivo}
       <a href="${linkDescadastro}" style="color:#8a6f2b">
-        Não quero mais receber
+        ${rodape.descadastrar}
       </a>.
     </p>
   </div>
@@ -137,10 +171,58 @@ async function montarHtml(
 </body></html>`
 }
 
+/**
+ * Confere QUEM está chamando, dentro da própria função.
+ *
+ * Antes, a única proteção era o `verify_jwt` da plataforma — um
+ * interruptor fora do código, que qualquer `functions deploy` com a
+ * flag errada desliga sem avisar. Se ele cair, esta função vira um
+ * relay aberto: qualquer pessoa na internet dispara e-mail em massa
+ * pela conta do Resend do dono, e o domínio é queimado por spam.
+ *
+ * Uma trava que mora no código não some num deploy distraído.
+ */
+async function identificarChamador(
+  req: Request
+): Promise<{ ok: true; usuarioId: string } | { ok: false; resposta: Response }> {
+  const authHeader = req.headers.get("Authorization")
+  const token = authHeader?.replace("Bearer ", "").trim()
+
+  // A anon key também chega como Bearer. Ela não identifica ninguém,
+  // então precisa ser recusada explicitamente.
+  if (!token || token === Deno.env.get("SUPABASE_ANON_KEY")) {
+    return { ok: false, resposta: responder({ erro: "Não autenticado." }, 401) }
+  }
+
+  const resposta = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+    headers: { apikey: SERVICE_ROLE_KEY, Authorization: `Bearer ${token}` },
+  })
+
+  if (!resposta.ok) {
+    return {
+      ok: false,
+      resposta: responder({ erro: "Usuário inválido ou sessão expirada." }, 401),
+    }
+  }
+
+  const usuario = await resposta.json()
+  if (!usuario?.id) {
+    return { ok: false, resposta: responder({ erro: "Não autenticado." }, 401) }
+  }
+
+  return { ok: true, usuarioId: usuario.id }
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders })
   }
+
+  // A identificação vem ANTES de qualquer outra checagem: responder
+  // "Resend não configurado" a quem nem se identificou entrega
+  // informação sobre a infraestrutura a quem está só sondando.
+  const chamador = await identificarChamador(req)
+  if (!chamador.ok) return chamador.resposta
 
   if (!RESEND_API_KEY || !REMETENTE_EMAIL) {
     return responder(
@@ -163,7 +245,7 @@ Deno.serve(async (req: Request) => {
   }
 
   try {
-    const { destinatarios, assunto, corpo, remetente } = await req.json()
+    const { destinatarios, assunto, corpo, remetente, idioma } = await req.json()
 
     if (!Array.isArray(destinatarios) || destinatarios.length === 0) {
       return responder({ erro: "Informe ao menos um destinatário." }, 400)
@@ -206,7 +288,7 @@ Deno.serve(async (req: Request) => {
         continue
       }
 
-      const html = await montarHtml(corpo, d, remetente)
+      const html = await montarHtml(corpo, d, remetente, idioma)
 
       const envio = await fetch("https://api.resend.com/emails", {
         method: "POST",

@@ -1,9 +1,11 @@
 import { Skeleton } from "@/components/ui/skeleton"
 import { useAppStore } from "@/store/useAppStore"
 import { calcularEstatisticas } from "@/lib/utils"
+import { useTranslation } from "react-i18next"
 
 export function GraficoBairros() {
   const { empresasFiltradas, carregando } = useAppStore()
+  const { t } = useTranslation()
   const stats = calcularEstatisticas(empresasFiltradas)
 
   const dadosBairros = Object.entries(stats.porBairro)
@@ -18,7 +20,7 @@ export function GraficoBairros() {
       <div className="px-5 pt-4 pb-3">
         <p className="text-[13px] font-semibold text-foreground/90 flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-dourado-400 shadow-[0_0_8px_rgba(212,176,106,0.6)]" />
-          Bairros com mais alvos
+          {t("painel.bairrosComMaisAlvos")}
         </p>
       </div>
 
@@ -28,7 +30,7 @@ export function GraficoBairros() {
             <Skeleton key={i} className="h-6 w-full rounded" style={{ width: `${95 - i * 12}%` }} />
           ))
         ) : dadosBairros.length === 0 ? (
-          <p className="text-sm text-muted-foreground py-4 text-center">Sem dados disponíveis</p>
+          <p className="text-sm text-muted-foreground py-4 text-center">{t("painel.semDados")}</p>
         ) : (
           dadosBairros.map((item, index) => (
             <div key={item.bairro} className="flex items-center gap-2.5">

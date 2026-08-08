@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { Download, X, Smartphone } from "lucide-react"
+import { useTranslation } from "react-i18next"
 
 interface EventoInstalacaoPWA extends Event {
   prompt: () => Promise<void>
@@ -15,6 +16,7 @@ const CHAVE_DISPENSADO = "prospectx_pwa_dispensado"
  * navegador não suportar instalação.
  */
 export function PromptInstalarApp() {
+  const { t } = useTranslation()
   const [eventoInstalacao, setEventoInstalacao] = useState<EventoInstalacaoPWA | null>(null)
   const [mostrar, setMostrar] = useState(false)
 
@@ -61,16 +63,14 @@ export function PromptInstalarApp() {
           <Smartphone className="w-5 h-5 text-dourado-400" />
         </div>
         <div className="flex-1">
-          <p className="text-sm font-semibold text-foreground">Instale o ProspectX</p>
-          <p className="text-xs text-muted-foreground mt-0.5">
-            Acesse mais rápido, direto da tela inicial do seu celular.
-          </p>
+          <p className="text-sm font-semibold text-foreground">{t("painel.instalarTitulo")}</p>
+          <p className="text-xs text-muted-foreground mt-0.5">{t("painel.instalarTexto")}</p>
           <button
             onClick={handleInstalar}
             className="mt-3 flex items-center gap-1.5 text-xs font-semibold bg-dourado-600 hover:bg-dourado-700 text-background px-3 py-1.5 rounded-md transition-colors"
           >
             <Download className="w-3.5 h-3.5" />
-            Instalar agora
+            {t("painel.instalarAgora")}
           </button>
         </div>
       </div>

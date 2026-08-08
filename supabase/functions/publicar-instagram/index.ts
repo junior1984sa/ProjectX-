@@ -93,10 +93,44 @@ async function aguardarContainerPronto(
   return { pronto: false, motivo: "O contêiner não ficou pronto a tempo." }
 }
 
+/**
+ * Confere quem chama, dentro da função.
+ *
+ * Publicar no Instagram é uma ação pública e irreversível feita em nome
+ * da marca. Depender só do `verify_jwt` da plataforma — um interruptor
+ * fora do código, que um deploy com a flag errada desliga em silêncio —
+ * deixaria qualquer pessoa postar no perfil oficial assim que as
+ * credenciais do Instagram forem configuradas.
+ */
+async function exigirUsuarioAutenticado(req: Request): Promise<Response | null> {
+  const token = req.headers.get("Authorization")?.replace("Bearer ", "").trim()
+
+  // A anon key é pública e chega no mesmo formato: não identifica ninguém.
+  if (!token || token === Deno.env.get("SUPABASE_ANON_KEY")) {
+    return responder({ erro: "Não autenticado." }, 401)
+  }
+
+  const resposta = await fetch(`${Deno.env.get("SUPABASE_URL")}/auth/v1/user`, {
+    headers: {
+      apikey: Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? "",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+
+  if (!resposta.ok) {
+    return responder({ erro: "Usuário inválido ou sessão expirada." }, 401)
+  }
+
+  return null
+}
+
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders })
   }
+
+  const naoAutorizado = await exigirUsuarioAutenticado(req)
+  if (naoAutorizado) return naoAutorizado
 
   if (!IG_USER_ID || !IG_ACCESS_TOKEN) {
     return responder(

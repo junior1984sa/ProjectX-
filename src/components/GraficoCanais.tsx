@@ -1,6 +1,7 @@
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts"
 import { Skeleton } from "@/components/ui/skeleton"
 import { useAppStore } from "@/store/useAppStore"
+import { useTranslation } from "react-i18next"
 import { calcularEstatisticas } from "@/lib/utils"
 
 // Paleta dourado/prata, alinhada ao mockup aprovado
@@ -24,13 +25,14 @@ function TooltipPersonalizado({ active, payload }: TooltipPersonalizadoProps) {
 
 export function GraficoCanais() {
   const { empresasFiltradas, carregando } = useAppStore()
+  const { t } = useTranslation()
   const stats = calcularEstatisticas(empresasFiltradas)
 
   const dados = [
-    { nome: "Telefone", valor: stats.porCanal.telefone },
-    { nome: "E-mail", valor: stats.porCanal.email },
-    { nome: "Website", valor: stats.porCanal.website },
-    { nome: "Redes sociais", valor: stats.porCanal.redesSociais },
+    { nome: t("painel.telefone"), valor: stats.porCanal.telefone },
+    { nome: t("painel.email"), valor: stats.porCanal.email },
+    { nome: t("painel.website"), valor: stats.porCanal.website },
+    { nome: t("painel.redesSociais"), valor: stats.porCanal.redesSociais },
   ].filter((d) => d.valor > 0)
 
   const total = dados.reduce((acc, d) => acc + d.valor, 0)
@@ -40,7 +42,7 @@ export function GraficoCanais() {
       <div className="px-5 pt-4 pb-3">
         <p className="text-[13px] font-semibold text-foreground/90 flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-dourado-400 shadow-[0_0_8px_rgba(212,176,106,0.6)]" />
-          Canais disponíveis
+          {t("painel.canaisDisponiveis")}
         </p>
       </div>
 

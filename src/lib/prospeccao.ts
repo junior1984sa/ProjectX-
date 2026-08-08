@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase"
 import type { Empresa } from "@/types/empresa"
+import i18n from "@/i18n"
 
 /**
  * PROSPECÇÃO — registro de quem já foi abordado
@@ -151,6 +152,9 @@ export async function dispararEmails(params: {
         assunto: params.assunto,
         corpo: params.corpo,
         remetente: params.remetente,
+        // O rodapé legal é montado no servidor e precisa sair no idioma
+        // de quem recebe, senão o aviso de descadastro não informa nada.
+        idioma: i18n.language,
         destinatarios: params.empresas
           .filter((e) => e.email)
           .map((e) => ({

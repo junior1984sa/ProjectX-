@@ -12,13 +12,14 @@ import { Button } from "@/components/ui/button"
 import { useAuthStore } from "@/store/useAuthStore"
 import { usePreferenciasStore } from "@/store/usePreferenciasStore"
 import { obterPais } from "@/types/prestador"
-import { gerarLinkWhatsAppComNumero } from "@/lib/utils"
+import { gerarLinkWhatsAppComNumero, montarMensagemAbordagem } from "@/lib/utils"
 import {
   carregarJaContatadas,
   registrarContato,
   chaveDaEmpresa,
 } from "@/lib/prospeccao"
 import type { Empresa } from "@/types/empresa"
+import { useTranslation } from "react-i18next"
 import toast from "react-hot-toast"
 
 interface FilaProspeccaoProps {
@@ -50,6 +51,7 @@ export function FilaProspeccao({
   onFechar,
 }: FilaProspeccaoProps) {
   const { perfil } = useAuthStore()
+  const { t } = useTranslation()
   const paisPreferido = usePreferenciasStore((s) => s.pais)
   const pais = perfil?.pais_foco ?? paisPreferido
   const configPais = obterPais(pais)
@@ -88,7 +90,7 @@ export function FilaProspeccao({
     if (!sucesso) {
       // O banco recusa se a empresa estiver na lista de descadastro.
       // Nesse caso pular é o comportamento certo, não insistir.
-      toast.error(erro ?? "Não foi possível registrar o contato.")
+      toast.error(erro ?? t("fila.erroRegistrar"))
       avancar()
       return
     }
@@ -131,19 +133,17 @@ export function FilaProspeccao({
 
           <div className="space-y-1.5">
             <h2 className="text-lg font-semibold text-foreground">
-              {nadaARenderizar ? "Nenhuma empresa nova" : "Fila concluída"}
+              {nadaARenderizar ? t("fila.nenhumaNova") : t("fila.concluida")}
             </h2>
             <p className="text-sm text-muted-foreground leading-relaxed">
               {nadaARenderizar
-                ? "Todas as empresas com telefone desta busca já foram abordadas antes."
-                : `Você abordou ${abordadasAgora} ${
-                    abordadasAgora === 1 ? "empresa" : "empresas"
-                  } agora. Elas não vão aparecer em filas futuras.`}
+                ? t("fila.todasJaAbordadas")
+                : t("fila.abordouAgora", { count: abordadasAgora })}
             </p>
           </div>
 
           <Button onClick={onFechar} className="w-full">
-            Voltar aos resultados
+            {t("fila.voltarResultados")}
           </Button>
         </div>
       </div>
@@ -158,10 +158,10 @@ export function FilaProspeccao({
       <div className="border-b border-border/60 px-4 py-3 flex items-center justify-between gap-4">
         <div className="min-w-0">
           <p className="text-sm font-semibold text-foreground">
-            {indice + 1} de {fila.length}
+            {t("fila.deTotal", { atual: indice + 1, total: fila.length })}
           </p>
           <p className="text-[11px] text-muted-foreground">
-            {restantes} {restantes === 1 ? "restante" : "restantes"} · {abordadasAgora} abordadas
+            {t("fila.restante", { count: restantes })} · {t("fila.abordadas", { count: abordadasAgora })}
           </p>
         </div>
 
@@ -170,7 +170,7 @@ export function FilaProspeccao({
           size="icon"
           onClick={onFechar}
           className="h-8 w-8 text-muted-foreground flex-shrink-0"
-          title="Fechar a fila"
+          title={t("fila.fechar")}
         >
           <X className="w-4 h-4" />
         </Button>
@@ -206,22 +206,24 @@ export function FilaProspeccao({
           {/* Prévia da mensagem: o que a empresa vai receber */}
           <div className="rounded-lg border border-border/60 bg-card p-3.5 space-y-1.5">
             <p className="text-[10px] uppercase tracking-wider text-muted-foreground">
-              Mensagem que será aberta
+              {t("fila.mensagemQueSeraAberta")}
             </p>
             <p className="text-[13px] text-muted-foreground leading-relaxed whitespace-pre-line">
-              {`Olá! Sou ${perfil?.nome_contato ?? "..."}.
-Vi que a ${atual.nome} pode ter interesse no nosso serviço.${
-                urlPortfolio ? "\nSegue nosso portfólio: [link]" : ""
-              }
-Posso te passar mais detalhes?`}
+              {/* Mesma função que monta a mensagem enviada de verdade:
+                  duas cópias do texto divergiriam na primeira alteração,
+                  e a prévia passaria a mentir sobre o que será enviado. */}
+              {montarMensagemAbordagem(
+                atual.nome,
+                perfil?.nome_contato ?? "...",
+                urlPortfolio ? "[link]" : null
+              ).join("\n")}
             </p>
           </div>
 
           {!urlPortfolio && (
             <p className="text-[11px] text-muted-foreground/80 flex items-start gap-1.5">
               <AlertCircle className="w-3.5 h-3.5 flex-shrink-0 mt-px" />
-              Sem portfólio enviado, a mensagem vai sem o anexo. Você pode
-              adicionar um em "Meu perfil".
+              {t("fila.semPortfolio")}
             </p>
           )}
 
@@ -230,10 +232,10 @@ Posso te passar mais detalhes?`}
               onClick={abrirWhatsApp}
               disabled={registrando}
               size="lg"
-              className="w-full bg-gradient-to-r from-dourado-600 to-dourado-700 hover:from-dourado-700 hover:to-dourado-800 text-white font-semibold"
+              className="w-full bg-dourado-500 hover:bg-dourado-400 active:bg-dourado-600 text-prata-900 font-semibold"
             >
               <MessageCircle className="w-4 h-4 mr-2" />
-              Abrir WhatsApp e marcar
+              {t("fila.abrirWhatsApp")}
             </Button>
 
             <Button
@@ -242,14 +244,13 @@ Posso te passar mais detalhes?`}
               className="w-full text-muted-foreground"
             >
               <SkipForward className="w-4 h-4 mr-2" />
-              Pular esta
+              {t("fila.pular")}
             </Button>
           </div>
 
           {semTelefone > 0 && indice === 0 && (
             <p className="text-[11px] text-center text-muted-foreground/70">
-              {semTelefone} {semTelefone === 1 ? "empresa ficou" : "empresas ficaram"} de fora
-              por não ter telefone cadastrado.
+              {t("fila.semTelefone", { count: semTelefone })}
             </p>
           )}
         </div>

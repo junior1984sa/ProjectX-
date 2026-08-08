@@ -1,18 +1,20 @@
 import { Phone, Mail, Globe, Share2 } from "lucide-react"
 import { useAppStore } from "@/store/useAppStore"
+import { useTranslation } from "react-i18next"
 
 interface FiltroChip {
   id: string
-  label: string
+  /** Chave de tradução — o rótulo é resolvido na hora de renderizar */
+  chaveLabel: string
   icone: React.ReactNode
   chave: "temTelefone" | "temEmail" | "temWebsite" | "temRedesSociais"
 }
 
 const CHIPS: FiltroChip[] = [
-  { id: "tel", label: "Com telefone", icone: <Phone className="w-3 h-3" />, chave: "temTelefone" },
-  { id: "mail", label: "Com e-mail", icone: <Mail className="w-3 h-3" />, chave: "temEmail" },
-  { id: "site", label: "Com site", icone: <Globe className="w-3 h-3" />, chave: "temWebsite" },
-  { id: "redes", label: "Redes sociais", icone: <Share2 className="w-3 h-3" />, chave: "temRedesSociais" },
+  { id: "tel", chaveLabel: "painel.comTelefone", icone: <Phone className="w-3 h-3" />, chave: "temTelefone" },
+  { id: "mail", chaveLabel: "painel.comEmail", icone: <Mail className="w-3 h-3" />, chave: "temEmail" },
+  { id: "site", chaveLabel: "painel.comSite", icone: <Globe className="w-3 h-3" />, chave: "temWebsite" },
+  { id: "redes", chaveLabel: "painel.redesSociais", icone: <Share2 className="w-3 h-3" />, chave: "temRedesSociais" },
 ]
 
 /** Anel circular indicando o score mínimo selecionado, no estilo "dial" do mockup aprovado */
@@ -51,6 +53,7 @@ function AnelScore({ score }: { score: number }) {
 
 export function PainelFiltros() {
   const { filtros, aplicarFiltros } = useAppStore()
+  const { t } = useTranslation()
 
   function alternarChip(chave: FiltroChip["chave"]) {
     aplicarFiltros({ [chave]: !filtros[chave] })
@@ -62,14 +65,14 @@ export function PainelFiltros() {
 
   const estrelasLabel = filtros.scoreMinimo > 0
     ? "★".repeat(Math.round(filtros.scoreMinimo)) + "☆".repeat(5 - Math.round(filtros.scoreMinimo))
-    : "Qualquer score"
+    : t("painel.qualquerScore")
 
   return (
     <div className="rounded-2xl border border-border bg-gradient-to-br from-card to-card/60 overflow-hidden">
       <div className="px-5 pt-4 pb-3">
         <p className="text-[13px] font-semibold text-foreground/90 flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-dourado-400 shadow-[0_0_8px_rgba(212,176,106,0.6)]" />
-          Refinar alvo
+          {t("painel.refinarAlvo")}
         </p>
       </div>
 
@@ -88,7 +91,7 @@ export function PainelFiltros() {
             >
               {ativo && "✓"}
               {chip.icone}
-              {chip.label}
+              {t(chip.chaveLabel)}
             </button>
           )
         })}
@@ -99,7 +102,7 @@ export function PainelFiltros() {
           <AnelScore score={filtros.scoreMinimo} />
         </button>
         <div className="text-xs text-muted-foreground leading-relaxed">
-          Score mínimo
+          {t("painel.scoreMinimo")}
           <br />
           <span className="text-foreground/90 font-medium tracking-wide">{estrelasLabel}</span>
         </div>
@@ -116,7 +119,7 @@ export function PainelFiltros() {
                 : "bg-secondary/60 text-muted-foreground hover:text-foreground"
             }`}
           >
-            {nivel === 0 ? "Tudo" : nivel}
+            {nivel === 0 ? t("painel.tudo") : nivel}
           </button>
         ))}
       </div>
