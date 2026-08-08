@@ -13,6 +13,7 @@ import { FilaProspeccao } from "@/components/FilaProspeccao"
 import { DisparoEmail } from "@/components/DisparoEmail"
 import type { Empresa } from "@/types/empresa"
 import { temAcessoLiberado } from "@/types/prestador"
+import { useTranslation } from "react-i18next"
 import toast from "react-hot-toast"
 
 const ITENS_POR_PAGINA = 8
@@ -50,6 +51,7 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
     alternarFavorito,
   } = useAppStore()
   const { perfil } = useAuthStore()
+  const { t } = useTranslation()
   const temAcesso = temAcessoLiberado(perfil)
 
   const [pagina, setPagina] = useState(1)
@@ -71,17 +73,14 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
 
   function handleEnviarPanfleto(empresa: Empresa) {
     if (!temAcesso) {
-      toast.error("Assine para enviar seu portfólio aos leads.")
+      toast.error(t("leads.erro.assineEnviar"))
       handleAssinar()
       return
     }
     if (!perfil) return
 
     if (!urlPortfolio) {
-      toast(
-        "Você ainda não enviou um portfólio. Vá em \"Meu perfil\" para adicionar um antes de disparar.",
-        { icon: "📎" }
-      )
+      toast(t("leads.semPortfolio"), { icon: "📎" })
       return
     }
 
@@ -94,7 +93,7 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
 
   async function handleCopiar(empresa: Empresa) {
     if (!temAcesso) {
-      toast.error("Assine para copiar os dados de contato.")
+      toast.error(t("leads.erro.assineCopiar"))
       handleAssinar()
       return
     }
@@ -102,12 +101,12 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
       .filter(Boolean)
       .join(" | ")
     const ok = await copiarParaClipboard(texto)
-    toast[ok ? "success" : "error"](ok ? "Dados copiados!" : "Não foi possível copiar.")
+    toast[ok ? "success" : "error"](ok ? t("leads.ok.copiado") : t("leads.erro.naoCopiou"))
   }
 
   function handleExportar() {
     if (!temAcesso) {
-      toast.error("Assine para exportar os dados em CSV.")
+      toast.error(t("leads.erro.assineExportar"))
       handleAssinar()
       return
     }
@@ -119,7 +118,7 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
     link.download = nomeArquivo
     link.click()
     URL.revokeObjectURL(url)
-    toast.success(`${empresasFiltradas.length} empresas exportadas!`)
+    toast.success(t("leads.ok.exportadas", { quantidade: empresasFiltradas.length }))
   }
 
   const ordenadas = [...empresasFiltradas].sort((a, b) => b.score - a.score)
@@ -131,16 +130,16 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
     <div>
       <div className="flex items-center justify-between flex-wrap gap-3 mb-4">
         <div>
-          <h2 className="text-[15px] font-bold text-foreground">Alvos encontrados</h2>
+          <h2 className="text-[15px] font-bold text-foreground">{t("leads.titulo")}</h2>
           <p className="text-xs text-muted-foreground mt-0.5">
-            {carregando ? "Carregando..." : `${ordenadas.length} empresas · ordenado por aderência ao seu perfil`}
+            {carregando ? t("leads.carregando") : t("leads.contagem", { quantidade: ordenadas.length })}
           </p>
         </div>
         <div className="flex gap-2">
           <div className="relative">
             <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
             <Input
-              placeholder="Buscar por nome ou bairro..."
+              placeholder={t("leads.buscarPlaceholder")}
               value={filtros.textoBusca}
               onChange={(e) => { aplicarFiltros({ textoBusca: e.target.value }); setPagina(1) }}
               className="pl-8 h-9 text-xs w-52 bg-white/[0.02]"
@@ -154,10 +153,10 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
               size="sm"
               onClick={() => setFilaAberta(true)}
               disabled={ordenadas.filter((e) => e.telefone).length === 0 || carregando}
-              className="h-9 text-xs bg-gradient-to-r from-dourado-600 to-dourado-700 text-white hover:from-dourado-700 hover:to-dourado-800"
+              className="h-9 text-xs bg-dourado-500 text-prata-900 hover:bg-dourado-400"
             >
               <MessageCircle className="w-3.5 h-3.5 mr-1.5" />
-              Prospectar em sequência
+              {t("leads.prospectarSequencia")}
             </Button>
           )}
           {/* WhatsApp é um a um por obrigação (disparo em massa banisce
@@ -171,7 +170,7 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
               className="h-9 text-xs border-dourado-700 bg-dourado-900/10 text-dourado-300 hover:bg-dourado-900/20"
             >
               <Mail className="w-3.5 h-3.5 mr-1.5" />
-              Enviar e-mail em lote
+              {t("leads.emailLote")}
             </Button>
           )}
           <Button
@@ -182,7 +181,7 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
             className="h-9 text-xs border-dourado-700 bg-dourado-900/10 text-dourado-300 hover:bg-dourado-900/20"
           >
             <Download className="w-3.5 h-3.5 mr-1.5" />
-            Exportar
+            {t("leads.exportar")}
           </Button>
         </div>
       </div>
@@ -205,16 +204,18 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
       {!temAcesso && !carregando && ordenadas.length > 0 && (
         <div className="rounded-xl border border-dourado-700/40 bg-gradient-to-r from-dourado-900/10 to-prata-700/5 px-5 py-3.5 mb-5 flex items-center justify-between flex-wrap gap-3">
           <p className="text-xs text-dourado-200/90">
-            🔒 Nomes e contatos estão protegidos até a assinatura ser confirmada. Desbloqueie
-            todos os {empresasFiltradas.filter(e => e.telefone).length} telefones e{" "}
-            {empresasFiltradas.filter(e => e.email).length} e-mails agora.
+            🔒{" "}
+            {t("leads.paywallAviso", {
+              telefones: empresasFiltradas.filter((e) => e.telefone).length,
+              emails: empresasFiltradas.filter((e) => e.email).length,
+            })}
           </p>
           <Button
             size="sm"
             onClick={handleAssinar}
             className="h-8 text-xs bg-gradient-to-r from-dourado-600 to-dourado-500 text-background font-semibold hover:from-dourado-700 hover:to-dourado-600 flex-shrink-0"
           >
-            Desbloquear acesso
+            {t("leads.desbloquear")}
           </Button>
         </div>
       )}
@@ -224,8 +225,8 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
           Array.from({ length: 6 }).map((_, i) => <SkeletonLeadCard key={i} />)
         ) : pagAtual.length === 0 ? (
           <div className="col-span-full text-center py-16">
-            <p className="text-sm text-muted-foreground">Nenhuma empresa encontrada.</p>
-            <p className="text-xs text-muted-foreground/70 mt-1">Ajuste os filtros para ver mais resultados.</p>
+            <p className="text-sm text-muted-foreground">{t("leads.nenhuma")}</p>
+            <p className="text-xs text-muted-foreground/70 mt-1">{t("leads.ajusteFiltros")}</p>
           </div>
         ) : (
           pagAtual.map((empresa) => {
@@ -266,7 +267,7 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
                     {empresa.telefone ? (
                       <ContatoComPaywall tipo="telefone" valor={empresa.telefone} onClickAssinar={handleAssinar} />
                     ) : (
-                      <span className="text-muted-foreground/50 text-[11px]">sem telefone cadastrado</span>
+                      <span className="text-muted-foreground/50 text-[11px]">{t("leads.semTelefone")}</span>
                     )}
                   </div>
                   <div className="flex items-center gap-2 text-xs">
@@ -274,7 +275,7 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
                     {empresa.email ? (
                       <ContatoComPaywall tipo="email" valor={empresa.email} onClickAssinar={handleAssinar} />
                     ) : (
-                      <span className="text-muted-foreground/50 text-[11px]">sem e-mail cadastrado</span>
+                      <span className="text-muted-foreground/50 text-[11px]">{t("leads.semEmail")}</span>
                     )}
                   </div>
                 </div>
@@ -285,26 +286,26 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
                     className="flex-1 flex items-center justify-center gap-1.5 py-1.5 rounded-lg border border-green-700/40 bg-green-900/10 text-xs text-green-400 hover:bg-green-900/20 transition-colors"
                   >
                     <MessageCircle className="w-3.5 h-3.5" />
-                    Enviar panfleto
+                    {t("leads.enviarPanfleto")}
                   </button>
                   <button
                     onClick={() => handleCopiar(empresa)}
                     className="w-9 flex items-center justify-center rounded-lg border border-border text-muted-foreground hover:text-foreground hover:bg-white/[0.02] transition-colors"
-                    title="Copiar dados"
+                    title={t("leads.copiarDados")}
                   >
                     <Copy className="w-3.5 h-3.5" />
                   </button>
                   <button
                     onClick={() => {
                       alternarFavorito(empresa.id)
-                      toast.success(empresa.favorita ? "Removido dos favoritos." : "Salvo nos favoritos!")
+                      toast.success(empresa.favorita ? t("leads.ok.favoritoRemovido") : t("leads.ok.favoritoSalvo"))
                     }}
                     className={`w-9 flex items-center justify-center rounded-lg border transition-colors ${
                       empresa.favorita
                         ? "border-red-700/40 bg-red-900/10 text-red-400"
                         : "border-border text-muted-foreground hover:text-foreground"
                     }`}
-                    title="Favoritar"
+                    title={t("leads.favoritar")}
                   >
                     <Heart className={`w-3.5 h-3.5 ${empresa.favorita ? "fill-red-400" : ""}`} />
                   </button>
@@ -324,7 +325,7 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
               className={`h-1.5 rounded-full transition-all ${
                 pagina === i + 1 ? "w-5 bg-dourado-400" : "w-1.5 bg-secondary"
               }`}
-              aria-label={`Página ${i + 1}`}
+              aria-label={t("leads.pagina", { numero: i + 1 })}
             />
           ))}
         </div>

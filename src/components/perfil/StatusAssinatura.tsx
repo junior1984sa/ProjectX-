@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { useAuthStore } from "@/store/useAuthStore"
 import { temAcessoLiberado } from "@/types/prestador"
+import { useTranslation } from "react-i18next"
 
 interface StatusAssinaturaProps {
   resultado: "sucesso" | "erro" | "pendente"
@@ -12,6 +13,7 @@ interface StatusAssinaturaProps {
 
 export function StatusAssinatura({ resultado, onContinuar }: StatusAssinaturaProps) {
   const { carregarPerfil, perfil } = useAuthStore()
+  const { t } = useTranslation()
   const [verificando, setVerificando] = useState(true)
 
   useEffect(() => {
@@ -48,22 +50,22 @@ export function StatusAssinatura({ resultado, onContinuar }: StatusAssinaturaPro
   const conteudo = {
     sucesso: {
       icone: <CheckCircle2 className="w-14 h-14 text-green-400" />,
-      titulo: "Teste grátis iniciado!",
+      titulo: t("assinatura.sucessoTitulo"),
       mensagem: temAcessoLiberado(perfil)
-        ? "Seu perfil já está ativo e visível no diretório."
-        : "Estamos confirmando seus dados com o Mercado Pago. Isso pode levar alguns segundos.",
+        ? t("assinatura.sucessoAtivo")
+        : t("assinatura.sucessoConfirmando"),
       cor: "border-green-800/50 bg-green-950/20",
     },
     erro: {
       icone: <XCircle className="w-14 h-14 text-red-400" />,
-      titulo: "Não foi possível iniciar",
-      mensagem: "Algo deu errado ao validar o cartão. Você pode tentar novamente.",
+      titulo: t("assinatura.erroTitulo"),
+      mensagem: t("assinatura.erroMensagem"),
       cor: "border-red-800/50 bg-red-950/20",
     },
     pendente: {
       icone: <Clock className="w-14 h-14 text-yellow-400" />,
-      titulo: "Em análise",
-      mensagem: "Estamos processando seus dados. Avisaremos quando for confirmado.",
+      titulo: t("assinatura.pendenteTitulo"),
+      mensagem: t("assinatura.pendenteMensagem"),
       cor: "border-yellow-800/50 bg-yellow-950/20",
     },
   }[resultado]
@@ -79,12 +81,12 @@ export function StatusAssinatura({ resultado, onContinuar }: StatusAssinaturaPro
           {resultado === "sucesso" && verificando && (
             <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground py-2">
               <Loader2 className="w-3.5 h-3.5 animate-spin" />
-              Verificando status da assinatura...
+              {t("assinatura.verificando")}
             </div>
           )}
 
           <Button onClick={onContinuar} className="w-full mt-2" size="lg">
-            Continuar
+            {t("assinatura.continuar")}
           </Button>
         </CardContent>
       </Card>

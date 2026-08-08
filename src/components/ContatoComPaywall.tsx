@@ -1,6 +1,7 @@
 import { Lock, Phone, Mail } from "lucide-react"
 import { useAuthStore } from "@/store/useAuthStore"
 import { temAcessoLiberado } from "@/types/prestador"
+import { useTranslation } from "react-i18next"
 
 interface ContatoComPaywallProps {
   tipo: "telefone" | "email"
@@ -14,6 +15,7 @@ interface ContatoComPaywallProps {
  */
 export function ContatoComPaywall({ tipo, valor, onClickAssinar }: ContatoComPaywallProps) {
   const { perfil } = useAuthStore()
+  const { t } = useTranslation()
   const temAcesso = temAcessoLiberado(perfil)
 
   if (!valor) {
@@ -38,7 +40,7 @@ export function ContatoComPaywall({ tipo, valor, onClickAssinar }: ContatoComPay
     <button
       onClick={onClickAssinar}
       className="group flex items-center gap-1.5 hover:opacity-80 transition-opacity"
-      title="Assine para ver este contato"
+      title={t("paywall.assineParaVer")}
     >
       <Lock className="w-3 h-3 text-muted-foreground flex-shrink-0" />
       <span className="text-xs font-mono text-muted-foreground/50 blur-[3px] select-none group-hover:blur-[2px] transition-all">

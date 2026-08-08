@@ -482,6 +482,55 @@ export const PAISES_DISPONIVEIS: ConfiguracaoPais[] = [
   },
 ]
 
+/**
+ * DIVISÕES ADMINISTRATIVAS POR PAÍS.
+ *
+ * O cadastro exigia "UF" com a lista dos 27 estados brasileiros, para
+ * todo mundo. Como o campo é obrigatório, um assinante australiano só
+ * conseguia salvar o perfil escolhendo um estado do Brasil — e esse
+ * valor ainda ia junto na busca, procurando "Sydney, SP".
+ *
+ * Cada país usa a abreviação oficial que o próprio Google e o OSM
+ * entendem em endereço, para que a geocodificação continue funcionando.
+ */
+export const DIVISOES_POR_PAIS: Record<string, string[]> = {
+  BR: ["AC","AL","AP","AM","BA","CE","DF","ES","GO","MA","MT","MS","MG","PA",
+       "PB","PR","PE","PI","RJ","RN","RS","RO","RR","SC","SP","SE","TO"],
+  US: ["AL","AK","AZ","AR","CA","CO","CT","DE","DC","FL","GA","HI","ID","IL",
+       "IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE",
+       "NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD",
+       "TN","TX","UT","VT","VA","WA","WV","WI","WY"],
+  AU: ["ACT","NSW","NT","QLD","SA","TAS","VIC","WA"],
+  CA: ["AB","BC","MB","NB","NL","NS","NT","NU","ON","PE","QC","SK","YT"],
+  NZ: ["AUK","BOP","CAN","GIS","HKB","MBH","MWT","NSN","NTL","OTA","STL",
+       "TAS","TKI","WGN","WKO","WTC"],
+  MX: ["AGU","BCN","BCS","CAM","CHH","CHP","CMX","COA","COL","DUR","GRO","GUA",
+       "HID","JAL","MEX","MIC","MOR","NAY","NLE","OAX","PUE","QUE","ROO","SIN",
+       "SLP","SON","TAB","TAM","TLA","VER","YUC","ZAC"],
+  PY: ["ASU","ALT","AMA","BOQ","CAA","CAG","CAN","CON","COR","GUA","ITA","MIS",
+       "NEE","PAR","PHA","SPE"],
+  GB: ["ENG","SCT","WLS","NIR"],
+  PT: ["AVE","ACO","BEJ","BRA","BRG","CBR","EVR","FAR","GUA","LEI","LIS","MAD",
+       "PTG","PTO","SAN","SET","VCT","VRL","VIS"],
+}
+
+/**
+ * Como esse campo se chama em cada país. "UF" só existe no Brasil;
+ * pedir "UF" a um canadense é pedir algo que ele não reconhece.
+ */
+export const ROTULO_DIVISAO_POR_PAIS: Record<string, string> = {
+  BR: "UF", US: "State", AU: "State", CA: "Province", NZ: "Region",
+  MX: "Estado", PY: "Depto.", GB: "Nation", PT: "Distrito",
+}
+
+export function divisoesDoPais(codigo: string | null | undefined): string[] {
+  return DIVISOES_POR_PAIS[obterPais(codigo).codigo] ?? DIVISOES_POR_PAIS.BR
+}
+
+export function rotuloDivisao(codigo: string | null | undefined): string {
+  return ROTULO_DIVISAO_POR_PAIS[obterPais(codigo).codigo] ?? "UF"
+}
+
 /** Busca a configuração de um país, caindo no Brasil se o código for desconhecido */
 export function obterPais(codigo: string | null | undefined) {
   return (

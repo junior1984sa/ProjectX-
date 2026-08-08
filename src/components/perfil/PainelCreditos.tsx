@@ -3,10 +3,13 @@ import { Zap, Clock, TrendingDown } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { useCreditosStore } from "@/store/useCreditosStore"
 import { format } from "date-fns"
-import { ptBR } from "date-fns/locale"
+import { useTranslation } from "react-i18next"
+import { localeDeData } from "@/lib/datas"
 
 export function PainelCreditos() {
   const { creditos, historico, carregarCreditos, carregarHistorico } = useCreditosStore()
+  const { t } = useTranslation()
+  const locale = localeDeData()
 
   useEffect(() => {
     carregarCreditos()
@@ -17,9 +20,7 @@ export function PainelCreditos() {
     return (
       <Card className="border-border/60">
         <CardContent className="p-6">
-          <p className="text-sm text-muted-foreground">
-            Seus créditos aparecem aqui depois que sua assinatura for ativada.
-          </p>
+          <p className="text-sm text-muted-foreground">{t("creditos.aindaNao")}</p>
         </CardContent>
       </Card>
     )
@@ -44,12 +45,9 @@ export function PainelCreditos() {
       <CardHeader>
         <CardTitle className="text-base flex items-center gap-2">
           <Zap className="w-4 h-4 text-dourado-400" />
-          Créditos de busca
+          {t("creditos.titulo")}
         </CardTitle>
-        <CardDescription>
-          Cada busca consome créditos conforme a quantidade de empresas retornadas.
-          O que sobrar não expira: soma à recarga do próximo ciclo.
-        </CardDescription>
+        <CardDescription>{t("creditos.descricao")}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-5">
         <div>
@@ -59,8 +57,8 @@ export function PainelCreditos() {
             </span>
             <span className="text-sm text-muted-foreground">
               {acumulado > 0
-                ? `${franquia} do plano + ${acumulado} acumulados`
-                : `de ${franquia} créditos`}
+                ? t("creditos.doPlanoMaisAcumulado", { franquia, acumulado })
+                : t("creditos.deTotal", { franquia })}
             </span>
           </div>
           <div className="h-2 rounded-full bg-secondary overflow-hidden">
@@ -71,8 +69,9 @@ export function PainelCreditos() {
           </div>
           <p className="text-xs text-muted-foreground mt-2 flex items-center gap-1.5">
             <Clock className="w-3 h-3" />
-            Próxima recarga em{" "}
-            {format(new Date(creditos.ciclo_fim), "dd 'de' MMMM", { locale: ptBR })}
+            {t("creditos.proximaRecarga", {
+              data: format(new Date(creditos.ciclo_fim), t("creditos.formatoData"), { locale }),
+            })}
           </p>
         </div>
 
@@ -80,7 +79,7 @@ export function PainelCreditos() {
           <div>
             <p className="text-xs font-medium text-muted-foreground uppercase tracking-wide mb-3 flex items-center gap-1.5">
               <TrendingDown className="w-3 h-3" />
-              Uso recente
+              {t("creditos.usoRecente")}
             </p>
             <div className="space-y-2 max-h-52 overflow-y-auto">
               {historico.map((item) => (
@@ -93,8 +92,10 @@ export function PainelCreditos() {
                       {item.segmento} · {item.cidade}
                     </p>
                     <p className="text-muted-foreground/70 mt-0.5">
-                      {item.quantidade_empresas} empresas ·{" "}
-                      {format(new Date(item.criado_em), "dd/MM 'às' HH:mm", { locale: ptBR })}
+                      {t("creditos.empresasEm", {
+                        quantidade: item.quantidade_empresas,
+                        data: format(new Date(item.criado_em), t("creditos.formatoDataHora"), { locale }),
+                      })}
                     </p>
                   </div>
                   <span className="text-dourado-400 font-semibold flex-shrink-0 ml-2">

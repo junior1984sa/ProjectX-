@@ -9,21 +9,25 @@ import { useAuthStore } from "@/store/useAuthStore"
 import { UploadPortfolio } from "@/components/perfil/UploadPortfolio"
 import { PainelCreditos } from "@/components/perfil/PainelCreditos"
 import { CancelarAssinatura } from "@/components/perfil/CancelarAssinatura"
-import { SEGMENTOS_SUGERIDOS, PAISES_DISPONIVEIS, temAcessoLiberado, type DadosPerfilForm } from "@/types/prestador"
+import {
+  SEGMENTOS_SUGERIDOS,
+  PAISES_DISPONIVEIS,
+  temAcessoLiberado,
+  obterPais,
+  divisoesDoPais,
+  rotuloDivisao,
+  type DadosPerfilForm,
+} from "@/types/prestador"
+import { useTranslation } from "react-i18next"
 import toast from "react-hot-toast"
 
 interface FormularioPerfilProps {
   onConcluido?: () => void
 }
 
-const ESTADOS_BR = [
-  "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS",
-  "MG", "PA", "PB", "PR", "PE", "PI", "RJ", "RN", "RS", "RO", "RR", "SC",
-  "SP", "SE", "TO",
-]
-
 export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
   const { perfil, usuarioId, email, criarOuAtualizarPerfil } = useAuthStore()
+  const { t } = useTranslation()
 
   const [form, setForm] = useState<DadosPerfilForm>({
     nome_empresa: "",
@@ -71,14 +75,14 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
   }
 
   function validarFormulario(): string | null {
-    if (!form.nome_empresa.trim()) return "Informe o nome da empresa."
-    if (!form.segmento.trim()) return "Informe o segmento de atuação."
-    if (!form.cidade.trim()) return "Informe a cidade."
-    if (!form.estado.trim()) return "Selecione o estado."
-    if (!form.nome_contato.trim()) return "Informe o nome do responsável pelo contato."
-    if (form.whatsapp.replace(/\D/g, "").length < 10) return "Informe um WhatsApp válido com DDD."
+    if (!form.nome_empresa.trim()) return t("perfil.erro.nomeEmpresa")
+    if (!form.segmento.trim()) return t("perfil.erro.segmento")
+    if (!form.cidade.trim()) return t("perfil.erro.cidade")
+    if (!form.estado.trim()) return t("perfil.erro.divisao")
+    if (!form.nome_contato.trim()) return t("perfil.erro.nomeContato")
+    if (form.whatsapp.replace(/\D/g, "").length < 10) return t("perfil.erro.whatsapp")
     if (!form.email_contato.trim() || !form.email_contato.includes("@")) {
-      return "Informe um e-mail de contato válido."
+      return t("perfil.erro.email")
     }
     return null
   }
@@ -99,7 +103,7 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
       return
     }
 
-    toast.success(perfil ? "Perfil atualizado!" : "Perfil criado! Agora escolha seu plano.")
+    toast.success(perfil ? t("perfil.ok.atualizado") : t("perfil.ok.criado"))
     onConcluido?.()
   }
 
@@ -111,11 +115,10 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-bold text-foreground">
-          {perfil ? "Editar perfil da empresa" : "Cadastre sua empresa"}
+          {perfil ? t("perfil.tituloEditar") : t("perfil.tituloCriar")}
         </h1>
         <p className="text-muted-foreground text-sm mt-1">
-          Essas informações são o que conecta você às empresas que estão, agora,
-          procurando o serviço que você presta — não é só um perfil, é a sua porta de entrada.
+          {t("perfil.subtitulo")}
         </p>
       </div>
 
@@ -123,17 +126,17 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
         <CardHeader>
           <CardTitle className="text-base flex items-center gap-2">
             <Building2 className="w-4 h-4 text-dourado-400" />
-            Dados da empresa
+            {t("perfil.dadosEmpresa")}
           </CardTitle>
-          <CardDescription>Informações principais do seu negócio</CardDescription>
+          <CardDescription>{t("perfil.dadosEmpresaDesc")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           {/* Nome da empresa */}
           <div className="space-y-2">
-            <Label htmlFor="nome_empresa">Nome da empresa *</Label>
+            <Label htmlFor="nome_empresa">{t("perfil.nomeEmpresa")}</Label>
             <Input
               id="nome_empresa"
-              placeholder="Ex: Jateamento Industrial Santos Ltda"
+              placeholder={t("perfil.placeholderNomeEmpresa")}
               value={form.nome_empresa}
               onChange={(e) => atualizarCampo("nome_empresa", e.target.value)}
               className="bg-background/60"
@@ -145,7 +148,7 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
             <Label htmlFor="segmento">Segmento / Ramo de atuação *</Label>
             <Input
               id="segmento"
-              placeholder="Ex: Jateamento abrasivo, pintura industrial..."
+              placeholder={t("perfil.placeholderSegmento")}
               value={form.segmento}
               onChange={(e) => atualizarCampo("segmento", e.target.value)}
               onFocus={() => setMostrarSugestoes(true)}
@@ -175,7 +178,7 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
               futuro, qual gateway cobra a assinatura. A busca já funciona
               nos quatro países; o que ainda falta em alguns é a cobrança. */}
           <div className="space-y-2">
-            <Label>País de atuação</Label>
+            <Label>{t("perfil.paisAtuacao")}</Label>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {PAISES_DISPONIVEIS.map((pais) => (
                 <button
@@ -211,12 +214,12 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
           {/* Cidade + Estado */}
           <div className="grid grid-cols-3 gap-3">
             <div className="col-span-2 space-y-2">
-              <Label htmlFor="cidade">Cidade *</Label>
+              <Label htmlFor="cidade">{t("perfil.cidade")}</Label>
               <div className="relative">
                 <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
                 <Input
                   id="cidade"
-                  placeholder="Ex: Biguaçu"
+                  placeholder={t("perfil.placeholderCidade", { exemplo: obterPais(form.paisFoco).exemploCidade })}
                   value={form.cidade}
                   onChange={(e) => atualizarCampo("cidade", e.target.value)}
                   className="pl-9 bg-background/60"
@@ -224,7 +227,7 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
               </div>
             </div>
             <div className="space-y-2">
-              <Label htmlFor="estado">UF *</Label>
+              <Label htmlFor="estado">{rotuloDivisao(form.paisFoco)} *</Label>
               <select
                 id="estado"
                 value={form.estado}
@@ -232,8 +235,8 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
                 className="flex h-10 w-full rounded-md border border-input bg-background/60 px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <option value="">--</option>
-                {ESTADOS_BR.map((uf) => (
-                  <option key={uf} value={uf}>{uf}</option>
+                {divisoesDoPais(form.paisFoco).map((divisao) => (
+                  <option key={divisao} value={divisao}>{divisao}</option>
                 ))}
               </select>
             </div>
@@ -241,10 +244,10 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
 
           {/* Descrição */}
           <div className="space-y-2">
-            <Label htmlFor="descricao">Descrição do serviço (opcional)</Label>
+            <Label htmlFor="descricao">{t("perfil.descricao")}</Label>
             <Textarea
               id="descricao"
-              placeholder="Conte um pouco sobre sua empresa, diferenciais, área de atendimento..."
+              placeholder={t("perfil.placeholderDescricao")}
               value={form.descricao}
               onChange={(e) => atualizarCampo("descricao", e.target.value)}
               className="bg-background/60 min-h-[90px]"
@@ -258,7 +261,7 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
               <Globe className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
                 id="website"
-                placeholder="www.suaempresa.com.br"
+                placeholder={t("perfil.placeholderWebsite")}
                 value={form.website}
                 onChange={(e) => atualizarCampo("website", e.target.value)}
                 className="pl-9 bg-background/60"
@@ -273,20 +276,18 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
         <CardHeader>
           <CardTitle className="text-base flex items-center gap-2">
             <User className="w-4 h-4 text-green-400" />
-            Informações de contato
+            {t("perfil.contato")}
           </CardTitle>
-          <CardDescription>
-            Como as empresas interessadas vão falar com você
-          </CardDescription>
+          <CardDescription>{t("perfil.contatoDesc")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="nome_contato">Nome do responsável *</Label>
+            <Label htmlFor="nome_contato">{t("perfil.nomeResponsavel")}</Label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
                 id="nome_contato"
-                placeholder="Ex: Antônio Silva"
+                placeholder={t("perfil.placeholderResponsavel")}
                 value={form.nome_contato}
                 onChange={(e) => atualizarCampo("nome_contato", e.target.value)}
                 className="pl-9 bg-background/60"
@@ -316,7 +317,7 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
                 <Input
                   id="email_contato"
                   type="email"
-                  placeholder="contato@suaempresa.com"
+                  placeholder={t("perfil.placeholderEmailContato")}
                   value={form.email_contato}
                   onChange={(e) => atualizarCampo("email_contato", e.target.value)}
                   className="pl-9 bg-background/60"
@@ -333,8 +334,7 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
           {perfil.status_assinatura === "trial" && (
             <div className="rounded-lg bg-dourado-900/15 border border-dourado-800/40 p-4 flex items-center justify-between flex-wrap gap-3">
               <p className="text-sm text-dourado-300">
-                🎁 Você está no período de teste gratuito. A primeira cobrança ocorre
-                automaticamente ao final do período, salvo cancelamento.
+                🎁 {t("perfil.avisoTrial")}
               </p>
               <CancelarAssinatura />
             </div>
@@ -354,12 +354,9 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
               <FileText className="w-4 h-4 text-purple-400" />
-              Portfólio e materiais
+              {t("perfil.portfolio")}
             </CardTitle>
-            <CardDescription>
-              Envie seu portfólio, proposta comercial ou panfleto para apresentar seu trabalho.
-              O arquivo mais recente é usado automaticamente quando você disparar mensagens para os leads.
-            </CardDescription>
+            <CardDescription>{t("perfil.portfolioDesc")}</CardDescription>
           </CardHeader>
           <CardContent>
             <UploadPortfolio profileId={usuarioId} />
@@ -370,8 +367,7 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
       {!perfil && (
         <div className="rounded-lg bg-dourado-900/20 border border-dourado-800/40 p-4">
           <p className="text-sm text-dourado-300">
-            💡 Depois de salvar os dados acima, você poderá enviar seu portfólio, proposta ou
-            panfleto nesta mesma tela.
+            💡 {t("perfil.avisoDepoisDeSalvar")}
           </p>
         </div>
       )}
@@ -380,10 +376,10 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
         onClick={handleSalvar}
         disabled={salvando}
         size="lg"
-        className="w-full bg-gradient-to-r from-dourado-600 to-dourado-700 hover:from-dourado-700 hover:to-dourado-800 text-white font-semibold"
+        className="w-full bg-dourado-500 hover:bg-dourado-400 active:bg-dourado-600 text-prata-900 font-semibold"
       >
         {salvando ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
-        {perfil ? "Salvar alterações" : "Salvar e continuar"}
+        {perfil ? t("perfil.salvarAlteracoes") : t("perfil.salvarContinuar")}
       </Button>
     </div>
   )

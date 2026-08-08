@@ -156,6 +156,38 @@
     "precisaConta": "Crie sua conta para começar o teste grátis.",
     "criarContaParaAssinar": "Criar conta e começar o teste"
   },
+  "leads": {
+    "titulo": "Alvos encontrados",
+    "carregando": "Carregando...",
+    "contagem": "{{quantidade}} empresas · ordenado por aderência ao seu perfil",
+    "buscarPlaceholder": "Buscar por nome ou bairro...",
+    "prospectarSequencia": "Prospectar em sequência",
+    "emailLote": "Enviar e-mail em lote",
+    "exportar": "Exportar",
+    "paywallAviso": "Nomes e contatos estão protegidos até a assinatura ser confirmada. Desbloqueie todos os {{telefones}} telefones e {{emails}} e-mails agora.",
+    "desbloquear": "Desbloquear acesso",
+    "nenhuma": "Nenhuma empresa encontrada.",
+    "ajusteFiltros": "Ajuste os filtros para ver mais resultados.",
+    "semTelefone": "sem telefone cadastrado",
+    "semEmail": "sem e-mail cadastrado",
+    "enviarPanfleto": "Enviar panfleto",
+    "copiarDados": "Copiar dados",
+    "favoritar": "Favoritar",
+    "pagina": "Página {{numero}}",
+    "semPortfolio": "Você ainda não enviou um portfólio. Vá em \"Meu perfil\" para adicionar um antes de disparar.",
+    "erro": {
+      "assineEnviar": "Assine para enviar seu portfólio aos leads.",
+      "assineCopiar": "Assine para copiar os dados de contato.",
+      "assineExportar": "Assine para exportar os dados em CSV.",
+      "naoCopiou": "Não foi possível copiar."
+    },
+    "ok": {
+      "copiado": "Dados copiados!",
+      "exportadas": "{{quantidade}} empresas exportadas!",
+      "favoritoRemovido": "Removido dos favoritos.",
+      "favoritoSalvo": "Salvo nos favoritos!"
+    }
+  },
   "auth": {
     "chamada": "Cadastre sua empresa — jateamento, pintura industrial, locação de equipamentos, qualquer ramo — e fique visível para quem está, agora, procurando exatamente o seu serviço.",
     "criarConta": "Criar conta",
@@ -229,6 +261,81 @@
       "iaIdentificou": "Identificamos os clientes potenciais com a ajuda de IA.",
       "demonstracao": "Essa é uma demonstração — crie sua conta para ver os contatos e buscar sem limites.",
       "creditosUsados": "{{custo}} créditos usados · {{saldo}} restantes"
+    }
+  },
+  "creditos": {
+    "titulo": "Créditos de busca",
+    "descricao": "Cada busca consome créditos conforme a quantidade de empresas retornadas. O que sobrar não expira: soma à recarga do próximo ciclo.",
+    "aindaNao": "Seus créditos aparecem aqui depois que sua assinatura for ativada.",
+    "doPlanoMaisAcumulado": "{{franquia}} do plano + {{acumulado}} acumulados",
+    "deTotal": "de {{franquia}} créditos",
+    "proximaRecarga": "Próxima recarga em {{data}}",
+    "usoRecente": "Uso recente",
+    "empresasEm": "{{quantidade}} empresas · {{data}}",
+    "formatoData": "dd 'de' MMMM",
+    "formatoDataHora": "dd/MM 'às' HH:mm"
+  },
+  "assinatura": {
+    "sucessoTitulo": "Teste grátis iniciado!",
+    "sucessoAtivo": "Seu perfil já está ativo e visível no diretório.",
+    "sucessoConfirmando": "Estamos confirmando seus dados com o meio de pagamento. Isso pode levar alguns segundos.",
+    "erroTitulo": "Não foi possível iniciar",
+    "erroMensagem": "Algo deu errado ao validar o cartão. Você pode tentar novamente.",
+    "pendenteTitulo": "Em análise",
+    "pendenteMensagem": "Estamos processando seus dados. Avisaremos quando for confirmado.",
+    "verificando": "Verificando status da assinatura...",
+    "continuar": "Continuar",
+    "cancelar": "Cancelar assinatura",
+    "cancelarDescricao": "Seu perfil deixa de aparecer no diretório e nenhuma nova cobrança será feita. Você pode assinar novamente quando quiser, sem penalidade.",
+    "manter": "Manter assinatura",
+    "confirmarCancelar": "Sim, cancelar",
+    "canceladaOk": "Assinatura cancelada. Você não será cobrado novamente.",
+    "canceladaErro": "Não foi possível cancelar agora. Tente novamente."
+  },
+  "paywall": {
+    "assineParaVer": "Assine para ver este contato"
+  },
+  "perfil": {
+    "tituloEditar": "Editar perfil da empresa",
+    "tituloCriar": "Cadastre sua empresa",
+    "subtitulo": "Essas informações são o que conecta você às empresas que estão, agora, procurando o serviço que você presta — não é só um perfil, é a sua porta de entrada.",
+    "dadosEmpresa": "Dados da empresa",
+    "dadosEmpresaDesc": "Informações principais do seu negócio",
+    "nomeEmpresa": "Nome da empresa *",
+    "placeholderNomeEmpresa": "Ex: Jateamento Industrial Santos Ltda",
+    "segmento": "Segmento de atuação *",
+    "placeholderSegmento": "Ex: jateamento abrasivo, pintura industrial...",
+    "paisAtuacao": "País de atuação",
+    "cidade": "Cidade *",
+    "placeholderCidade": "Ex: {{exemplo}}",
+    "descricao": "Descrição do serviço (opcional)",
+    "placeholderDescricao": "Conte um pouco sobre sua empresa, diferenciais, área de atendimento...",
+    "website": "Site (opcional)",
+    "placeholderWebsite": "www.suaempresa.com.br",
+    "contato": "Informações de contato",
+    "contatoDesc": "Como as empresas interessadas vão falar com você",
+    "nomeResponsavel": "Nome do responsável *",
+    "placeholderResponsavel": "Ex: Antônio Silva",
+    "emailContato": "E-mail de contato *",
+    "placeholderEmailContato": "contato@suaempresa.com",
+    "avisoTrial": "Você está no período de teste gratuito. A primeira cobrança ocorre automaticamente ao final do período, salvo cancelamento.",
+    "portfolio": "Portfólio e materiais",
+    "portfolioDesc": "Envie seu portfólio, proposta comercial ou panfleto para apresentar seu trabalho. O arquivo mais recente é usado automaticamente quando você disparar mensagens para os leads.",
+    "avisoDepoisDeSalvar": "Depois de salvar os dados acima, você poderá enviar seu portfólio, proposta ou panfleto nesta mesma tela.",
+    "salvarAlteracoes": "Salvar alterações",
+    "salvarContinuar": "Salvar e continuar",
+    "erro": {
+      "nomeEmpresa": "Informe o nome da empresa.",
+      "segmento": "Informe o segmento de atuação.",
+      "cidade": "Informe a cidade.",
+      "divisao": "Selecione a região.",
+      "nomeContato": "Informe o nome do responsável pelo contato.",
+      "whatsapp": "Informe um WhatsApp válido com DDD.",
+      "email": "Informe um e-mail de contato válido."
+    },
+    "ok": {
+      "atualizado": "Perfil atualizado!",
+      "criado": "Perfil criado! Agora escolha seu plano."
     }
   }
 }

@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dialog"
 import { cancelarAssinatura } from "@/lib/pagamento"
 import { useAuthStore } from "@/store/useAuthStore"
+import { useTranslation } from "react-i18next"
 import toast from "react-hot-toast"
 
 /**
@@ -19,6 +20,7 @@ import toast from "react-hot-toast"
  */
 export function CancelarAssinatura() {
   const { carregarPerfil } = useAuthStore()
+  const { t } = useTranslation()
   const [modalAberto, setModalAberto] = useState(false)
   const [cancelando, setCancelando] = useState(false)
 
@@ -28,11 +30,11 @@ export function CancelarAssinatura() {
     setCancelando(false)
 
     if (!resultado.sucesso) {
-      toast.error(resultado.erro ?? "Não foi possível cancelar agora. Tente novamente.")
+      toast.error(resultado.erro ?? t("assinatura.canceladaErro"))
       return
     }
 
-    toast.success("Assinatura cancelada. Você não será cobrado novamente.")
+    toast.success(t("assinatura.canceladaOk"))
     setModalAberto(false)
     await carregarPerfil()
   }
@@ -43,7 +45,7 @@ export function CancelarAssinatura() {
         onClick={() => setModalAberto(true)}
         className="text-xs text-muted-foreground hover:text-red-400 transition-colors underline-offset-2 hover:underline"
       >
-        Cancelar assinatura
+        {t("assinatura.cancelar")}
       </button>
 
       <Dialog open={modalAberto} onOpenChange={setModalAberto}>
@@ -51,12 +53,9 @@ export function CancelarAssinatura() {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-base">
               <AlertTriangle className="w-4 h-4 text-yellow-400" />
-              Cancelar assinatura
+              {t("assinatura.cancelar")}
             </DialogTitle>
-            <DialogDescription>
-              Seu perfil deixa de aparecer no diretório e nenhuma nova cobrança será feita.
-              Você pode assinar novamente quando quiser, sem penalidade.
-            </DialogDescription>
+            <DialogDescription>{t("assinatura.cancelarDescricao")}</DialogDescription>
           </DialogHeader>
 
           <div className="flex gap-2 mt-2">
@@ -67,7 +66,7 @@ export function CancelarAssinatura() {
               disabled={cancelando}
             >
               <X className="w-4 h-4 mr-1.5" />
-              Manter assinatura
+              {t("assinatura.manter")}
             </Button>
             <Button
               onClick={handleConfirmarCancelamento}
@@ -78,7 +77,7 @@ export function CancelarAssinatura() {
               {cancelando ? (
                 <Loader2 className="w-4 h-4 mr-1.5 animate-spin" />
               ) : null}
-              Sim, cancelar
+              {t("assinatura.confirmarCancelar")}
             </Button>
           </div>
         </DialogContent>

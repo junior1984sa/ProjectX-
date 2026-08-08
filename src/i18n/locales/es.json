@@ -156,6 +156,38 @@
     "precisaConta": "Crea tu cuenta para empezar la prueba gratuita.",
     "criarContaParaAssinar": "Crear cuenta y empezar la prueba"
   },
+  "leads": {
+    "titulo": "Objetivos encontrados",
+    "carregando": "Cargando...",
+    "contagem": "{{quantidade}} empresas · ordenado por afinidad con tu perfil",
+    "buscarPlaceholder": "Buscar por nombre o zona...",
+    "prospectarSequencia": "Prospectar en secuencia",
+    "emailLote": "Enviar correo masivo",
+    "exportar": "Exportar",
+    "paywallAviso": "Los nombres y contactos están protegidos hasta confirmar la suscripción. Desbloquea los {{telefones}} teléfonos y {{emails}} correos ahora.",
+    "desbloquear": "Desbloquear acceso",
+    "nenhuma": "No se encontraron empresas.",
+    "ajusteFiltros": "Ajusta los filtros para ver más resultados.",
+    "semTelefone": "sin teléfono registrado",
+    "semEmail": "sin correo registrado",
+    "enviarPanfleto": "Enviar folleto",
+    "copiarDados": "Copiar datos",
+    "favoritar": "Guardar",
+    "pagina": "Página {{numero}}",
+    "semPortfolio": "Todavía no subiste un portafolio. Ve a \"Mi perfil\" para agregar uno antes de enviar.",
+    "erro": {
+      "assineEnviar": "Suscríbete para enviar tu portafolio a los leads.",
+      "assineCopiar": "Suscríbete para copiar los datos de contacto.",
+      "assineExportar": "Suscríbete para exportar los datos en CSV.",
+      "naoCopiou": "No se pudo copiar."
+    },
+    "ok": {
+      "copiado": "¡Datos copiados!",
+      "exportadas": "¡{{quantidade}} empresas exportadas!",
+      "favoritoRemovido": "Quitado de guardados.",
+      "favoritoSalvo": "¡Guardado!"
+    }
+  },
   "auth": {
     "chamada": "Registra tu empresa — arenado, pintura industrial, alquiler de equipos, cualquier rubro — y hazte visible para quienes buscan justo tu servicio ahora mismo.",
     "criarConta": "Crear cuenta",
@@ -229,6 +261,81 @@
       "iaIdentificou": "Identificamos los clientes potenciales con ayuda de IA.",
       "demonstracao": "Esto es una demostración — crea tu cuenta para ver los contactos y buscar sin límites.",
       "creditosUsados": "{{custo}} créditos usados · {{saldo}} restantes"
+    }
+  },
+  "creditos": {
+    "titulo": "Créditos de búsqueda",
+    "descricao": "Cada búsqueda consume créditos según la cantidad de empresas devueltas. Lo que sobra no vence: se suma a la próxima recarga.",
+    "aindaNao": "Tus créditos aparecen aquí una vez activada tu suscripción.",
+    "doPlanoMaisAcumulado": "{{franquia}} del plan + {{acumulado}} acumulados",
+    "deTotal": "de {{franquia}} créditos",
+    "proximaRecarga": "Próxima recarga el {{data}}",
+    "usoRecente": "Uso reciente",
+    "empresasEm": "{{quantidade}} empresas · {{data}}",
+    "formatoData": "d 'de' MMMM",
+    "formatoDataHora": "dd/MM 'a las' HH:mm"
+  },
+  "assinatura": {
+    "sucessoTitulo": "¡Prueba gratuita iniciada!",
+    "sucessoAtivo": "Tu perfil ya está activo y visible en el directorio.",
+    "sucessoConfirmando": "Estamos confirmando tus datos con el medio de pago. Puede tardar unos segundos.",
+    "erroTitulo": "No se pudo iniciar",
+    "erroMensagem": "Algo salió mal al validar la tarjeta. Puedes intentarlo de nuevo.",
+    "pendenteTitulo": "En revisión",
+    "pendenteMensagem": "Estamos procesando tus datos. Te avisaremos cuando se confirme.",
+    "verificando": "Verificando el estado de la suscripción...",
+    "continuar": "Continuar",
+    "cancelar": "Cancelar suscripción",
+    "cancelarDescricao": "Tu perfil deja de aparecer en el directorio y no se hará ningún cobro nuevo. Puedes suscribirte otra vez cuando quieras, sin penalización.",
+    "manter": "Mantener suscripción",
+    "confirmarCancelar": "Sí, cancelar",
+    "canceladaOk": "Suscripción cancelada. No se te cobrará de nuevo.",
+    "canceladaErro": "No se pudo cancelar ahora. Inténtalo de nuevo."
+  },
+  "paywall": {
+    "assineParaVer": "Suscríbete para ver este contacto"
+  },
+  "perfil": {
+    "tituloEditar": "Editar perfil de la empresa",
+    "tituloCriar": "Registra tu empresa",
+    "subtitulo": "Esta información es lo que te conecta con las empresas que están, ahora, buscando el servicio que prestas — no es solo un perfil, es tu puerta de entrada.",
+    "dadosEmpresa": "Datos de la empresa",
+    "dadosEmpresaDesc": "Información principal de tu negocio",
+    "nomeEmpresa": "Nombre de la empresa *",
+    "placeholderNomeEmpresa": "Ej: Arenado Industrial Santos S.A.",
+    "segmento": "Tu rubro *",
+    "placeholderSegmento": "Ej: arenado, pintura industrial...",
+    "paisAtuacao": "País donde trabajas",
+    "cidade": "Ciudad *",
+    "placeholderCidade": "Ej: {{exemplo}}",
+    "descricao": "Descripción del servicio (opcional)",
+    "placeholderDescricao": "Cuéntanos sobre tu empresa, diferenciales, zona de atención...",
+    "website": "Sitio web (opcional)",
+    "placeholderWebsite": "www.tuempresa.com",
+    "contato": "Datos de contacto",
+    "contatoDesc": "Cómo te van a contactar las empresas interesadas",
+    "nomeResponsavel": "Nombre del responsable *",
+    "placeholderResponsavel": "Ej: Antonio Silva",
+    "emailContato": "Correo de contacto *",
+    "placeholderEmailContato": "contacto@tuempresa.com",
+    "avisoTrial": "Estás en el período de prueba gratuita. El primer cobro ocurre automáticamente al final del período, salvo cancelación.",
+    "portfolio": "Portafolio y materiales",
+    "portfolioDesc": "Sube tu portafolio, propuesta comercial o folleto para presentar tu trabajo. El archivo más reciente se usa automáticamente cuando envíes mensajes a los leads.",
+    "avisoDepoisDeSalvar": "Después de guardar los datos de arriba, podrás subir tu portafolio, propuesta o folleto en esta misma pantalla.",
+    "salvarAlteracoes": "Guardar cambios",
+    "salvarContinuar": "Guardar y continuar",
+    "erro": {
+      "nomeEmpresa": "Ingresa el nombre de la empresa.",
+      "segmento": "Ingresa tu rubro.",
+      "cidade": "Ingresa la ciudad.",
+      "divisao": "Selecciona la región.",
+      "nomeContato": "Ingresa el nombre del responsable.",
+      "whatsapp": "Ingresa un WhatsApp válido con código de área.",
+      "email": "Ingresa un correo de contacto válido."
+    },
+    "ok": {
+      "atualizado": "¡Perfil actualizado!",
+      "criado": "¡Perfil creado! Ahora elige tu plan."
     }
   }
 }

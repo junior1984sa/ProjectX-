@@ -156,6 +156,38 @@
     "precisaConta": "Create your account to start the free trial.",
     "criarContaParaAssinar": "Create account and start the trial"
   },
+  "leads": {
+    "titulo": "Targets found",
+    "carregando": "Loading...",
+    "contagem": "{{quantidade}} companies · sorted by match to your profile",
+    "buscarPlaceholder": "Search by name or area...",
+    "prospectarSequencia": "Prospect in sequence",
+    "emailLote": "Send bulk email",
+    "exportar": "Export",
+    "paywallAviso": "Names and contacts stay protected until your subscription is confirmed. Unlock all {{telefones}} phone numbers and {{emails}} emails now.",
+    "desbloquear": "Unlock access",
+    "nenhuma": "No companies found.",
+    "ajusteFiltros": "Adjust the filters to see more results.",
+    "semTelefone": "no phone number listed",
+    "semEmail": "no email listed",
+    "enviarPanfleto": "Send flyer",
+    "copiarDados": "Copy details",
+    "favoritar": "Save",
+    "pagina": "Page {{numero}}",
+    "semPortfolio": "You haven't uploaded a portfolio yet. Go to \"My profile\" to add one before reaching out.",
+    "erro": {
+      "assineEnviar": "Subscribe to send your portfolio to leads.",
+      "assineCopiar": "Subscribe to copy contact details.",
+      "assineExportar": "Subscribe to export the data as CSV.",
+      "naoCopiou": "Couldn't copy."
+    },
+    "ok": {
+      "copiado": "Details copied!",
+      "exportadas": "{{quantidade}} companies exported!",
+      "favoritoRemovido": "Removed from saved.",
+      "favoritoSalvo": "Saved!"
+    }
+  },
   "auth": {
     "chamada": "Register your company — sandblasting, industrial painting, equipment rental, any trade — and become visible to the businesses looking for exactly your service right now.",
     "criarConta": "Create account",
@@ -229,6 +261,81 @@
       "iaIdentificou": "We identified the potential clients with help from AI.",
       "demonstracao": "This is a demo — create an account to see contact details and search without limits.",
       "creditosUsados": "{{custo}} credits used · {{saldo}} remaining"
+    }
+  },
+  "creditos": {
+    "titulo": "Search credits",
+    "descricao": "Each search uses credits based on how many companies it returns. Whatever is left never expires: it adds to your next top-up.",
+    "aindaNao": "Your credits appear here once your subscription is active.",
+    "doPlanoMaisAcumulado": "{{franquia}} from your plan + {{acumulado}} rolled over",
+    "deTotal": "of {{franquia}} credits",
+    "proximaRecarga": "Next top-up on {{data}}",
+    "usoRecente": "Recent usage",
+    "empresasEm": "{{quantidade}} companies · {{data}}",
+    "formatoData": "MMMM d",
+    "formatoDataHora": "MM/dd 'at' HH:mm"
+  },
+  "assinatura": {
+    "sucessoTitulo": "Free trial started!",
+    "sucessoAtivo": "Your profile is active and visible in the directory.",
+    "sucessoConfirmando": "We're confirming your details with the payment provider. This can take a few seconds.",
+    "erroTitulo": "We couldn't start it",
+    "erroMensagem": "Something went wrong validating the card. You can try again.",
+    "pendenteTitulo": "Under review",
+    "pendenteMensagem": "We're processing your details. We'll let you know once it's confirmed.",
+    "verificando": "Checking subscription status...",
+    "continuar": "Continue",
+    "cancelar": "Cancel subscription",
+    "cancelarDescricao": "Your profile stops appearing in the directory and you won't be charged again. You can subscribe again whenever you like, with no penalty.",
+    "manter": "Keep subscription",
+    "confirmarCancelar": "Yes, cancel",
+    "canceladaOk": "Subscription cancelled. You won't be charged again.",
+    "canceladaErro": "We couldn't cancel right now. Please try again."
+  },
+  "paywall": {
+    "assineParaVer": "Subscribe to see this contact"
+  },
+  "perfil": {
+    "tituloEditar": "Edit company profile",
+    "tituloCriar": "Register your company",
+    "subtitulo": "This is what connects you to the companies looking, right now, for the service you provide — it isn't just a profile, it's your front door.",
+    "dadosEmpresa": "Company details",
+    "dadosEmpresaDesc": "The core information about your business",
+    "nomeEmpresa": "Company name *",
+    "placeholderNomeEmpresa": "e.g. Santos Industrial Sandblasting Ltd",
+    "segmento": "Your trade *",
+    "placeholderSegmento": "e.g. sandblasting, industrial painting...",
+    "paisAtuacao": "Country you work in",
+    "cidade": "City *",
+    "placeholderCidade": "e.g. {{exemplo}}",
+    "descricao": "Service description (optional)",
+    "placeholderDescricao": "Tell us about your company, what sets you apart, the areas you cover...",
+    "website": "Website (optional)",
+    "placeholderWebsite": "www.yourcompany.com",
+    "contato": "Contact details",
+    "contatoDesc": "How interested companies will reach you",
+    "nomeResponsavel": "Contact name *",
+    "placeholderResponsavel": "e.g. Anthony Smith",
+    "emailContato": "Contact email *",
+    "placeholderEmailContato": "contact@yourcompany.com",
+    "avisoTrial": "You're on the free trial. The first charge happens automatically at the end of the period, unless you cancel.",
+    "portfolio": "Portfolio and materials",
+    "portfolioDesc": "Upload your portfolio, proposal or flyer to show your work. The most recent file is used automatically when you message leads.",
+    "avisoDepoisDeSalvar": "Once you save the details above, you'll be able to upload your portfolio, proposal or flyer on this same screen.",
+    "salvarAlteracoes": "Save changes",
+    "salvarContinuar": "Save and continue",
+    "erro": {
+      "nomeEmpresa": "Enter your company name.",
+      "segmento": "Enter your trade.",
+      "cidade": "Enter your city.",
+      "divisao": "Select your region.",
+      "nomeContato": "Enter the contact person's name.",
+      "whatsapp": "Enter a valid WhatsApp number with area code.",
+      "email": "Enter a valid contact email."
+    },
+    "ok": {
+      "atualizado": "Profile updated!",
+      "criado": "Profile created! Now choose your plan."
     }
   }
 }
