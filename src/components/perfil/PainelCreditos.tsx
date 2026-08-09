@@ -63,7 +63,7 @@ export function PainelCreditos() {
           </div>
           <div className="h-2 rounded-full bg-secondary overflow-hidden">
             <div
-              className="h-full rounded-full bg-gradient-to-r from-dourado-700 to-dourado-400 transition-all"
+              className="h-full rounded-full bg-azul-500 transition-all"
               style={{ width: `${percentualRestante}%` }}
             />
           </div>

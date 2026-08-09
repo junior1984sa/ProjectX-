@@ -179,7 +179,7 @@ export function FilaProspeccao({
       {/* Barra de progresso */}
       <div className="h-1 bg-secondary">
         <div
-          className="h-full bg-gradient-to-r from-dourado-700 to-dourado-400 transition-all"
+          className="h-full bg-azul-500 transition-all"
           style={{ width: `${(indice / fila.length) * 100}%` }}
         />
       </div>
@@ -232,7 +232,7 @@ export function FilaProspeccao({
               onClick={abrirWhatsApp}
               disabled={registrando}
               size="lg"
-              className="w-full bg-dourado-500 hover:bg-dourado-400 active:bg-dourado-600 text-prata-900 font-semibold"
+              className="w-full"
             >
               <MessageCircle className="w-4 h-4 mr-2" />
               {t("fila.abrirWhatsApp")}

@@ -174,7 +174,7 @@ export function TelaAuth({ onSucesso }: TelaAuthProps) {
                   onClick={handleCadastrar}
                   disabled={carregando}
                   size="lg"
-                  className="w-full bg-gradient-to-r from-dourado-600 to-dourado-700 hover:from-dourado-700 hover:to-dourado-800 text-white font-semibold"
+                  className="w-full"
                 >
                   {carregando ? (
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />
@@ -188,7 +188,7 @@ export function TelaAuth({ onSucesso }: TelaAuthProps) {
                   onClick={handleEntrar}
                   disabled={carregando}
                   size="lg"
-                  className="w-full bg-gradient-to-r from-dourado-600 to-dourado-700 hover:from-dourado-700 hover:to-dourado-800 text-white font-semibold"
+                  className="w-full"
                 >
                   {carregando ? (
                     <Loader2 className="w-4 h-4 mr-2 animate-spin" />

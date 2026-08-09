@@ -81,7 +81,7 @@ export function BuscaDiretorio() {
           <Button
             onClick={handleBuscar}
             disabled={carregando}
-            className="bg-gradient-to-r from-dourado-600 to-dourado-500 text-background font-semibold flex-shrink-0"
+            className="flex-shrink-0"
           >
             {carregando ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Search className="w-4 h-4 mr-2" />}
             {t("diretorio.buscar")}

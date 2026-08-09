@@ -14,7 +14,7 @@ function MiniBarras() {
       {alturas.map((altura, i) => (
         <div
           key={i}
-          className="w-[5px] rounded-t-sm bg-gradient-to-b from-dourado-500 to-dourado-700 opacity-80"
+          className="w-[5px] rounded-t-sm bg-azul-500 opacity-80"
           style={{ height: `${altura}%` }}
         />
       ))}

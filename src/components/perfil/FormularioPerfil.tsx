@@ -190,7 +190,7 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
                   }
                   className={`flex flex-col items-center justify-center py-2.5 rounded-md text-xs font-medium border transition-all ${
                     form.paisFoco === pais.codigo
-                      ? "bg-dourado-900/30 border-dourado-600 text-dourado-300"
+                      ? "bg-azul-500/15 border-azul-500 text-azul-300"
                       : pais.buscaDisponivel
                       ? "bg-secondary border-transparent text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
                       : "bg-secondary/40 border-transparent text-muted-foreground/40 cursor-not-allowed"
@@ -376,7 +376,7 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
         onClick={handleSalvar}
         disabled={salvando}
         size="lg"
-        className="w-full bg-dourado-500 hover:bg-dourado-400 active:bg-dourado-600 text-prata-900 font-semibold"
+        className="w-full"
       >
         {salvando ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : null}
         {perfil ? t("perfil.salvarAlteracoes") : t("perfil.salvarContinuar")}

@@ -194,7 +194,7 @@ export function GestaoCustos() {
           <Button
             size="sm"
             onClick={() => setMostrarForm(!mostrarForm)}
-            className="bg-dourado-600 hover:bg-dourado-700 text-background"
+            className=""
           >
             <Plus className="w-4 h-4 mr-1.5" />
             Novo custo

@@ -85,7 +85,7 @@ export function InstrucoesAPI({ aberto, onFechar }: InstrucoesAPIProps) {
                 onClick={() => setEtapaAtiva(i)}
                 className={`flex-1 py-2 px-3 rounded-md text-xs font-medium transition-all ${
                   etapaAtiva === i
-                    ? "bg-dourado-600 text-white"
+                    ? "bg-azul-500 text-white"
                     : "bg-secondary text-muted-foreground hover:text-foreground"
                 }`}
               >

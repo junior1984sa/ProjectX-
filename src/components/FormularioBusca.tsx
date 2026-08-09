@@ -114,7 +114,7 @@ export function FormularioBusca() {
                 onClick={() => setModoBusca("clientes")}
                 className={`flex flex-col items-start gap-0.5 p-3 rounded-lg border text-left transition-all ${
                   modoBusca === "clientes"
-                    ? "bg-dourado-900/30 border-dourado-600 text-dourado-300"
+                    ? "bg-azul-500/15 border-azul-500 text-azul-300"
                     : "bg-secondary border-transparent text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
                 }`}
               >
@@ -126,7 +126,7 @@ export function FormularioBusca() {
                 onClick={() => setModoBusca("direta")}
                 className={`flex flex-col items-start gap-0.5 p-3 rounded-lg border text-left transition-all ${
                   modoBusca === "direta"
-                    ? "bg-dourado-900/30 border-dourado-600 text-dourado-300"
+                    ? "bg-azul-500/15 border-azul-500 text-azul-300"
                     : "bg-secondary border-transparent text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
                 }`}
               >
@@ -270,7 +270,7 @@ export function FormularioBusca() {
                   onClick={() => setRaioKm(km)}
                   className={`flex-1 py-2 rounded-md text-sm font-medium transition-all ${
                     raioKm === km
-                      ? "bg-dourado-500 text-prata-900"
+                      ? "bg-azul-500 text-white"
                       : "bg-secondary text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
                   }`}
                 >
@@ -302,7 +302,7 @@ export function FormularioBusca() {
                   onClick={() => setFaixaSelecionada(i)}
                   className={`flex flex-col items-center justify-center py-2.5 rounded-md text-xs font-medium transition-all border ${
                     faixaSelecionada === i
-                      ? "bg-dourado-900/30 border-dourado-600 text-dourado-300"
+                      ? "bg-azul-500/15 border-azul-500 text-azul-300"
                       : "bg-secondary border-transparent text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
                   }`}
                 >
@@ -325,7 +325,7 @@ export function FormularioBusca() {
             onClick={handleBuscar}
             disabled={carregando || buscandoMapeamento}
             size="xl"
-            className="w-full bg-dourado-500 hover:bg-dourado-400 active:bg-dourado-600 text-prata-900 font-semibold shadow-lg shadow-dourado-900/30"
+            className="w-full shadow-lg shadow-azul-900/40"
           >
             {buscandoMapeamento ? (
               <div className="flex items-center gap-2">

@@ -1,38 +1,130 @@
+/* Fontes self-hosted: sem requisição a terceiro no carregamento, o que
+   protege o LCP e evita depender da disponibilidade do Google Fonts. */
+@import "@fontsource-variable/inter";
+@import "@fontsource/space-grotesk/500.css";
+@import "@fontsource/space-grotesk/600.css";
+@import "@fontsource/space-grotesk/700.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════════════════════
+   DESIGN TOKENS — PROSPECTX
+   Fonte única de verdade do sistema visual.
+
+   Os tokens `--px-*` são a linguagem nova. As variáveis do shadcn
+   (--background, --card, --primary…) continuam existindo e apontam
+   para os mesmos valores, de propósito: assim os 14 primitivos em
+   components/ui herdam a paleta sem precisar ser reescritos, e não
+   ficamos com dois sistemas de cor concorrendo.
+   ═══════════════════════════════════════════════════════════ */
+
 @layer base {
   :root {
-    --background: 220 9% 9%;
-    --foreground: 210 12% 90%;
+    /* ── Superfícies ── */
+    --px-bg: 216 24% 4%;            /* #080A0D  fundo da aplicação      */
+    --px-surface: 216 23% 9%;       /* #11151B  cards                   */
+    --px-elevated: 215 20% 12%;     /* #181D24  inputs, dropdown, modal */
+    --px-border: 216 15% 19%;       /* #292F38  separadores decorativos */
+    /* Limite de COMPONENTE (input, botão de contorno, campo de busca).
+       O WCAG 1.4.11 exige 3:1 para esses limites, e #292F38 entrega
+       1,47:1 contra o fundo — invisível para quem tem baixa visão.
+       #626B76 é o valor mais escuro que ainda passa (3,67 no fundo,
+       3,39 no card), então mantém a discrição sem reprovar. */
+    --px-border-strong: 213 9% 42%; /* #626B76                          */
 
-    --card: 220 9% 13%;
-    --card-foreground: 210 12% 90%;
+    /* ── Texto ── */
+    --px-text: 210 22% 96%;         /* #F4F6F8                          */
+    --px-text-secondary: 212 9% 58%;/* #8B949E                          */
+    --px-text-muted: 213 9% 42%;    /* #626B76                          */
 
-    --popover: 220 9% 13%;
-    --popover-foreground: 210 12% 90%;
+    /* ── Azul: AÇÃO ──
+       CTA, navegação ativa, links, foco, informação. É a cor que diz
+       "clique aqui" — por isso não pode aparecer em elemento inerte. */
+    --px-blue: 217 100% 58%;        /* #287BFF                          */
+    --px-blue-hover: 216 100% 62%;  /* #3D8BFF                          */
+    --px-blue-pressed: 217 75% 48%; /* #1E63D6                          */
 
-    --primary: 210 8% 62%;
-    --primary-foreground: 220 12% 10%;
+    /* ── Ouro: MARCA ──
+       Identidade, premium, oportunidade excepcional. Vale como joia:
+       se aparecer em tudo, deixa de significar qualquer coisa. Meta de
+       ocupação na tela: ~5%. */
+    --px-gold: 40 61% 57%;          /* #D4A84F                          */
+    --px-gold-light: 43 82% 68%;    /* #F0C96A                          */
+    --px-gold-dark: 38 59% 38%;     /* #9B7128                          */
 
-    --secondary: 220 8% 18%;
-    --secondary-foreground: 210 12% 90%;
+    /* ── Estados ──
+       Todos verificados contra o fundo #080A0D em contraste AA. */
+    --px-success: 152 55% 52%;
+    --px-warning: 38 92% 58%;
+    --px-danger: 0 84% 70%;
+    --px-info: var(--px-blue);
 
-    --muted: 220 8% 16%;
-    --muted-foreground: 215 8% 58%;
+    /* ── Raio ── */
+    --px-radius-sm: 0.375rem;   /* 6px  — chips, badges              */
+    --px-radius: 0.625rem;      /* 10px — botões, inputs             */
+    --px-radius-md: 0.75rem;    /* 12px — cards                      */
+    --px-radius-lg: 1rem;       /* 16px — painéis                    */
+    --px-radius-xl: 1.25rem;    /* 20px — modais, destaques          */
 
-    --accent: 38 47% 63%;
-    --accent-foreground: 220 12% 10%;
+    /* ── Elevação ──
+       Interface escura eleva por borda e contraste, não por sombra
+       pesada. As sombras aqui apenas separam camadas. */
+    --px-shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+    --px-shadow-md: 0 4px 12px -2px rgb(0 0 0 / 0.5);
+    --px-shadow-lg: 0 16px 40px -12px rgb(0 0 0 / 0.65);
 
-    --destructive: 0 70% 55%;
-    --destructive-foreground: 210 40% 98%;
+    /* ── Movimento ──
+       A animação explica uma mudança de estado. Se não explica nada,
+       não deveria existir. */
+    --px-fast: 120ms;
+    --px-normal: 200ms;
+    --px-medium: 300ms;
+    --px-slow: 450ms;
 
-    --border: 220 8% 22%;
-    --input: 220 8% 22%;
-    --ring: 40 38% 58%;
+    /* ── Camadas ── */
+    --px-z-dropdown: 40;
+    --px-z-sticky: 50;
+    --px-z-drawer: 60;
+    --px-z-modal: 70;
+    --px-z-toast: 80;
 
-    --radius: 0.5rem;
+    /* ═══ Ponte para os primitivos shadcn já existentes ═══ */
+    --background: var(--px-bg);
+    --foreground: var(--px-text);
+
+    --card: var(--px-surface);
+    --card-foreground: var(--px-text);
+
+    --popover: var(--px-elevated);
+    --popover-foreground: var(--px-text);
+
+    /* `primary` do shadcn passa a ser o AZUL: é ele que pinta o botão
+       padrão, e o botão padrão é sempre uma ação. */
+    --primary: var(--px-blue);
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: var(--px-elevated);
+    --secondary-foreground: var(--px-text);
+
+    --muted: var(--px-elevated);
+    --muted-foreground: var(--px-text-secondary);
+
+    --accent: var(--px-gold);
+    --accent-foreground: 216 24% 4%;
+
+    --destructive: var(--px-danger);
+    --destructive-foreground: 216 24% 4%;
+
+    --border: var(--px-border);
+    /* Input usa a borda FORTE: o contorno de um campo e limite de
+       componente, e limite de componente precisa de 3:1. Com a borda
+       decorativa o campo sumia contra o fundo. */
+    --input: var(--px-border-strong);
+    --ring: var(--px-blue);
+
+    --radius: var(--px-radius);
   }
 }
 
@@ -40,84 +132,144 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
-    /* Fundo sutil de engrenagens em esboço técnico — reforça a temática
-       industrial sem competir visualmente com o conteúdo. */
-    background-image: url('/gear-pattern.svg');
-    background-repeat: repeat;
-    background-size: 480px 480px;
+    font-family: "Inter Variable", "Inter", system-ui, -apple-system, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1, "cv05" 1;
+    -webkit-font-smoothing: antialiased;
+
+    /* Grade técnica no lugar do padrão de engrenagens que existia aqui.
+       Engrenagem diz "oficina industrial"; o produto é uma plataforma de
+       dados. A grade sugere estrutura e medição sem competir com o
+       conteúdo — a 3% de opacidade ela é percebida, não lida. */
+    background-image:
+      linear-gradient(hsl(var(--px-border) / 0.28) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--px-border) / 0.28) 1px, transparent 1px);
+    background-size: 72px 72px;
+    background-position: center top;
     background-attachment: fixed;
   }
+
+  /* Títulos em Space Grotesk: a caixa mais estreita e o desenho mais
+     técnico separam visualmente "o que é" de "o que se lê". */
+  h1, h2, h3, h4 {
+    font-family: "Space Grotesk", "Inter Variable", system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
   html {
     @apply scroll-smooth;
   }
+
+  /* Números em tabela alinham na coluna. Sem isso, comparar valores
+     empilhados exige que o olho reposicione a cada linha. */
+  .tabular, table, .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
 }
 
-/* Camada de esmaecimento sobre o padrão de engrenagens — aplicada nos
-   containers de conteúdo para garantir que o texto/cards continuem
-   com contraste e legibilidade total por cima do fundo decorativo. */
+/* Mantida por compatibilidade com telas que já a referenciam. Com a
+   grade sutil no lugar das engrenagens, não é mais preciso esmaecer
+   o fundo para o texto ter contraste. */
 .fundo-conteudo {
   position: relative;
 }
-.fundo-conteudo::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: hsl(var(--background) / 0.55);
-  pointer-events: none;
-  z-index: 0;
+
+/* ═══ Superfícies utilitárias ═══ */
+
+@layer components {
+  .px-surface {
+    background: hsl(var(--px-surface));
+    border: 1px solid hsl(var(--px-border));
+    border-radius: var(--px-radius-md);
+  }
+
+  .px-elevated {
+    background: hsl(var(--px-elevated));
+    border: 1px solid hsl(var(--px-border));
+    border-radius: var(--px-radius);
+  }
+
+  /* Brilho de fundo. Azul para áreas de ação, ouro para áreas premium.
+     Sempre um só por tela — dois halos borram o centro de atenção. */
+  .px-glow-blue {
+    background: radial-gradient(
+      ellipse at center,
+      hsl(var(--px-blue) / 0.07),
+      transparent 70%
+    );
+  }
+
+  .px-glow-gold {
+    background: radial-gradient(
+      ellipse at center,
+      hsl(var(--px-gold) / 0.06),
+      transparent 70%
+    );
+  }
 }
 
-/* Scrollbar personalizada */
+/* ═══ Barra de rolagem ═══ */
+
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(222 47% 10%);
+  background: hsl(var(--px-bg));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: hsl(220 8% 26%);
-  border-radius: 3px;
+  background: hsl(var(--px-border));
+  border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: hsl(40 38% 58% / 0.6);
+  background: hsl(var(--px-text-muted));
 }
 
-/* Leaflet customizações */
+/* ═══ Foco ═══
+   Azul, porque foco é estado de interação. Nunca removido: quem navega
+   por teclado perde a noção de onde está sem ele. */
+:focus-visible {
+  outline: 2px solid hsl(var(--px-blue));
+  outline-offset: 2px;
+  border-radius: var(--px-radius-sm);
+}
+
+/* ═══ Leaflet ═══ */
+
 .leaflet-container {
-  background: hsl(220 8% 11%) !important;
+  background: hsl(var(--px-surface)) !important;
   font-family: inherit !important;
 }
 
 .leaflet-popup-content-wrapper {
-  background: hsl(220 9% 16%) !important;
-  color: hsl(210 12% 88%) !important;
-  border: 1px solid hsl(220 8% 26%) !important;
-  border-radius: 8px !important;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5) !important;
+  background: hsl(var(--px-elevated)) !important;
+  color: hsl(var(--px-text)) !important;
+  border: 1px solid hsl(var(--px-border)) !important;
+  border-radius: var(--px-radius-md) !important;
+  box-shadow: var(--px-shadow-lg) !important;
 }
 
 .leaflet-popup-tip {
-  background: hsl(220 9% 16%) !important;
+  background: hsl(var(--px-elevated)) !important;
 }
 
 .leaflet-popup-close-button {
-  color: hsl(210 12% 88%) !important;
+  color: hsl(var(--px-text-secondary)) !important;
 }
 
-/* Skeleton animation */
+/* ═══ Esqueleto de carregamento ═══ */
+
 .skeleton {
   background: linear-gradient(
     90deg,
-    hsl(220 9% 16%) 25%,
-    hsl(220 8% 23%) 50%,
-    hsl(220 9% 16%) 75%
+    hsl(var(--px-surface)) 25%,
+    hsl(var(--px-elevated)) 50%,
+    hsl(var(--px-surface)) 75%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
@@ -128,38 +280,25 @@
   100% { background-position: 200% 0; }
 }
 
-/* Transições globais */
-button, a, [role="button"] {
-  transition: all 0.15s ease;
-}
+/* ═══ Recharts ═══ */
 
-/* Estrelas de score */
-.estrela-cheia { color: #cba968; }
-.estrela-vazia { color: hsl(220 8% 30%); }
-
-/* Badge de score */
-.score-alto { @apply bg-green-900/40 text-green-400 border border-green-700/50; }
-.score-medio { @apply bg-yellow-900/40 text-yellow-400 border border-yellow-700/50; }
-.score-baixo { @apply bg-red-900/40 text-red-400 border border-red-700/50; }
-
-/* Recharts tooltip */
 .recharts-tooltip-wrapper .recharts-default-tooltip {
-  background: hsl(220 9% 16%) !important;
-  border: 1px solid hsl(220 8% 26%) !important;
-  border-radius: 8px !important;
-  color: hsl(210 12% 88%) !important;
+  background: hsl(var(--px-elevated)) !important;
+  border: 1px solid hsl(var(--px-border)) !important;
+  border-radius: var(--px-radius) !important;
+  color: hsl(var(--px-text)) !important;
 }
 
-/* Focus ring visível */
-:focus-visible {
-  outline: 2px solid hsl(40 38% 58%);
-  outline-offset: 2px;
-}
-
-/* Tabela listrada */
-.tabela-linha-par {
-  background: hsl(220 9% 12%);
-}
-.tabela-linha-impar {
-  background: hsl(220 9% 15%);
+/* ═══ Movimento reduzido ═══
+   Quem pediu menos animação no sistema operacional está pedindo por um
+   motivo — vertigem e enxaqueca são os mais comuns. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

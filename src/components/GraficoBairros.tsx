@@ -16,7 +16,7 @@ export function GraficoBairros() {
   const maiorValor = dadosBairros[0]?.total ?? 1
 
   return (
-    <div className="rounded-2xl border border-border bg-gradient-to-br from-card to-card/60 overflow-hidden">
+    <div className="rounded-2xl border border-border bg-card overflow-hidden">
       <div className="px-5 pt-4 pb-3">
         <p className="text-[13px] font-semibold text-foreground/90 flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-dourado-400 shadow-[0_0_8px_rgba(212,176,106,0.6)]" />
@@ -42,7 +42,7 @@ export function GraficoBairros() {
               </span>
               <div className="flex-1 h-1.5 rounded-full bg-secondary/60 overflow-hidden">
                 <div
-                  className="h-full rounded-full bg-gradient-to-r from-dourado-700 to-dourado-400"
+                  className="h-full rounded-full bg-azul-500"
                   style={{ width: `${(item.total / maiorValor) * 100}%` }}
                 />
               </div>

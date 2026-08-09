@@ -482,7 +482,8 @@ export function SelecaoPlano() {
         onClick={handleAssinar}
         disabled={carregando}
         size="xl"
-        className="w-full bg-gradient-to-r from-dourado-600 to-dourado-500 hover:from-dourado-700 hover:to-dourado-600 text-background font-semibold shadow-lg shadow-dourado-900/30"
+        variant="premium"
+        className="w-full shadow-lg shadow-dourado-900/30"
       >
         {carregando ? (
           <Loader2 className="w-5 h-5 mr-2 animate-spin" />

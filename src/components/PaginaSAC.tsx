@@ -181,7 +181,7 @@ export function PaginaSAC() {
           <Button
             onClick={handleEnviarEmail}
             disabled={enviando}
-            className="w-full bg-dourado-500 hover:bg-dourado-400 active:bg-dourado-600 text-prata-900 font-semibold"
+            className="w-full"
           >
             <Send className="w-4 h-4 mr-2" />
             {t("sac.enviarMensagem")}

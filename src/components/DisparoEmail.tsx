@@ -192,7 +192,7 @@ export function DisparoEmail({ empresas, onFechar }: DisparoEmailProps) {
               value={corpo}
               onChange={(e) => setCorpo(e.target.value)}
               rows={9}
-              className="w-full rounded-md border border-border bg-background/60 px-3 py-2.5 text-sm leading-relaxed resize-y focus:outline-none focus:ring-2 focus:ring-dourado-600/40"
+              className="w-full rounded-md border border-border bg-background/60 px-3 py-2.5 text-sm leading-relaxed resize-y focus:outline-none focus:ring-2 focus:ring-azul-500/40"
             />
           </div>
 
@@ -227,7 +227,7 @@ export function DisparoEmail({ empresas, onFechar }: DisparoEmailProps) {
             onClick={handleEnviar}
             disabled={enviando || elegiveis.length === 0}
             size="lg"
-            className="w-full bg-dourado-500 hover:bg-dourado-400 active:bg-dourado-600 text-prata-900 font-semibold"
+            className="w-full"
           >
             {enviando ? (
               <>

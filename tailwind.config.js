@@ -17,6 +17,14 @@ export default {
       },
     },
     extend: {
+      fontFamily: {
+        // Títulos em Space Grotesk, corpo em Inter. As duas são
+        // self-hosted (@fontsource), então não há requisição a
+        // terceiro no caminho crítico.
+        sans: ['"Inter Variable"', '"Inter"', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Space Grotesk"', '"Inter Variable"', 'system-ui', 'sans-serif'],
+        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -51,41 +59,98 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Cores ProspectProX — paleta prateado/cromado com destaques dourados
-        prata: {
-          900: "#1c1f24",
-          800: "#2a2e35",
-          700: "#3a3f48",
-          600: "#52585f",
-          500: "#7b828b",
-          400: "#a3aab2",
-          300: "#c4c9cf",
-          200: "#dde0e3",
-          100: "#f1f2f4",
+
+        /**
+         * AZUL — a cor da AÇÃO.
+         * CTA, navegação ativa, link, foco, informação. Se o elemento
+         * não é clicável nem indica estado de interação, não é azul.
+         */
+        azul: {
+          900: "#0C2B5E",
+          800: "#123C82",
+          700: "#1750AE",
+          600: "#1E63D6",
+          500: "#287BFF",
+          400: "#3D8BFF",
+          300: "#6BA5FF",
+          200: "#9CC3FF",
+          100: "#D0E1FF",
         },
+
+        /**
+         * OURO — a cor da MARCA.
+         * Identidade, premium, oportunidade excepcional. Meta de
+         * ocupação: ~5% da área pintada. O nome `dourado` foi mantido
+         * porque já é usado em 95 lugares; os VALORES é que mudaram,
+         * então todo o produto adota a paleta nova de uma vez.
+         */
         dourado: {
-          900: "#5c4a1f",
-          800: "#7a6228",
-          700: "#9c7f33",
-          600: "#b8954a",
-          500: "#d4b06a",
-          400: "#dfc086",
-          300: "#e8d2a4",
-          200: "#f0e2c3",
-          100: "#f8f0e1",
+          900: "#5C4318",
+          800: "#7A5920",
+          700: "#9B7128",
+          600: "#BC9142",
+          500: "#D4A84F",
+          400: "#E0B85C",
+          300: "#F0C96A",
+          200: "#F5E3BE",
+          100: "#FAF0DC",
         },
+
+        /**
+         * NEUTROS — estrutura e texto.
+         * Mesma observação: o nome `prata` ficou, os valores agora são
+         * os do sistema novo (obsidian → grafite → texto).
+         */
+        prata: {
+          900: "#11151B",
+          800: "#181D24",
+          700: "#292F38",
+          600: "#4A525C",
+          500: "#626B76",
+          400: "#8B949E",
+          300: "#C2C9D1",
+          200: "#DDE2E7",
+          100: "#F4F6F8",
+        },
+
+        /** Fundo mais profundo que a superfície dos cards */
+        obsidian: "#080A0D",
+
         verde: {
-          700: "#276749",
-          600: "#2f855a",
-          500: "#38a169",
-          400: "#48bb78",
-          300: "#68d391",
+          700: "#1B6B45",
+          600: "#228555",
+          500: "#2F9E68",
+          400: "#3DBB7E",
+          300: "#5FD69C",
         },
       },
       borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+        sm: "var(--px-radius-sm)",
+        DEFAULT: "var(--px-radius)",
+        md: "var(--px-radius)",
+        lg: "var(--px-radius-md)",
+        xl: "var(--px-radius-lg)",
+        "2xl": "var(--px-radius-xl)",
+      },
+      boxShadow: {
+        sm: "var(--px-shadow-sm)",
+        DEFAULT: "var(--px-shadow-md)",
+        md: "var(--px-shadow-md)",
+        lg: "var(--px-shadow-lg)",
+      },
+      transitionDuration: {
+        fast: "120ms",
+        DEFAULT: "200ms",
+        normal: "200ms",
+        medium: "300ms",
+        slow: "450ms",
+      },
+      zIndex: {
+        dropdown: "40",
+        sticky: "50",
+        drawer: "60",
+        modal: "70",
+        toast: "80",
       },
       keyframes: {
         "accordion-down": {
@@ -104,12 +169,18 @@ export default {
           from: { opacity: "0", transform: "translateY(8px)" },
           to: { opacity: "1", transform: "translateY(0)" },
         },
+        /** Pulso do X quando a IA está processando */
+        pulseSuave: {
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "1" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         shimmer: "shimmer 1.5s infinite linear",
         fadeIn: "fadeIn 0.3s ease-out",
+        pulseSuave: "pulseSuave 1.8s ease-in-out infinite",
       },
     },
   },

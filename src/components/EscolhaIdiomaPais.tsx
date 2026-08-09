@@ -77,7 +77,7 @@ export function EscolhaIdiomaPais({ aoConcluir }: EscolhaIdiomaPaisProps = {}) {
                 onClick={() => definirIdioma(item.codigo)}
                 className={`py-2.5 rounded-md text-sm font-medium border transition-all ${
                   idiomaBase === item.codigo.split("-")[0]
-                    ? "bg-dourado-900/30 border-dourado-600 text-dourado-300"
+                    ? "bg-azul-500/15 border-azul-500 text-azul-300"
                     : "bg-secondary border-transparent text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
                 }`}
               >
@@ -100,7 +100,7 @@ export function EscolhaIdiomaPais({ aoConcluir }: EscolhaIdiomaPaisProps = {}) {
                 onClick={() => definirPais(item.codigo)}
                 className={`relative flex flex-col items-center justify-center py-2.5 px-1 rounded-md text-xs font-medium border transition-all ${
                   pais === item.codigo
-                    ? "bg-dourado-900/30 border-dourado-600 text-dourado-300"
+                    ? "bg-azul-500/15 border-azul-500 text-azul-300"
                     : "bg-secondary border-transparent text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
                 }`}
               >
@@ -131,7 +131,7 @@ export function EscolhaIdiomaPais({ aoConcluir }: EscolhaIdiomaPaisProps = {}) {
             confirmarEscolha()
             aoConcluir?.()
           }}
-          className="w-full py-3 rounded-md bg-gradient-to-r from-dourado-700 to-dourado-500 text-prata-900 text-sm font-semibold hover:opacity-90 transition-opacity"
+          className="w-full py-3 rounded-md bg-azul-600 text-white text-sm font-semibold hover:bg-azul-500 transition-colors"
         >
           {t("preferencias.confirmar")}
         </button>

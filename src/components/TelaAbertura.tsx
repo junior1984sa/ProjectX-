@@ -87,7 +87,7 @@ export function TelaAbertura() {
             reabrirEscolha()
             setTrocandoPais(true)
           }}
-          className="flex items-center gap-1.5 text-[13px] text-prata-400 hover:text-prata-200 transition-colors rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(40_38%_58%)]"
+          className="flex items-center gap-1.5 text-[13px] text-prata-400 hover:text-prata-200 transition-colors rounded"
         >
           <Globe className="w-3.5 h-3.5" />
           {configPais.idioma.split("-")[0].toUpperCase()}
@@ -97,7 +97,7 @@ export function TelaAbertura() {
           {usuarioId ? (
             <Link
               to="/perfil"
-              className="text-[13px] text-prata-400 hover:text-prata-200 transition-colors rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(40_38%_58%)]"
+              className="text-[13px] text-prata-400 hover:text-prata-200 transition-colors rounded"
             >
               {t("home.meuPerfil")}
             </Link>
@@ -105,13 +105,13 @@ export function TelaAbertura() {
             <>
               <Link
                 to="/entrar"
-                className="text-[13px] text-prata-400 hover:text-prata-200 transition-colors rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(40_38%_58%)]"
+                className="text-[13px] text-prata-400 hover:text-prata-200 transition-colors rounded"
               >
                 {t("home.entrar")}
               </Link>
               <Link
                 to="/entrar"
-                className="h-8 px-3 inline-flex items-center rounded-lg border border-prata-600 text-[13px] text-prata-200 hover:border-prata-500 hover:text-prata-100 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(40_38%_58%)]"
+                className="h-8 px-3 inline-flex items-center rounded-lg border border-prata-600 text-[13px] text-prata-200 hover:border-prata-500 hover:text-prata-100 transition-colors"
               >
                 {t("home.criarConta")}
               </Link>
@@ -124,7 +124,7 @@ export function TelaAbertura() {
       <main className="flex-1 flex flex-col items-center px-4 pt-[10svh] sm:pt-0 sm:justify-center fundo-conteudo">
         {/* Halo único, centrado no vértice. O próprio X fornece a
             segunda massa focal, então dois halos só borrariam o centro. */}
-        <div className="absolute left-1/2 -translate-x-1/2 top-1/3 w-[720px] h-[720px] max-w-[100vw] rounded-full bg-dourado-500/[0.06] blur-3xl pointer-events-none" />
+        <div className="absolute left-1/2 -translate-x-1/2 top-1/3 w-[720px] h-[720px] max-w-[100vw] rounded-full bg-azul-500/[0.07] blur-3xl pointer-events-none" />
 
         <div className="relative w-full max-w-[880px] flex flex-col items-center">
           {/* Marca.
@@ -152,7 +152,7 @@ export function TelaAbertura() {
                 key={modo}
                 onClick={() => setModoBusca(modo)}
                 aria-pressed={modoBusca === modo}
-                className={`h-9 px-3.5 rounded-[6px] text-[13px] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(40_38%_58%)] ${
+                className={`h-9 px-3.5 rounded-[6px] text-[13px] transition-colors ${
                   modoBusca === modo
                     ? "bg-prata-800 text-prata-100"
                     : "text-prata-400 hover:text-prata-200"
@@ -169,10 +169,10 @@ export function TelaAbertura() {
                 (4,65:1 — a borda padrão do sistema dá 1,51:1 e reprova) */}
             <div
               aria-busy={ocupado}
-              className="relative flex flex-col sm:flex-row gap-2 sm:gap-0 sm:h-16 sm:rounded-xl sm:border sm:border-prata-500 sm:bg-[hsl(220_9%_11%)] sm:shadow-[0_24px_48px_-12px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.06)] sm:overflow-hidden"
+              className="relative flex flex-col sm:flex-row gap-2 sm:gap-0 sm:h-16 sm:rounded-xl sm:border sm:border-prata-500 sm:bg-prata-900 sm:shadow-[0_24px_48px_-12px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.06)] sm:overflow-hidden"
             >
               {/* Zona 1 — ramo */}
-              <label className="flex-[1.4] flex items-center gap-3 px-5 py-3 sm:py-0 h-14 sm:h-auto rounded-xl sm:rounded-none border border-prata-500 sm:border-0 bg-[hsl(220_9%_11%)] cursor-text focus-within:bg-[hsl(220_9%_13%)] transition-colors">
+              <label className="flex-[1.4] flex items-center gap-3 px-5 py-3 sm:py-0 h-14 sm:h-auto rounded-xl sm:rounded-none border border-prata-500 sm:border-0 bg-prata-900 cursor-text focus-within:bg-prata-800 transition-colors">
                 <Search className={`w-[18px] h-[18px] flex-shrink-0 ${temRamo ? "text-prata-300" : "text-prata-500"}`} />
                 <span className="sr-only">
                   {modoBusca === "clientes" ? t("busca.seuRamo") : t("busca.ramoABuscar")}
@@ -189,7 +189,7 @@ export function TelaAbertura() {
               <div className="hidden sm:block w-px h-8 self-center bg-prata-700 flex-shrink-0" />
 
               {/* Zona 2 — cidade, com o país à direita dentro do campo */}
-              <label className="flex-1 flex items-center gap-3 px-5 py-3 sm:py-0 h-14 sm:h-auto rounded-xl sm:rounded-none border border-prata-500 sm:border-0 bg-[hsl(220_9%_11%)] cursor-text focus-within:bg-[hsl(220_9%_13%)] transition-colors">
+              <label className="flex-1 flex items-center gap-3 px-5 py-3 sm:py-0 h-14 sm:h-auto rounded-xl sm:rounded-none border border-prata-500 sm:border-0 bg-prata-900 cursor-text focus-within:bg-prata-800 transition-colors">
                 <MapPin className={`w-[18px] h-[18px] flex-shrink-0 ${temCidade ? "text-prata-300" : "text-prata-500"}`} />
                 <span className="sr-only">{t("busca.cidade")}</span>
                 <input
@@ -213,7 +213,7 @@ export function TelaAbertura() {
               <button
                 onClick={handleBuscar}
                 disabled={!pronto || ocupado}
-                className="h-13 sm:h-auto py-3.5 sm:py-0 sm:w-[216px] flex-shrink-0 flex items-center justify-center gap-2 rounded-xl sm:rounded-none text-[1.125rem] font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(40_38%_58%)] disabled:cursor-not-allowed bg-dourado-500 text-prata-900 hover:bg-dourado-400 active:bg-dourado-600 disabled:bg-prata-700 disabled:text-prata-400"
+                className="h-13 sm:h-auto py-3.5 sm:py-0 sm:w-[216px] flex-shrink-0 flex items-center justify-center gap-2 rounded-xl sm:rounded-none text-[1.125rem] font-semibold transition-colors duration-fast disabled:cursor-not-allowed bg-azul-600 text-white hover:bg-azul-500 active:bg-azul-700 disabled:bg-prata-700 disabled:text-prata-500"
               >
                 {ocupado ? (
                   <>
@@ -289,7 +289,7 @@ export function TelaAbertura() {
             <Link
               key={link.para}
               to={link.para}
-              className="text-prata-400 hover:text-prata-200 transition-colors rounded focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[hsl(40_38%_58%)]"
+              className="text-prata-400 hover:text-prata-200 transition-colors rounded"
             >
               {link.texto}
             </Link>

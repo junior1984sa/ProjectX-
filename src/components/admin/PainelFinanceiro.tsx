@@ -182,8 +182,8 @@ export function PainelFinanceiro() {
                       onClick={() => setAssinantes(degrau)}
                       className={`px-2 py-0.5 rounded text-[11px] border transition-colors ${
                         assinantes === degrau
-                          ? "border-dourado-600 bg-dourado-900/30 text-dourado-300"
-                          : "border-border/60 text-muted-foreground hover:border-dourado-700/50"
+                          ? "border-azul-500 bg-azul-500/15 text-azul-300"
+                          : "border-border/60 text-muted-foreground hover:border-azul-600/60"
                       }`}
                     >
                       {degrau}
@@ -389,7 +389,7 @@ export function PainelFinanceiro() {
                     </div>
                     <div className="h-1 rounded-full bg-border/40 overflow-hidden">
                       <div
-                        className="h-full bg-dourado-600/70 rounded-full"
+                        className="h-full bg-azul-500/80 rounded-full"
                         style={{ width: `${Math.min(100, proporcao)}%` }}
                       />
                     </div>

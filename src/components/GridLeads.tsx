@@ -153,7 +153,7 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
               size="sm"
               onClick={() => setFilaAberta(true)}
               disabled={ordenadas.filter((e) => e.telefone).length === 0 || carregando}
-              className="h-9 text-xs bg-dourado-500 text-prata-900 hover:bg-dourado-400"
+              className="h-9 text-xs"
             >
               <MessageCircle className="w-3.5 h-3.5 mr-1.5" />
               {t("leads.prospectarSequencia")}
@@ -202,7 +202,7 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
       )}
 
       {!temAcesso && !carregando && ordenadas.length > 0 && (
-        <div className="rounded-xl border border-dourado-700/40 bg-gradient-to-r from-dourado-900/10 to-prata-700/5 px-5 py-3.5 mb-5 flex items-center justify-between flex-wrap gap-3">
+        <div className="rounded-xl border border-dourado-700/40 bg-dourado-900/12 px-5 py-3.5 mb-5 flex items-center justify-between flex-wrap gap-3">
           <p className="text-xs text-dourado-200/90">
             🔒{" "}
             {t("leads.paywallAviso", {
@@ -213,7 +213,8 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
           <Button
             size="sm"
             onClick={handleAssinar}
-            className="h-8 text-xs bg-gradient-to-r from-dourado-600 to-dourado-500 text-background font-semibold hover:from-dourado-700 hover:to-dourado-600 flex-shrink-0"
+            variant="premium"
+            className="h-8 text-xs flex-shrink-0"
           >
             {t("leads.desbloquear")}
           </Button>
@@ -234,7 +235,7 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
             return (
               <div
                 key={empresa.id}
-                className={`rounded-2xl border bg-gradient-to-br from-card to-card/70 p-[18px] transition-colors ${
+                className={`rounded-2xl border bg-card p-[18px] transition-colors ${
                   destaque ? "border-dourado-700/40" : "border-border"
                 }`}
               >

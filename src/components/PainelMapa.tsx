@@ -7,7 +7,7 @@ export function PainelMapa() {
   const { t } = useTranslation()
 
   return (
-    <div className="rounded-2xl border border-border bg-gradient-to-br from-card to-card/60 overflow-hidden h-full">
+    <div className="rounded-2xl border border-border bg-card overflow-hidden h-full">
       <div className="px-5 pt-4 pb-3 flex items-center justify-between flex-wrap gap-2">
         <p className="text-[13px] font-semibold text-foreground/90 flex items-center gap-2">
           <span className="w-1.5 h-1.5 rounded-full bg-dourado-400 shadow-[0_0_8px_rgba(212,176,106,0.6)]" />

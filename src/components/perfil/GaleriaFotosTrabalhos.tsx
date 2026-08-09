@@ -85,7 +85,7 @@ export function GaleriaFotosTrabalhos({ profileId }: GaleriaFotosTrabalhosProps)
           <button
             onClick={() => inputRef.current?.click()}
             disabled={enviando}
-            className="aspect-square rounded-lg border border-dashed border-border flex flex-col items-center justify-center gap-1 text-muted-foreground hover:text-foreground hover:border-dourado-700/50 transition-colors"
+            className="aspect-square rounded-lg border border-dashed border-border flex flex-col items-center justify-center gap-1 text-muted-foreground hover:text-foreground hover:border-azul-600/60 transition-colors"
           >
             {enviando ? (
               <Loader2 className="w-5 h-5 animate-spin" />
