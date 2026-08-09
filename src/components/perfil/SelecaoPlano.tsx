@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { Check, Loader2, Sparkles, ShieldCheck, TrendingUp, Calendar, CreditCard, Gift, ChevronDown, Flame, Zap } from "lucide-react"
+import { Check, Loader2, Sparkles, ShieldCheck, TrendingUp, TrendingDown, Calendar, CreditCard, Gift, ChevronDown, Flame, Zap } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -16,6 +16,9 @@ import {
   PLANOS,
   ORDEM_PLANOS,
   economiaPercentual,
+  planoAnterior,
+  economiaSobrePlanoAnterior,
+  economiaEmDinheiroSobreAnterior,
   precoMensalEquivalente,
   precoTotalNoPais,
   precoLancamentoNoPais,
@@ -257,6 +260,9 @@ export function SelecaoPlano() {
           const config = PLANOS[idPlano]
           const selecionado = planoSelecionado === idPlano
           const economia = economiaPercentual(idPlano, pais)
+          const nomeAnterior = planoAnterior(idPlano)
+          const degrauPercentual = economiaSobrePlanoAnterior(idPlano, pais)
+          const degrauEmDinheiro = economiaEmDinheiroSobreAnterior(idPlano, pais)
           const equivalenteMensal = precoMensalEquivalente(idPlano, pais)
           const precoTotal = precoTotalNoPais(idPlano, pais)
 
@@ -343,6 +349,25 @@ export function SelecaoPlano() {
                         meses: config.meses,
                       })}
                 </p>
+
+                {/* O DEGRAU DA ESCADA.
+                    Comparar tudo com o mensal esconde o que realmente
+                    decide a compra: quem já está olhando o semestral
+                    não se pergunta quanto economiza contra o mensal, e
+                    sim se vale dobrar para o anual. É essa conta que
+                    aparece aqui — em percentual e em dinheiro. */}
+                {degrauPercentual > 0 && (
+                  <p className="text-[11px] text-verde-300 mt-2 flex items-start gap-1 leading-snug">
+                    <TrendingDown className="w-3 h-3 flex-shrink-0 mt-px" />
+                    <span>
+                      {t("planos.degrau", {
+                        percentual: degrauPercentual,
+                        anterior: PLANOS[nomeAnterior!].nome.toLowerCase(),
+                        valor: moeda(degrauEmDinheiro),
+                      })}
+                    </span>
+                  </p>
+                )}
 
                 <p className="text-[11px] text-dourado-300/90 mt-2 flex items-center gap-1">
                   <Zap className="w-3 h-3" />

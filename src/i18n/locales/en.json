@@ -155,7 +155,8 @@
     "cobrancaIndisponivel": "Billing isn't available {{pais}} yet. You can keep using search normally while we enable payments here.",
     "trialIniciado": "{{dias}}-day free trial started!",
     "precisaConta": "Create your account to start the free trial.",
-    "criarContaParaAssinar": "Create account and start the trial"
+    "criarContaParaAssinar": "Create account and start the trial",
+    "degrau": "{{percentual}}% cheaper than the {{anterior}} plan — {{valor}} saved over the cycle"
   },
   "leads": {
     "titulo": "Targets found",

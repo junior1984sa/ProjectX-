@@ -45,23 +45,23 @@ export const PLANOS: Record<TipoPlano, ConfiguracaoPlano> = {
     id: "trimestral",
     nome: "Trimestral",
     meses: 3,
-    precoTotal: 1341.0,
-    creditosMensais: 120,
+    precoTotal: 1377.0,
+    creditosMensais: 135,
   },
   semestral: {
     id: "semestral",
     nome: "Semestral",
     meses: 6,
-    precoTotal: 2532.0,
-    creditosMensais: 135,
+    precoTotal: 2497.0,
+    creditosMensais: 180,
     destaque: "Melhor equilíbrio",
   },
   anual: {
     id: "anual",
     nome: "Anual",
     meses: 12,
-    precoTotal: 4764.0,
-    creditosMensais: 150,
+    precoTotal: 4497.0,
+    creditosMensais: 240,
     destaque: "Maior economia",
   },
 }
@@ -86,18 +86,18 @@ export const ORDEM_PLANOS: TipoPlano[] = ["mensal", "trimestral", "semestral", "
  * que a tela exibe — mantenha os dois em sincronia ao alterar preços.
  */
 export const PRECOS_POR_PAIS: Record<string, Record<TipoPlano, number>> = {
-  BR: { mensal: 497, trimestral: 1341, semestral: 2532, anual: 4764 },
-  US: { mensal: 97, trimestral: 261, semestral: 492, anual: 924 },
-  AU: { mensal: 147, trimestral: 396, semestral: 744, anual: 1404 },
-  NZ: { mensal: 157, trimestral: 427, semestral: 797, anual: 1497 },
-  CA: { mensal: 137, trimestral: 369, semestral: 697, anual: 1317 },
-  GB: { mensal: 77, trimestral: 207, semestral: 390, anual: 732 },
-  PT: { mensal: 89, trimestral: 240, semestral: 450, anual: 852 },
+  BR: { mensal: 497, trimestral: 1377, semestral: 2497, anual: 4497 },
+  US: { mensal: 97, trimestral: 277, semestral: 497, anual: 887 },
+  AU: { mensal: 147, trimestral: 417, semestral: 747, anual: 1337 },
+  NZ: { mensal: 157, trimestral: 437, semestral: 797, anual: 1427 },
+  CA: { mensal: 137, trimestral: 387, semestral: 697, anual: 1247 },
+  GB: { mensal: 77, trimestral: 217, semestral: 397, anual: 707 },
+  PT: { mensal: 89, trimestral: 257, semestral: 457, anual: 807 },
   // México e Paraguai têm poder de compra menor que EUA/Europa: o
   // preço é ancorado no mercado local, não convertido do dólar, senão
   // sai caro demais para a realidade de uma marmoraria em Asunción.
-  MX: { mensal: 1497, trimestral: 3997, semestral: 7497, anual: 13997 },
-  PY: { mensal: 397000, trimestral: 1071000, semestral: 2024000, anual: 3811000 },
+  MX: { mensal: 1497, trimestral: 4137, semestral: 7517, anual: 13537 },
+  PY: { mensal: 397000, trimestral: 1096000, semestral: 1991000, anual: 3587000 },
 }
 
 /** Preço total do plano no país informado, caindo no Brasil se desconhecido */
@@ -126,15 +126,15 @@ export const PRECOS_LANCAMENTO_POR_PAIS: Record<
   string,
   Record<TipoPlano, number>
 > = {
-  BR: { mensal: 197, trimestral: 537, semestral: 997, anual: 1897 },
-  US: { mensal: 37, trimestral: 99, semestral: 187, anual: 357 },
-  AU: { mensal: 57, trimestral: 153, semestral: 288, anual: 549 },
-  NZ: { mensal: 67, trimestral: 179, semestral: 337, anual: 637 },
-  CA: { mensal: 57, trimestral: 153, semestral: 287, anual: 547 },
-  GB: { mensal: 29, trimestral: 78, semestral: 147, anual: 279 },
-  PT: { mensal: 35, trimestral: 94, semestral: 177, anual: 337 },
-  MX: { mensal: 597, trimestral: 1597, semestral: 2997, anual: 5697 },
-  PY: { mensal: 157000, trimestral: 423000, semestral: 797000, anual: 1507000 },
+  BR: { mensal: 197, trimestral: 547, semestral: 977, anual: 1707 },
+  US: { mensal: 37, trimestral: 107, semestral: 187, anual: 317 },
+  AU: { mensal: 57, trimestral: 167, semestral: 287, anual: 487 },
+  NZ: { mensal: 57, trimestral: 167, semestral: 287, anual: 487 },
+  CA: { mensal: 57, trimestral: 167, semestral: 287, anual: 487 },
+  GB: { mensal: 29, trimestral: 79, semestral: 142, anual: 247 },
+  PT: { mensal: 34, trimestral: 93, semestral: 167, anual: 297 },
+  MX: { mensal: 597, trimestral: 1637, semestral: 2937, anual: 5167 },
+  PY: { mensal: 157000, trimestral: 429000, semestral: 771000, anual: 1356000 },
 }
 
 /**
@@ -213,6 +213,48 @@ export function economiaPercentual(plano: TipoPlano, pais = "BR"): number {
   const custoSeFosseMensal =
     precoTotalNoPais("mensal", pais) * PLANOS[plano].meses
   return Math.round((1 - precoTotalNoPais(plano, pais) / custoSeFosseMensal) * 100)
+}
+
+/** O plano imediatamente abaixo na escada de compromisso */
+export function planoAnterior(plano: TipoPlano): TipoPlano | null {
+  const i = ORDEM_PLANOS.indexOf(plano)
+  return i <= 0 ? null : ORDEM_PLANOS[i - 1]
+}
+
+/**
+ * ESCADA DE COMPROMISSO — o degrau sobre o plano ANTERIOR.
+ *
+ * Comparar tudo com o mensal esconde o que decide a compra. Quem já
+ * está olhando o semestral não se pergunta "quanto economizo contra o
+ * mensal?", e sim "vale a pena dobrar para o anual?". Este número
+ * responde essa pergunta.
+ *
+ * A tabela foi redesenhada para que os degraus ACELEREM — ~8%, ~9%,
+ * ~10%. Antes eles desaceleravam (10%, 6%, 6%): sair do semestral para
+ * o anual dobrava o compromisso do cliente em troca de 6%, o que é um
+ * mau negócio do lado dele, e era por isso que o anual não vendia.
+ */
+export function economiaSobrePlanoAnterior(plano: TipoPlano, pais = "BR"): number {
+  const anterior = planoAnterior(plano)
+  if (!anterior) return 0
+
+  const mensalDoPlano = precoMensalEquivalente(plano, pais)
+  const mensalDoAnterior = precoMensalEquivalente(anterior, pais)
+  return Math.round((1 - mensalDoPlano / mensalDoAnterior) * 100)
+}
+
+/**
+ * Quanto o cliente economiza EM DINHEIRO, no ciclo inteiro, por ter
+ * escolhido este plano em vez do anterior. O percentual convence a
+ * cabeça; o valor absoluto convence o bolso.
+ */
+export function economiaEmDinheiroSobreAnterior(plano: TipoPlano, pais = "BR"): number {
+  const anterior = planoAnterior(plano)
+  if (!anterior) return 0
+
+  const diferencaMensal =
+    precoMensalEquivalente(anterior, pais) - precoMensalEquivalente(plano, pais)
+  return Math.round(diferencaMensal * PLANOS[plano].meses)
 }
 
 /**
