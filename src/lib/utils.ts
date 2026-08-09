@@ -217,7 +217,14 @@ export function gerarLinkWhatsAppComNumero(
   nomeEmpresa: string,
   nomeContatoPrestador: string,
   urlPortfolio?: string | null,
-  codigoTelefonePais = "55"
+  codigoTelefonePais = "55",
+  /**
+   * Texto pronto, quando quem chama já montou a mensagem — é o caso do
+   * assistente de abordagem, em que o assinante editou o texto antes de
+   * enviar. Sem isso, a edição dele seria descartada em silêncio e o
+   * WhatsApp abriria com a mensagem genérica.
+   */
+  mensagemPronta?: string | null
 ): string {
   // O código vem do país da busca: prefixar 55 num telefone de Miami
   // ou Sydney gera link para um número brasileiro que não existe.
@@ -233,7 +240,9 @@ export function gerarLinkWhatsAppComNumero(
     ? semZeroInicial
     : `${codigoTelefonePais}${semZeroInicial}`
 
-  const linhas = montarMensagemAbordagem(nomeEmpresa, nomeContatoPrestador, urlPortfolio)
+  const linhas = mensagemPronta
+    ? [mensagemPronta]
+    : montarMensagemAbordagem(nomeEmpresa, nomeContatoPrestador, urlPortfolio)
 
   const mensagem = encodeURIComponent(linhas.join("\n"))
   return `https://wa.me/${numeroComPais}?text=${mensagem}`

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Heart, Copy, Download, Search, MessageCircle, Mail } from "lucide-react"
+import { Heart, Copy, Download, Search, MessageCircle, Mail, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton"
@@ -11,6 +11,7 @@ import { ContatoComPaywall } from "@/components/ContatoComPaywall"
 import { NomeComPaywall } from "@/components/NomeComPaywall"
 import { FilaProspeccao } from "@/components/FilaProspeccao"
 import { DisparoEmail } from "@/components/DisparoEmail"
+import { ModalAbordagem } from "@/components/ModalAbordagem"
 import type { Empresa } from "@/types/empresa"
 import { temAcessoLiberado } from "@/types/prestador"
 import { useTranslation } from "react-i18next"
@@ -58,6 +59,8 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
   const [urlPortfolio, setUrlPortfolio] = useState<string | null>(null)
   const [filaAberta, setFilaAberta] = useState(false)
   const [disparoAberto, setDisparoAberto] = useState(false)
+  /** Empresa cuja abordagem esta sendo escrita, ou null */
+  const [abordando, setAbordando] = useState<Empresa | null>(null)
 
   useEffect(() => {
     if (!perfil?.id) return
@@ -201,6 +204,14 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
         />
       )}
 
+      {abordando && (
+        <ModalAbordagem
+          empresa={abordando}
+          urlPortfolio={urlPortfolio}
+          onFechar={() => setAbordando(null)}
+        />
+      )}
+
       {!temAcesso && !carregando && ordenadas.length > 0 && (
         <div className="rounded-xl border border-dourado-700/40 bg-dourado-900/12 px-5 py-3.5 mb-5 flex items-center justify-between flex-wrap gap-3">
           <p className="text-xs text-dourado-200/90">
@@ -288,6 +299,23 @@ export function GridLeads({ onAssinar }: { onAssinar?: () => void }) {
                   >
                     <MessageCircle className="w-3.5 h-3.5" />
                     {t("leads.enviarPanfleto")}
+                  </button>
+                  {/* Assistente de abordagem: mesma trava dos demais —
+                      sem assinatura os contatos estao protegidos, e a
+                      mensagem existe justamente para usa-los. */}
+                  <button
+                    onClick={() => {
+                      if (!temAcesso) {
+                        toast.error(t("leads.erro.assineEnviar"))
+                        handleAssinar()
+                        return
+                      }
+                      setAbordando(empresa)
+                    }}
+                    className="w-9 flex items-center justify-center rounded-lg border border-dourado-700/50 bg-dourado-900/15 text-dourado-300 hover:bg-dourado-900/30 transition-colors"
+                    title={t("abordagem.titulo")}
+                  >
+                    <Sparkles className="w-3.5 h-3.5" />
                   </button>
                   <button
                     onClick={() => handleCopiar(empresa)}

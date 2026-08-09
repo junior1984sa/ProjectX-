@@ -558,5 +558,45 @@
       "sem_resposta": "Sin respuesta",
       "descartado": "Descartado"
     }
+  },
+  "abordagem": {
+    "titulo": "Asistente de contacto",
+    "subtitulo": "Mensaje armado a partir de tu rubro y del rubro de quien lo recibe.",
+    "tom": {
+      "direto": {
+        "nome": "Directo",
+        "abertura": "¡Hola! Soy {{contato}}, de {{minhaEmpresa}} — trabajamos con {{meuRamo}}.",
+        "fecho": "¿Tiene sentido que te envíe nuestra propuesta? Puedes responder por aquí mismo."
+      },
+      "amigavel": {
+        "nome": "Amigable",
+        "abertura": "¡Hola! Acá es {{contato}}, de {{minhaEmpresa}}. Trabajamos con {{meuRamo}}.",
+        "fecho": "Si tiene sentido, te mando algunos trabajos que ya entregamos. ¿Qué te parece?"
+      },
+      "formal": {
+        "nome": "Formal",
+        "abertura": "Estimados, soy {{contato}}, de {{minhaEmpresa}}, empresa de {{meuRamo}}.",
+        "fecho": "De haber interés, envío nuestra propuesta comercial y portafolio. Quedo a disposición."
+      }
+    },
+    "ligacaoComRamo": "Encontré a {{empresa}} al mapear el rubro de {{alvo}} en {{cidade}} — es quien más contrata {{meuRamo}}.",
+    "ligacaoSemRamo": "Encontré a {{empresa}} al mapear empresas de {{cidade}} que suelen necesitar {{meuRamo}}.",
+    "anexoPortfolio": "Portafolio: {{url}}",
+    "assunto": "{{meuRamo}} para {{empresa}}",
+    "canal": "Canal",
+    "canalWhatsapp": "WhatsApp",
+    "canalEmail": "Correo",
+    "tomLabel": "Tono del mensaje",
+    "gerar": "Generar otra versión",
+    "gerando": "Escribiendo...",
+    "mensagem": "Mensaje",
+    "copiar": "Copiar",
+    "copiado": "¡Mensaje copiado!",
+    "abrirWhatsapp": "Abrir en WhatsApp",
+    "porIA": "Refinado por IA",
+    "porModelo": "Plantilla por rubro",
+    "dicaEditar": "Edita a gusto antes de enviar — quien conoce tu servicio eres tú.",
+    "semPerfil": "Completa tu perfil para que el asistente sepa qué haces.",
+    "fechar": "Cerrar"
   }
 }

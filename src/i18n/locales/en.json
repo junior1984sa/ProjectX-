@@ -558,5 +558,45 @@
       "sem_resposta": "No reply",
       "descartado": "Dropped"
     }
+  },
+  "abordagem": {
+    "titulo": "Outreach assistant",
+    "subtitulo": "Message built from your trade and the trade of whoever receives it.",
+    "tom": {
+      "direto": {
+        "nome": "Direct",
+        "abertura": "Hello! I'm {{contato}}, from {{minhaEmpresa}} — we work with {{meuRamo}}.",
+        "fecho": "Would it make sense for me to send you our proposal? You can reply right here."
+      },
+      "amigavel": {
+        "nome": "Friendly",
+        "abertura": "Hi! This is {{contato}}, from {{minhaEmpresa}}. We work with {{meuRamo}}.",
+        "fecho": "If it makes sense, I'll send over some of the work we've delivered. What do you think?"
+      },
+      "formal": {
+        "nome": "Formal",
+        "abertura": "Good day. I'm {{contato}}, from {{minhaEmpresa}}, a {{meuRamo}} company.",
+        "fecho": "Should there be interest, I'll send our commercial proposal and portfolio. I remain at your disposal."
+      }
+    },
+    "ligacaoComRamo": "I found {{empresa}} while mapping the {{alvo}} sector in {{cidade}} — it's the field that hires {{meuRamo}} the most.",
+    "ligacaoSemRamo": "I found {{empresa}} while mapping companies in {{cidade}} that tend to need {{meuRamo}}.",
+    "anexoPortfolio": "Portfolio: {{url}}",
+    "assunto": "{{meuRamo}} for {{empresa}}",
+    "canal": "Channel",
+    "canalWhatsapp": "WhatsApp",
+    "canalEmail": "Email",
+    "tomLabel": "Message tone",
+    "gerar": "Generate another version",
+    "gerando": "Writing...",
+    "mensagem": "Message",
+    "copiar": "Copy",
+    "copiado": "Message copied!",
+    "abrirWhatsapp": "Open in WhatsApp",
+    "porIA": "Refined by AI",
+    "porModelo": "Trade-based template",
+    "dicaEditar": "Edit freely before sending — you're the one who knows your service.",
+    "semPerfil": "Complete your profile so the assistant knows what you do.",
+    "fechar": "Close"
   }
 }
