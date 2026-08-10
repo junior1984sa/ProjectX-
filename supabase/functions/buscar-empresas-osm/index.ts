@@ -24,7 +24,7 @@ const HEADERS_OSM = {
   "User-Agent": "ProspectX/1.0 (https://prospectx-oficial.vercel.app)",
 }
 
-function mapearSegmentoParaTagsOSM(segmento: string): string[] {
+function mapearSegmentoParaTagsOSM(segmento: string): string[] | null {
   // Acentos fora antes de comparar: quem digita "construcao" ou
   // "caminhao" — a maioria — nao casava com "construção"/"caminhão" e
   // caia no filtro generico, recebendo "qualquer empresa da regiao".
@@ -97,10 +97,23 @@ function mapearSegmentoParaTagsOSM(segmento: string): string[] {
     }
   }
 
-  // Sem correspondencia: devolve empresas em geral na regiao. E menos
-  // preciso, mas melhor que nada — e a busca do Google, quando houver
-  // chave, cobre justamente esses casos com precisao de categoria.
-  return ["office=company", "shop=yes", "craft=yes"]
+  // Sem correspondencia conhecida: devolve null, e NAO uma lista
+  // generica.
+  //
+  // Antes isto retornava ["office=company", "shop=yes", "craft=yes"]
+  // com o comentario "melhor que nada". Nao era. O efeito medido:
+  // "estaleiro naval", "manutencao industrial" e "arquitetura"
+  // devolviam EXATAMENTE as mesmas 53 empresas em Curitiba — Agiplan,
+  // Aldeia Coworking, Amway, um sindicato de professores. O segmento
+  // era ignorado e o assinante recebia escritorios quaisquer com o
+  // rotulo do que ele pediu.
+  //
+  // Isso e pior que resultado vazio por tres motivos: gasta credito,
+  // destroi a confianca no primeiro uso, e faz a mensagem de abordagem
+  // dizer "encontrei voces ao mapear o ramo de estaleiro naval" para
+  // um coworking. Dado errado com cara de dado certo e o pior defeito
+  // que um produto de dados pode ter.
+  return null
 }
 
 /**
@@ -335,6 +348,23 @@ Deno.serve(async (req: Request) => {
     }
 
     const tagsOSM = mapearSegmentoParaTagsOSM(segmento)
+
+    // Segmento fora do mapeamento: avisa em vez de inventar. O app usa
+    // `semCobertura` para explicar ao assinante e devolver o credito.
+    if (!tagsOSM) {
+      const semCobertura = {
+        encontrado: false,
+        semCobertura: true,
+        segmento,
+        elementos: [],
+        ponto,
+      }
+      return new Response(JSON.stringify(semCobertura), {
+        status: 200,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      })
+    }
+
     const raioMetros = (raioKm ?? 10) * 1000
 
     const { elementos, raioUsado } = await buscarEstabelecimentosOverpass(
