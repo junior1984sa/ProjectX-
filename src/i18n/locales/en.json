@@ -565,12 +565,12 @@
     "tom": {
       "direto": {
         "nome": "Direct",
-        "abertura": "Hello! I'm {{contato}}, from {{minhaEmpresa}} — we work with {{meuRamo}}.",
+        "abertura": "Hello! I'm {{contato}}, from {{minhaEmpresa}} — we provide {{meuRamo}} services.",
         "fecho": "Would it make sense for me to send you our proposal? You can reply right here."
       },
       "amigavel": {
         "nome": "Friendly",
-        "abertura": "Hi! This is {{contato}}, from {{minhaEmpresa}}. We work with {{meuRamo}}.",
+        "abertura": "Hi! This is {{contato}}, from {{minhaEmpresa}}. We provide {{meuRamo}} services.",
         "fecho": "If it makes sense, I'll send over some of the work we've delivered. What do you think?"
       },
       "formal": {
@@ -579,8 +579,8 @@
         "fecho": "Should there be interest, I'll send our commercial proposal and portfolio. I remain at your disposal."
       }
     },
-    "ligacaoComRamo": "I found {{empresa}} while mapping the {{alvo}} sector in {{cidade}} — it's the field that hires {{meuRamo}} the most.",
-    "ligacaoSemRamo": "I found {{empresa}} while mapping companies in {{cidade}} that tend to need {{meuRamo}}.",
+    "ligacaoComRamo": "I found {{empresa}} while mapping the {{alvo}} sector in {{cidade}} — it's the field that hires {{meuRamo}} services the most.",
+    "ligacaoSemRamo": "I found {{empresa}} while mapping companies in {{cidade}} that tend to need {{meuRamo}} services.",
     "anexoPortfolio": "Portfolio: {{url}}",
     "assunto": "{{meuRamo}} for {{empresa}}",
     "canal": "Channel",

@@ -3,6 +3,9 @@
 /**
  * Status possíveis de uma assinatura
  */
+
+import { canonizarSegmento, traduzirSegmento } from "./segmentosTraduzidos"
+import i18n from "@/i18n"
 export type StatusAssinatura = "pendente" | "trial" | "ativa" | "atraso" | "cancelada"
 
 /**
@@ -1278,12 +1281,18 @@ export const TOTAL_SEGMENTOS_MAPEADOS = Object.keys(MAPA_SEGMENTOS_CLIENTES).len
  * tolerar variações no texto digitado.
  */
 export function obterSegmentosClientes(segmentoPrestador: string): string[] {
-  const chave = normalizarSegmento(segmentoPrestador)
+  // O que a pessoa digitou pode estar em inglês ou espanhol. O mapa de
+  // relações só existe em português, então a entrada é convertida para
+  // o termo canônico antes da busca — sem isso, "stonemason" não casava
+  // com nada e o assinante estrangeiro perdia a inferência inteira.
+  const chave = normalizarSegmento(canonizarSegmento(segmentoPrestador))
 
   for (const [seg, clientes] of Object.entries(MAPA_SEGMENTOS_CLIENTES)) {
     const segNorm = normalizarSegmento(seg)
     if (chave.includes(segNorm) || segNorm.includes(chave)) {
-      return clientes
+      // A saída volta no idioma da interface: o mapa devolve português,
+      // mas quem está lendo a tela pode não ler português.
+      return clientes.map((c) => traduzirSegmento(c, i18n.language))
     }
   }
 
