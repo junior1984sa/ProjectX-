@@ -224,6 +224,29 @@ export function TelaAbertura() {
                   t("home.buscar")
                 )}
               </button>
+
+              {/* RÉGUA DE PRONTIDÃO.
+                  Cada metade pertence a um campo e se preenche quando
+                  ele é preenchido — o estado da busca vira sinal visual,
+                  sem repetir o X que a logomarca já carrega.
+
+                  Foi removida uma vez por engano: o painel de preview
+                  não estava compondo quadros, então as transições CSS
+                  ficavam congeladas no valor inicial e a medição dizia
+                  que a régua nunca preenchia. Ela sempre funcionou. */}
+              <div
+                aria-hidden="true"
+                className="hidden sm:flex absolute bottom-0 left-0 right-0 h-[2px] overflow-hidden"
+              >
+                <span
+                  className="h-full flex-1 bg-dourado-500 transition-transform duration-medium ease-out motion-reduce:transition-none"
+                  style={{ transformOrigin: "right", transform: `scaleX(${temRamo ? 1 : 0})` }}
+                />
+                <span
+                  className="h-full flex-1 bg-dourado-500 transition-transform duration-medium ease-out motion-reduce:transition-none"
+                  style={{ transformOrigin: "left", transform: `scaleX(${temCidade ? 1 : 0})` }}
+                />
+              </div>
             </div>
 
           </div>
