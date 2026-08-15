@@ -76,10 +76,24 @@ export function Dashboard() {
                     {t("resultados.fonteGoogle")}
                   </Badge>
                 ) : fonteDados === "openstreetmap" ? (
-                  <Badge variant="secondary" className="text-xs flex items-center gap-1">
+                  /* ATRIBUIÇÃO OBRIGATÓRIA — ODbL, cláusula 4.3.
+                     A licença do OpenStreetMap exige que todo uso público
+                     do resultado identifique a base de origem e informe
+                     que ela está sob ODbL. Não é cortesia: violar a
+                     licença TERMINA automaticamente o direito de usar os
+                     dados, e o remédio é a cessação de uso — o risco não
+                     é multa, é perder a base inteira.
+                     Por isso o link fica aqui, na tela de resultados,
+                     e não escondido num rodapé institucional. */
+                  <a
+                    href="https://www.openstreetmap.org/copyright"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-[11px] text-prata-400 hover:text-prata-200 border border-prata-700 rounded-md px-2 py-1 transition-colors"
+                  >
                     <MapPin className="w-3 h-3" />
-                    {t("resultados.fonteOSM")}
-                  </Badge>
+                    © OpenStreetMap contributors
+                  </a>
                 ) : (
                   <Badge variant="warning" className="text-xs flex items-center gap-1" title={t("resultados.fonteSimuladaAviso")}>
                     <AlertTriangle className="w-3 h-3" />
