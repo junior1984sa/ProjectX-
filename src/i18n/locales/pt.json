@@ -257,7 +257,8 @@
       "demoUsada": "Você já usou sua busca de demonstração. Crie sua conta para continuar buscando.",
       "assineParaLiberar": "Assine um plano para liberar suas buscas.",
       "creditosInsuficientes": "Créditos insuficientes (precisa de {{custo}}, você tem {{saldo}}). Aguarde a próxima recarga do seu plano.",
-      "limiteDiario": "Você atingiu o limite de hoje ({{restantes}} créditos restantes no dia). Nos primeiros 7 dias há um teto diário — seu saldo continua guardado e libera amanhã."
+      "limiteDiario": "Você atingiu o limite de hoje ({{restantes}} créditos restantes no dia). Nos primeiros 7 dias há um teto diário — seu saldo continua guardado e libera amanhã.",
+      "restricaoExportacao": "Sua conta está configurada para atuar fora do Brasil. Buscas por empresas brasileiras não estão disponíveis neste plano — altere o país de atuação no seu perfil se você passou a atender o Brasil."
     },
     "ok": {
       "iaIdentificou": "Identificamos os clientes potenciais com a ajuda de IA.",

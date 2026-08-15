@@ -9,7 +9,6 @@ import type {
 } from "@/types/empresa"
 import { gerarEmpresasMock } from "@/lib/dadosMock"
 import { buscarEmpresasReais } from "@/lib/dadosReais"
-import { buscarEmpresasGoogle } from "@/lib/dadosGoogle"
 import { gerarId } from "@/lib/utils"
 
 // Filtros padrão iniciais
@@ -71,7 +70,7 @@ export const useAppStore = create<AppState>()(
       erroAtual: null,
       paginaAtual: 1,
       itensPorPagina: 10,
-      fonteDados: "google" as const,
+      fonteDados: "openstreetmap" as const,
       filtros: FILTROS_PADRAO,
 
       // ══ Ações ══
@@ -84,16 +83,18 @@ export const useAppStore = create<AppState>()(
 
         try {
           // Cascata de fontes de dados, da mais precisa para a mais simples:
-          // 1. Google Places (melhor precisão de categoria, tem custo)
-          // 2. OpenStreetMap (gratuito, cobertura menor de contato/precisão)
-          // 3. Exemplo simulado (sempre disponível, claramente identificado na UI)
-          let empresas = await buscarEmpresasGoogle(params)
-          let fonteDados: "google" | "openstreetmap" | "simulado" = "google"
-
-          if (!empresas || empresas.length === 0) {
-            empresas = await buscarEmpresasReais(params)
-            fonteDados = "openstreetmap"
-          }
+          // 1. OpenStreetMap (gratuito, cobertura irregular fora do varejo)
+          // 2. Exemplo simulado (sempre disponível, identificado na UI)
+          //
+          // O Google Places FOI REMOVIDO desta cascata, e não pode voltar.
+          // Os termos da plataforma proíbem armazenar nome, endereço e
+          // telefone dos estabelecimentos retornados — que é exatamente
+          // o que um produto de prospecção faz e vende. A precisão era
+          // melhor, mas construir a base sobre uma fonte que proíbe o
+          // nosso caso de uso é construir sobre algo que pode ser
+          // desligado a qualquer momento, com o produto já vendido.
+          let empresas = await buscarEmpresasReais(params)
+          let fonteDados: "openstreetmap" | "simulado" = "openstreetmap"
 
           if (!empresas || empresas.length === 0) {
             empresas = await gerarEmpresasMock(params)

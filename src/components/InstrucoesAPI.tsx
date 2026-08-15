@@ -13,10 +13,11 @@ import { Badge } from "@/components/ui/badge"
 const ETAPAS = [
   {
     numero: 1,
-    titulo: "Google Places API",
-    descricao: "Substitua a função gerarEmpresasMock() em src/lib/dadosMock.ts pela API real do Google Places Nearby Search. Você precisa de uma chave de API no Google Cloud Console.",
-    chave: "VITE_GOOGLE_PLACES_KEY",
-    url: "https://console.cloud.google.com",
+    titulo: "Registros oficiais por país",
+    descricao:
+      "A cobertura do OpenStreetMap é irregular fora do varejo, e o Google Places está DESCARTADO: os termos dele proíbem armazenar nome, endereço e telefone, que é exatamente o que este produto entrega. O caminho é o registro oficial de cada país — Companies House no Reino Unido, ABN Lookup na Austrália e a base aberta de CNPJ no Brasil. São públicos, permitem armazenamento e cobrem justamente os segmentos B2B que o mapa colaborativo ignora.",
+    chave: "—",
+    url: "https://developer.company-information.service.gov.uk",
     cor: "text-dourado-400",
     icone: <Globe className="w-4 h-4" />,
   },
@@ -139,22 +140,21 @@ export function InstrucoesAPI({ aberto, onFechar }: InstrucoesAPIProps) {
               Código de integração (src/lib/dadosMock.ts)
             </p>
             <div className="bg-muted rounded-lg p-4 font-mono text-xs text-foreground overflow-x-auto">
-              <pre>{`// Substitua gerarEmpresasMock() por:
-export async function buscarEmpresasAPI(
-  params: ParametrosBusca
-): Promise<Empresa[]> {
-  const key = import.meta.env.VITE_GOOGLE_PLACES_KEY
-  const url = \`https://maps.googleapis.com/maps/api/place/nearbysearch/json
-    ?location=\${lat},\${lng}
-    &radius=\${params.raioKm * 1000}
-    &keyword=\${params.segmento}
-    &key=\${key}\`
-    
-  const response = await fetch(url)
-  const data = await response.json()
-  
-  return data.results.map(mapearParaEmpresa)
-}`}</pre>
+              <pre>{`// A chamada mora na Edge Function, nunca no navegador:
+// a chave não pode chegar ao cliente, e cada registro
+// precisa nascer com procedência e data de coleta.
+
+const empresa = {
+  ...campos,
+  pais: params.pais,        // decide se pode receber e-mail
+  fonte: "companies-house", // de onde veio
+  coletadoEm: new Date(),   // frescor do dado
+}
+
+// Regra dura: se a fonte não cobre o segmento pedido,
+// devolva vazio. Nunca preencha com resultado genérico
+// só para a tela não ficar em branco — dado errado gasta
+// o crédito do cliente e queima a confiança.`}</pre>
             </div>
           </div>
 
@@ -164,11 +164,11 @@ export async function buscarEmpresasAPI(
               Checklist de integração
             </p>
             {[
-              "Criar arquivo .env na raiz do projeto",
-              "Adicionar chave VITE_GOOGLE_PLACES_KEY",
-              "Substituir gerarEmpresasMock() em dadosMock.ts",
-              "Mapear campos da API para a interface Empresa",
-              "Testar com cidade e segmento reais",
+              "Ler a licença da fonte ANTES de integrar",
+              "Guardar o segredo nos secrets do Supabase, nunca no .env do front",
+              "Preencher pais, fonte e data de coleta em cada registro",
+              "Amostrar 50 registros em segmento B2B real, não em restaurante",
+              "Medir contatabilidade: quantos vieram com telefone ou e-mail",
             ].map((item, i) => (
               <div key={i} className="flex items-center gap-2 text-xs text-muted-foreground">
                 <CheckCircle2 className="w-3.5 h-3.5 text-muted-foreground/40 flex-shrink-0" />

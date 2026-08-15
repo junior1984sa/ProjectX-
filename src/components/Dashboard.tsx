@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import { Globe, AlertTriangle, MapPin } from "lucide-react"
+import { AlertTriangle, MapPin } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { HeroMetricas } from "@/components/HeroMetricas"
 import { PainelMapa } from "@/components/PainelMapa"
@@ -70,12 +70,7 @@ export function Dashboard() {
 
             <div className="flex items-center gap-2 flex-shrink-0">
               {buscaAtual && (
-                fonteDados === "google" ? (
-                  <Badge variant="success" className="text-xs flex items-center gap-1">
-                    <Globe className="w-3 h-3" />
-                    {t("resultados.fonteGoogle")}
-                  </Badge>
-                ) : fonteDados === "openstreetmap" ? (
+                fonteDados === "openstreetmap" ? (
                   /* ATRIBUIÇÃO OBRIGATÓRIA — ODbL, cláusula 4.3.
                      A licença do OpenStreetMap exige que todo uso público
                      do resultado identifique a base de origem e informe

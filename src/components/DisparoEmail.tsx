@@ -9,6 +9,11 @@ import {
   chaveDaEmpresa,
   dispararEmails,
 } from "@/lib/prospeccao"
+import {
+  podeReceberEmail,
+  motivoDaRecusa,
+  paisesQueExigemEnderecoPostal,
+} from "@/lib/regimeEmail"
 import type { Empresa } from "@/types/empresa"
 import { useTranslation } from "react-i18next"
 import toast from "react-hot-toast"
@@ -69,11 +74,26 @@ export function DisparoEmail({ empresas, onFechar }: DisparoEmailProps) {
     )
   }, [perfil])
 
-  /** Só entram empresas com e-mail e que ainda não foram abordadas */
+  /**
+   * Só entram empresas com e-mail, ainda não abordadas E em país onde
+   * o disparo sem consentimento prévio é lícito.
+   *
+   * O filtro por país acontece AQUI, na montagem da lista, e não só no
+   * servidor. Não é redundância inútil: sem isso o assinante escreveria
+   * a mensagem inteira acreditando que ela vai para 40 empresas, e só
+   * depois de clicar em enviar descobriria que 25 eram britânicas. O
+   * servidor continua sendo quem recusa de fato — este filtro só evita
+   * o trabalho perdido.
+   */
   const elegiveis = useMemo(() => {
     if (!jaContatadas) return []
     return empresas
-      .filter((e) => e.email && !jaContatadas.has(chaveDaEmpresa(e)))
+      .filter(
+        (e) =>
+          e.email &&
+          !jaContatadas.has(chaveDaEmpresa(e)) &&
+          podeReceberEmail(e.pais),
+      )
       .slice(0, MAXIMO_POR_DISPARO)
   }, [empresas, jaContatadas])
 
@@ -81,6 +101,32 @@ export function DisparoEmail({ empresas, onFechar }: DisparoEmailProps) {
   const jaAbordadas = jaContatadas
     ? empresas.filter((e) => e.email && jaContatadas.has(chaveDaEmpresa(e))).length
     : 0
+
+  /** Agrupa as recusadas por país, para explicar em vez de só omitir. */
+  const recusadasPorPais = useMemo(() => {
+    const mapa = new Map<string, { quantidade: number; motivo: string }>()
+    for (const e of empresas) {
+      if (!e.email || podeReceberEmail(e.pais)) continue
+      const chave = e.pais || "?"
+      const atual = mapa.get(chave)
+      if (atual) atual.quantidade += 1
+      else mapa.set(chave, { quantidade: 1, motivo: motivoDaRecusa(e.pais) })
+    }
+    return [...mapa.entries()].sort((a, b) => b[1].quantidade - a[1].quantidade)
+  }, [empresas])
+
+  /**
+   * O CAN-SPAM exige endereço postal físico do remetente. Se houver
+   * destinatário nos Estados Unidos e o perfil não tiver endereço, o
+   * servidor recusa o lote — então travamos o botão antes, com o
+   * motivo à vista.
+   */
+  const paisesExigindoEndereco = useMemo(
+    () => paisesQueExigemEnderecoPostal(elegiveis.map((e) => e.pais)),
+    [elegiveis],
+  )
+  const faltaEnderecoPostal =
+    paisesExigindoEndereco.length > 0 && !perfil?.endereco_postal?.trim()
 
   async function handleEnviar() {
     if (!perfil) return
@@ -91,6 +137,13 @@ export function DisparoEmail({ empresas, onFechar }: DisparoEmailProps) {
     }
     if (elegiveis.length === 0) {
       toast.error(t("disparo.erroNenhuma"))
+      return
+    }
+    if (faltaEnderecoPostal) {
+      toast.error(
+        "Cadastre o endereço postal da sua empresa no perfil — é " +
+          `exigência legal para enviar a ${paisesExigindoEndereco.join(", ")}.`,
+      )
       return
     }
 
@@ -104,6 +157,7 @@ export function DisparoEmail({ empresas, onFechar }: DisparoEmailProps) {
         contato: perfil.nome_contato,
         cidade: `${perfil.cidade}${perfil.estado ? `/${perfil.estado}` : ""}`,
         email: perfil.email_contato,
+        enderecoPostal: perfil.endereco_postal,
       },
     })
     setEnviando(false)
@@ -115,6 +169,7 @@ export function DisparoEmail({ empresas, onFechar }: DisparoEmailProps) {
 
     const partes = [`${r.enviados} enviados`]
     if (r.bloqueados > 0) partes.push(`${r.bloqueados} descadastrados`)
+    if (r.recusadosPorPais > 0) partes.push(`${r.recusadosPorPais} fora das regras do país`)
     if (r.falhas > 0) partes.push(`${r.falhas} falhas`)
 
     toast.success(partes.join(" · "))
@@ -164,6 +219,41 @@ export function DisparoEmail({ empresas, onFechar }: DisparoEmailProps) {
               {jaAbordadas > 0 && (
                 <p>{t("disparo.jaAbordadas", { count: jaAbordadas })}</p>
               )}
+            </div>
+          )}
+
+          {/* Recusa por país — explicada, não escondida.
+              Omitir em silêncio faria o assinante achar que a busca
+              trouxe menos empresas do que trouxe de fato. */}
+          {recusadasPorPais.length > 0 && (
+            <div className="rounded-lg border border-border/60 bg-muted/20 p-3 space-y-1.5">
+              <p className="text-[11px] font-medium text-foreground">
+                Contatos fora do disparo por regra do país
+              </p>
+              {recusadasPorPais.map(([pais, info]) => (
+                <p key={pais} className="text-[11px] text-muted-foreground leading-relaxed">
+                  <strong className="text-foreground/80">{pais}</strong> ·{" "}
+                  {info.quantidade}{" "}
+                  {info.quantidade === 1 ? "empresa" : "empresas"} — {info.motivo}
+                </p>
+              ))}
+              <p className="text-[11px] text-muted-foreground/70 pt-0.5">
+                Nesses países o contato precisa ter autorizado antes. Você pode
+                abordar por telefone, formulário do site ou LinkedIn.
+              </p>
+            </div>
+          )}
+
+          {/* Endereço postal ausente trava o envio aos EUA */}
+          {faltaEnderecoPostal && (
+            <div className="flex items-start gap-2 rounded-lg border border-amber-700/40 bg-amber-950/20 p-3">
+              <AlertCircle className="w-3.5 h-3.5 text-amber-400 flex-shrink-0 mt-0.5" />
+              <p className="text-[11px] text-amber-200/90 leading-relaxed">
+                Para enviar a <strong>{paisesExigindoEndereco.join(", ")}</strong> é
+                obrigatório informar o endereço postal físico da sua empresa no
+                rodapé da mensagem. Cadastre o endereço no seu perfil para
+                liberar o disparo.
+              </p>
             </div>
           )}
 

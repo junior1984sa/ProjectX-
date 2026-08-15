@@ -215,17 +215,28 @@ A busca de prospecção tenta, nesta ordem: **Google Places** → **OpenStreetMa
 ### Configurar no Supabase
 
 ```bash
-supabase secrets set GOOGLE_PLACES_API_KEY=sua-chave-aqui
+# ATENÇÃO: o Google Places foi DESCARTADO como fonte de dados.
+# Os termos dele proíbem armazenar nome, endereço e telefone dos
+# estabelecimentos — exatamente o que este produto entrega ao
+# assinante. A função `buscar-empresas-google` foi removida do
+# repositório. Se você tiver esse segredo cadastrado, remova:
+supabase secrets unset GOOGLE_PLACES_API_KEY
 ```
 
 ### Publicar as Edge Functions de busca
 
 ```bash
-supabase functions deploy buscar-empresas-google --no-verify-jwt
 supabase functions deploy buscar-empresas-osm --no-verify-jwt
 ```
 
-Se a chave do Google não estiver configurada, a busca cai automaticamente no OpenStreetMap (gratuito) sem erro — você pode lançar o produto sem o Google e adicionar depois, sem precisar mudar código.
+A flag `--no-verify-jwt` aqui é intencional e segura: a busca precisa
+funcionar para visitante não cadastrado, e essa função não gasta
+dinheiro nem envia nada em nome de ninguém.
+
+**Nunca use essa flag em `enviar-email-lote` nem em `publicar-instagram`.**
+Essas duas gastam a conta do dono e enviam em nome dele. Elas validam o
+chamador dentro do próprio código, justamente porque uma flag de linha
+de comando é fácil demais de errar num deploy apressado.
 
 ## 6.4. Aplicar a migration do diretório público
 

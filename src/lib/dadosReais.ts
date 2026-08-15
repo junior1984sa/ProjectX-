@@ -8,7 +8,8 @@
 //
 // Limitação conhecida: a cobertura de telefone/e-mail no OpenStreetMap
 // depende de quem cadastrou aquele estabelecimento no mapa colaborativo.
-// Em muitas cidades brasileiras, isso é mais escasso que no Google Places.
+// A cobertura é boa no varejo que o consumidor visita e fraca nos
+// segmentos B2B, que são justamente os que este produto busca.
 //
 // Suporta dois modos de busca (ver ParametrosBusca.segmentosBusca):
 // - "direta": busca pelo próprio segmento do prestador
@@ -40,7 +41,8 @@ function converterParaEmpresa(
   elemento: ElementoOSM,
   segmento: string,
   cidade: string,
-  estado: string
+  estado: string,
+  pais: string
 ): Empresa | null {
   const tags = elemento.tags ?? {}
   const nome = tags.name
@@ -69,6 +71,7 @@ function converterParaEmpresa(
     bairro,
     cidade,
     estado,
+    pais,
     cep: tags["addr:postcode"] ?? "",
     telefone,
     email,
@@ -120,7 +123,9 @@ async function buscarPorTermo(
     }
 
     return (dados.elementos as ElementoOSM[])
-      .map((el) => converterParaEmpresa(el, termoBusca, params.cidade, params.estado))
+      .map((el) =>
+        converterParaEmpresa(el, termoBusca, params.cidade, params.estado, params.pais ?? "BR"),
+      )
       .filter((e): e is Empresa => e !== null)
       .sort((a, b) => b.score - a.score)
       .slice(0, quantidade)

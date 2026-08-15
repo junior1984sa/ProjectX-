@@ -360,7 +360,7 @@ export function GestaoCustos() {
 
       <p className="text-[11px] text-muted-foreground">
         Custos marcados como <strong>inativos</strong> não entram no cálculo — útil para
-        deixar pré-cadastrado o que você ainda vai contratar (Vercel Pro, Google Places,
+        deixar pré-cadastrado o que você ainda vai contratar (Vercel Pro, fonte de dados paga,
         lojas de apps) e ativar quando começar a pagar de fato.
       </p>
     </div>

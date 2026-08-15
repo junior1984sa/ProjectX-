@@ -8,7 +8,14 @@ import type { CreditosUsuario, HistoricoBusca } from "@/types/prestador"
  * significa que o saldo existe, mas o teto do dia foi atingido — e o
  * cliente só precisa voltar amanhã.
  */
-export type MotivoConsumo = "ok" | "sem_creditos" | "limite_diario"
+export type MotivoConsumo =
+  | "ok"
+  | "sem_creditos"
+  | "limite_diario"
+  /** Assinante de fora do Brasil tentando buscar empresa brasileira.
+   *  Quebraria o requisito de "resultado verificado no exterior" da
+   *  tese de exportação de serviço — e reclassificaria a receita. */
+  | "restricao_exportacao"
 
 interface ResultadoConsumo {
   sucesso: boolean
@@ -30,6 +37,10 @@ interface CreditosState {
     cidade: string
     estado: string
     raioKm: number
+    /** País onde a busca acontece. O banco recusa assinante de fora
+     *  do Brasil buscando empresa brasileira — requisito da tese de
+     *  exportação de serviço. */
+    pais: string
   }) => Promise<ResultadoConsumo>
 }
 
@@ -78,7 +89,7 @@ export const useCreditosStore = create<CreditosState>((set, get) => ({
     set({ historico: data as HistoricoBusca[] })
   },
 
-  consumirCreditos: async ({ quantidadeEmpresas, segmento, cidade, estado, raioKm }) => {
+  consumirCreditos: async ({ quantidadeEmpresas, segmento, cidade, estado, raioKm, pais }) => {
     const { data: sessao } = await supabase.auth.getSession()
     const usuarioId = sessao.session?.user.id
 
@@ -93,6 +104,7 @@ export const useCreditosStore = create<CreditosState>((set, get) => ({
       p_cidade: cidade,
       p_estado: estado,
       p_raio_km: raioKm,
+      p_pais: pais,
     })
 
     if (error) {

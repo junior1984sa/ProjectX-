@@ -274,6 +274,14 @@ export interface Profile {
   segmento: string
   cidade: string
   estado: string
+  /**
+   * Endereço postal físico completo da empresa.
+   *
+   * Obrigatório para disparar e-mail comercial aos Estados Unidos: o
+   * CAN-SPAM exige endereço postal válido do remetente em toda
+   * mensagem. Sem ele o servidor recusa o lote inteiro.
+   */
+  endereco_postal: string | null
   nome_contato: string
   whatsapp: string
   email_contato: string
@@ -591,6 +599,7 @@ export interface DadosPerfilForm {
   segmento: string
   cidade: string
   estado: string
+  endereco_postal: string
   nome_contato: string
   whatsapp: string
   email_contato: string

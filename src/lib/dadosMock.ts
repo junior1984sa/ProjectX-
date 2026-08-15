@@ -467,6 +467,7 @@ export async function gerarEmpresasMock(
       bairro,
       cidade: params.cidade,
       estado,
+      pais: params.pais ?? "BR",
       cep: `${Math.floor(Math.random() * 90000) + 10000}-${Math.floor(Math.random() * 900) + 100}`,
       telefone: empresaParcial.telefone || null,
       email: empresaParcial.email || null,

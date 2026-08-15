@@ -27,6 +27,8 @@
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY") ?? ""
 const REMETENTE_EMAIL = Deno.env.get("REMETENTE_EMAIL") ?? ""
 const SEGREDO_DESCADASTRO = Deno.env.get("SEGREDO_DESCADASTRO") ?? ""
+import { regraDoPais, podeEnviarPara } from "./regimes.ts"
+
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? ""
 const SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
 
@@ -43,6 +45,14 @@ interface Destinatario {
   email: string
   cidade?: string
   estado?: string
+  /**
+   * ISO 3166-1 alfa-2. OBRIGATÓRIO.
+   *
+   * Não é opcional com valor padrão: assumir "BR" para um contato de
+   * Manchester produziria exatamente a infração que esta trava existe
+   * para impedir. Sem país, o destinatário é recusado.
+   */
+  pais: string
   chaveEmpresa: string
 }
 
@@ -98,24 +108,32 @@ async function chamarRpc(nome: string, corpo: unknown): Promise<unknown> {
  * e vira infração. Por isso ele é concatenado aqui no servidor, e não
  * deixado a cargo de quem escreve a mensagem.
  */
-const RODAPE_POR_IDIOMA: Record<string, { contato: string; motivo: string; descadastrar: string }> = {
+const RODAPE_POR_IDIOMA: Record<
+  string,
+  { contato: string; motivo: string; descadastrar: string; rotuloAnuncio: string }
+> = {
   pt: {
     contato: "Contato",
     motivo:
       "Você recebeu este e-mail porque sua empresa atua em um segmento relacionado ao nosso serviço.",
     descadastrar: "Não quero mais receber",
+    rotuloAnuncio: "Comunicação comercial",
   },
   en: {
     contato: "Contact",
     motivo:
       "You received this email because your company works in a field related to our service.",
     descadastrar: "Unsubscribe",
+    // Exigência do CAN-SPAM: a mensagem precisa se identificar como
+    // comunicação comercial de forma clara e visível.
+    rotuloAnuncio: "Advertisement",
   },
   es: {
     contato: "Contacto",
     motivo:
       "Recibiste este correo porque tu empresa trabaja en un rubro relacionado con nuestro servicio.",
     descadastrar: "No quiero recibir más",
+    rotuloAnuncio: "Comunicación comercial",
   },
 }
 
@@ -134,10 +152,17 @@ function rodapeDoIdioma(idioma: string | undefined) {
 async function montarHtml(
   corpoTexto: string,
   destinatario: Destinatario,
-  remetente: { empresa: string; contato: string; cidade: string; email: string },
+  remetente: {
+    empresa: string
+    contato: string
+    cidade: string
+    email: string
+    enderecoPostal?: string
+  },
   idioma: string | undefined
 ): Promise<string> {
   const rodape = rodapeDoIdioma(idioma)
+  const regra = regraDoPais(destinatario.pais)
   const token = await assinarEmail(destinatario.email)
   const linkDescadastro =
     `${SUPABASE_URL}/functions/v1/descadastrar` +
@@ -158,7 +183,13 @@ async function montarHtml(
   ${paragrafos}
 
   <div style="margin-top:28px;padding-top:16px;border-top:1px solid #d8d8d4;font-size:12px;line-height:1.6;color:#7a7f86">
+    ${regra.exigeRotuloAnuncio
+      ? `<p style="margin:0 0 6px;text-transform:uppercase;letter-spacing:.04em;font-size:11px">${rodape.rotuloAnuncio}</p>`
+      : ""}
     <p style="margin:0 0 6px"><strong>${remetente.empresa}</strong> · ${remetente.cidade}</p>
+    ${regra.exigeEnderecoPostal && remetente.enderecoPostal
+      ? `<p style="margin:0 0 6px">${remetente.enderecoPostal}</p>`
+      : ""}
     <p style="margin:0 0 6px">${rodape.contato}: ${remetente.contato} — ${remetente.email}</p>
     <p style="margin:0">
       ${rodape.motivo}
@@ -266,11 +297,70 @@ Deno.serve(async (req: Request) => {
       )
     }
 
+    // ── TRAVA POR PAÍS ────────────────────────────────────────
+    //
+    // Roda ANTES de enviar qualquer mensagem, sobre o lote inteiro.
+    // Se ficasse dentro do laço, um lote misto com um contato britânico
+    // no fim já teria enviado dezenas de mensagens antes de descobrir
+    // o problema — e e-mail enviado não volta.
+    //
+    // O bloqueio devolve 200, não erro: para quem usa, isso não é
+    // falha do sistema, é o sistema funcionando. A resposta explica
+    // qual país e qual norma, para o assinante entender por que aquele
+    // contato ficou de fora em vez de achar que o produto está quebrado.
+    const recusadosPorPais: { email: string; pais: string; norma: string }[] = []
+    const paisesExigindoEndereco = new Set<string>()
+
+    for (const d of destinatarios as Destinatario[]) {
+      const regra = regraDoPais(d.pais)
+      if (regra.regime !== "optout") {
+        recusadosPorPais.push({
+          email: d.email ?? "sem e-mail",
+          pais: d.pais ?? "não informado",
+          norma: regra.norma,
+        })
+        continue
+      }
+      if (regra.exigeEnderecoPostal) paisesExigindoEndereco.add(d.pais.toUpperCase())
+    }
+
+    // Endereço postal físico do remetente é exigência do CAN-SPAM para
+    // envio aos Estados Unidos. Sem ele a mensagem é irregular, então a
+    // recusa é do lote inteiro — enviar "quase conforme" não existe.
+    if (paisesExigindoEndereco.size > 0 && !remetente?.enderecoPostal?.trim()) {
+      return responder(
+        {
+          erro:
+            "Endereço postal físico é obrigatório para enviar a " +
+            `${[...paisesExigindoEndereco].join(", ")}. ` +
+            "Cadastre o endereço da sua empresa no perfil antes de disparar.",
+          codigo: "endereco_postal_obrigatorio",
+          paises: [...paisesExigindoEndereco],
+        },
+        400
+      )
+    }
+
+    // Lote inteiro recusado: não há o que enviar.
+    const permitidos = (destinatarios as Destinatario[]).filter(
+      (d) => podeEnviarPara(d.pais)
+    )
+    if (permitidos.length === 0) {
+      return responder({
+        sucesso: true,
+        enviados: 0,
+        bloqueados: 0,
+        falhas: 0,
+        recusadosPorPais: recusadosPorPais.length,
+        detalheRecusa: recusadosPorPais.slice(0, 10),
+      })
+    }
+
     const enviados: string[] = []
     const bloqueados: string[] = []
     const falhas: string[] = []
 
-    for (const d of destinatarios as Destinatario[]) {
+    for (const d of permitidos) {
       if (!d.email?.includes("@")) {
         falhas.push(d.nome ?? "sem nome")
         continue
@@ -323,13 +413,14 @@ Deno.serve(async (req: Request) => {
         p_email: d.email,
         p_cidade: d.cidade ?? null,
         p_estado: d.estado ?? null,
-        p_pais: "BR",
+        p_pais: d.pais.toUpperCase(),
       })
     }
 
     console.log(
       `Disparo concluído: ${enviados.length} enviados, ` +
-      `${bloqueados.length} bloqueados por descadastro, ${falhas.length} falhas.`
+      `${bloqueados.length} bloqueados por descadastro, ` +
+      `${recusadosPorPais.length} recusados por país, ${falhas.length} falhas.`
     )
 
     return responder({
@@ -337,6 +428,8 @@ Deno.serve(async (req: Request) => {
       enviados: enviados.length,
       bloqueados: bloqueados.length,
       falhas: falhas.length,
+      recusadosPorPais: recusadosPorPais.length,
+      detalheRecusa: recusadosPorPais.slice(0, 10),
     })
   } catch (erro) {
     console.error("Erro inesperado no disparo:", erro)

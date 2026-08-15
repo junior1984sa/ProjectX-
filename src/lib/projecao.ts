@@ -54,10 +54,13 @@ export interface Premissas {
  * Valores iniciais. São PONTOS DE PARTIDA plausíveis, não cotações ao
  * vivo — o painel deixa isso explícito e permite corrigir cada um.
  *
- *  - custoPorCredito: cada crédito equivale a uma consulta de lugares.
- *    A faixa paga do Google Places gira em torno de US$ 32 por mil
- *    consultas; a R$ 5,40 o dólar isso dá ~R$ 0,17. Arredondado para
- *    cima, para não subestimar.
+ *  - custoPorCredito: cada crédito equivale a uma consulta de dados.
+ *    Hoje a fonte é o OpenStreetMap via Overpass, que não cobra — o
+ *    custo real de API é ZERO. O valor inicial de R$ 0,20 é uma reserva
+ *    deliberada para o dia em que entrar uma fonte paga, porque projetar
+ *    com custo zero produz margem que some assim que a base melhorar.
+ *    Quando contratar a fonte definitiva, troque por (preço por mil
+ *    consultas ÷ 1000), convertido pelo câmbio.
  *  - taxaGatewayPct: faixas públicas de cartão de crédito. Mercado Pago
  *    e Stripe variam conforme prazo de repasse e volume — confira a sua.
  *  - anexoSimples: começa em "V" de propósito. Sem pró-labore é esse

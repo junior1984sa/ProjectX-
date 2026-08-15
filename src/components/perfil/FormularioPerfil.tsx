@@ -34,6 +34,7 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
     segmento: "",
     cidade: "",
     estado: "",
+    endereco_postal: "",
     nome_contato: "",
     whatsapp: "",
     email_contato: email ?? "",
@@ -53,6 +54,7 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
         segmento: perfil.segmento,
         cidade: perfil.cidade,
         estado: perfil.estado,
+        endereco_postal: perfil.endereco_postal ?? "",
         nome_contato: perfil.nome_contato,
         whatsapp: perfil.whatsapp,
         email_contato: perfil.email_contato,
@@ -240,6 +242,24 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
                 ))}
               </select>
             </div>
+          </div>
+
+          {/* Endereço postal — exigência legal, não capricho de cadastro */}
+          <div className="space-y-2">
+            <Label htmlFor="endereco_postal">Endereço postal completo</Label>
+            <Input
+              id="endereco_postal"
+              value={form.endereco_postal}
+              onChange={(e) => atualizarCampo("endereco_postal", e.target.value)}
+              placeholder="Rua, número, complemento, bairro, CEP"
+            />
+            <p className="text-[11px] text-muted-foreground leading-relaxed">
+              Sai no rodapé dos e-mails que você dispara. É{" "}
+              <strong className="text-foreground/80">obrigatório por lei</strong>{" "}
+              para enviar a empresas nos Estados Unidos — sem ele o disparo
+              para lá fica bloqueado. Para envio só dentro do Brasil, é
+              opcional.
+            </p>
           </div>
 
           {/* Descrição */}

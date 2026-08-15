@@ -11,6 +11,17 @@ export interface Empresa {
   bairro: string
   cidade: string
   estado: string
+  /**
+   * País do estabelecimento, em ISO 3166-1 alfa-2.
+   *
+   * Não é enfeite de endereço: é o campo que decide se este contato
+   * pode receber e-mail comercial. Reino Unido e Austrália exigem
+   * consentimento prévio; Estados Unidos não, mas exigem endereço
+   * postal do remetente no rodapé. Sem saber o país, não dá para
+   * cumprir nenhuma das duas regras — por isso o campo é obrigatório
+   * e o servidor recusa o disparo quando ele falta.
+   */
+  pais: string
   cep: string
   telefone: string | null
   email: string | null
@@ -110,7 +121,7 @@ export interface AppState {
   paginaAtual: number
   itensPorPagina: number
   /** Identifica a origem dos dados da última busca: qual fonte foi usada de fato */
-  fonteDados: "google" | "openstreetmap" | "simulado"
+  fonteDados: "openstreetmap" | "simulado"
 
   // Filtros
   filtros: Filtros

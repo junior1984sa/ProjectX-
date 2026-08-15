@@ -140,12 +140,19 @@ export function useExecutarBusca() {
       cidade: nomeCidade,
       estado,
       raioKm,
+      pais: paisDaBusca,
     })
 
     if (!resultado.sucesso) {
       // Duas recusas bem diferentes: sem saldo pede recarga; teto do
       // dia significa que o saldo existe e só precisa voltar amanhã.
       // Dar a mensagem errada aqui faria o cliente achar que acabou.
+      // Três recusas bem diferentes. Dar a mensagem errada aqui faz o
+      // cliente achar que acabou o crédito quando o caso é outro.
+      if (resultado.motivo === "restricao_exportacao") {
+        toast.error(t("busca.erro.restricaoExportacao"))
+        return
+      }
       toast.error(
         resultado.motivo === "limite_diario"
           ? t("busca.erro.limiteDiario", { restantes: resultado.creditos_restantes })

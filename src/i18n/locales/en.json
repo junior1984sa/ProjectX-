@@ -257,7 +257,8 @@
       "demoUsada": "You've already used your demo search. Create an account to keep searching.",
       "assineParaLiberar": "Subscribe to a plan to unlock your searches.",
       "creditosInsuficientes": "Not enough credits (you need {{custo}}, you have {{saldo}}). Wait for your plan's next top-up.",
-      "limiteDiario": "You've hit today's limit ({{restantes}} credits left today). There's a daily cap during your first 7 days — your balance is safe and unlocks tomorrow."
+      "limiteDiario": "You've hit today's limit ({{restantes}} credits left today). There's a daily cap during your first 7 days — your balance is safe and unlocks tomorrow.",
+      "restricaoExportacao": "Your account is set to operate outside Brazil. Searches for Brazilian companies aren't available on this plan — change your country of operation in your profile if you now serve Brazil."
     },
     "ok": {
       "iaIdentificou": "We identified the potential clients with help from AI.",

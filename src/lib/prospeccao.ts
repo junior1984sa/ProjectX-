@@ -146,6 +146,8 @@ export interface ResultadoDisparo {
   enviados: number
   bloqueados: number
   falhas: number
+  /** Contatos recusados porque o país deles exige consentimento prévio */
+  recusadosPorPais: number
   erro: string | null
 }
 
@@ -161,13 +163,22 @@ export async function dispararEmails(params: {
   empresas: Empresa[]
   assunto: string
   corpo: string
-  remetente: { empresa: string; contato: string; cidade: string; email: string }
+  remetente: {
+    empresa: string
+    contato: string
+    cidade: string
+    email: string
+    enderecoPostal?: string | null
+  }
 }): Promise<ResultadoDisparo> {
   const { data: sessao } = await supabase.auth.getSession()
   const token = sessao.session?.access_token
 
   if (!token) {
-    return { sucesso: false, enviados: 0, bloqueados: 0, falhas: 0, erro: "Sessão expirada." }
+    return {
+      sucesso: false, enviados: 0, bloqueados: 0, falhas: 0,
+      recusadosPorPais: 0, erro: "Sessão expirada.",
+    }
   }
 
   const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string
@@ -193,6 +204,9 @@ export async function dispararEmails(params: {
             email: e.email,
             cidade: e.cidade,
             estado: e.estado,
+            // O servidor recusa o destinatário sem país. Mandar um
+            // padrão aqui só empurraria o erro para dentro do envio.
+            pais: e.pais,
             chaveEmpresa: chaveDaEmpresa(e),
           })),
       }),
@@ -206,6 +220,7 @@ export async function dispararEmails(params: {
         enviados: 0,
         bloqueados: 0,
         falhas: 0,
+        recusadosPorPais: 0,
         erro: dados.erro ?? "Não foi possível enviar.",
       }
     }
@@ -215,11 +230,15 @@ export async function dispararEmails(params: {
       enviados: dados.enviados ?? 0,
       bloqueados: dados.bloqueados ?? 0,
       falhas: dados.falhas ?? 0,
+      recusadosPorPais: dados.recusadosPorPais ?? 0,
       erro: null,
     }
   } catch (erro) {
     console.error("Erro ao disparar e-mails:", erro)
-    return { sucesso: false, enviados: 0, bloqueados: 0, falhas: 0, erro: "Erro de conexão." }
+    return {
+      sucesso: false, enviados: 0, bloqueados: 0, falhas: 0,
+      recusadosPorPais: 0, erro: "Erro de conexão.",
+    }
   }
 }
 
