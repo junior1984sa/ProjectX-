@@ -1,638 +1,484 @@
-# ProspectX — Análise de Inteligência Competitiva
+# ProspectX — Análise de Concorrência
 
-**Analista:** Inteligência Competitiva e de Mercado
-**Data da pesquisa:** 15 de agosto de 2026
-**Escopo:** Estados Unidos, Reino Unido, Austrália (mercados-alvo declarados) + Brasil (mercado secundário)
-**Estado do produto analisado:** ProspectX no ar, zero assinantes, base atual em OpenStreetMap/Overpass
+**Data de consulta de todas as fontes: 15 de agosto de 2026.**
+Analista: `analista-concorrencia` · Escopo: EUA, Reino Unido e Austrália (Brasil tratado como fase 2)
 
-> **Regra aplicada neste documento:** todo preço citado foi lido na página de preços do próprio fornecedor em 15/08/2026, salvo quando marcado `[FONTE SECUNDÁRIA]` ou `[NÃO VERIFICADO]`. Nenhum número de faturamento, base de clientes ou rodada de investimento foi estimado. Câmbio de referência: **1 USD = 5,19 BRL** (cotação de mercado consultada em 15/08/2026, `[FONTE SECUNDÁRIA]`).
+---
+
+## Convenção de confiabilidade de preço
+
+Este relatório separa três níveis. Não misture.
+
+| Marca | Significado |
+|---|---|
+| **[PÁGINA]** | Preço lido diretamente na página de preços do fornecedor em 15/08/2026 |
+| **[SECUNDÁRIA]** | Preço só encontrado em blog de terceiro ou comparador. Serve para faixa, **não** para decisão |
+| **[NÃO VERIFICADO]** | Não foi possível confirmar. Não use em nenhum cálculo |
+
+Fornecedores que bloqueiam leitura automática da página de preços (Lusha, ZoomInfo, Cognism, Apollo, BookYourData, GetProspect) aparecem apenas com **[SECUNDÁRIA]** ou **[NÃO VERIFICADO]**. Isso não é falha de pesquisa: **esconder o preço é, ele próprio, um dado sobre o público-alvo** — quem esconde preço vende para comitê, não para profissional solo.
 
 ---
 
 ## 1. Sumário Executivo
 
-**A ProspectX está posicionada num preço que o mercado não pratica, com uma fonte de dados que o mercado comoditizou, contra um diferencial que o mercado não cobra separadamente.** Essas são três conclusões independentes e cada uma sozinha já impede a venda.
+**1.** O mercado está partido em dois blocos que quase não conversam: o bloco de **sales intelligence corporativa** (Apollo, ZoomInfo, Cognism, Lusha, UpLead), que vende contato de decisor nomeado por assento a partir de ~US$ 49/usuário/mês e chega a US$ 15.000/ano de piso; e o bloco de **leads locais via mapas** (Scrap.io, LeadSwift, D7, Outscraper, Lead Atlas, B2BLeadFinder), que vende registro de empresa local a **US$ 0,003 a US$ 0,03 por registro**. A ProspectX está vendendo produto do segundo bloco com estrutura de preço do primeiro — e mais cara que ambos por crédito.
 
-**Primeiro: o preço por registro está fora da curva por uma ordem de grandeza.** A ProspectX cobra R$ 497/mês por 100 créditos — **US$ 0,96 por contato revelado**. O RocketReach entrega exatamente os mesmos 100 lookups/mês por US$ 27/mês (US$ 0,27). O Lead411 entrega 1.000 exportações/mês por US$ 49 (US$ 0,049), com rollover. Nem o plano fundador (R$ 197 ≈ US$ 0,38/crédito) chega ao degrau de entrada do mercado. Não existe cliente informado que pague isso.
+**2.** O diferencial declarado — o mapa "quem contrata quem" com 531 termos — **de fato não existe como produto no mercado**, e a razão é instrutiva: toda a categoria de descoberta de ICP (Ocean.io, Unify, Keyplay, Clay) parte de **clientes que você já tem** para achar semelhantes. Nenhuma delas serve quem tem zero clientes. Esse é o espaço vazio real. Mas ele está vazio porque é **barato de copiar** (em 2026 qualquer LLM devolve "quem contrata manutenção industrial" em segundos) e porque **o valor não está no mapa, está na base por trás dele** — que a ProspectX ainda não tem. O mapa é uma camada fina sobre um buraco.
 
-**Segundo: a fonte de dados escolhida é justamente aquela cujo preço de mercado caiu a quase zero.** Dados de estabelecimento local — nome, endereço, telefone, site — que é o que o OpenStreetMap devolve, são vendidos hoje a **US$ 1,50 por 1.000 registros** no Apify e a partir de **US$ 3,00 por 1.000** no Outscraper `[FONTE SECUNDÁRIA]`. A ProspectX está cobrando US$ 960 pelo mesmo volume de mil registros. O problema de qualidade que o dono já detectou não é um bug de implementação: é a consequência de ter escolhido a camada mais barata e mais copiável da cadeia.
+**3.** A fraqueza estrutural que dá para atacar é a mesma em todos os players: **eles exigem que o cliente já saiba quem procurar.** Apollo pede filtro de SIC/NAICS; Scrap.io pede a categoria do Google Maps; D7 pede a palavra-chave. Todos assumem um comprador treinado. O prestador solo não é treinado — e é por isso que ele desiste na primeira busca vazia, não por falta de dado.
 
-**Terceiro: o diferencial real — o mapa de 1.187 pares "quem contrata quem" — é genuinamente raro, e essa raridade merece desconfiança antes de comemoração.** Não encontrei nenhum produto cujo eixo central seja "informe o seu serviço e receba os segmentos que compram esse serviço". Mas o mercado resolve o mesmo problema por três caminhos que já funcionam e já foram pagos: filtro por código setorial (SIC/NAICS, presente em todo mundo), *lookalike* a partir da carteira existente (Ocean.io) e dado de intenção de compra (Bombora, 6sense, Cognism Pro). O mapa estático é a versão mais fraca das três, porque um par fixo "manutenção industrial → indústria" é conhecimento que qualquer prestador com dois anos de ofício já tem de cabeça. **O que ele não tem é a lista com contato e um sinal de que aquela empresa está comprando agora.** É esse o produto.
+**4.** O concorrente real do prestador solo em EUA/UK/AU **não é uma ferramenta de dados, é o marketplace de leads**: Angi, Thumbtack, Bark, Checkatrade. Eles cobram US$ 8–150 por lead (Thumbtack) e £5–40 por lead (Bark), vendem o mesmo lead para 4–5 profissionais, e 78% dos clientes contratam quem responde primeiro **[SECUNDÁRIA]**. Essa é a dor que a ProspectX pode nomear e que nenhuma ferramenta de dados nomeia. É o melhor ângulo de mensagem disponível.
 
-**Onde está a oportunidade real:** todos os fornecedores sérios de dados abandonaram deliberadamente o profissional solo. Cognism exige 5 assentos e não publica preço. ZoomInfo cota na casa dos cinco dígitos anuais. Apollo cobra por assento e desenha tudo para equipe de SDR. Abaixo desse degrau só sobrou o *scraper* cru (US$ 1,50/mil, sem interpretação) e o marketplace de leads (Bark, Thumbtack: **US$ 15 a US$ 60 por lead**, com 75% de fantasma reportado). **Existe um vão real entre "planilha crua barata demais para usar" e "lead de marketplace caro demais para escalar" — e é nesse vão que a ProspectX pode viver, se abandonar o preço atual e trocar a fonte de dados.**
+**5.** Recomendação central: **não venda base, venda alvo — e prove antes do cadastro.** A ProspectX não vai ganhar de Apollo em volume nem de Scrap.io em preço por registro. Pode ganhar sendo a única que responde "para quem eu vendo?" antes de responder "qual o e-mail dele?". Mas isso só é vendável se a base entregar dado real; enquanto o OpenStreetMap for a fonte, cada busca vazia queima a promessa e o pouco de confiança que uma marca sem assinantes tem.
 
 ---
 
 ## 2. Mapa do mercado
 
-### 2.1 Concorrentes diretos (vendem lista de empresas + contato para prospecção ativa)
+### 2.1 Concorrentes diretos — leads locais por cidade × segmento
 
-| Camada | Players | Faixa de entrada |
+Esta é a categoria da ProspectX. Fonte de dados quase sempre Google Maps (API ou raspagem).
+
+| Produto | O que é | Entrada mais barata |
 |---|---|---|
-| **Enterprise / sem preço público** | ZoomInfo, Cognism, Dun & Bradstreet, illion (AU), Data Axle, Bureau van Dijk/FAME (UK) | Cotação comercial; 5+ assentos |
-| **Mid-market self-service** | Apollo.io, Lusha, Seamless.ai, Amplemarket | US$ 49–119/assento/mês |
-| **Solo-friendly self-service** | RocketReach, Lead411, Hunter, UpLead, Kaspr, Wiza, Skrapp | US$ 27–99/mês |
-| **Local / geo-segmentado** | **LeadSwift**, Outscraper, Apify (Compass), D7 Lead Finder, GMapsScraper, MapLeadScraper, Targetley | US$ 1,50/mil registros até US$ 20/mês |
-| **Outreach com base embutida** | Instantly, Saleshandy, lemlist, Reply.io | US$ 25–47/mês (+ base como assinatura separada) |
-| **"Monte a sua própria base"** | Clay, PhantomBuster, TexAu, n8n + workflow pronto | Grátis a US$ 185/mês |
+| **Scrap.io** | Extração de Google/Apple/Bing Maps, 195 países, 4.000+ categorias | US$ 35/mês anual, 10.000 créditos de exportação **[PÁGINA]** |
+| **LeadSwift** | Raspagem ao vivo de Maps/Yelp/Facebook/YellowPages para agências | US$ 19,99/mês anual (1 busca/dia, leads ilimitados) **[PÁGINA]** |
+| **D7 Lead Finder** | Até 1.200 leads por busca, mundial | US$ 44,99/mês (15 buscas/dia) **[SECUNDÁRIA]** |
+| **Outscraper** | Pay-as-you-go por registro, sem mensalidade | US$ 1–9 por 1.000 registros **[PÁGINA]** |
+| **Lead Atlas** | Busca por cidade/CEP/setor, créditos que não expiram | **US$ 9 por 300 créditos (US$ 0,030/lead)** **[PÁGINA]** |
+| **B2BLeadFinder** | Google Places API + score de "lacuna digital" | US$ 14,99/mês; teste 7 dias, 25 scans **[PÁGINA parcial]** |
 
-### 2.2 Concorrentes indiretos (resolvem "conseguir cliente", não "conseguir lista")
+### 2.2 Concorrentes diretos — sales intelligence B2B
 
-- **Marketplaces de lead pago:** Bark (UK/US/AU), Thumbtack (US), Angi/HomeAdvisor (US), Hipages (AU), Checkatrade (UK), Airtasker (AU), Houzz Pro.
-- **Mídia paga por intenção:** Google Local Services Ads, Google Ads, Meta Ads.
-- **Dado de intenção de compra:** Bombora, 6sense, Demandbase, G2 Buyer Intent.
-- **Serviço feito-por-você:** UpLead Done-For-You, Sopro (UK), Illicium (AU), agências de *outbound*.
+| Produto | Posição | Entrada |
+|---|---|---|
+| **Apollo.io** | Líder de volume no self-serve, plano gratuito agressivo | US$ 49/usuário/mês anual **[SECUNDÁRIA]** |
+| **UpLead** | Precisão garantida, filtro por SIC | US$ 74/mês anual (2.040 créditos/ano) **[PÁGINA]** |
+| **Lusha** | Extensão de navegador, autosserviço | **[NÃO VERIFICADO]** — página bloqueada |
+| **Cognism** | Dado europeu, celular verificado, contrato anual | Piso ~US$ 15.000/ano + assento **[SECUNDÁRIA]** |
+| **ZoomInfo** | Enterprise, mínimo de 3 assentos, sem preço público | US$ 15.000–60.000/ano **[SECUNDÁRIA]** |
+| **Seamless.AI** | Autosserviço agressivo, reputação ruim de cobrança | ~US$ 147/usuário/mês anual **[SECUNDÁRIA]** |
+| **Lead411** | Intent Bombora no plano de entrada | US$ 49/mês (1.000 exportações) **[SECUNDÁRIA]** |
+| **Kaspr** | LinkedIn, e-mail B2B ilimitado | €45/usuário/mês **[PÁGINA]** |
+| **Wiza** | LinkedIn Sales Navigator → CSV | US$ 49/mês **[SECUNDÁRIA]** |
+| **Data Axle Salesgenie** | Listas compiladas EUA, SMB clássico | US$ 99/mês **com contrato de 12 meses** **[SECUNDÁRIA]** |
 
-### 2.3 Substitutos gratuitos — **o concorrente real de quem tem zero assinante**
+### 2.3 Cold outreach com base embutida
 
-Este bloco merece atenção desproporcional. Um prestador solo que nunca pagou por dado de prospecção não está escolhendo entre ProspectX e Apollo; está escolhendo entre ProspectX e **não gastar nada**.
+Aqui a base virou brinde do disparador. Isso é o fato mais perigoso para a ProspectX.
 
-| Substituto | Cobertura | Custo | Por que ele segura o cliente |
-|---|---|---|---|
-| **Busca manual no Google Maps** | US/UK/AU/BR, universal | R$ 0 | Devolve exatamente o que o OSM devolve, com dado melhor e sem cadastro |
-| **Companies House (UK)** | Reino Unido, censitário | R$ 0, download em massa liberado, uso comercial permitido | Registro legal de **toda** empresa do país, com SIC code e endereço. Arquivo mensal `BasicCompanyDataAsOneFile` |
-| **ABN Lookup / ABR (Austrália)** | Austrália, censitário | R$ 0, extrato semanal em XML; até 500 mil registros por consulta | Identificador ABN é a chave canônica do dado B2B australiano |
-| **SAM.gov (EUA)** | Federal, licitações + fornecedores | R$ 0, sem cadastro para consultar | 24 mil avisos novos/mês; alerta por código NAICS |
-| **Find a Tender / Contracts Finder (UK)** | Setor público UK | R$ 0 | Base central obrigatória de contratos públicos |
-| **AusTender (AU)** | Federal AU, contratos ≥ A$ 10 mil | R$ 0, alerta por perfil | Publicação obrigatória; ~1/3 dos contratos vai para PME |
-| **LinkedIn manual + Sales Navigator** | Global | R$ 0 a ~US$ 99/mês | Dado de pessoa, atualizado pelo próprio titular |
-| **Listas de associação setorial** | Por país/setor | R$ 0 a taxa de associado | Já vem pré-qualificado por segmento — é o "quem contrata quem" feito à mão |
-| **Planilha do próprio prestador** | — | R$ 0 | Custo de troca psicológico altíssimo: já funciona |
+| Produto | Base embutida | Entrada |
+|---|---|---|
+| **Instantly.ai** | 450M+ contatos B2B; pacote Starter US$ 94/mês com 1.500 créditos | Outreach US$ 47/mês; Créditos US$ 47/mês **[PÁGINA]** |
+| **lemlist** | 650M+ leads incluídos já no plano de US$ 69 | US$ 55/mês anual **[SECUNDÁRIA]** |
+| **Snov.io** | Prospecção + disparo + verificação | US$ 29,25/mês, 1.000 créditos **[PÁGINA]** |
+| **Hunter.io** | Busca de e-mail + sequências | US$ 34/mês anual, 2.000 créditos **[PÁGINA]** |
+| **Saleshandy** | Lead Finder + disparo | US$ 25/mês (2.000 prospects ativos) **[PÁGINA]** |
 
-> **Achado estrutural:** no Reino Unido e na Austrália — dois dos três mercados-alvo — **o Estado publica de graça, em massa e com licença comercial, um cadastro censitário de empresas com classificação setorial**. Isso é dado melhor que o OpenStreetMap, sem custo e sem risco de termo de uso. Qualquer proposta de valor da ProspectX nesses dois países precisa explicar por que o cliente pagaria por algo que o governo entrega melhor.
+### 2.4 Descoberta de ICP / "lookalike"
 
----
+| Produto | Mecanismo | Limite estrutural |
+|---|---|---|
+| **Ocean.io** | Lookalike a partir de clientes atuais; 35M empresas | Precisa de clientes existentes. US$ 0,071/crédito, mín. 750 **[SECUNDÁRIA]** |
+| **Unify / Keyplay / Persana / Landbase** | Scoring de fit + intent + lookalike | Preço enterprise, ciclo de venda com comitê **[NÃO VERIFICADO]** |
+| **Clay** | Infra de enriquecimento; Launch US$ 185/mês, Growth US$ 495/mês **[SECUNDÁRIA]** | Exige operador técnico |
 
-## 3. Ficha de cada concorrente
+**Achado:** a categoria inteira responde "quem se parece com meu cliente?". Nenhuma responde "quem é meu cliente?" para quem ainda não tem nenhum.
 
-### 3.1 Apollo.io — o padrão de referência do mercado
+### 2.5 Substitutos gratuitos — o verdadeiro concorrente
 
-| Eixo | Resposta |
-|---|---|
-| **Proposta (literal, 15/08/2026)** | "A plataforma completa para crescer seu negócio — Construa o pipeline de forma mais inteligente, feche negócios mais rápido e unifique sua ferramenta de tecnologia com uma plataforma impulsionada por IA." |
-| **Cliente-alvo** | Equipe de vendas B2B com SDR. **Ignora conscientemente** o prestador de serviço local |
-| **Fonte de dados** | Base própria + rede contributiva via extensão Chrome (usuários alimentam a base ao navegar). Escala em dado de **pessoa em empresa com presença digital**, não de estabelecimento físico |
-| **Modelo de preço** | Por assento + crédito. E-mail = 1 crédito; telefone = **8 créditos**; pesquisa de IA = 1 crédito/execução; discador EUA = 2 créditos/min |
-| **Preço real (15/08/2026)** | Grátis: US$ 0, 900 créditos/assento/ano. Básico: **US$ 49**/assento/mês anual, 30.000 créditos/ano. Profissional: **US$ 79**, 48.000 créditos/ano. Organização: **US$ 119**, mín. 3 assentos, 72.000 créditos/ano. Add-ons Inbound e Advanced Dialer: US$ 119/equipe/mês cada |
-| **Plano gratuito** | Sim, permanente. Limita por **funcionalidade** (5 chats de IA, 2 sequências, filtros básicos), não por tempo |
-| **Onboarding** | Busca disponível logo após cadastro gratuito; teste de 14 dias com 50 créditos |
-| **Reclamações recorrentes** | Precisão real relatada na faixa de 65–80% `[FONTE SECUNDÁRIA]`; créditos que não acumulam de um mês para o outro; custo efetivo bem acima do preço de tabela por consumo de crédito |
-| **Fraqueza estrutural** | A base vive de **pessoas com cargo em empresa com pegada digital**. Uma serralheria com 4 funcionários e um perfil no Google não tem "VP of Operations" no LinkedIn. Apollo não pode consertar isso sem trocar a lógica de sourcing inteira |
+| Substituto | Custo | Por que o cliente usa |
+|---|---|---|
+| **Busca manual no Google Maps + planilha** | R$ 0 | É o que ele já faz. Funciona mal, mas funciona |
+| **LinkedIn manual / Sales Navigator** | US$ 0 ou ~US$ 99–119/mês **[SECUNDÁRIA]** | Decisor nomeado; inútil para oficina, obra, restaurante |
+| **Apollo plano gratuito** | US$ 0 | 10 créditos de exportação/mês, 25 registros por exportação **[SECUNDÁRIA]** |
+| **Companies House (UK)** | R$ 0 | Registro oficial, SIC code, dado limpo, download em massa |
+| **ABN Lookup / ABR (Austrália)** | R$ 0 | Registro oficial, 20M+ registros, extração em massa permitida |
+| **SAM.gov (EUA), Contracts Finder / Find a Tender (UK), AusTender (AU)** | R$ 0 | Quem já contrata aquele serviço, com valor e prazo. Sinal de compra puro |
+| **Stotles** | Plano gratuito com usuários ilimitados **[SECUNDÁRIA]** | Agrega os portais públicos do UK/IE num feed |
+| **Listas de associação setorial / câmaras de comércio** | R$ 0 a baixo | Segmentado por definição, é literalmente "quem é desse setor" |
+| **ChatGPT / Claude** | US$ 0–20/mês | **Responde "quem contrata manutenção industrial?" de graça.** Este é o substituto que ameaça o diferencial declarado da ProspectX, não a base de dados |
 
-**Cálculo relevante:** Básico = 30.000 créditos/ano ÷ 12 = 2.500/mês por US$ 49 → **US$ 0,0196 por crédito de e-mail.**
+### 2.6 Substitutos pagos que consomem o mesmo orçamento
 
----
+| Plataforma | Custo por lead | Mecânica |
+|---|---|---|
+| **Thumbtack (EUA)** | US$ 8–150+; US$ 25–75 típico; US$ 35–55 em HVAC/elétrica nos 50 maiores mercados **[SECUNDÁRIA]** | Lead compartilhado |
+| **Angi Leads (EUA)** | US$ 15–85, US$ 100+ em serviços caros, + ~US$ 300/ano de acesso **[SECUNDÁRIA]** | Assinatura + lead |
+| **Bark (UK)** | Crédito ~£1,20 + IVA; lead custa 5–20 créditos, ou £5–40 **[SECUNDÁRIA]**. Créditos comprados a partir de 01/11/2025 expiram em 3 meses | Crédito consumível |
 
-### 3.2 LeadSwift — **o concorrente direto mais perigoso**
+Custo por trabalho fechado: Angi ~US$ 542, Thumbtack ~US$ 250 **[SECUNDÁRIA]**. Leads dividos com 4–5 profissionais; 78% contratam quem responde primeiro **[SECUNDÁRIA]**.
 
-| Eixo | Resposta |
-|---|---|
-| **Proposta (literal, 15/08/2026)** | "#1 Local B2B Lead Generation & Outreach Software" |
-| **Cliente-alvo** | Agência de marketing local e freelancer que vende serviço **para** pequeno negócio. É o vizinho de porta do cliente da ProspectX |
-| **Fonte de dados** | Raspagem em tempo real de **Google Maps, Yelp, Facebook, LinkedIn, YellowPages e Bing** `[FONTE SECUNDÁRIA]`. Mesma camada da ProspectX, com seis fontes em vez de uma |
-| **Modelo de preço** | **Por busca/dia**, com resultado ilimitado. Não cobra por registro |
-| **Preço real (15/08/2026, página própria)** | Starter: **US$ 19,99**/mês anual (US$ 49,99 mensal), 1 busca/dia. Professional: **US$ 39,99**/mês anual (US$ 99,99 mensal), 5 buscas/dia. Agency: **US$ 79,99**/mês anual (US$ 199,99 mensal), 20 buscas/dia. Todos com "unlimited: leads, contacts, exports, data points, list uploads" |
-| **Plano gratuito** | Teste de 7 dias, **sem cartão de crédito** |
-| **Onboarding** | Busca imediata, sem cartão |
-| **Reclamações recorrentes** | E-mails genéricos (`info@`, `contact@`) em vez de contato direto verificado; ausência de sinal de compra; ausência de enriquecimento de CRM `[FONTE SECUNDÁRIA]` |
-| **Fraqueza estrutural** | Entrega o *estabelecimento*, não a *pessoa que decide*. E não diz **para quem** vender — devolve o que você pediu, não o que você deveria pedir |
-
-**Por que isso importa mais que tudo:** LeadSwift é a prova de que existe demanda paga na faixa "prestador pequeno + dado local". Também é a prova do teto de preço dessa faixa: **US$ 19,99/mês**. A ProspectX pede 4,8x isso no plano mensal padrão (R$ 497 ≈ US$ 95,8) e 1,9x no plano fundador (R$ 197 ≈ US$ 38).
-
-O mecanismo interessante aqui é a **cobrança por busca, não por registro**: ela remove a ansiedade de consumo. O usuário sabe que uma busca é uma busca, e nunca fica com medo de "gastar crédito à toa" numa consulta exploratória. Isso é decisivo num produto de descoberta, onde o usuário *precisa* errar algumas vezes antes de achar o filtro certo. Cobrar por crédito num produto de descoberta pune exatamente o comportamento que gera o "aha".
+**Este é o orçamento que a ProspectX disputa de verdade.** Um prestador que gasta US$ 300/mês no Thumbtack tem dinheiro. Um que nunca gastou nada não tem.
 
 ---
 
-### 3.3 RocketReach — o espelho exato da estrutura de crédito da ProspectX
+## 3. Fichas de teardown
+
+### 3.1 Apollo.io — o concorrente que define o teto do mercado
 
 | Eixo | Resposta |
 |---|---|
-| **Proposta (literal, 15/08/2026)** | "Planos flexíveis para cada equipe" / "Pesquise entre 700 milhões de profissionais e 35 milhões de empresas" |
-| **Cliente-alvo** | Indivíduo e equipe pequena. Recrutador, vendedor solo, fundador |
-| **Fonte de dados** | Agregação e verificação de dado profissional público, com verificação "sob demanda e em tempo real" |
-| **Modelo de preço** | Por assento + **consultas mensais** (mesma mecânica de crédito da ProspectX) |
-| **Preço real (15/08/2026, página própria)** | Essentials: **US$ 27/mês** (US$ 329/ano), **100 consultas/mês**, só e-mail. Pro: **US$ 69/mês** (US$ 829/ano), 250 consultas, e-mail + telefone. Ultimate: **US$ 142/mês** (US$ 1.699/ano), 1.000 consultas. Planos de organização "a partir de US$ 6 mil anuais" |
-| **Plano gratuito** | Conta gratuita com consultas gratuitas, sem cartão |
-| **Onboarding** | Cadastro gratuito → consulta imediata |
-| **Reclamações recorrentes** | `[NÃO VERIFICADO]` — não auditei as avaliações públicas |
-| **Fraqueza estrutural** | Dado de profissional, não de estabelecimento. Fraco em micro-empresa de serviço |
+| **Proposta (literal, home, 15/08/2026)** | "The AI sales platform for smarter, faster revenue growth" / "Build pipeline smarter, close deals faster, and simplify your tech stack with a unified platform built for modern sales and marketing teams." CTA: "Sign up for free" |
+| **Cliente-alvo** | Time de vendas B2B com SDR. **Ignora conscientemente** o prestador local: não há caso de uso para "achar 40 construtoras em Manchester" |
+| **Fonte de dados** | Rede de ~2 milhões de contribuidores (usuários compartilham contatos), crawl de sites públicos, rastreio de engajamento de e-mail e fornecedores terceiros (230M+ registros/mês) **[SECUNDÁRIA]** |
+| **Modelo de preço** | Assento + créditos por tipo de ação (e-mail 1 crédito, telefone 8, IA 1, discador 2/min) **[SECUNDÁRIA]** |
+| **Preço real** | Free US$ 0 · Basic US$ 49 · Professional US$ 79 · Organization US$ 119/usuário/mês anual (mín. 3 assentos). Mensal: 65/99/149 **[SECUNDÁRIA — página de preços é renderizada por JS e não pôde ser lida]** |
+| **Plano gratuito** | Sim, e é o mais agressivo do mercado: e-mail ilimitado, 5 créditos de celular, **10 créditos de exportação/mês, 25 registros por exportação** **[SECUNDÁRIA]**. Limita por **exportação**, não por busca — deixa você ver tudo e pagar para levar |
+| **Onboarding** | Cadastro → busca imediata. Primeiro valor em minutos |
+| **Reclamações recorrentes** | Qualidade de dado é a queixa nº 1 (500+ das 9.000+ resenhas no G2 citam dado impreciso/desatualizado). Taxa de bounce reportada de 20–30%. Precisão ~88% nos EUA e ~60% fora **[SECUNDÁRIA]** |
+| **Fraqueza estrutural** | A rede de contribuidores só enxerga **quem usa e-mail corporativo em CRM**. Encanador, serralheria e transportadora com 6 funcionários não estão lá e **não podem estar** — não há contribuidor gerando esse dado. Apollo não consegue cobrir SMB local sem trocar de fonte |
 
-**Este é o comparativo mais desconfortável do relatório.** RocketReach Essentials e ProspectX mensal têm **exatamente o mesmo número de créditos: 100/mês**. RocketReach cobra US$ 27. ProspectX cobra R$ 497 (≈ US$ 95,8). **3,5x mais caro pela mesma unidade de consumo, com base de dados incomparavelmente pior.** Nenhuma quantidade de copy resolve isso.
-
----
-
-### 3.4 Lead411 — o degrau de entrada mais agressivo em volume
+### 3.2 Scrap.io — o concorrente mais parecido com a ProspectX
 
 | Eixo | Resposta |
 |---|---|
-| **Proposta (literal, 15/08/2026)** | "Affordable Pricing with no hidden fees" / "Quality Lead Data With Growth Intent" |
-| **Cliente-alvo** | Equipe pequena e média que quer volume sem contrato enterprise |
-| **Fonte de dados** | Base própria com verificação tripla (SMTP + humana + validação por abertura), re-verificação a cada 3–6 meses |
-| **Modelo de preço** | **Por exportação**, com **rollover** de saldo não usado |
-| **Preço real (15/08/2026, página própria)** | Pilot Light: US$ 0 / 7 dias, 50 exportações. Spark: **US$ 49/mês, 1.000 exportações/mês**. Ignite: a partir de **US$ 150/mês**, 1.000+ exportações |
-| **Plano gratuito** | Teste de 7 dias com 50 exportações |
-| **Onboarding** | Teste imediato |
-| **Funcionalidade digna de nota** | Filtro **"Currently Hiring"** — encontra empresas que estão contratando para cargos específicos. É sinal de compra derivado de dado público de vaga |
-| **Fraqueza estrutural** | Foco em dado corporativo americano; cobertura fraca em micro-empresa local `[NÃO VERIFICADO]` |
+| **Proposta (literal, home, 15/08/2026)** | "Local Leads Generator" / "Target businesses you won't find on LinkedIn. Extract leads from Google Maps, Apple Maps and Bing Maps." CTA: "Try for free now" |
+| **Cliente-alvo** | Agência e prestador vendendo para negócio local. Exatamente o alvo da ProspectX |
+| **Fonte de dados** | Google Maps, Apple Maps, Bing Maps. 195 países, 4.000+ categorias. Declara conformidade com GDPR/CCPA por usar só informação pública de empresa |
+| **Modelo de preço** | Assinatura por **crédito de exportação**, com desbloqueio geográfico progressivo (cidade → país) |
+| **Preço real [PÁGINA, 15/08/2026]** | Anual: Basic US$ 35 (10k) · Professional US$ 69 (20k) · Agency US$ 139 (40k) · Company US$ 350 (100k). Mensal: 49 / 99 / 199 / 499 |
+| **Plano gratuito** | Teste de 7 dias com até 100 leads |
+| **Onboarding** | Busca → resultado na hora |
+| **Reclamações recorrentes** | Padrão da categoria: e-mail só existe para 40–60% dos negócios com site, e é genérico (`info@`, `contact@`) **[SECUNDÁRIA]** |
+| **Fraqueza estrutural** | (a) Depende de raspagem do Google Maps — modelo que viola os termos do Google e vive de tolerância **[SECUNDÁRIA]**; (b) **o usuário tem que saber qual categoria buscar.** O produto não decide o alvo. Consertar isso exigiria construir exatamente o mapa que a ProspectX diz ter |
 
-**Custo por registro: US$ 0,049.** A ProspectX é **20x mais cara por registro** que o Lead411 — e o Lead411 ainda deixa o crédito acumular.
-
-O mecanismo do **rollover** merece atenção: ele converte "crédito" de uma ameaça de perda em um saldo acumulável. Isso muda o comportamento do usuário — ele para de racionar e passa a usar. Em produto novo sem base instalada, uso é a única coisa que gera evidência de valor.
-
----
-
-### 3.5 Hunter — o modelo sem imposto de assento
+### 3.3 Lead Atlas — quem definiu o degrau de entrada real
 
 | Eixo | Resposta |
 |---|---|
-| **Proposta (literal, 15/08/2026)** | "Find the right plan for your business. Unlimited users, auto-verified Hunter lead data on all plans, and subscriptions that scale as you grow." |
-| **Cliente-alvo** | Equipe de qualquer tamanho fazendo *cold email*. Explicitamente amigável a time pequeno |
-| **Fonte de dados** | Rastreamento de e-mail em domínio público + verificação automática |
-| **Modelo de preço** | Por crédito, **com usuários ilimitados em todos os planos** |
-| **Preço real (15/08/2026, página própria)** | Free: US$ 0, 50 créditos/mês. Starter: **US$ 34/mês** anual (US$ 408/ano), 24.000 créditos/ano (2.000/mês), 3 contas de e-mail. Growth: **US$ 104/mês** anual, 120.000 créditos/ano. Scale: **US$ 209/mês** anual, 300.000 créditos/ano |
-| **Plano gratuito** | Permanente, 50 créditos/mês, 1 conta de e-mail, 500 destinatários por sequência |
-| **Onboarding** | Imediato, gratuito |
-| **Fraqueza estrutural** | Parte do **domínio** para achar o e-mail. Prestador que só tem Instagram e telefone fica invisível |
+| **Proposta (literal, home, 15/08/2026)** | "Find Local Business Leads by City, ZIP Code, and Industry" / "Search by location and industry, then export structured business contact data for sales, marketing, and outreach." CTA: "Get 40 free credits" |
+| **Cliente-alvo** | Micro. Quem quer 300 leads e sumir |
+| **Fonte de dados** | "Dados públicos de contato empresarial", atualizados e deduplicados. **Fonte não nomeada** — sinal de que é raspagem |
+| **Modelo de preço** | **Compra avulsa de crédito, sem assinatura, crédito não expira** |
+| **Preço real [PÁGINA, 15/08/2026]** | Starter US$ 9 / 300 créditos (US$ 0,030 por lead) · Growth US$ 29 / 1.500 + 750 bônus (US$ 0,019) · Scale US$ 59 / 3.750 (US$ 0,016) |
+| **Plano gratuito** | 40 créditos no cadastro |
+| **Onboarding** | Cadastro → 40 leads grátis |
+| **Reclamações recorrentes** | Não há volume público de resenhas. Produto pequeno **[NÃO VERIFICADO]** |
+| **Fraqueza estrutural** | Sem retenção: crédito não expira e não há assinatura, então não há receita recorrente nem motivo para voltar. É um utilitário, não uma plataforma. **Esse também é o risco da ProspectX se ela virar "busca + exportação"** |
 
-**"Unlimited users" em todos os planos é uma decisão estratégica, não uma generosidade.** O mecanismo: quando o preço não escala por assento, o produto entra na empresa sem negociação interna e sem gestor de licença. Remove atrito de adoção em troca de teto de receita por conta. Para quem ataca o mercado de baixo, é a escolha certa — e é a escolha oposta à do Apollo.
-
----
-
-### 3.6 UpLead — o benchmark de preço por crédito no mid-market
+### 3.4 Instantly.ai — a base virou brinde
 
 | Eixo | Resposta |
 |---|---|
-| **Proposta (literal, 15/08/2026)** | "UpLead Plans & Pricing — Find the plan that's right for you." |
-| **Cliente-alvo** | Segmentado na própria página: "The Basics" (Essentials), "For Individuals" (Plus), "For Organizations" (Professional) |
-| **Fonte de dados** | Base própria com verificação em tempo real no momento da revelação |
-| **Modelo de preço** | Por crédito, 1 assento nos planos publicados. **Crédito avulso a US$ 0,60** |
-| **Preço real (15/08/2026, página própria)** | Free Trial: US$ 0 / 7 dias, **5 créditos**. Essentials: **US$ 99/mês**, 170 créditos, 1 assento. Plus: **US$ 199/mês**, 400 créditos. Professional: só anual, "Let's talk" |
-| **Plano gratuito** | Não — apenas teste de 7 dias com 5 créditos |
-| **Fraqueza estrutural** | Preço por crédito alto (US$ 0,58–0,60) só se sustenta pela precisão declarada. Se a precisão cai, o modelo inteiro cai |
+| **Proposta (literal, home, 15/08/2026)** | "Find Clients" / "Get more clients by chatting to AI". CTA: "Get Started" |
+| **Cliente-alvo** | Agência e fundador fazendo cold e-mail em volume |
+| **Fonte de dados** | Base própria de 450M+ contatos B2B (origem não divulgada) + verificação |
+| **Modelo de preço** | Modular: Outreach (envio) + Credits (base) + CRM, ou pacote |
+| **Preço real [PÁGINA, 15/08/2026]** | Outreach: Growth US$ 47 · Hypergrowth US$ 97 · Lightspeed US$ 358. Pacotes: Starter US$ 94 (5k e-mails, 1k contatos, **1.500 créditos**, "450M+ B2B leads") · Scale US$ 194 · Agency US$ 555. Créditos avulsos: Growth US$ 47 / 1.500 |
+| **Plano gratuito** | Não há plano gratuito permanente; sem cartão para começar |
+| **Onboarding** | Precisa conectar caixas de e-mail e aquecer domínio — **dias, não minutos** |
+| **Reclamações recorrentes** | Créditos não acumulam mês a mês **[SECUNDÁRIA]**; custo real do stack sobe rápido |
+| **Fraqueza estrutural** | Ganha dinheiro com **volume de envio**. Não tem incentivo para reduzir a lista do cliente a 40 empresas certas — isso derruba o próprio ARPU. **Esse é o ponto exato em que a ProspectX pode se posicionar do lado contrário** |
 
-**US$ 0,60 por crédito avulso é o teto de mercado observado para revelação de contato B2B verificado.** A ProspectX cobra US$ 0,96 por crédito no plano mensal — **60% acima do teto do mercado**, com dado de OpenStreetMap.
+**Nota crítica de precificação:** o crédito da ProspectX (R$ 4,97 no mensal cheio) precisa ser comparado com US$ 0,031 do crédito Instantly e US$ 0,030 do Lead Atlas. Ver seção 7.
 
----
-
-### 3.7 Cognism — o líder em Reino Unido, e o que ele revela sobre o degrau abandonado
+### 3.5 Cognism — o exemplo de como se vende dado caro
 
 | Eixo | Resposta |
 |---|---|
-| **Proposta (literal, 15/08/2026)** | "Clear pricing, built around how your team uses data." (a ironia é do próprio site: não há preço na página) |
-| **Cliente-alvo** | Equipe de receita com 5+ pessoas. **Declara na própria página: "5 seats included"** |
-| **Fonte de dados** | Base própria com foco em conformidade (GDPR), verificação telefônica de celular ("Diamond Data"), sinais contextuais e intenção via Bombora |
-| **Modelo de preço** | Por assento (mín. 5) + crédito. "1 credit = 1 revealed contact". Sem cobrança para reexibir contato já revelado |
-| **Preço real** | **Não publicado.** Apenas "Talk to sales" / "Get a personalised quote" (verificado na página em 15/08/2026). Fontes secundárias citam faixa de US$ 1.500 a US$ 25 mil/ano `[FONTE SECUNDÁRIA — não usar como base de decisão]` |
+| **Proposta (literal, home, 15/08/2026)** | "Europe's most trusted B2B data for growing pipeline." / "Become fluent in your market with precise, compliant data for the companies and decision-makers that matter." CTA duplo: "See it in Action" + "Calculate ROI" |
+| **Cliente-alvo** | Time de vendas europeu com orçamento. **Não vende para solo, e diz isso pelo formato do CTA** — não há botão de "começar grátis" |
+| **Fonte de dados** | Compilação licenciada + verificação humana de celular ("Diamond Data", triagem contra listas DNC) |
+| **Modelo de preço** | Taxa de plataforma + assento + pool de créditos negociado |
+| **Preço real** | **Não publica.** Estimativas de terceiros: ~US$ 15.000–25.000/ano de plataforma + US$ 1.500–2.500/assento/ano **[SECUNDÁRIA]**. Sem teste gratuito, só contrato anual |
 | **Plano gratuito** | Não |
-| **Cobertura** | Reconhecidamente a melhor cobertura B2B europeia, especialmente **Reino Unido**, DACH e Nórdicos `[FONTE SECUNDÁRIA]` |
-| **Fraqueza estrutural** | O mínimo de 5 assentos **é** a fraqueza. Eles não podem vender para 1 pessoa sem destruir o preço médio por conta e a economia do time comercial que fecha essas vendas |
+| **Onboarding** | Demo com vendedor. Semanas |
+| **Reclamações recorrentes** | **[NÃO VERIFICADO]** — não foi possível ler resenhas em volume |
+| **Fraqueza estrutural** | Verificação humana de telefone é cara e não escala para milhões de micro empresas. Cognism nunca vai descer para o SMB local: o custo unitário do dado deles não fecha abaixo de contrato de 5 dígitos |
 
-**Leitura estratégica:** o líder do mercado que a ProspectX quer atacar (UK) publicou, na própria página de preços, que não atende quem tem menos de 5 assentos. Isso é uma fronteira declarada. Abaixo dela existe mercado — mas note que **ninguém com dado bom desceu até lá**, e a razão não é falta de vontade: é que o custo de manter dado verificado não cai proporcionalmente ao tamanho do cliente.
-
----
-
-### 3.8 Clay — o "monte você mesmo" que come o mercado por cima
+### 3.6 UpLead — o mais próximo do "filtro por setor"
 
 | Eixo | Resposta |
 |---|---|
-| **Proposta (literal, 15/08/2026)** | "Compare plans, features & costs" / posicionamento de plataforma de GTM com 150+ parceiros de dados |
-| **Cliente-alvo** | Operações de GTM, growth engineer. **Não** é o prestador solo |
-| **Fonte de dados** | Não tem base própria — é **agregador em cascata** ("waterfall") sobre 150+ fornecedores, com desconto de volume negociado e repassado |
-| **Modelo de preço** | Data Credits (compra de dado) + Actions (execução), **assentos ilimitados** |
-| **Preço real (15/08/2026, página própria)** | Free: 100 Data Credits + 500 Actions/mês, 200 linhas/tabela, assentos ilimitados. Launch: **a partir de US$ 185/mês**, 2.500 Data Credits + 15.000 Actions. Growth: **a partir de US$ 495/mês**, 6.000 Data Credits + 40.000 Actions. Enterprise: sob consulta |
-| **Plano gratuito** | Sim, permanente |
-| **Fraqueza estrutural** | Exige que o usuário **saiba o que quer**. É uma ferramenta de montagem para quem já tem a hipótese. Zero valor para quem não sabe a quem vender |
+| **Proposta (literal, home, 15/08/2026)** | "Real-time verified B2B emails, mobile numbers and intent data" / "200M+ leads, AI-verified as you search and ranked by freshness". CTA: "Grab 5 Free Leads Now". Garantia: "95%+ accuracy guarantee" |
+| **Cliente-alvo** | PME B2B. Material de marketing deles cita explicitamente busca por **SIC code** para achar "os tipos de negócio que você quer limpar" (limpeza comercial) **[SECUNDÁRIA]** |
+| **Fonte de dados** | Agregação + verificação em tempo real no momento da busca |
+| **Modelo de preço** | Assinatura + crédito por registro revelado |
+| **Preço real [PÁGINA, 15/08/2026]** | Teste 7 dias, 5 créditos · Essentials US$ 99/mês (170 créditos) ou US$ 74/mês anual (2.040/ano) · Plus US$ 199/mês (400) ou US$ 149 anual (4.800/ano) · Professional sob consulta. Crédito extra US$ 0,60 |
+| **Plano gratuito** | Só teste de 7 dias com 5 créditos |
+| **Onboarding** | Minutos |
+| **Reclamações recorrentes** | **[NÃO VERIFICADO]** |
+| **Fraqueza estrutural** | **Aqui está a prova do espaço vazio:** a UpLead vende exatamente "ache as indústrias que contratam seu serviço" — mas o **cliente precisa descobrir o SIC code sozinho** e o próprio marketing deles ensina isso num post de blog. A tradução serviço → setor está terceirizada para o cliente. Consertar exigiria o mapa |
 
-**O mecanismo do "waterfall" é o mais importante deste relatório para a ProspectX.** Clay não tenta ter o melhor dado; tenta ter *um* dado, consultando fornecedores em cascata até algum responder, e cobrando só pelo acerto. Isso transforma cobertura de um problema de aquisição de base em um problema de roteamento. **É exatamente a arquitetura que resolveria o problema de dado da ProspectX sem construir base própria** — e é a razão de a Clay não ter base própria e mesmo assim cobrar US$ 495/mês.
-
----
-
-### 3.9 Kaspr — cobertura por dependência de plataforma
+### 3.7 Marketplaces de lead (Thumbtack / Angi / Bark) — o concorrente pelo orçamento
 
 | Eixo | Resposta |
 |---|---|
-| **Proposta (literal, 15/08/2026)** | "Kaspr Plans & Pricing — Unlimited B2B Emails on Free Plan" |
-| **Cliente-alvo** | SDR individual e time pequeno que vive dentro do LinkedIn |
-| **Fonte de dados** | Extensão sobre LinkedIn / Sales Navigator / Recruiter Lite |
-| **Modelo de preço** | Por assento + créditos separados por tipo (e-mail B2B, telefone, e-mail direto), com rollover |
-| **Preço real (15/08/2026, página própria)** | Free: €0, 15 créditos de e-mail B2B/mês, 5 de telefone, 5 de e-mail direto, exportação limitada a 100. Starter: **€45/usuário/mês**, e-mail B2B ilimitado, 1.200 créditos de telefone/ano, 12.000 exportações/ano. Business: **€79/usuário/mês**, 30.000 exportações/ano |
-| **Fraqueza estrutural** | Existe por concessão de uma plataforma que não controla. Se o LinkedIn fechar, o produto acaba. E o dono de padaria não está no LinkedIn |
+| **Proposta** | "Receba clientes prontos, sem prospectar" |
+| **Cliente-alvo** | Exatamente o prestador solo alvo da ProspectX |
+| **Fonte de dados** | Demanda gerada por eles próprios (mídia paga + SEO). Não é base, é fluxo |
+| **Modelo de preço** | Pay-per-lead, crédito consumível, às vezes + assinatura |
+| **Preço real** | Thumbtack US$ 8–150+ (US$ 25–75 típico); Angi US$ 15–85 + ~US$ 300/ano; Bark ~£1,20/crédito, 5–20 créditos por lead **[SECUNDÁRIA]** |
+| **Plano gratuito** | Perfil grátis, lead pago |
+| **Onboarding** | Horas |
+| **Reclamações recorrentes** | Lead fantasma cobrado (BBB, jan/2026: US$ 30,31 por contato que negou ter pedido orçamento); taxa de contratação de 5–7%; lead vendido a 4–5 profissionais; dificuldade de cancelar; créditos Bark passaram a expirar em 3 meses **[SECUNDÁRIA]** |
+| **Fraqueza estrutural** | **O modelo exige revender o mesmo lead.** Vender exclusividade destruiria a receita por lead. Eles não podem consertar isso. É a maior brecha de mensagem disponível para a ProspectX |
+
+### 3.8 Fichas resumidas dos demais
+
+| Produto | Fonte de dados | Modelo | Entrada | Grátis | Fraqueza estrutural |
+|---|---|---|---|---|---|
+| **ZoomInfo** | Compilação + contribuição + intent | Plataforma + assento (mín. 3) + créditos | US$ 15k–60k/ano **[SECUNDÁRIA]** | Não | Custo de aquisição impede qualquer movimento para baixo |
+| **Seamless.AI** | Busca em tempo real na web | Assento + crédito, contrato anual | ~US$ 147/usuário/mês **[SECUNDÁRIA]** | 50 créditos vitalícios | Reputação de cobrança (Trustpilot 1,4/5; 79 queixas no BBB em 3 anos) **[SECUNDÁRIA]** |
+| **Kaspr** | LinkedIn + contribuição | Assento + créditos de telefone | €45/usuário/mês; e-mail B2B ilimitado, 12.000 exportações/ano **[PÁGINA]** | Sim: 15 e-mails, 5 telefones/mês | Só existe onde há LinkedIn. Inútil para SMB local |
+| **Hunter.io** | Crawl de domínio | Crédito de busca/verificação | US$ 34/mês anual, 2.000 créditos **[PÁGINA]** | Sim: 50 créditos/mês | Parte do domínio: você já precisa saber a empresa |
+| **Snov.io** | Agregação + verificação | Crédito | US$ 29,25/mês, 1.000 créditos **[PÁGINA]** | Teste renovável, 50 créditos | Sem foco geográfico local |
+| **Saleshandy** | Lead Finder + disparo | Prospects ativos | US$ 25/mês, 2.000 prospects **[PÁGINA]** | Não claro | Vive de volume de envio |
+| **Data Axle Salesgenie** | Compilação própria EUA (listas telefônicas + verificação) | Assinatura + créditos | US$ 99/mês **com contrato de 12 meses** **[SECUNDÁRIA]** | 3 dias | Contrato anual afasta o solo; produto e UX de outra década |
+| **Outscraper** | Google Maps e outras | **Por registro, pré-pago, sem mensalidade** | US$ 1–9 por 1.000 registros **[PÁGINA]** | Sim: 500 negócios | É ferramenta técnica, não produto de negócio. Sem funil, sem contexto |
+| **LeadSwift** | Maps/Yelp/Facebook/YellowPages ao vivo | Assinatura por **buscas/dia**, leads ilimitados | US$ 19,99/mês anual **[PÁGINA]** | Teste 7 dias sem cartão | Limitar por busca/dia é hostil a quem faz uma campanha e some |
+| **D7 Lead Finder** | Raspagem multi-fonte, 65M+ leads | Assinatura por buscas/dia | US$ 44,99/mês **[SECUNDÁRIA]** | Sem teste público | G2 3,7/5 em 5 resenhas; e-mails genéricos; sem reembolso por dado errado **[SECUNDÁRIA]** |
+| **B2BLeadFinder** | **Google Places API** + score de lacuna digital | Assinatura | US$ 14,99/mês **[PÁGINA parcial]** | 7 dias, 25 scans | Nicho estreito (só vende para quem vende site/SEO) |
+| **Ocean.io** | 35M empresas, 330M pontos | Crédito com slider, usuários ilimitados | ~US$ 0,071/crédito, mín. 750 **[SECUNDÁRIA]** | **[NÃO VERIFICADO]** | Lookalike exige cliente existente |
+| **Clay** | Orquestração de 100+ fornecedores | Data Credits + Actions | Launch US$ 185/mês, Growth US$ 495 **[SECUNDÁRIA]** | Free: 100 créditos + 500 ações **[SECUNDÁRIA]** | Exige operador técnico. Não é produto de prestador solo |
+| **LinkedIn Sales Navigator** | LinkedIn | Assento | ~US$ 99–119/mês **[SECUNDÁRIA]** | Teste | Empresa local sem página no LinkedIn é invisível |
+| **Stotles** | Portais públicos UK/IE agregados | Free / £50 por usuário/mês / £475+ **[SECUNDÁRIA]** | **Plano gratuito com usuários ilimitados** | Só setor público, só UK/IE |
 
 ---
 
-### 3.10 Saleshandy e Instantly — outreach barato com base acoplada
+## 4. Matriz de funcionalidades — nós × eles
 
-| Eixo | Saleshandy | Instantly |
-|---|---|---|
-| **Proposta (literal, 15/08/2026)** | "Outreach that pays for itself — One booked meeting covers your entire month." | "Simple Pricing For Everyone — Pricing built for businesses of all sizes. Always know what you'll pay." |
-| **Preço de envio (15/08/2026, página própria)** | Starter: **US$ 25/mês** anual (US$ 36 mensal), 2.000 prospects ativos, 6.000 e-mails/mês, contas de e-mail ilimitadas. Pro: US$ 69/mês anual. Scale: US$ 139/mês anual | Growth: **US$ 47/mês**, 1.000 contatos, 5.000 e-mails/mês, contas ilimitadas. Hypergrowth: US$ 97/mês, 25.000 contatos. Light Speed: US$ 358/mês |
-| **Base de dados** | "Lead Finder": 852M contatos / 42M empresas declarados. **Assinatura separada.** 50 créditos grátis no cadastro | "Lead Finder" em assinatura de créditos separada. Faixas citadas: US$ 47/1.500 créditos, US$ 97/5.000, US$ 197/10.000 `[FONTE SECUNDÁRIA — não confirmado na página de preços]` |
-| **Plano gratuito** | Teste de 7 dias | `[NÃO VERIFICADO]` |
-| **Nota relevante** | Preço exibido em **USD, EUR, GBP, AUD, CAD, INR e BRL** na própria página | Créditos **não acumulam** entre meses `[FONTE SECUNDÁRIA]` |
-| **Fraqueza estrutural** | Ambos cobram duas vezes: uma pelo envio, outra pela base. O usuário solo só percebe isso depois de assinar |
+Legenda: ✅ tem · ⚠️ parcial · ❌ não tem · **🚫 deliberadamente não vamos ter**
 
-**A separação entre "envio" e "base" é o padrão do mercado — e é uma fraqueza explorável.** O prestador solo não quer duas assinaturas, não entende por que precisa de duas, e reclama disso. Um produto que entrega busca + disparo num preço só tem uma vantagem narrativa concreta. A ProspectX já tem essa arquitetura (busca + funil + disparo em lote). **Isso é ativo real e está sendo desperdiçado numa mensagem que fala de mapa de segmentos.**
+| Funcionalidade | ProspectX (hoje) | Apollo | Scrap.io | Instantly | UpLead | Lead Atlas | Recomendação |
+|---|---|---|---|---|---|---|---|
+| Busca por cidade + segmento | ✅ | ⚠️ | ✅ | ⚠️ | ✅ | ✅ | Mesa posta. Não é diferencial |
+| **Mapa serviço → setores que contratam** | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | **Único ativo. Construir em cima disso** |
+| Tradução PT/EN/ES do mapa | ✅ | ❌ | ⚠️ | ❌ | ❌ | ❌ | Manter — é o que viabiliza EUA/UK/AU + Brasil no mesmo produto |
+| Cobertura de dado local real | ❌ (OSM ruim) | ❌ | ✅ | ⚠️ | ⚠️ | ✅ | **Bloqueador nº 1. Nada mais importa até resolver** |
+| Decisor nomeado + cargo | ❌ | ✅ | ❌ | ✅ | ✅ | ❌ | **🚫 Não perseguir.** Perde por definição para Apollo/Cognism |
+| Celular verificado | ❌ | ⚠️ | ❌ | ⚠️ | ✅ | ❌ | **🚫 Não construir.** Custo unitário incompatível com o preço-alvo |
+| Verificação de e-mail | **[NÃO VERIFICADO]** | ✅ | ⚠️ | ✅ | ✅ | ⚠️ | Obrigatório antes de qualquer disparo. Terceirizar |
+| Funil / CRM leve | ✅ | ✅ | ⚠️ | ✅ | ❌ | ❌ | Commodity. Manter mínimo, não investir |
+| Disparo de e-mail em lote | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | **Reavaliar.** Ver seção 7, item 4 — risco desproporcional |
+| Aquecimento de domínio / infra de entrega | ❌ | ⚠️ | ❌ | ✅ | ❌ | ❌ | **🚫 Não construir.** É o negócio do Instantly, não o nosso |
+| IA que sugere a abordagem | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ | **Commoditizado em 2026.** Não é argumento de venda. Manter, não anunciar como diferencial |
+| Dados de intenção (intent) | ❌ | ✅ | ❌ | ⚠️ | ✅ | ❌ | **🚫 Não construir.** Requer rede de coleta que não temos |
+| Integração bidirecional com CRM | ❌ | ✅ | ⚠️ | ✅ | ✅ | ❌ | **🚫 Não construir.** Prestador solo não tem CRM |
+| API pública | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ | **🚫 Adiar.** Público errado |
+| Plano gratuito real | ❌ | ✅ | ⚠️ (7 dias) | ❌ | ⚠️ (5 leads) | ✅ (40 créditos) | **Construir. É a maior lacuna competitiva atual** |
+| Busca visível antes do cadastro | **[NÃO VERIFICADO]** | ❌ | ❌ | ❌ | ❌ | ❌ | **Construir. Ninguém faz. Diferencia na hora** |
+| Multi-assento | ❌ | ✅ | ⚠️ | ✅ | ✅ | ❌ | **🚫 Não construir.** Cliente é solo |
 
----
-
-### 3.11 Camada de commodity: Apify, Outscraper e a API do Google
-
-| Fornecedor | Preço (15/08/2026) | Fonte |
-|---|---|---|
-| **Apify — Google Maps Scraper (Compass)** | "from **US$ 1,50 / 1.000 scraped places**", modelo pay-per-event. Extrai e-mail, telefone, site, redes sociais. Sem camada gratuita | Página do ator no Apify |
-| **Outscraper** | ~US$ 3,00 / 1.000 registros após faixa gratuita de 500 resultados | `[FONTE SECUNDÁRIA]` — página bloqueada por verificação de bot, não acessada |
-| **Google Places API (New) — Text Search Pro** | **US$ 32,00 / 1.000 chamadas** após franquia gratuita de 5.000 chamadas/mês. Campos de review/atmosfera sobem para US$ 40,00/1.000 | `[FONTE SECUNDÁRIA]` |
-| **Workflow n8n pronto (Gumroad)** | **US$ 19**, pagamento único, extrai nome, endereço, telefone e site | `[FONTE SECUNDÁRIA]` |
-| **OpenStreetMap / Overpass API** | R$ 0 | Fonte atual da ProspectX |
-
-**Este quadro é a sentença econômica do produto atual.** Uma chamada de Text Search do Google devolve até 20 estabelecimentos, o que coloca o custo efetivo de dado local em torno de **US$ 1,60 por mil registros** — praticamente idêntico ao Apify. A ProspectX cobra **US$ 960 por mil registros** (US$ 0,96 × 1.000) por dado da mesma natureza e qualidade inferior. Não existe posicionamento, marca ou copy que sustente um múltiplo de 600x sobre a commodity subjacente. **O valor tem que estar em outro lugar, e o preço tem que refletir onde ele está.**
-
----
-
-### 3.12 Targetley — o único precedente direto de "quem precisa do meu serviço"
-
-| Eixo | Resposta |
-|---|---|
-| **Proposta (literal, 15/08/2026)** | "Targetley — Find Businesses Without Websites \| Web Design & Agency Client Finder" |
-| **Cliente-alvo** | Web designer e agência digital |
-| **Mecanismo** | Em vez de mapear "quem contrata web design" de forma abstrata, detecta o **sintoma observável** da necessidade: a empresa não tem site |
-| **Preço** | `[NÃO VERIFICADO]` — não exposto no conteúdo acessível da página |
-| **Fonte de dados** | `[NÃO VERIFICADO]` |
-
-**Este é o achado conceitual mais valioso do relatório.** Targetley resolve "quem precisa do meu serviço" para **um** serviço, e resolve com um **critério verificável no dado**, não com uma tabela de correspondência. Não diz "agências de marketing contratam web design"; diz "esta empresa aqui, agora, não tem site". O prospect é qualificado por evidência, não por categoria.
-
-A ProspectX escolheu o caminho oposto: 1.187 pares abstratos, generalizados para 531 segmentos e três idiomas. **Amplitude sem evidência.** O par "manutenção industrial → construtora" é verdadeiro e inútil, porque não distingue a construtora que precisa da que não precisa. O Targetley entrega 1 par com evidência e cobra por isso; a ProspectX entrega 1.187 pares sem evidência.
-
----
-
-### 3.13 Marketplaces de lead — onde o dinheiro do prestador solo realmente vai hoje
-
-| Plataforma | Custo por lead (2026) | Modelo | Reclamação dominante |
-|---|---|---|---|
-| **Bark** (UK/US/AU) | Crédito a £1,80 + IVA (UK) / ~US$ 2,20–2,35 (US/AU); lead custa 6–12 créditos → **US$ 15–30/lead** | Crédito pré-pago | Créditos comprados a partir de 01/11/2025 **expiram em 3 meses** (antes eram 12), sem reembolso; maioria dos contatos pagos nunca responde |
-| **Thumbtack** (US) | **US$ 20–60/lead** típico (faixa US$ 5–150+) | Pay-per-lead, mesmo lead vendido a 4–5 profissionais | Lead compartilhado; taxa de fantasma alta |
-| **Angi/HomeAdvisor** (US) | **US$ 15–85/lead**, US$ 100+ em nichos de alto ticket, + ~US$ 300/ano de anuidade | Assinatura + pay-per-lead | ~1,96/5 no BBB com 3.000+ avaliações; leads falsos e cobranças inesperadas |
-| **Hipages** (AU) | `[NÃO VERIFICADO]` | Assinatura + créditos | `[NÃO VERIFICADO]` |
-
-*Todos os números desta tabela: `[FONTE SECUNDÁRIA]` — compilados de publicações de mercado, não das páginas oficiais de preço, que exigem cadastro de profissional.*
-
-**Custo por trabalho fechado citado:** ~US$ 250 no Thumbtack, ~US$ 542 na Angi, ~US$ 168 no Google Local Services Ads `[FONTE SECUNDÁRIA]`.
-
-**Este é o verdadeiro ponto de comparação econômico do cliente-alvo.** O prestador solo não compara ProspectX com Apollo. Ele compara com "quanto me custa conseguir um cliente hoje". Se ele paga US$ 25 por um lead no Bark que 75% das vezes não responde, então **R$ 497/mês (≈ US$ 96) por 100 contatos** não é caro em termos absolutos — é caro *por crédito*, mas potencialmente barato *por cliente conquistado*.
-
-**Isso muda a régua da conversa comercial inteira.** A ProspectX está se comparando com ferramentas de dados (onde perde feio em preço por registro) quando deveria se comparar com marketplaces de lead (onde a matemática é favorável). Mas essa comparação **só funciona se o dado entregue realmente gerar conversa** — o que hoje, com OpenStreetMap, não acontece. A comparação favorável está bloqueada pelo problema de dados, não pelo posicionamento.
-
----
-
-### 3.14 Ocean.io — a alternativa mecânica ao mapa estático
-
-| Eixo | Resposta |
-|---|---|
-| **Cliente-alvo** | Time de vendas pequeno, sobretudo europeu, com ICP já definido |
-| **Mecanismo** | *Lookalike* por IA: você entrega a URL de um cliente bom, ele devolve empresas ranqueadas por semelhança. 1 resultado = 1 crédito |
-| **Preço** | Assinatura a partir de US$ 0,071/crédito (mín. 750); pay-as-you-go US$ 0,081/crédito (mín. 1.000); planos a partir de ~US$ 32/mês anual por 9.000 créditos; **usuários ilimitados**; créditos com validade de 6 meses `[FONTE SECUNDÁRIA]` |
-| **Fraqueza estrutural** | Exige que o cliente **já tenha clientes bons** para servir de semente. Inútil para quem está começando |
-
-**O contraste com a ProspectX é instrutivo.** Ambos respondem "a quem devo vender?". Ocean.io responde a partir da **evidência do próprio cliente** (quem já comprou); a ProspectX responde a partir de uma **tabela pré-escrita**. A resposta do Ocean.io melhora com o uso; a da ProspectX é a mesma no dia 1 e no dia 500.
-
-**Mas a fraqueza do Ocean.io é o *cold start* — e o cold start é exatamente onde o prestador solo vive.** Um eletricista que quer entrar em manutenção predial não tem carteira nesse segmento para servir de semente. **Esse é o único vão defensável que encontrei para o mapa de 1.187 pares: ele é um substituto de partida a frio para o lookalike.** Não é o produto; é o *onboarding* do produto.
-
----
-
-## 4. Matriz de funcionalidades
-
-Legenda: ✅ tem · ⚠️ tem com limitação séria · ❌ não tem · 🚫 **não vamos ter de propósito**
-
-| Funcionalidade | ProspectX (hoje) | Apollo | LeadSwift | Lead411 | RocketReach | Hunter | Clay | Bark/Thumbtack |
-|---|---|---|---|---|---|---|---|---|
-| Busca de empresa por segmento + cidade | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ |
-| **Sugestão de "a quem vender"** | ✅ (tabela estática) | ❌ | ❌ | ❌ | ❌ | ❌ | ⚠️ (o usuário programa) | ❌ |
-| Dado de estabelecimento local | ⚠️ (OSM, ruim) | ⚠️ | ✅ | ⚠️ | ❌ | ❌ | ✅ (via parceiros) | — |
-| Dado de decisor com nome e cargo | ❌ | ✅ | ⚠️ | ✅ | ✅ | ✅ | ✅ | — |
-| E-mail verificado | ❌ | ✅ | ⚠️ (genérico) | ✅ | ✅ | ✅ | ✅ | — |
-| Telefone direto / celular | ❌ | ✅ (8 créditos) | ⚠️ | ✅ | ✅ | ❌ | ✅ | — |
-| **Sinal de compra** (contratando, obra, licitação, sem site) | ❌ | ✅ (intent) | ❌ | ✅ (hiring) | ⚠️ | ❌ | ✅ | — |
-| Funil / CRM leve | ✅ | ✅ | ✅ | ⚠️ | ✅ | ✅ | ⚠️ | ⚠️ |
-| Disparo de e-mail em lote **incluído no mesmo preço** | ✅ | ✅ | ✅ | ❌ | ✅ | ✅ | ⚠️ | ❌ |
-| Assistente de IA para primeira abordagem | ✅ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Multi-idioma (PT/EN/ES) | ✅ | ⚠️ | ❌ | ❌ | ⚠️ | ❌ | ❌ | ⚠️ |
-| Plano gratuito permanente | ❌ | ✅ | ❌ (7 dias) | ❌ (7 dias) | ✅ | ✅ | ✅ | ❌ |
-| Busca visível **antes** do cadastro | `[NÃO VERIFICADO]` | ❌ | ❌ | ❌ | ⚠️ | ⚠️ | ❌ | ✅ |
-| Rollover de crédito | `[NÃO VERIFICADO]` | ❌ | — | ✅ | ❌ | ❌ | ⚠️ | ❌ |
-| Assentos ilimitados | `[NÃO VERIFICADO]` | ❌ | — | ❌ | ❌ | ✅ | ✅ | — |
-| Enriquecimento de CRM / API | ❌ | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Discador | 🚫 | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ❌ |
-| Dado de intenção comprado (Bombora) | 🚫 | ✅ | ❌ | ✅ | ✅ | ❌ | ✅ | ❌ |
-| Integração Salesforce/HubSpot bidirecional | 🚫 | ✅ | ❌ | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Extensão Chrome sobre LinkedIn | 🚫 | ✅ | ⚠️ | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Cobrança por assento | 🚫 | ✅ | ❌ | ✅ | ✅ | ❌ | ❌ | — |
-
-### O que **não** vamos ter de propósito, e por quê
-
-| Não construir | Razão |
-|---|---|
-| **Discador / telefonia** | Consome 8 créditos por número no Apollo justamente porque o custo de verificação de celular é alto. Entrar aí é importar a estrutura de custo do concorrente sem a escala dele |
-| **Dado de intenção comprado (Bombora e afins)** | Precificado para enterprise (US$ 75–400 por tópico adicional `[FONTE SECUNDÁRIA]`). O prestador solo não tem volume que justifique. Sinal de compra tem que vir de **fonte pública gratuita** (licitação, alvará, vaga, ausência de site) |
-| **Integração bidirecional com Salesforce/HubSpot** | O cliente-alvo não tem CRM. Construir isso é atender o cliente do Apollo, não o nosso |
-| **Extensão Chrome sobre LinkedIn** | Dependência de plataforma que não controlamos (ver Kaspr), e o dono de serralheria não está no LinkedIn |
-| **Cobrança por assento** | Pune o cliente-alvo, que é uma pessoa só. Hunter, Clay e Ocean.io já provaram que assento ilimitado é arma de ataque por baixo |
+**Leitura da matriz:** de 17 linhas, 8 são coisas que a ProspectX **não deve** construir. O produto ganha por subtração, não por paridade.
 
 ---
 
 ## 5. Mapa de posicionamento
 
-### Eixo escolhido: **onde vem a hipótese de "a quem vender"** × **quanto do trabalho o produto faz**
+### Eixo escolhido (e por quê)
 
-Esses são os dois eixos que importam porque o cliente-alvo (prestador solo) tem duas carências simultâneas e independentes: **ele não sabe a quem vender** e **ele não tem tempo de operar ferramenta**. Preço e volume de base são consequências, não causas.
+Descartei "preço × funcionalidades" — não decide nada. Os dois eixos que decidem são:
+
+- **Eixo X — Quem escolhe o alvo:** o produto decide para quem você deve vender ← → você tem que saber e digitar
+- **Eixo Y — Que tipo de empresa está na base:** micro/local (oficina, obra, restaurante, transportadora) ← → corporativa com decisor nomeado
 
 ```
-                    O PRODUTO ENTREGA O CLIENTE PRONTO
+                      CORPORATIVA, DECISOR NOMEADO
                                   ▲
                                   │
-        Bark ●                    │                    ● Angi
-     Thumbtack ●                  │                ● Hipages
+        Ocean.io ·  Unify         │   ZoomInfo · Cognism
+        Keyplay · Clay            │   Apollo · Lusha · UpLead
+        (lookalike: decide,       │   Sales Navigator
+         mas exige cliente        │   Lead411 · Seamless · Kaspr
+         existente)               │
                                   │
-      (caro por lead,             │          UpLead Done-For-You ●
-       lead compartilhado,        │              Sopro (UK) ●
-       75% fantasma)              │
+   PRODUTO DECIDE ◄───────────────┼───────────────► CLIENTE DECIDE
+      O ALVO                      │                   O ALVO
                                   │
-──────────────────────────────────┼──────────────────────────────────▶
-  HIPÓTESE VEM                    │                    HIPÓTESE VEM
-  DO PRODUTO                      │                    DO USUÁRIO
-                                  │
-         ◆ PROSPECTX              │        ● Apollo    ● Lead411
-        (declara aqui,            │        ● Hunter    ● RocketReach
-         entrega dado ruim)       │        ● LeadSwift ● UpLead
-                                  │        ● Kaspr     ● Cognism
-    ● Ocean.io                    │
-   (lookalike — precisa           │              ● Clay
-    de semente)                   │        (usuário programa tudo)
-                                  │
-    ● Targetley                   │        ● Apify / Outscraper
-   (1 serviço, evidência real)    │        (dado cru, você resolve)
-                                  │
-                                  ▼
-                    O USUÁRIO FAZ TODO O TRABALHO
+       ██████████████             │   Scrap.io · D7 · LeadSwift
+       █  PROSPECTX  █            │   Outscraper · Lead Atlas
+       █  (declarado)█            │   B2BLeadFinder
+       ██████████████             │   Data Axle Salesgenie
+        vazio hoje                │
+                                  │   [Angi · Thumbtack · Bark:
+                                  │    fora do plano — vendem
+                                  ▼    demanda, não base]
+                       MICRO / LOCAL
 ```
 
-### Leitura do mapa
+### O que o mapa mostra
 
-1. **O quadrante inferior-esquerdo — "o produto tem a hipótese, o usuário faz o trabalho" — está praticamente vazio, e a ProspectX declara estar nele.** Só há dois vizinhos: Ocean.io (que precisa de semente) e Targetley (que serve a um único ofício). **Vazio não é oportunidade automática.** A leitura mais provável é que quem tenta esse quadrante descobre que sugerir o segmento é a parte fácil e barata; a parte cara é ter o dado daquele segmento com contato utilizável. A ProspectX está vivendo essa descoberta agora.
+1. **O quadrante inferior-esquerdo está genuinamente vazio.** Nenhum produto encontrado decide o alvo para quem vende a negócio local.
+2. **O quadrante superior-esquerdo é habitado, mas com pré-requisito fatal:** Ocean.io, Unify e Keyplay decidem o alvo — a partir de clientes que você já tem. Quem tem zero clientes não entra.
+3. **Aplicando o princípio "ausência raramente é oportunidade":** o quadrante vazio tem três explicações plausíveis, e é preciso saber qual é.
+   - *(a) Ninguém pensou.* Improvável. UpLead escreve blog ensinando SIC code para limpeza comercial — o problema é conhecido, a solução foi deixada como conteúdo, não como produto.
+   - *(b) O mercado não paga.* Plausível. Quem tem zero clientes tem baixa disposição a pagar e alta rotatividade. É o pior segmento de SaaS que existe.
+   - *(c) O valor não é defensável.* **Esta é a explicação mais forte.** A tradução "manutenção industrial → indústria, construtora, estaleiro" é reproduzível por qualquer LLM em 2026, de graça. O mapa não é fosso; é conveniência. O fosso teria que ser a base de dados por trás — que hoje é o ponto fraco.
 
-2. **O eixo vertical é onde o dinheiro do cliente-alvo já está.** Bark, Thumbtack, Angi e Hipages ocupam o topo e cobram US$ 15–85 por lead. Eles vendem *resultado*, não *dado*. E são detestados: 1,96/5 no BBB para a Angi, créditos com validade cortada de 12 para 3 meses no Bark.
-
-3. **O corredor entre os dois — "hipótese do produto + entrega quase pronta" — é o único território não ocupado com evidência de demanda dos dois lados.** Acima dele há gente pagando caro e reclamando; abaixo há gente pagando pouco e trabalhando muito.
-
----
-
-## 6. Espaços não atendidos
-
-### 6.1 Nenhum fornecedor de dado bom desceu abaixo de US$ 25/mês para uma pessoa só
-
-**Evidência:** Cognism declara "5 seats included" e não publica preço (página, 15/08/2026). Apollo Organização exige mínimo de 3 assentos (página, 15/08/2026). RocketReach Essentials a US$ 27/mês é o piso publicado por um fornecedor de dado sério. Lead411 Spark a US$ 49. UpLead Essentials a US$ 99.
-
-**Tamanho do vão:** entre US$ 0 (substituto gratuito) e US$ 25/mês. Nesse vão só existe LeadSwift (US$ 19,99 anual) e *scraper* cru.
-
-**Por que ele existe:** o custo marginal de manter dado verificado não cai com o tamanho do cliente, e o custo de aquisição de um cliente de US$ 20/mês só fecha com aquisição orgânica ou viral. **É um vão que só se ataca com produto que se vende sozinho — nunca com time comercial.** Isso valida a decisão do dono de gerar demanda por Instagram antes de vender.
+   **Conclusão honesta:** o quadrante está vazio principalmente por (c), com contribuição de (b). Isso não invalida o produto — invalida a estratégia de vender o mapa como se fosse o produto.
 
 ---
 
-### 6.2 O sinal de compra público está livre e ninguém o empacotou para o prestador pequeno
+## 6. Espaços não atendidos (cada um com a evidência)
 
-**Evidência:** Lead411 tem filtro "Currently Hiring" (página, 15/08/2026). Cognism tem sinais de "Hiring, Funding and M&A" (página, 15/08/2026). Ambos derivam sinal de fonte pública — mas ambos vendem para equipe de vendas B2B corporativa, a partir de US$ 49 e sem preço publicado, respectivamente.
+### 6.1 Tradução serviço → setor comprador
+**Evidência:** UpLead vende busca por SIC code e publica conteúdo ensinando o cliente a descobrir o próprio SIC **[SECUNDÁRIA]**. Scrap.io exige a categoria do Google Maps. Apollo exige o filtro de indústria. Nenhum decide.
+**Tamanho do espaço:** não mensurado **[NÃO VERIFICADO]**.
+**Risco:** replicável por LLM. Vale como onboarding, não como fosso.
 
-Ao mesmo tempo, em **cada um dos três mercados-alvo**, o Estado publica sinal de compra de graça:
+### 6.2 Descoberta de ICP para quem tem zero clientes
+**Evidência:** Ocean.io ("lookalike a partir dos seus clientes"), Unify (scoring + lookalike), Keyplay, Clay — toda a categoria pressupõe base instalada.
+**Risco:** o público sem clientes é o de menor disposição a pagar. Precifique conforme.
 
-- **EUA:** SAM.gov, 24 mil avisos novos/mês, alerta gratuito por código NAICS, sem cadastro para consultar
-- **UK:** Find a Tender + Contracts Finder, base central obrigatória, gratuita
-- **AU:** AusTender, publicação obrigatória de tudo acima de A$ 10 mil, alerta gratuito por perfil; cerca de 1/3 dos contratos vai para PME
+### 6.3 Plano gratuito de verdade no segmento de leads locais
+**Evidência [PÁGINA]:** Scrap.io = teste de 7 dias; UpLead = 5 créditos; D7 = nada; LeadSwift = 7 dias. Só Lead Atlas (40 créditos permanentes) e Apollo (10 exportações/mês) oferecem entrada gratuita contínua. **A ProspectX hoje não tem nenhuma.**
+**Oportunidade direta:** com zero assinantes e zero marca em três países novos, não existe caminho de conversão sem prova gratuita.
 
-**Nenhum produto na faixa de preço do prestador solo transformou isso em "esta empresa aqui vai precisar do seu serviço nas próximas semanas".** Bark e Thumbtack vendem intenção de *consumidor*; ninguém vende intenção de *empresa* barato.
+### 6.4 Resultado visível antes do cadastro
+**Evidência:** nenhum dos 6 produtos cujas home foram lidas em 15/08/2026 mostra resultado real antes do cadastro; todos abrem com "Sign up for free" / "Try for free" / "Get Started" / "Get 40 free credits".
+**Leitura:** ninguém confia no próprio resultado o bastante para mostrá-lo cru. Quem mostrar primeiro compra credibilidade barata — **mas só pode mostrar se o dado prestar.**
 
-**Por que ninguém fez:** provavelmente porque exige trabalho de normalização por país e porque o mercado de licitação já tem seus especialistas caros (BidPrime, Stotles, Tenders Direct) mirando quem vende para governo em tempo integral. **O uso que ninguém atendeu é o do prestador que não vende para governo, mas usa o edital como sinal de que a empresa vencedora vai precisar subcontratar.** Isso é hipótese, não fato verificado — precisa de validação com cliente real antes de virar roadmap.
+### 6.5 Exclusividade do lead
+**Evidência:** Angi/Thumbtack/Bark vendem o mesmo lead a 4–5 profissionais; 78% dos clientes contratam quem responde primeiro; custo por trabalho fechado de US$ 250–542 **[SECUNDÁRIA]**.
+**Oportunidade:** a mensagem "ninguém mais recebeu esta lista" é verdadeira num produto de prospecção ativa e impossível num marketplace. É a melhor munição de copy disponível.
 
----
+### 6.6 Cobertura de Austrália
+**Evidência:** Cognism se posiciona como "Europe's most trusted B2B data" (literal, home 15/08/2026) — Austrália não aparece. Apollo tem precisão ~60% fora dos EUA **[SECUNDÁRIA]**. Fornecedores locais (InfobelPRO, KnowFirst, LeadLists) existem, e a Austrália tem registro público massivo e legalmente extraível (ABN Lookup / ABR, 20M+ registros).
+**Oportunidade:** é o país onde a assimetria "dado oficial gratuito e limpo × cobertura fraca dos gigantes" é maior. **Mas atenção:** o Spam Act australiano é o mais restritivo dos três para e-mail não solicitado, exigindo permissão. Antes de qualquer disparo em massa na AU, acionar `especialista-privacidade` e `especialista-deliverability`.
 
-### 6.3 A cobrança por crédito num produto de descoberta pune o comportamento que gera o "aha"
+### 6.7 SEO programático por par "serviço × cidade"
+**Evidência:** os concorrentes brigam por termos genéricos e saturados ("b2b lead generation", "google maps scraper", "email finder"). Ninguém ocupa "quem contrata [serviço]".
+**Oportunidade:** 531 termos × 3 idiomas × N cidades é um mapa de conteúdo pronto. É o único ativo da ProspectX que **não** é replicável em uma tarde — porque exige a curadoria dos 1.187 pares. Handoff para `especialista-seo` e `prospectx-growth`.
 
-**Evidência:** LeadSwift cobra por **busca/dia** com resultado ilimitado e comunica isso como argumento principal ("All plans include unlimited: Leads, Contacts, Exports"). Lead411 dá **rollover** de exportações não usadas e destaca isso em "Included Features in All Subscriptions". Hunter dá **usuários ilimitados** em todos os planos. Ocean.io dá **usuários ilimitados** e créditos com 6 meses de validade `[FONTE SECUNDÁRIA]`.
-
-Do outro lado: os créditos do Apollo **não acumulam** e essa é uma reclamação recorrente `[FONTE SECUNDÁRIA]`; o Bark cortou a validade do crédito de 12 para 3 meses e virou caso de reputação `[FONTE SECUNDÁRIA]`.
-
-**O padrão é claro:** quem ataca por baixo remove a ansiedade de consumo; quem já tem base instalada a mantém para forçar upgrade. A ProspectX, com zero assinantes, adotou o modelo de quem tem base instalada.
-
----
-
-### 6.4 A dupla assinatura (base + disparo) é atrito real e a ProspectX já resolveu isso sem saber
-
-**Evidência:** Instantly cobra US$ 47/mês pelo envio e a base é assinatura separada (verificado na página: "Do you also provide leads I can send emails to? Yes we do! You can use Instantly Lead Finder"). Saleshandy cobra US$ 25/mês pelo envio e tem aba separada de "Lead Finder". Lead411 e UpLead não têm disparo. Clay tem sequenciador só no plano gratuito e integrações de campanha a partir de US$ 185/mês.
-
-**A ProspectX entrega busca + funil + disparo em lote + assistente de IA numa assinatura só.** Isso é uma vantagem concreta, verificável e comunicável — e não é o que a página está comunicando.
-
----
-
-### 6.5 Onde ProspectX é fraca e ninguém está fraco junto: qualidade em UK e AU
-
-**Evidência:** Companies House (UK) e ABR/ABN Lookup (AU) publicam cadastro censitário, gratuito, com licença comercial, em download em massa, com classificação setorial. Cognism é reconhecidamente o mais forte em UK `[FONTE SECUNDÁRIA]`. Em AU, illion e D&B Australia têm cobertura profunda mas não são construídos para prospecção *outbound* `[FONTE SECUNDÁRIA]`; o ABN é o identificador canônico do dado B2B australiano `[FONTE SECUNDÁRIA]`.
-
-**Este não é um espaço não atendido — é o oposto.** É um alerta: nos dois mercados onde o dono quer começar, o dado básico de empresa é gratuito e melhor que o do OpenStreetMap. **A ProspectX não pode vender "a lista" nesses países. Só pode vender o que se faz com a lista.**
+### 6.8 Onde a ausência NÃO é oportunidade — registre
+- **Ninguém vende dado de SMB local com decisor nomeado.** Não é descuido: o dado não existe em escala e verificá-lo custa mais do que o segmento paga. Não persiga.
+- **Ninguém cobra assinatura alta de prestador solo sem marca.** Data Axle exige contrato de 12 meses e é a exceção — com produto vendido por telefone há décadas. Não é modelo replicável por um SaaS novo sem força de vendas.
 
 ---
 
-## 7. Recomendação
+## 7. Recomendação — 5 movimentos, ordenados por impacto sobre esforço
 
-Ordenadas por impacto sobre esforço. Cada uma explica o mecanismo, não a cópia.
+### Movimento 1 — Congelar a promessa de cobertura até a base existir (impacto altíssimo / esforço zero)
+Nada neste relatório importa se a busca voltar vazia. Enquanto a fonte for OpenStreetMap, **não anunciar cobertura, não abrir mídia paga, não lançar plano gratuito** — cada busca vazia gasta a única coisa que a ProspectX tem hoje, que é o benefício da dúvida.
+Dado de contexto para a decisão de fonte: o OSM tem cobertura de ~26% e taxa de preenchimento de ~39,8% num estudo comparativo, contra ~100% e ~95,6% de um fornecedor comercial **[SECUNDÁRIA]**. O problema é estrutural, não de query.
+Assimetria competitiva a registrar: **B2BLeadFinder declara usar a Google Places API; Scrap.io, Outscraper e D7 operam por raspagem, modelo que viola os termos do Google e vive de tolerância [SECUNDÁRIA].** A ProspectX descartou o Google por respeitar os termos — e paga o preço disso sozinha. Isso vira argumento de venda ("nosso dado é licenciado") **só depois** que a base licenciada existir. Handoff para `engenheiro-dados`.
 
----
+### Movimento 2 — Inverter a promessa: de "base" para "alvo", com prova antes do cadastro (impacto alto / esforço baixo)
+A home não deve prometer registros; deve executar o mapa na frente do visitante. Fluxo: campo único ("o que você faz" + "onde") → tela mostra **os setores que contratam aquele serviço** e a contagem de empresas por setor → cadastro só para ver os contatos.
+Isso entrega três coisas de uma vez: (i) demonstra o único ativo proprietário; (ii) ocupa o espaço 6.4, que ninguém ocupa; (iii) transforma os 1.187 pares em landing pages de SEO programático.
+Ninguém entre os 6 concorrentes lidos mostra resultado antes do cadastro.
 
-### R1. Trocar a unidade de cobrança de "crédito" para "busca", e reprecificar para o degrau abandonado
-**Impacto: máximo · Esforço: baixo (é decisão, não código)**
+### Movimento 3 — Refazer o modelo de cobrança (impacto alto / esforço médio)
+O preço atual está fora de faixa em três dimensões ao mesmo tempo. Cálculo em BRL, sem conversão (ver ressalva abaixo):
 
-O preço atual (US$ 0,96/crédito) está 60% acima do teto de mercado para revelação de contato verificado (UpLead, US$ 0,60) e 20x acima do Lead411, com dado incomparavelmente pior. Não há narrativa que sustente isso.
+| Plano ProspectX | Preço | Créditos/mês | **R$ por crédito** |
+|---|---|---|---|
+| Mensal | R$ 497 | 100 | **R$ 4,97** |
+| Trimestral | R$ 1.377 (R$ 459/mês) | 135 | R$ 3,40 |
+| Semestral | R$ 2.497 (R$ 416/mês) | 180 | R$ 2,31 |
+| Anual | R$ 4.497 (R$ 375/mês) | 240 | R$ 1,56 |
+| Fundador mensal | R$ 197 | 100 | R$ 1,97 |
+| Fundador anual | R$ 1.707 | 240 | R$ 0,59 |
 
-**O mecanismo por trás da mudança:** num produto de *descoberta*, o usuário precisa errar. Ele vai buscar "manutenção industrial em Manchester", ver que veio ruim, tentar "facilities management", tentar de novo. Se cada tentativa custa crédito, ele para de tentar antes de encontrar o filtro que funciona — e cancela achando que o produto não serve. Cobrar por busca/dia (LeadSwift) ou dar rollover (Lead411) elimina esse mecanismo de auto-sabotagem. **Não é generosidade; é remoção de um obstáculo à ativação.** Com zero assinantes, ativação é a única métrica que existe.
+Referência de mercado por registro, verificada em página em 15/08/2026: **Lead Atlas US$ 0,030 · Instantly US$ 0,031 · Hunter US$ 0,017 · Snov.io US$ 0,029 · Scrap.io US$ 0,0035 · Outscraper US$ 0,001–0,009.** Apenas UpLead (US$ 0,58/crédito) está acima — e entrega e-mail verificado, celular e garantia de 95%.
 
-**Não copiar o preço do LeadSwift.** O que importa é o princípio: a unidade cobrada tem que ser aquela que o usuário controla com confiança. Ele sabe o que é uma busca; ele não sabe quantos créditos vai gastar.
+Mesmo sem fixar taxa de câmbio, a distância é de **uma a duas ordens de grandeza** em qualquer paridade plausível. Três correções:
+- **Não cobre "crédito" sem definir publicamente o que ele compra.** Hoje isso é uma incógnita até internamente — ver seção 8. Crédito indefinido é o modelo que mais assusta comprador que não sabe estimar consumo, e o prestador solo é exatamente esse comprador.
+- **Cobre por registro exportado, não por busca.** Alinha preço com valor entregue, é o modelo do Apollo no plano gratuito (limita exportação, não visualização) e permite mostrar o resultado antes de cobrar.
+- **Desça o degrau de entrada e crie plano gratuito permanente.** O degrau abandonado no segmento local é abaixo de US$ 9–15/mês; o degrau abandonado no segmento de sales intelligence é abaixo de US$ 29–49/mês. Detalhamento no handoff para `analista-precificacao`.
 
----
+### Movimento 4 — Reavaliar o disparo de e-mail em lote como funcionalidade central (impacto médio / esforço negativo — é remoção)
+O disparo compete com Instantly (US$ 47), Saleshandy (US$ 25) e lemlist, que investem em infraestrutura de entrega, aquecimento de domínio e rede privada de IPs. Uma ferramenta de dados que dispara sem essa infraestrutura queima o domínio do cliente e leva a culpa. Some-se: **o Spam Act australiano exige permissão prévia**, o que torna o disparo em massa na AU juridicamente arriscado **[SECUNDÁRIA — confirmar com `especialista-privacidade`]**; UK (PECR) permite para assinante corporativo com opt-out; EUA (CAN-SPAM) permite com opt-out e endereço físico, com multa de até US$ 53.088 por mensagem na correção inflacionária de 2026 da FTC **[SECUNDÁRIA]**.
+Recomendação: manter envio em volume baixo como conveniência, **nunca posicioná-lo como pilar**, e não competir em capacidade de envio.
 
-### R2. Substituir o mapa estático de 1.187 pares por sinal verificável, começando por um único sinal e um único país
-**Impacto: máximo · Esforço: médio**
-
-O mapa responde "qual categoria compra o meu serviço". O cliente já sabe isso. O que ele não sabe é **qual empresa específica está comprando agora**.
-
-**O mecanismo, demonstrado pelo Targetley:** substituir a *categoria* pela *evidência observável no dado*. "Empresas que não têm site" é infinitamente mais vendável que "agências contratam web design", porque o primeiro é uma lista de nomes e o segundo é uma obviedade. Lead411 faz o mesmo com "Currently Hiring": não diz "empresas em crescimento compram RH", diz "estas 40 estão contratando".
-
-**Sinais gratuitos e verificáveis, por ordem de facilidade:**
-
-| Sinal | Fonte gratuita | Serve a quem |
-|---|---|---|
-| Empresa sem site / site quebrado | Google Places + verificação HTTP | Web design, marketing, TI |
-| Empresa contratando cargo X | Portais públicos de vaga | Treinamento, RH, terceirização, EPI, uniforme |
-| Empresa venceu licitação recente | SAM.gov / Contracts Finder / AusTender | Subcontratação, logística, manutenção, obra |
-| Empresa recém-registrada | Companies House (UK) / ABR (AU) | Contabilidade, seguro, mobiliário, reforma, TI |
-| Empresa mudou de endereço | Companies House / ABR | Mudança, reforma, instalação, limpeza |
-
-**Escolher UM.** "Empresas registradas nos últimos 90 dias" no Reino Unido é o mais barato de construir (arquivo mensal gratuito do Companies House, licença comercial) e o mais fácil de demonstrar em vídeo de Instagram, que é o canal escolhido.
-
-**O mapa de 1.187 pares não deve ser jogado fora — deve ser rebaixado a onboarding.** Ele é a semente para quem não tem carteira, resolvendo o *cold start* que derruba o Ocean.io. Vira a **primeira pergunta** ("qual é o seu ramo?") que preenche o filtro inicial, não a proposta de valor da página inicial.
-
----
-
-### R3. Adotar a arquitetura de cascata (waterfall) em vez de tentar ter base própria
-**Impacto: alto · Esforço: médio**
-
-Este item é do escopo de dados, que está sendo tratado à parte, mas a decisão competitiva pertence a este relatório.
-
-**O mecanismo da Clay:** não tentar ter o melhor dado. Consultar fornecedores em sequência até um responder e cobrar só pelo acerto. Isso transforma "cobertura" de um problema de aquisição de base (caro, lento, sem fim) em um problema de roteamento (barato, incremental, mensurável). A Clay não tem base própria e cobra US$ 495/mês por isso.
-
-**Aplicado à ProspectX:** camada 1 = registro público gratuito do país (Companies House, ABR, SAM.gov) para *existir e classificar*; camada 2 = Places/Apify a ~US$ 1,50/mil para *endereço e telefone*; camada 3 = enriquecimento pago só no contato que o usuário efetivamente quer revelar. **O custo variável passa a acompanhar o uso real, e o OpenStreetMap deixa de ser um ponto único de falha.**
-
-**A consequência competitiva é maior que a técnica:** enquanto a base for OSM, a proposta "encontramos as empresas" é falsa, e nenhuma decisão de preço, copy ou growth se sustenta sobre ela. Isso trava R1 e R2.
-
----
-
-### R4. Reposicionar o comparativo econômico: contra marketplace de lead, não contra ferramenta de dado
-**Impacto: alto · Esforço: baixo**
-
-Contra Apollo e Lead411, a ProspectX perde em preço por registro por 20x a 50x. Contra Bark e Thumbtack, a matemática vira: **US$ 15–60 por um lead compartilhado com 4 outros profissionais e com 75% de taxa de fantasma reportada** `[FONTE SECUNDÁRIA]`, contra uma assinatura mensal que dá acesso a uma lista inteira que só é sua.
-
-**O mecanismo:** o cliente-alvo não tem orçamento de "ferramenta de vendas"; ele tem orçamento de "conseguir cliente". Enquadrar o produto na categoria errada faz o preço parecer absurdo; enquadrar na categoria certa faz o mesmo preço parecer óbvio.
-
-**Duas ressalvas obrigatórias.** Primeira: essa comparação só é honesta se a lista entregue realmente gerar conversa — hoje não gera, e usá-la antes de R3 seria promessa falsa. Segunda: os números de Bark, Thumbtack e Angi neste relatório são de fontes secundárias. **Antes de virar copy pública, precisam ser confirmados nas páginas oficiais de profissional, e a comparação precisa passar pelo `juridico-internacional`** — publicidade comparativa com nome de concorrente tem regra distinta em EUA, Reino Unido (CAP Code) e Austrália (ACL).
-
----
-
-### R5. Abrir a busca antes do cadastro e criar plano gratuito permanente por funcionalidade
-**Impacto: médio-alto · Esforço: baixo-médio**
-
-Apollo, Hunter, Clay, Kaspr e RocketReach têm plano gratuito **permanente**. LeadSwift dá 7 dias sem cartão. UpLead dá 5 créditos em 7 dias — e é o menos generoso e o mais caro.
-
-**O mecanismo, e é o princípio central deste ofício:** se o produto esconde a busca atrás do cadastro, ele está dizendo que não confia no próprio resultado. Hoje a ProspectX não pode mostrar a busca — porque o resultado é ruim. **Isso torna R5 um teste de verdade, não uma tática de conversão: o dia em que a busca puder ficar aberta é o dia em que o produto está pronto para ser vendido.**
-
-E o limite do plano gratuito deve ser por **funcionalidade**, não por volume — Apollo limita chats de IA e sequências, não a busca. Limitar volume ensina o usuário a racionar antes de ele ter visto valor. Limitar funcionalidade deixa ele ver o valor e sentir falta do que não tem.
+### Movimento 5 — Escolher uma cabeça de ponte: um serviço, um país (impacto médio-alto / esforço médio)
+531 termos × 3 países × 3 idiomas é uma promessa que a base não sustenta e que o marketing não consegue defender. Escolha um par serviço × país onde exista fonte oficial gratuita e limpa — Reino Unido é o candidato natural (Companies House com SIC code, dado estruturado e livre; PECR permite e-mail B2B corporativo com opt-out). Prove o mapa em um vertical, com dado que presta, antes de abrir os 531.
+Efeito colateral bom: um vertical estreito é o único jeito de o Instagram em inglês gerar demanda qualificada em vez de curtida.
 
 ---
 
 ## 8. O que ficou não verificado
 
-### Preços que NÃO foram lidos na página oficial do fornecedor
-- **Instantly Lead Finder** (base de dados): faixas de US$ 47/1.500 créditos, US$ 97/5.000, US$ 197/10.000 vêm de publicações de terceiros. A página de preços da Instantly tem aba dedicada que não consegui abrir. **Não usar em decisão.**
-- **Saleshandy Lead Finder:** confirmado que existe e que dá 50 créditos grátis no cadastro; **faixas de preço não capturadas.**
-- **Outscraper:** US$ 3/1.000 registros é fonte secundária. A página oficial está protegida por verificação de bot e **não foi acessada — não contornei a proteção, por princípio.**
-- **Ocean.io:** todos os valores (US$ 0,071/crédito, ~US$ 32/mês) são de fontes secundárias.
-- **Bark, Thumbtack, Angi, Hipages:** todos os custos por lead são de publicações de mercado. As páginas oficiais exigem cadastro como profissional. **Hipages não tem nenhum dado de preço.**
-- **Google Places API:** US$ 32/1.000 chamadas é fonte secundária; não foi lido na tabela de SKU do Google.
-- **Cognism e ZoomInfo:** confirmado na página que **não publicam preço**. Qualquer faixa citada por terceiros (US$ 15 mil/ano etc.) é `[NÃO VERIFICADO]` e não deve entrar em material comercial.
-- **Targetley:** preço e fonte de dados não obtidos.
+**Preços que não consegui ler na página do fornecedor** (páginas bloqueadas ou renderizadas por JS, testadas em 15/08/2026): Apollo.io, Lusha, ZoomInfo, Cognism, Seamless.AI, Lead411, Wiza, lemlist, Clay, LinkedIn Sales Navigator, Data Axle Salesgenie, D7 Lead Finder, Ocean.io, BookYourData, GetProspect, Stotles, Thumbtack, Angi, Bark. Tudo o que consta deles neste relatório é **[SECUNDÁRIA]** e serve só para faixa. **Antes de qualquer decisão de preço, `analista-precificacao` deve reconferir na página do fornecedor.**
 
-### Sobre a própria ProspectX (não me foram informados)
-- **Tabela de preços em USD, GBP e AUD.** Todo o comparativo internacional deste relatório converteu o preço em BRL a 5,19. **Se os preços em moeda estrangeira forem diferentes da conversão direta, as conclusões de preço precisam ser refeitas.** Este é o item mais urgente a esclarecer.
-- Se há plano gratuito, se há rollover de crédito, se a busca aparece antes do cadastro, e se o preço é por assento.
-- Custo unitário real de uma busca hoje (para saber qual margem existe).
+**Sobre a própria ProspectX:**
+- Preços em USD, GBP e AUD — **[NÃO VERIFICADO]**, não me foram informados. Toda comparação internacional deste relatório está incompleta sem eles.
+- **O que 1 crédito da ProspectX compra** (uma busca? um registro exibido? um registro exportado? um e-mail enviado?) — **[NÃO VERIFICADO]**. Este é o item mais urgente: metade da análise de preço depende dele.
+- Existência de plano gratuito, teste sem cartão e se a busca aparece antes do cadastro — **[NÃO VERIFICADO]**.
+- Acurácia dos 1.187 pares "quem contrata quem" — **[NÃO VERIFICADO]**. Não foi auditado nenhum par. Se o mapa é o ativo, ele precisa de auditoria por amostragem antes de virar promessa pública.
 
-### Não investigado por escopo
-- Concorrentes brasileiros (Econodata, Speedio, Cortex, Neoway, Ramper) — o Brasil foi declarado mercado secundário. **Antes de qualquer lançamento no Brasil, esta análise precisa ser refeita**: o mercado brasileiro tem dado de Receita Federal e CNPJ público, que muda completamente a economia.
-- Nichos verticais de dado de obra (Dodge/ConstructConnect nos EUA, Glenigan/Barbour ABI no UK, Cordell/BCI na AU). **São os concorrentes mais relevantes se a ProspectX seguir a rota do sinal de licitação/obra (R2)** e merecem um segundo teardown dedicado.
-- Termos de uso do OpenStreetMap e da Overpass API para revenda comercial — **questão jurídica real e não analisada aqui.** ODbL tem cláusula de *share-alike*. Encaminhar ao `juridico-internacional` antes de qualquer venda.
-- Análise de canal de aquisição e SEO dos concorrentes.
+**Sobre os concorrentes:**
+- Faturamento, número de clientes, base instalada e rodadas de investimento de **todos** os concorrentes citados — **[NÃO VERIFICADO]** e deliberadamente ausentes. Nenhum número desse tipo aparece neste relatório.
+- Participação de mercado por país — **[NÃO VERIFICADO]**.
+- Cobertura real de Apollo/Lusha/Cognism na Austrália e no Reino Unido para micro empresa local — **[NÃO VERIFICADO]**. Só há indícios (posicionamento europeu da Cognism, precisão internacional citada de ~60% da Apollo em fonte secundária). **Testar com plano gratuito legítimo antes de afirmar qualquer coisa em copy.**
+- Reclamações de Scrap.io, Lead Atlas, B2BLeadFinder e Ocean.io — **[NÃO VERIFICADO]**, volume público de resenhas insuficiente.
+- Se algum concorrente já testou e abandonou o mapeamento "quem contrata quem" — **[NÃO VERIFICADO]**. Não encontrei produto morto nem post-mortem público. A ausência de evidência aqui é literal: não achei nem quem tentou, nem quem falhou.
+
+**Interpretação jurídica:** as referências a CAN-SPAM, PECR, GDPR e Spam Act vieram de material secundário e **não substituem parecer**. Encaminhar a `especialista-privacidade` e `juridico-internacional` antes de qualquer campanha.
 
 ---
 
-## 9. Handoffs
+## Handoffs
 
 ### → `analista-precificacao`
 
-**Faixa de preço observada no mercado (todos verificados em página oficial, 15/08/2026):**
+**Faixa de preço do mercado (mensal, entrada, verificada em página quando marcado [PÁGINA]):**
 
-| Produto | Entrada | Unidade | Custo por registro |
+| Segmento | Piso | Mediana aproximada | Teto self-serve |
 |---|---|---|---|
-| LeadSwift Starter | **US$ 19,99/mês** (anual) | 1 busca/dia, leads ilimitados | efetivamente zero |
-| RocketReach Essentials | **US$ 27/mês** (anual) | 100 consultas/mês | US$ 0,27 |
-| Hunter Starter | **US$ 34/mês** (anual) | 2.000 créditos/mês, usuários ilimitados | US$ 0,017 |
-| Saleshandy Starter | **US$ 25/mês** (anual) | envio; base à parte | — |
-| Apollo Básico | **US$ 49/assento/mês** (anual) | 2.500 créditos/mês | US$ 0,0196 |
-| Lead411 Spark | **US$ 49/mês** | 1.000 exportações/mês, com rollover | US$ 0,049 |
-| UpLead Essentials | **US$ 99/mês** | 170 créditos | US$ 0,58 (avulso US$ 0,60) |
-| Clay Launch | **a partir de US$ 185/mês** | 2.500 data credits | — |
-| Cognism / ZoomInfo | sem preço público, mín. 5 assentos | — | — |
-| **ProspectX mensal** | **R$ 497 ≈ US$ 95,8** | **100 créditos** | **US$ 0,96** |
-| **ProspectX fundador** | **R$ 197 ≈ US$ 38** | **100 créditos** | **US$ 0,38** |
+| Leads locais por mapa | US$ 9 avulso (Lead Atlas) [PÁGINA] · US$ 14,99 (B2BLeadFinder) [PÁGINA] | **US$ 35–49** [PÁGINA] | US$ 350–499 (Scrap.io Company) [PÁGINA] |
+| Prospecção + disparo | US$ 25 (Saleshandy) [PÁGINA] | **US$ 47–69** [PÁGINA] | US$ 358–555 (Instantly) [PÁGINA] |
+| Sales intelligence self-serve | US$ 29,25 (Snov.io) [PÁGINA] · €45 (Kaspr) [PÁGINA] | **US$ 49–99** | US$ 199 (UpLead Plus) [PÁGINA] |
+| Sales intelligence enterprise | US$ 15.000/ano [SECUNDÁRIA] | — | US$ 60.000/ano [SECUNDÁRIA] |
 
-**Três fatos para a sua modelagem:**
+**Modelo de cobrança predominante:** crédito consumível mensal, sem acúmulo (Apollo, Instantly, Snov, Hunter, UpLead). O modelo em ascensão e mais alinhado ao valor é **crédito de exportação** (Scrap.io, Apollo no plano gratuito) e **crédito avulso que não expira** (Lead Atlas, Outscraper). Cobrança por assento é padrão só no bloco corporativo — e é exatamente o que repele o profissional solo.
 
-1. **US$ 0,60/crédito (UpLead avulso) é o teto de mercado observado** para revelação de contato B2B verificado. A ProspectX mensal está 60% acima dele, com dado de OpenStreetMap. Nem o plano fundador chega ao piso de um fornecedor sério (RocketReach, US$ 0,27 com 100 créditos — **exatamente a mesma unidade de consumo por 1/3,5 do preço**).
+**Degrau de entrada abandonado (a informação que você pediu):**
+1. **Abaixo de US$ 9/mês não existe produto pago no segmento local.** Só Lead Atlas (US$ 9 avulso) e Apollo (grátis com 10 exportações/mês) ocupam a base.
+2. **Não existe plano intermediário entre "grátis com 10 exportações" e "US$ 35–49/mês com 10.000 créditos".** Quem precisa de 100–300 registros por mês, mensalmente, não tem produto. É o buraco mais concreto do mercado — e é o perfil exato do prestador solo.
+3. **Ninguém no segmento local cobra por assento** — portanto não copie isso.
 
-2. **O modelo de cobrança predominante é crédito por assento, mas quem ataca por baixo abandonou os dois.** Hunter, Clay e Ocean.io dão **assentos ilimitados**. LeadSwift cobra por **busca/dia** com resultado ilimitado. Lead411 dá **rollover**. Cobrar por crédito com 100 unidades e sem rollover é o modelo de quem já tem base instalada e quer forçar upgrade — a ProspectX não tem base instalada.
-
-3. **O degrau de entrada abandonado é a faixa US$ 0 a US$ 25/mês para uma pessoa só com dado utilizável.** Cognism declara mínimo de 5 assentos na própria página; Apollo Organização exige 3. Abaixo de US$ 25/mês só existe LeadSwift e scraper cru a US$ 1,50/mil. **Mas atenção: esse vão existe porque a economia é difícil, não porque ninguém percebeu.** Só fecha com aquisição orgânica — CAC pago mata a conta nessa faixa. Modele com CAC próximo de zero ou não modele.
-
-**Peça ao dono, antes de fechar qualquer preço:** a tabela em USD/GBP/AUD. Todo este comparativo assumiu conversão direta de BRL a 5,19; se os preços internacionais forem outros, refaça.
-
----
+**Alerta de posição atual:** o crédito da ProspectX custa **R$ 4,97** no plano mensal cheio contra referências de **US$ 0,003 a US$ 0,031** por registro no segmento local. Antes de qualquer ajuste, **defina publicamente o que um crédito compra** — sem isso o número não é comparável e o cliente não consegue estimar consumo. Preciso da definição e dos preços em USD/GBP/AUD para fechar a análise.
 
 ### → `copywriter-conversao`
 
-**Frases saturadas — não usar, o mercado inteiro já disse:**
+**Frases literais já usadas pelo mercado (colhidas das home em 15/08/2026) — não repetir nenhuma:**
 
-| Frase / ângulo | Quem já ocupa |
+| Concorrente | Headline literal |
 |---|---|
-| "A plataforma completa / all-in-one para crescer seu negócio" | Apollo, literal |
-| "Encontre seus clientes ideais" / "ideal buyers" | Saleshandy ("your ideal buyers are already here"), Instantly, todos |
-| "Verified emails / dados verificados" | Apollo, Lead411 ("triple verified"), UpLead, Hunter, Cognism |
-| "X00 milhões de contatos e Y milhões de empresas" | Saleshandy (852M/42M), RocketReach (700M/35M), ZoomInfo, Apollo — **guerra de números que a ProspectX não pode vencer e não deve entrar** |
-| "Powered by AI" / "IA que personaliza sua abordagem" | Todos, sem exceção |
-| "Simple pricing / clear pricing" | Instantly ("Always know what you'll pay"), Cognism ("Clear pricing") — a Cognism usa a frase **e não publica preço** |
-| "Preços a partir de / mais barato que o ZoomInfo" | Categoria inteira de conteúdo comparativo, dominada por afiliados |
-| "One booked meeting covers your entire month" | Saleshandy, literal |
+| Apollo.io | "The AI sales platform for smarter, faster revenue growth" |
+| Instantly.ai | "Find Clients" / "Get more clients by chatting to AI" |
+| Cognism | "Europe's most trusted B2B data for growing pipeline" |
+| Scrap.io | "Local Leads Generator" / "Target businesses you won't find on LinkedIn" |
+| UpLead | "Real-time verified B2B emails, mobile numbers and intent data" / "200M+ leads" |
+| Clay | "Build systems to grow revenue" |
+| Lead Atlas | "Find Local Business Leads by City, ZIP Code, and Industry" |
+| B2BLeadFinder | "Find Businesses That Don't Have a Website" |
 
-**A fraqueza que a nossa mensagem deve explorar — e o motivo pelo qual ela é real:**
+**Padrões saturados — queimados, evitar:** "AI sales platform", "find clients", "build pipeline", "verified emails", "[N] million/billion leads", "most trusted data", "start free trial", "get started", "no credit card required", "95% accuracy guarantee". Contagem de registros como manchete está morta: todo mundo tem centenas de milhões e o comprador já não acredita.
 
-1. **Todos os fornecedores de dado bom vendem para *equipe de vendas*, não para *quem faz o serviço*.** A prova está na própria página deles: Cognism escreve "5 seats included"; Apollo exige 3 assentos no plano Organização; Apollo organiza o site por função ("Líderes de Vendas", "Executivos de Conta", "Desenvolvimento de Vendas", "Operações de Receita"). **Nenhum deles tem uma página para "você, que faz o serviço e também precisa vender".** Esse é o ângulo humano livre — e é honesto, porque é literalmente o que a estrutura de preço deles declara.
+**A fraqueza que a nossa mensagem deve explorar (em ordem de força):**
+1. **O lead comprado não é seu.** Angi/Thumbtack/Bark vendem o mesmo contato a 4–5 profissionais; 78% dos clientes fecham com quem responde primeiro; o trabalho fechado sai por US$ 250–542 **[SECUNDÁRIA]**. Eles **não podem** parar de revender — é o modelo. Ângulo: *"a lista é sua. Ninguém mais recebeu."*
+2. **Todas as ferramentas exigem que você já saiba quem procurar.** Apollo pede código de indústria; Scrap.io pede a categoria; a UpLead escreve blog ensinando SIC code. Ângulo: *"você diz o que faz. Nós dizemos para quem vender."*
+3. **Volume não é resposta.** 450 milhões de contatos e bounce de 20–30% relatado nas resenhas do Apollo **[SECUNDÁRIA]**. Ângulo: *"40 empresas certas valem mais que 4.000 e-mails."*
+4. **Contrato anual e cancelamento difícil** — Seamless.AI (Trustpilot 1,4/5, 79 queixas no BBB em 3 anos) e Data Axle (12 meses obrigatórios) **[SECUNDÁRIA]**. Ângulo: sem contrato, sem multa.
 
-2. **O concorrente real do cliente não é software, é o marketplace de lead que ele já odeia.** Bark cortou a validade dos créditos de 12 para 3 meses; Angi tem 1,96/5 no BBB com mais de 3 mil avaliações; o lead do Thumbtack é vendido a 4–5 profissionais ao mesmo tempo `[FONTE SECUNDÁRIA — confirmar antes de publicar]`. **Há copy poderosa em "a sua lista é sua, não é dividida com mais quatro concorrentes" e em "você não paga por contato que nunca respondeu".** Mas isso só pode ir ao ar depois de R3 (dados) — hoje seria promessa falsa.
-
-3. **Uma assinatura só.** Instantly e Saleshandy cobram o envio numa assinatura e a base em outra. A ProspectX entrega busca + funil + disparo + IA num preço só. É verdadeiro, verificável e ninguém no segmento comunica isso.
-
-**Duas proibições enquanto a base for OpenStreetMap:** não escrever "dados verificados", não escrever número de empresas na base. Ambos são checáveis em 30 segundos por um cliente cético e destroem a credibilidade da página inteira.
-
-**Antes de publicar qualquer comparação nominal com Bark, Thumbtack ou Angi:** passar pelo `juridico-internacional`. Publicidade comparativa tem regra própria em EUA, UK (CAP Code) e Austrália (ACL), e os números de suporte hoje são de fonte secundária.
-
----
+**Restrição obrigatória:** nenhuma promessa de cobertura, número de empresas ou taxa de acerto entra na copy enquanto o `engenheiro-dados` não confirmar a base. Use `[PREENCHER]`.
 
 ### → `prospectx-produto`
 
-**CONSTRUIR**
+**Construir (nesta ordem):**
+1. **Busca demonstrada antes do cadastro** — mostrar os setores que contratam o serviço informado e a contagem por setor, sem login. Nenhum dos 6 concorrentes analisados faz isso. É o movimento de diferenciação mais barato disponível.
+2. **Plano gratuito permanente com limite de exportação, não de visualização** — copie o *mecanismo* do Apollo (ver tudo, pagar para levar), não a tabela dele. Hoje a ProspectX é o único produto do estudo sem porta de entrada gratuita, com zero marca em três países novos.
+3. **Definir e exibir o que 1 crédito compra.** Bloqueador de precificação e de conversão.
+4. **Auditoria por amostragem dos 1.187 pares.** Se o mapa é o ativo, ele precisa ser verdadeiro antes de virar manchete.
+5. **Um vertical, um país, provado ponta a ponta** antes de abrir os 531 termos.
 
-| O quê | Por quê (mecanismo) |
-|---|---|
-| **Um sinal de compra verificável, um país, uma fonte gratuita** | Targetley vende "empresas sem site" e Lead411 vende "currently hiring" porque **evidência observável vende e categoria abstrata não**. Comece por "empresas registradas nos últimos 90 dias" no Companies House (UK): gratuito, licença comercial, download mensal em massa, e demonstrável em vídeo de 20 segundos |
-| **Cobrança por busca com resultado ilimitado, ou crédito com rollover** | Num produto de descoberta o usuário precisa errar o filtro 3–4 vezes antes do acerto. Crédito sem rollover faz ele parar de tentar e cancelar antes da ativação. LeadSwift e Lead411 provaram o contrário |
-| **Plano gratuito permanente limitado por funcionalidade** | Apollo, Hunter, Clay, Kaspr e RocketReach têm. Limitar por funcionalidade (e não por volume) deixa o usuário chegar ao valor e sentir falta do que falta. Limitar por volume ensina a racionar antes de ele ver valor |
-| **Arquitetura de dados em cascata** | Clay não tem base própria e cobra US$ 495/mês. Transformar cobertura em problema de roteamento (registro público gratuito → Places/Apify a US$ 1,50/mil → enriquecimento pago só no que o usuário revela) elimina o ponto único de falha do OSM e alinha custo variável ao uso |
-| **Assentos ilimitados** | O cliente é uma pessoa. Cobrar por assento é atender o cliente do Apollo. Hunter e Clay usam assento ilimitado como arma de ataque por baixo — funciona porque remove negociação interna e gestão de licença |
+**Ignorar deliberadamente (e dizer isso na página, porque recusa explícita vende):** decisor nomeado, celular verificado, dados de intenção, integração bidirecional com CRM, API pública, multi-assento, infraestrutura de aquecimento de domínio. São sete linhas da matriz onde a derrota é estrutural e a tentativa de empate consome todo o roadmap.
 
-**IGNORAR**
+**Fazer diferente:**
+- **Onde os outros cobram por assento, cobre por registro exportado.** Assento é o modelo que pune o profissional solo — e o solo é o nosso cliente.
+- **Onde os outros vendem volume, venda corte.** O incentivo do Instantly é o cliente enviar mais; o nosso tem que ser o cliente enviar menos e melhor. Isso é posicionamento, e precisa aparecer na tela — mostre por que aquela empresa entrou na lista, não só que entrou.
+- **Onde os outros escondem a origem do dado** (Lead Atlas não nomeia a fonte; Scrap.io e D7 raspam o Google contra os termos), **declare a nossa.** Só depois que ela existir e for licenciada. É a única vantagem que a decisão de descartar o Google Places pode gerar.
 
-| O quê | Por quê |
-|---|---|
-| Discador e verificação de telefone celular | Apollo cobra 8 créditos por número porque o custo é alto. Importar essa estrutura de custo sem a escala do Apollo é herdar a dívida dele |
-| Dado de intenção comprado (Bombora e similares) | US$ 75–400 por tópico adicional `[FONTE SECUNDÁRIA]`. Precificado para enterprise. Nosso sinal tem que vir de fonte pública gratuita |
-| Integração bidirecional com Salesforce/HubSpot | O cliente-alvo não tem CRM |
-| Extensão Chrome sobre LinkedIn | Dependência de plataforma que não controlamos (risco Kaspr) e o cliente-alvo não vive no LinkedIn |
-| **A guerra de números de base** | Saleshandy declara 852M contatos, RocketReach 700M. Essa competição está perdida antes de começar e distrai do único eixo em que dá para vencer |
-| Expandir o mapa de 1.187 para 2.000 pares | Mais pares abstratos não resolvem nada. O problema não é cobertura do mapa; é ausência de evidência por trás de cada par |
+### → `prospectx-growth` e `especialista-seo`
 
-**FAZER DIFERENTE**
+**Por onde o concorrente capta:** conteúdo comparativo de fundo de funil em escala industrial ("X pricing 2026", "melhores alternativas a Y") — os resultados de busca desta pesquisa foram dominados por blogs de concorrentes atacando concorrentes; extensão de Chrome como porta de entrada (Lusha, Kaspr, Wiza); plano gratuito como canal de aquisição (Apollo); diretórios de software (G2, Capterra, SourceForge, Slashdot).
 
-1. **Rebaixar o mapa de 1.187 pares de proposta de valor para onboarding.** Ele é bom no que Ocean.io é ruim: partida a frio. Ocean.io precisa que você já tenha clientes bons para achar parecidos — o prestador que quer entrar num segmento novo não tem. **O mapa vira a primeira pergunta que preenche o filtro inicial ("qual é o seu ramo?"), não a manchete.** A manchete é o sinal de compra.
+**Termos já dominados — não brigar:** "b2b lead generation tools", "google maps scraper", "email finder", "sales prospecting tools", "[concorrente] pricing", "[concorrente] alternatives", "lead generation software".
 
-2. **Inverter a ordem da promessa.** Hoje: "descubra quem contrata o seu serviço" → o cliente já sabe. Proposta: "estas 40 empresas de [cidade] provavelmente vão precisar de [serviço] nas próximas semanas — aqui está o porquê de cada uma". **O "porquê" é o produto.** Categoria é grátis; evidência é o que se cobra.
+**Território livre, e é o nosso:** a família "**who hires / who buys [serviço]**" e "**companies that hire [serviço] in [cidade]**", nos três idiomas. 531 termos × 3 idiomas × cidades é um mapa de conteúdo programático que nenhum concorrente pode montar sem antes construir a curadoria dos 1.187 pares. É o único ativo da ProspectX que não se copia numa tarde.
 
-3. **Escolher um país e um ofício para o primeiro lançamento, não três países e 531 segmentos.** Targetley escolheu um ofício (web design) e um sinal (sem site) e isso basta para existir. Com zero assinantes, 531 segmentos × 3 idiomas × 3 países é dispersão que impede qualquer aprendizado. **Sugestão: Reino Unido, porque o Companies House entrega o dado de graça, com licença comercial e em massa — o único dos três mercados onde a base pode ficar boa sem gastar.**
-
-4. **Tratar "a busca fica aberta antes do cadastro" como critério de pronto, não como tática.** Um produto de dados que esconde a busca está declarando que não confia no resultado. Hoje a ProspectX não pode abrir. **O dia em que puder é o dia em que está pronta para vender** — use isso como o marco de saída da fase de correção de dados, e não lance antes.
-
----
-
-*Fim do relatório. Todo preço marcado como verificado foi lido na página oficial do fornecedor em 15/08/2026. Preços mudam; revalidar antes de qualquer decisão tomada após 30 dias desta data.*
+**Ressalva de sequência:** página programática que devolve resultado vazio é pior que página inexistente — o Google mede isso e o visitante nunca volta. Só publicar a malha depois do Movimento 1.

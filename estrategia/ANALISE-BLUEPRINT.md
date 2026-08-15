@@ -108,6 +108,23 @@ A diferença não é estilística. Apollo, ZoomInfo, Hunter e Lusha respondem *"
 
 **Recomendação de posicionamento:** não somos uma base de dados menor que a do Apollo. Somos a camada que responde uma pergunta que o Apollo não responde. A base precisa ser boa o suficiente para não desmentir a promessa — não precisa ser a maior.
 
+### ⚠️ Correção posterior — o mapa não é fosso
+
+*Adicionado depois do teardown competitivo (`ANALISE-CONCORRENCIA.md`).*
+
+Escrevi acima que o mapa "quem contrata quem" era o ativo defensável. **Isso está errado, e a correção muda o que construir.**
+
+O argumento que derruba: qualquer modelo de linguagem responde "quem contrata manutenção industrial" de graça, em 2026. O conhecimento não é escasso. A prova de que o mercado já sabe disso: a UpLead vende busca por código setorial e **publica blog ensinando o cliente a descobrir o próprio código** — o problema foi resolvido como conteúdo, não como produto. O quadrante está vazio porque o valor não se defende, não porque ninguém pensou.
+
+O que o mapa continua sendo, e que não é pouco:
+
+- **Camada de conversão.** O usuário não precisa saber o que procurar. Isso reduz o atrito do primeiro uso, que é onde a maioria dos concorrentes perde o visitante.
+- **Ativo de SEO.** 531 termos × 3 idiomas × cidades é uma malha de páginas que ninguém replica numa tarde. Com a ressalva de que página programática com resultado vazio é pior que página inexistente.
+
+O que ele **não** é: barreira de entrada. Um concorrente com orçamento reproduz o mapa numa semana com um LLM.
+
+**Consequência prática:** o fosso tem que ser a base de dados ou a profundidade num vertical. As duas exigem o mesmo pré-requisito — resolver a fonte. A ordem da seção 7 não muda; o que muda é parar de tratar o mapa como se ele sozinho justificasse o preço.
+
 ---
 
 ## 5. Correções que os documentos revelaram no nosso produto
@@ -137,7 +154,7 @@ A ProspectX já tem a aplicação construída, no ar, com autenticação, pagame
 ## 7. Recomendação final, em ordem
 
 1. **Resolver a fonte de dados.** Nada mais importa até isso fechar. Em andamento.
-2. **Tornar o "quem contrata quem" visível e explicado.** É o ativo, e hoje ele está escondido dentro do resultado da busca.
+2. **Tornar o "quem contrata quem" visível e explicado.** Não porque seja fosso — não é —, mas porque é o que reduz o atrito do primeiro uso e o que sustenta a malha de SEO.
 3. **Adicionar confiança e data de verificação por registro.** Honestidade sobre o dado é vantagem competitiva quando o dado é imperfeito — e o dos concorrentes também é.
 4. **Trocar "10.000 leads" por "as 25 contas de hoje, com justificativa".** Melhor ideia de interface dos três documentos, e barata de implementar.
 5. **Só então revisar preço**, criando o degrau de entrada em torno de US$ 29–39.
