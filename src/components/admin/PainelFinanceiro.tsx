@@ -32,6 +32,8 @@ import {
   PREMISSAS_PADRAO,
   MIX_PADRAO_PCT,
   DEGRAUS_CENARIO,
+  aliquotaSimples,
+  compararAnexos,
   type Premissas,
 } from "@/lib/projecao"
 import {
@@ -274,6 +276,17 @@ export function PainelFinanceiro() {
                 { rotulo: "Impostos", valor: -cenario.totalImpostos, sinal: "−" },
                 { rotulo: "Custo de API (créditos)", valor: -cenario.totalCustoVariavel, sinal: "−" },
                 { rotulo: "Custo fixo mensal", valor: -cenario.custoFixoMensal, sinal: "−" },
+                // No Anexo V a linha some: não existe pró-labore obrigatório,
+                // e mostrá-la zerada sugeriria uma despesa que não há.
+                ...(cenario.proLabore
+                  ? [
+                      {
+                        rotulo: "Pró-labore (fator r)",
+                        valor: -cenario.proLabore.saidaDeCaixa,
+                        sinal: "−",
+                      },
+                    ]
+                  : []),
               ].map((linha) => (
                 <div
                   key={linha.rotulo}
@@ -300,6 +313,20 @@ export function PainelFinanceiro() {
                 </span>
               </div>
             </div>
+
+            {cenario.proLabore && (
+              <p className="mt-3 text-[11px] leading-relaxed text-muted-foreground">
+                O pró-labore aparece como despesa porque, sem ele, o fator
+                &quot;r&quot; não fecha 28% e a empresa cai no Anexo V — perdendo
+                os 9,5 pontos de imposto que motivaram o Anexo III. Mas ele não é
+                dinheiro perdido: é o dono se pagando. O que sai de fato é o INSS
+                de {formatarBRL(cenario.proLabore.inss)}.
+                {cenario.proLabore.limitadoPeloPiso &&
+                  " Neste volume o valor está no piso do salário mínimo, não no percentual — é a faixa em que o Anexo III ainda não compensa."}
+                {cenario.proLabore.atingeIRRF &&
+                  " Acima de R$ 5.000 mensais entra IRRF na fonte, que reduz o líquido do sócio sem alterar o custo da empresa."}
+              </p>
+            )}
           </CardContent>
         </Card>
       </section>
@@ -531,17 +558,67 @@ export function PainelFinanceiro() {
               </p>
             </div>
 
-            <div className="space-y-1.5">
-              <Label className="text-[12px]">Imposto sobre faturamento (%)</Label>
-              <Input
-                type="number"
-                step="0.1"
-                value={premissas.impostoPct}
-                onChange={(e) => atualizarPremissas({ impostoPct: Number(e.target.value) || 0 })}
-              />
-              <p className="text-[11px] text-muted-foreground">
-                Simples Nacional, Anexo III, primeira faixa.
-              </p>
+            <div className="space-y-1.5 sm:col-span-2">
+              <Label className="text-[12px]">Anexo do Simples Nacional</Label>
+              <div className="flex gap-2">
+                {(["III", "V"] as const).map((anexo) => (
+                  <Button
+                    key={anexo}
+                    type="button"
+                    variant={premissas.anexoSimples === anexo ? "default" : "outline"}
+                    size="sm"
+                    className="flex-1"
+                    onClick={() => atualizarPremissas({ anexoSimples: anexo })}
+                  >
+                    Anexo {anexo}
+                  </Button>
+                ))}
+              </div>
+              <div className="rounded-md border border-border/60 bg-muted/30 p-2.5 text-[11px] leading-relaxed text-muted-foreground">
+                <p className="mb-1.5">
+                  A alíquota não é digitada — ela vem do anexo e de a receita ser
+                  ou não exportação de serviço:
+                </p>
+                <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 font-mono">
+                  <span>Brasil</span>
+                  <span className="text-right text-foreground">
+                    {aliquotaSimples(premissas.anexoSimples, "BR").toFixed(3)}%
+                  </span>
+                  <span>Exportação</span>
+                  <span className="text-right text-foreground">
+                    {aliquotaSimples(premissas.anexoSimples, "US").toFixed(3)}%
+                  </span>
+                </div>
+                <p className="mt-1.5">
+                  Anexo III exige fator &quot;r&quot; de 28% (folha ÷ receita). Sem
+                  pró-labore, o enquadramento é o V. Exportação de serviço não paga
+                  PIS, Cofins nem ISS dentro do DAS (LC 123, art. 18, §14).
+                </p>
+                {(() => {
+                  // O painel desconta o pró-labore inteiro do resultado, o
+                  // que é correto para a empresa e enganoso para a decisão:
+                  // esse dinheiro vai para o dono. Aqui compara-se só o que
+                  // some de fato — imposto mais INSS.
+                  const c = compararAnexos(cenario.receitaBrutaMensal)
+                  if (cenario.receitaBrutaMensal <= 0) return null
+                  return (
+                    <p className="mt-1.5 pt-1.5 border-t border-border/40">
+                      Neste volume, o que evapora em imposto + INSS:{" "}
+                      <strong className="text-foreground">
+                        Anexo III {formatarBRL(c.custoAnexoIII)}
+                      </strong>{" "}
+                      contra{" "}
+                      <strong className="text-foreground">
+                        Anexo V {formatarBRL(c.custoAnexoV)}
+                      </strong>
+                      .{" "}
+                      {c.vantagemDoIII > 0
+                        ? `O Anexo III economiza ${formatarBRL(c.vantagemDoIII)} por mês.`
+                        : `O Anexo V ainda é melhor — o III vira a partir de ${formatarBRL(c.receitaDeVirada)} de receita mensal.`}
+                    </p>
+                  )
+                })()}
+              </div>
             </div>
 
             {(["mercadopago", "stripe", "paypal"] as const).map((gateway) => (
