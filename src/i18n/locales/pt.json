@@ -156,7 +156,13 @@
     "trialIniciado": "Teste grátis de {{dias}} dias iniciado!",
     "precisaConta": "Crie sua conta para começar o teste grátis.",
     "criarContaParaAssinar": "Criar conta e começar o teste",
-    "degrau": "{{percentual}}% mais barato que o {{anterior}} — economia de {{valor}} no ciclo"
+    "degrau": "{{percentual}}% mais barato que o {{anterior}} — economia de {{valor}} no ciclo",
+    "ciclo": {
+      "mensal": "Mensal",
+      "trimestral": "Trimestral",
+      "semestral": "Semestral",
+      "anual": "Anual"
+    }
   },
   "leads": {
     "titulo": "Alvos encontrados",
@@ -599,5 +605,105 @@
     "dicaEditar": "Edite à vontade antes de enviar — quem conhece o próprio serviço é você.",
     "semPerfil": "Complete seu perfil para o assistente saber o que você faz.",
     "fechar": "Fechar"
+  },
+  "secoes": {
+    "pilares": {
+      "sobrescrito": "O que a ferramenta faz",
+      "titulo": "Da lista de empresas a conversa que vira contrato.",
+      "subtitulo": "Tres movimentos, um lugar so. Voce nao sai daqui para planilha nenhuma.",
+      "descobrir": {
+        "titulo": "Descobrir",
+        "texto": "Informe o seu ramo e a cidade. O sistema devolve as empresas que contratam o que voce faz, nao o consumidor final."
+      },
+      "abordar": {
+        "titulo": "Abordar",
+        "texto": "Um assistente escreve a primeira mensagem a partir do ramo do cliente, e o disparo em lote respeita a regra de cada pais."
+      },
+      "acompanhar": {
+        "titulo": "Acompanhar",
+        "texto": "Cada empresa abordada entra num funil com etapa, data e valor fechado. Nada se perde entre uma busca e outra."
+      }
+    },
+    "passos": {
+      "sobrescrito": "Como funciona",
+      "titulo": "Quatro passos. O primeiro leva menos de um minuto.",
+      "p1": {
+        "titulo": "Diga o que voce vende",
+        "texto": "O seu ramo, escrito do seu jeito. O sistema reconhece variacoes e sinonimos em portugues, ingles e espanhol."
+      },
+      "p2": {
+        "titulo": "Veja quem contrata isso",
+        "texto": "Em vez de procurar empresas parecidas com a sua, voce recebe os ramos que compram o seu servico e as empresas de cada um."
+      },
+      "p3": {
+        "titulo": "Escolha e aborde",
+        "texto": "Filtre por quem tem contato disponivel, gere a mensagem e envie. O rodape legal e o descadastro entram sozinhos."
+      },
+      "p4": {
+        "titulo": "Acompanhe ate fechar",
+        "texto": "Mova cada oportunidade pelo funil e registre o valor. E o que mostra quanto a ferramenta devolveu."
+      }
+    },
+    "precos": {
+      "sobrescrito": "Precos",
+      "titulo": "Preco de tabela, sem consulta comercial.",
+      "subtitulo": "Ciclos mais longos custam menos por mes e rendem mais creditos. Escolha o pais para ver na sua moeda.",
+      "ciclo": "Ciclo de cobranca",
+      "pais": "Pais",
+      "porMes": "por mes",
+      "cobradoDeUmaVez": "Cobrado {{total}} de uma vez, a cada {{meses}} meses",
+      "economia": "{{pct}}% mais barato por mes que o ciclo anterior",
+      "item": {
+        "creditos": "{{creditos}} creditos por mes, acumulativos",
+        "segmentos": "{{total}} ramos mapeados, em tres idiomas",
+        "funil": "Funil de acompanhamento com etapas e valor fechado",
+        "abordagem": "Assistente de primeira abordagem por ramo",
+        "idiomas": "Busca em portugues, ingles e espanhol"
+      },
+      "cta": "Ver todos os planos",
+      "transparencia": {
+        "titulo": "A conta, antes de voce pagar",
+        "credito": {
+          "p": "O que gasta credito?",
+          "r": "So a busca que devolve empresas. Ver resultado salvo, abrir o funil e escrever mensagem nao gastam nada."
+        },
+        "acumulo": {
+          "p": "Credito nao usado vira o que?",
+          "r": "Acumula para o mes seguinte enquanto a assinatura estiver ativa. Nao vira dinheiro nem e reembolsavel."
+        },
+        "cancelamento": {
+          "p": "Como cancelo?",
+          "r": "Pelo painel, sem falar com ninguem. O acesso continua ate o fim do ciclo ja pago."
+        },
+        "moeda": {
+          "p": "Em que moeda eu pago?",
+          "r": "Em {{moeda}}, a moeda do pais selecionado. O valor exibido e o que sai no cartao."
+        }
+      }
+    },
+    "faq": {
+      "sobrescrito": "Perguntas",
+      "titulo": "O que costumam perguntar antes de assinar.",
+      "origem": {
+        "p": "De onde vem os dados das empresas?",
+        "r": "De registros publicos oficiais de empresas, com a origem declarada em cada registro. No Reino Unido usamos o Companies House, sob licenca que permite uso comercial. Nenhum dado vem de fonte que proiba armazenamento, e nao raspamos rede social."
+      },
+      "cobertura": {
+        "p": "Toda empresa vem com contato?",
+        "r": "Nao, e seria desonesto dizer que sim. O registro oficial traz nome, endereco e ramo de praticamente todas as empresas; contato so aparece quando a propria empresa publica no site dela. Por isso o credito e cobrado pelo contato entregue, e nao pela busca: voce ve o mercado inteiro e paga so pelo que veio verificado."
+      },
+      "creditos": {
+        "p": "Por que cobrar por credito e nao por assento?",
+        "r": "Porque assento cobra por quantidade de pessoas, e quem presta servico costuma trabalhar sozinho. Credito cobra pelo uso, entao quem usa menos paga menos."
+      },
+      "email": {
+        "p": "Posso disparar e-mail para qualquer pais?",
+        "r": "Nao. Cada pais tem uma regra propria e o sistema recusa o envio onde a lei exige consentimento previo. A recusa aparece na tela, com o motivo e a norma."
+      },
+      "cancelar": {
+        "p": "Preciso falar com vendas para assinar ou cancelar?",
+        "r": "Nao. Assinatura e cancelamento sao pelo painel. Nao ha contrato de fidelidade nem ligacao de retencao."
+      }
+    }
   }
 }

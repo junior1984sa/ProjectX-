@@ -1,0 +1,1895 @@
+[
+ {
+  "nome": "ALDEYAR ALMASREYA COMPANY LTD",
+  "numero": "16749377",
+  "segmento": "atacado",
+  "sic": [
+   "46499",
+   "46760",
+   "46900",
+   "47190"
+  ],
+  "l1": "UNIT 7 INITIAL BUSINESS CENTRE",
+  "l2": "WILSON BUSINESS PARK",
+  "cidade": "MANCHESTER",
+  "cep": "M40 8WN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "29/09/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1054
+ },
+ {
+  "nome": "ATR COURIERS LIMITED",
+  "numero": "16627897",
+  "segmento": "transporte",
+  "sic": [
+   "49410",
+   "53201",
+   "53202",
+   "78200"
+  ],
+  "l1": "4 KINGS HALL DRIVE",
+  "l2": "",
+  "cidade": "MANCHESTER",
+  "cep": "M18 7FN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "04/08/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "19/02/2026",
+  "coabitantes_endereco": 2
+ },
+ {
+  "nome": "BALMIRA PVT LTD",
+  "numero": "16806314",
+  "segmento": "atacado",
+  "sic": [
+   "46499",
+   "46760",
+   "46900",
+   "47190"
+  ],
+  "l1": "UNIT 7 INITIAL BUSINESS CENTRE",
+  "l2": "WILSON BUSINESS PARK",
+  "cidade": "MANCHESTER",
+  "cep": "M40 8WN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "23/10/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1054
+ },
+ {
+  "nome": "BALMORAL BRICKLAYING LIMITED",
+  "numero": "08843504",
+  "segmento": "construcao",
+  "sic": [
+   "43999"
+  ],
+  "l1": "30 HAMILTON ROAD",
+  "l2": "ASHTON-IN-MAKERFIELD",
+  "cidade": "WIGAN",
+  "cep": "WN4 0SU",
+  "categoria": "Private Limited Company",
+  "incorporacao": "14/01/2014",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "31/03/2025",
+  "conf_ult": "11/10/2025",
+  "coabitantes_endereco": 34
+ },
+ {
+  "nome": "ATLAS INDUSTRIAL GROUP LIMITED",
+  "numero": "16952574",
+  "segmento": "atacado",
+  "sic": [
+   "46140",
+   "46610",
+   "46690",
+   "46900"
+  ],
+  "l1": "PICCADILLY BUSINESS CENTRE UNIT C ALDOW ENTERPRISE PARK",
+  "l2": "BLACKETT STREET",
+  "cidade": "MANCHESTER",
+  "cep": "M12 6AE",
+  "categoria": "Private Limited Company",
+  "incorporacao": "09/01/2026",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 183
+ },
+ {
+  "nome": "R A CARTER EXCAVATIONS & GROUNDWORK LTD",
+  "numero": "12555281",
+  "segmento": "construcao",
+  "sic": [
+   "43999"
+  ],
+  "l1": "10 BANKSIDE CLOSE",
+  "l2": "",
+  "cidade": "BACUP",
+  "cep": "OL13 8HZ",
+  "categoria": "Private Limited Company",
+  "incorporacao": "14/04/2020",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "30/04/2025",
+  "conf_ult": "13/04/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "RAT LAB LTD",
+  "numero": "16242646",
+  "segmento": "construcao",
+  "sic": [
+   "43999"
+  ],
+  "l1": "APARTMENT N S 305, ROYAL MILLS, 2",
+  "l2": "COTTON STREET",
+  "cidade": "MANCHESTER",
+  "cep": "M4 5BD",
+  "categoria": "Private Limited Company",
+  "incorporacao": "10/02/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "NELI ATHD LIMITED",
+  "numero": "15351061",
+  "segmento": "transporte",
+  "sic": [
+   "52290",
+   "53202"
+  ],
+  "l1": "58 A CHORLEY ROAD",
+  "l2": "SWINTON",
+  "cidade": "MANCHESTER",
+  "cep": "M27 5AD",
+  "categoria": "Private Limited Company",
+  "incorporacao": "14/12/2023",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "31/12/2025",
+  "conf_ult": "13/12/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "BRADLEYS CONSTRUCTION LTD",
+  "numero": "07293726",
+  "segmento": "construcao",
+  "sic": [
+   "28302",
+   "41201",
+   "46140"
+  ],
+  "l1": "THE NEW OFFICE PARK HOUSE FARM APPLEY LANE NORTH",
+  "l2": "APPLEY BRIDGE",
+  "cidade": "WIGAN",
+  "cep": "WN6 9DX",
+  "categoria": "Private Limited Company",
+  "incorporacao": "23/06/2010",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "31/05/2025",
+  "conf_ult": "23/06/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "PROWOOD LIMITED",
+  "numero": "03271673",
+  "segmento": "atacado",
+  "sic": [
+   "16100",
+   "46730"
+  ],
+  "l1": "C/O GE ROBINSON & CO THURLOW SAWMILLS",
+  "l2": "MONTFORD STREET",
+  "cidade": "SALFORD",
+  "cep": "M50 2XD",
+  "categoria": "Private Limited Company",
+  "incorporacao": "31/10/1996",
+  "contas_cat": "AUDIT EXEMPTION SUBSIDIARY",
+  "contas_ult": "31/12/2024",
+  "conf_ult": "31/10/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "NEXABUILD NW LTD",
+  "numero": "16992102",
+  "segmento": "construcao",
+  "sic": [
+   "43999"
+  ],
+  "l1": "C/O NRA ACCOUNTANCY",
+  "l2": "ARROW MILL, QUEENSWAY",
+  "cidade": "ROCHDALE",
+  "cep": "OL11 2YW",
+  "categoria": "Private Limited Company",
+  "incorporacao": "27/01/2026",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 6
+ },
+ {
+  "nome": "B L M GALLAGHER LTD",
+  "numero": "17195442",
+  "segmento": "transporte",
+  "sic": [
+   "52290"
+  ],
+  "l1": "44 NEWARK ROAD",
+  "l2": "",
+  "cidade": "STOCKPORT",
+  "cep": "SK5 7NF",
+  "categoria": "Private Limited Company",
+  "incorporacao": "01/05/2026",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "PKRUK ONLINE LTD",
+  "numero": "09850126",
+  "segmento": "atacado",
+  "sic": [
+   "46760",
+   "47290",
+   "47910"
+  ],
+  "l1": "FERNHILLS BUSINESS CENTRE FOERSTER CHAMBERS",
+  "l2": "TODD STREET",
+  "cidade": "BURY",
+  "cep": "BL9 5BJ",
+  "categoria": "Private Limited Company",
+  "incorporacao": "30/10/2015",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "31/10/2025",
+  "conf_ult": "29/10/2025",
+  "coabitantes_endereco": 48
+ },
+ {
+  "nome": "AQUILO REFRIGERATION LIMITED",
+  "numero": "11999914",
+  "segmento": "atacado",
+  "sic": [
+   "46690"
+  ],
+  "l1": "74 ST. GEORGES ROAD",
+  "l2": "",
+  "cidade": "BOLTON",
+  "cep": "BL1 2DD",
+  "categoria": "Private Limited Company",
+  "incorporacao": "16/05/2019",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "30/06/2025",
+  "conf_ult": "25/05/2026",
+  "coabitantes_endereco": 21
+ },
+ {
+  "nome": "RAP ROLLERS UK LTD",
+  "numero": "16062130",
+  "segmento": "atacado",
+  "sic": [
+   "46690"
+  ],
+  "l1": "LOGIC 3 CHARLES BABBAGE AVENUE",
+  "l2": "KINGSWAY BUSINESS PARK",
+  "cidade": "ROCHDALE",
+  "cep": "OL16 4NW",
+  "categoria": "Private Limited Company",
+  "incorporacao": "05/11/2024",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "04/11/2025",
+  "coabitantes_endereco": 2
+ },
+ {
+  "nome": "P.D.S. (SHEET METAL) LIMITED",
+  "numero": "01236941",
+  "segmento": "manufatura",
+  "sic": [
+   "25990"
+  ],
+  "l1": "13 HIGHER BARN",
+  "l2": "HORWICH",
+  "cidade": "BOLTON",
+  "cep": "BL6 6RD",
+  "categoria": "Private Limited Company",
+  "incorporacao": "10/12/1975",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "31/12/2025",
+  "conf_ult": "08/06/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "OTAAWA LIMITED",
+  "numero": "13473772",
+  "segmento": "transporte",
+  "sic": [
+   "49410"
+  ],
+  "l1": "105 UPPER LLOYD STREET",
+  "l2": "",
+  "cidade": "MANCHESTER",
+  "cep": "M14 4HS",
+  "categoria": "Private Limited Company",
+  "incorporacao": "23/06/2021",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "30/06/2025",
+  "conf_ult": "21/03/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "BREARMAN LTD",
+  "numero": "13679563",
+  "segmento": "construcao",
+  "sic": [
+   "41100",
+   "41201",
+   "68209"
+  ],
+  "l1": "64 DRAKE STREET",
+  "l2": "",
+  "cidade": "ROCHDALE",
+  "cep": "OL16 1PA",
+  "categoria": "Private Limited Company",
+  "incorporacao": "14/10/2021",
+  "contas_cat": "DORMANT",
+  "contas_ult": "31/10/2024",
+  "conf_ult": "28/04/2026",
+  "coabitantes_endereco": 21
+ },
+ {
+  "nome": "ABDULLAH HASAN AL-SAGHEER TRADING LIMITED",
+  "numero": "16913092",
+  "segmento": "atacado",
+  "sic": [
+   "46499",
+   "46760",
+   "46900",
+   "47190"
+  ],
+  "l1": "UNIT 7 INITIAL BUSINESS CENTRE",
+  "l2": "WILSON BUSINESS PARK",
+  "cidade": "MANCHESTER",
+  "cep": "M40 8WN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "16/12/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1054
+ },
+ {
+  "nome": "P P A K LIMITED",
+  "numero": "09152664",
+  "segmento": "construcao",
+  "sic": [
+   "41202"
+  ],
+  "l1": "1 TRAFFORD ROAD",
+  "l2": "ECCLES",
+  "cidade": "MANCHESTER",
+  "cep": "M30 0JX",
+  "categoria": "Private Limited Company",
+  "incorporacao": "29/07/2014",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "31/07/2025",
+  "conf_ult": "29/07/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "NM TRANS LTD",
+  "numero": "10295518",
+  "segmento": "transporte",
+  "sic": [
+   "49410"
+  ],
+  "l1": "60 ROLAG CRESCENT",
+  "l2": "",
+  "cidade": "SWINTON",
+  "cep": "M27 5BH",
+  "categoria": "Private Limited Company",
+  "incorporacao": "26/07/2016",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "31/07/2025",
+  "conf_ult": "26/07/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "A. & C. SHEET METAL LIMITED",
+  "numero": "03401609",
+  "segmento": "manufatura",
+  "sic": [
+   "25110",
+   "25990"
+  ],
+  "l1": "BARTON MOSS ROAD",
+  "l2": "ECCLES",
+  "cidade": "MANCHESTER",
+  "cep": "M30 7RL",
+  "categoria": "Private Limited Company",
+  "incorporacao": "10/07/1997",
+  "contas_cat": "UNAUDITED ABRIDGED",
+  "contas_ult": "31/07/2025",
+  "conf_ult": "31/05/2026",
+  "coabitantes_endereco": 3
+ },
+ {
+  "nome": "A&O TRANSPORTERS LTD",
+  "numero": "12739724",
+  "segmento": "transporte",
+  "sic": [
+   "49410",
+   "81299"
+  ],
+  "l1": "38 GREENWAY ROAD",
+  "l2": "HEALD GREEN CHEADLE",
+  "cidade": "CHESHIRE",
+  "cep": "SK8 3NU",
+  "categoria": "Private Limited Company",
+  "incorporacao": "14/07/2020",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "31/07/2025",
+  "conf_ult": "13/07/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "AVEZO LIMITED",
+  "numero": "14928633",
+  "segmento": "transporte",
+  "sic": [
+   "49320",
+   "52290",
+   "77110"
+  ],
+  "l1": "29 VARDON DRIVE",
+  "l2": "",
+  "cidade": "WIGAN",
+  "cep": "WN6 0YY",
+  "categoria": "Private Limited Company",
+  "incorporacao": "12/06/2023",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "30/06/2025",
+  "conf_ult": "11/06/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "P & K SHUTTER SERVICES LIMITED",
+  "numero": "03870924",
+  "segmento": "manufatura",
+  "sic": [
+   "25110"
+  ],
+  "l1": "UNIT 4 WESTHOUGHTON INDUSTRIAL ESTATE JAMES STREET",
+  "l2": "WESTHOUGHTON",
+  "cidade": "BOLTON",
+  "cep": "BL5 3QR",
+  "categoria": "Private Limited Company",
+  "incorporacao": "03/11/1999",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "30/11/2025",
+  "conf_ult": "03/11/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "AQL INTERNATIONAL LTD",
+  "numero": "08599466",
+  "segmento": "atacado",
+  "sic": [
+   "46760"
+  ],
+  "l1": "73 ST HELENS ROAD",
+  "l2": "",
+  "cidade": "BOLTON",
+  "cep": "BL3 3PR",
+  "categoria": "Private Limited Company",
+  "incorporacao": "05/07/2013",
+  "contas_cat": "FULL",
+  "contas_ult": "31/12/2024",
+  "conf_ult": "06/09/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "AL AYKOONA AL THAHABIYA FOR GENERAL TRADING LTD",
+  "numero": "16839656",
+  "segmento": "atacado",
+  "sic": [
+   "46499",
+   "46760",
+   "46900",
+   "47190"
+  ],
+  "l1": "UNIT 7 INITIAL BUSINESS CENTRE",
+  "l2": "WILSON BUSINESS PARK",
+  "cidade": "MANCHESTER",
+  "cep": "M40 8WN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "07/11/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1054
+ },
+ {
+  "nome": "PERFORMANCE MATERIALS LIMITED",
+  "numero": "09174053",
+  "segmento": "manufatura",
+  "sic": [
+   "25110"
+  ],
+  "l1": "XEINADIN MANCHESTER",
+  "l2": "100 BARBIROLLI SQUARE",
+  "cidade": "MANCHESTER",
+  "cep": "M2 3BD",
+  "categoria": "Private Limited Company",
+  "incorporacao": "13/08/2014",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "30/06/2025",
+  "conf_ult": "13/08/2025",
+  "coabitantes_endereco": 30
+ },
+ {
+  "nome": "PENDLE HARDWOODS LIMITED",
+  "numero": "00364656",
+  "segmento": "atacado",
+  "sic": [
+   "46730"
+  ],
+  "l1": "C/O MENZIES LLP ONE EXPRESS",
+  "l2": "1 GEORGE LEIGH STREET",
+  "cidade": "MANCHESTER",
+  "cep": "M4 5DL",
+  "categoria": "Private Limited Company",
+  "incorporacao": "02/01/1941",
+  "contas_cat": "DORMANT",
+  "contas_ult": "31/03/2025",
+  "conf_ult": "02/08/2025",
+  "coabitantes_endereco": 68
+ },
+ {
+  "nome": "ALRIQIE LTD",
+  "numero": "16288526",
+  "segmento": "transporte",
+  "sic": [
+   "52290",
+   "53100",
+   "62090",
+   "82990"
+  ],
+  "l1": "FLAT 4 FLAT 4 BEYERS HOUSE",
+  "l2": "132 WENLOCK WAY",
+  "cidade": "MANCHESTER",
+  "cep": "M12 5UE",
+  "categoria": "Private Limited Company",
+  "incorporacao": "03/03/2025",
+  "contas_cat": "DORMANT",
+  "contas_ult": "31/03/2026",
+  "conf_ult": "21/04/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "NABRAS AL-TUMOOH COMPANY LTD",
+  "numero": "16836741",
+  "segmento": "atacado",
+  "sic": [
+   "46499",
+   "46760",
+   "46900",
+   "47190"
+  ],
+  "l1": "UNIT 7 INITIAL BUSINESS CENTRE",
+  "l2": "WILSON BUSINESS PARK",
+  "cidade": "MANCHESTER",
+  "cep": "M40 8WN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "06/11/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1054
+ },
+ {
+  "nome": "ORPHEUS MANUFACTURING LIMITED",
+  "numero": "14768509",
+  "segmento": "manufatura",
+  "sic": [
+   "25620"
+  ],
+  "l1": "UNIT 2 CLIFTON INDUSTRIAL ESTATE",
+  "l2": "RAKE LANE",
+  "cidade": "CLIFTON",
+  "cep": "M27 8LT",
+  "categoria": "Private Limited Company",
+  "incorporacao": "30/03/2023",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "31/03/2025",
+  "conf_ult": "29/03/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "AFAQ ALGHARBYAH INTERNATIONAL FOR TRADING CO LTD",
+  "numero": "16758404",
+  "segmento": "atacado",
+  "sic": [
+   "46499",
+   "46760",
+   "46900",
+   "47190"
+  ],
+  "l1": "UNIT 7 INITIAL BUSINESS CENTRE",
+  "l2": "WILSON BUSINESS PARK",
+  "cidade": "MANCHESTER",
+  "cep": "M40 8WN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "02/10/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "13/10/2025",
+  "coabitantes_endereco": 1054
+ },
+ {
+  "nome": "AUTO MARINE CABLES LIMITED",
+  "numero": "00804767",
+  "segmento": "atacado",
+  "sic": [
+   "27320",
+   "32990",
+   "46760"
+  ],
+  "l1": "UNIT 32 DEVONSHIRE ROAD",
+  "l2": "OAKHILL TRADING ESTATE",
+  "cidade": "WORSLEY",
+  "cep": "M28 3PT",
+  "categoria": "Private Limited Company",
+  "incorporacao": "11/05/1964",
+  "contas_cat": "MEDIUM",
+  "contas_ult": "30/09/2025",
+  "conf_ult": "15/04/2026",
+  "coabitantes_endereco": 2
+ },
+ {
+  "nome": "PHOENIX HOME PROJECTS LTD",
+  "numero": "14935620",
+  "segmento": "construcao",
+  "sic": [
+   "41202"
+  ],
+  "l1": "51 CARDWELL ROAD",
+  "l2": "ECCLES",
+  "cidade": "MANCHESTER",
+  "cep": "M30 7EF",
+  "categoria": "Private Limited Company",
+  "incorporacao": "14/06/2023",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "30/06/2025",
+  "conf_ult": "13/06/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "PACKAGED HEAT LIMITED",
+  "numero": "11475951",
+  "segmento": "manufatura",
+  "sic": [
+   "25990"
+  ],
+  "l1": "OFFICE G26, CT3 BUILDING WIGAN INVESTMENT CENTRE",
+  "l2": "WATERSIDE DRIVE",
+  "cidade": "WIGAN",
+  "cep": "WN3 5BA",
+  "categoria": "Private Limited Company",
+  "incorporacao": "20/07/2018",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "30/09/2025",
+  "conf_ult": "19/07/2025",
+  "coabitantes_endereco": 20
+ },
+ {
+  "nome": "APT DOOR GROUP LIMITED",
+  "numero": "17092424",
+  "segmento": "manufatura",
+  "sic": [
+   "25110"
+  ],
+  "l1": "ALSTON HOUSE ALSTON STREET",
+  "l2": "UNIT 1 WOOLFOLD INDUSTRIAL ESTATE",
+  "cidade": "BURY",
+  "cep": "BL8 1SF",
+  "categoria": "Private Limited Company",
+  "incorporacao": "16/03/2026",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 2
+ },
+ {
+  "nome": "MPT GROUP MATTRESS MACHINERY LTD",
+  "numero": "14665645",
+  "segmento": "manufatura",
+  "sic": [
+   "25110"
+  ],
+  "l1": "UNIT 5",
+  "l2": "THE SIDINGS",
+  "cidade": "BACUP",
+  "cep": "OL13 9RW",
+  "categoria": "Private Limited Company",
+  "incorporacao": "15/02/2023",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "31/03/2025",
+  "conf_ult": "18/05/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "ABBOTT MELLOR LIMITED",
+  "numero": "12094826",
+  "segmento": "manufatura",
+  "sic": [
+   "25110",
+   "25120",
+   "43290",
+   "82990"
+  ],
+  "l1": "65 GREENGATE STREET",
+  "l2": "",
+  "cidade": "OLDHAM",
+  "cep": "OL4 1DH",
+  "categoria": "Private Limited Company",
+  "incorporacao": "10/07/2019",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "31/07/2025",
+  "conf_ult": "02/04/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "ANCOATS STORAGE LTD",
+  "numero": "14249780",
+  "segmento": "transporte",
+  "sic": [
+   "52103"
+  ],
+  "l1": "15 FIRS AVENUE",
+  "l2": "",
+  "cidade": "ASHTON-UNDER-LYNE",
+  "cep": "OL6 8PL",
+  "categoria": "Private Limited Company",
+  "incorporacao": "21/07/2022",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "31/07/2025",
+  "conf_ult": "25/03/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "ACCUMAC LIMITED",
+  "numero": "07864189",
+  "segmento": "atacado",
+  "sic": [
+   "46690"
+  ],
+  "l1": "PARK HOUSE",
+  "l2": "200 DRAKE STREET",
+  "cidade": "ROCHDALE",
+  "cep": "OL16 1PJ",
+  "categoria": "Private Limited Company",
+  "incorporacao": "29/11/2011",
+  "contas_cat": "UNAUDITED ABRIDGED",
+  "contas_ult": "31/12/2024",
+  "conf_ult": "29/11/2025",
+  "coabitantes_endereco": 35
+ },
+ {
+  "nome": "AZ INTEC LIMITED",
+  "numero": "05323768",
+  "segmento": "manufatura",
+  "sic": [
+   "25990"
+  ],
+  "l1": "OFFICE 16-17 CROWS NEST BUSINESS PARK",
+  "l2": "ASHTON ROAD",
+  "cidade": "BILLINGE",
+  "cep": "WN5 7XX",
+  "categoria": "Private Limited Company",
+  "incorporacao": "04/01/2005",
+  "contas_cat": "UNAUDITED ABRIDGED",
+  "contas_ult": "31/12/2025",
+  "conf_ult": "13/11/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "READ & TURNER (TRANSPORT) LIMITED",
+  "numero": "01077393",
+  "segmento": "transporte",
+  "sic": [
+   "46120",
+   "49410",
+   "68201"
+  ],
+  "l1": "READ & TURNER (TRANSPORT) LTD",
+  "l2": "HARPUR HILL INDUSTRIAL ESTATE",
+  "cidade": "BUXTON",
+  "cep": "SK17 9JL",
+  "categoria": "Private Limited Company",
+  "incorporacao": "19/10/1972",
+  "contas_cat": "UNAUDITED ABRIDGED",
+  "contas_ult": "31/03/2025",
+  "conf_ult": "22/08/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "PCW DEVELOPMENTS (BAMFORD) LIMITED",
+  "numero": "12662850",
+  "segmento": "construcao",
+  "sic": [
+   "41202"
+  ],
+  "l1": "STERLING HOUSE, 501 MIDDLETON ROAD",
+  "l2": "CHADDERTON",
+  "cidade": "OLDHAM",
+  "cep": "OL9 9LY",
+  "categoria": "Private Limited Company",
+  "incorporacao": "11/06/2020",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "30/06/2025",
+  "conf_ult": "09/06/2026",
+  "coabitantes_endereco": 4
+ },
+ {
+  "nome": "NERO FOR TRADING LTD",
+  "numero": "16953531",
+  "segmento": "atacado",
+  "sic": [
+   "46620",
+   "46690",
+   "46740",
+   "47520"
+  ],
+  "l1": "UNIT 7 INITIAL BUSINESS CENTRE",
+  "l2": "WILSON BUSINESS PARK",
+  "cidade": "MANCHESTER",
+  "cep": "M40 8WN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "09/01/2026",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1054
+ },
+ {
+  "nome": "P & D SHEET METAL FABRICATIONS LTD",
+  "numero": "06917358",
+  "segmento": "manufatura",
+  "sic": [
+   "25110"
+  ],
+  "l1": "UNIT 7 BROOKFIELD WORKS",
+  "l2": "CHRISTIE STREET",
+  "cidade": "STOCKPORT",
+  "cep": "SK1 4LR",
+  "categoria": "Private Limited Company",
+  "incorporacao": "28/05/2009",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "30/06/2025",
+  "conf_ult": "18/11/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "A & P RECOVERY LTD",
+  "numero": "16277496",
+  "segmento": "transporte",
+  "sic": [
+   "49390",
+   "49420",
+   "52103",
+   "52219"
+  ],
+  "l1": "APARTMENT 2 EGERTON HOUSE 3 ELMIRA WAY",
+  "l2": "SALFORD",
+  "cidade": "MANCHESTER",
+  "cep": "M5 3DH",
+  "categoria": "Private Limited Company",
+  "incorporacao": "26/02/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "25/02/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "ARCON OVERSEAS LIMITED",
+  "numero": "02874747",
+  "segmento": "atacado",
+  "sic": [
+   "46690"
+  ],
+  "l1": "2 HUDDERSFIELD ROAD",
+  "l2": "",
+  "cidade": "STALYBRIDGE",
+  "cep": "SK15 2QA",
+  "categoria": "Private Limited Company",
+  "incorporacao": "24/11/1993",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "31/12/2024",
+  "conf_ult": "24/09/2025",
+  "coabitantes_endereco": 39
+ },
+ {
+  "nome": "RADIAL LINE SHEETMETAL LIMITED",
+  "numero": "06905727",
+  "segmento": "manufatura",
+  "sic": [
+   "25910",
+   "25990"
+  ],
+  "l1": "62 HAWKHURST PARK",
+  "l2": "",
+  "cidade": "LEIGH",
+  "cep": "WN7 2TG",
+  "categoria": "Private Limited Company",
+  "incorporacao": "14/05/2009",
+  "contas_cat": "UNAUDITED ABRIDGED",
+  "contas_ult": "31/05/2025",
+  "conf_ult": "14/05/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "ACB WELDING LTD",
+  "numero": "14068774",
+  "segmento": "transporte",
+  "sic": [
+   "28290",
+   "49410"
+  ],
+  "l1": "76 MARKET STREET",
+  "l2": "FARNWORTH",
+  "cidade": "BOLTON",
+  "cep": "BL4 7NY",
+  "categoria": "Private Limited Company",
+  "incorporacao": "26/04/2022",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "30/04/2026",
+  "conf_ult": "23/04/2026",
+  "coabitantes_endereco": 101
+ },
+ {
+  "nome": "OAKENBANK JOINERY & BUILD LTD",
+  "numero": "15920986",
+  "segmento": "construcao",
+  "sic": [
+   "41202"
+  ],
+  "l1": "98 RUGBY DRIVE",
+  "l2": "",
+  "cidade": "MACCLESFIELD",
+  "cep": "SK10 2JF",
+  "categoria": "Private Limited Company",
+  "incorporacao": "28/08/2024",
+  "contas_cat": "DORMANT",
+  "contas_ult": "31/12/2025",
+  "conf_ult": "27/08/2025",
+  "coabitantes_endereco": 3
+ },
+ {
+  "nome": "PMA MULTISECTOR SERVICE LIMITED",
+  "numero": "17336413",
+  "segmento": "manufatura",
+  "sic": [
+   "01500",
+   "03110",
+   "25990",
+   "64306"
+  ],
+  "l1": "42 CHATHAM STREET",
+  "l2": "INCE",
+  "cidade": "WIGAN",
+  "cep": "WN2 2HG",
+  "categoria": "Private Limited Company",
+  "incorporacao": "13/07/2026",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "A. KENNY & SONS LIMITED",
+  "numero": "04776526",
+  "segmento": "manufatura",
+  "sic": [
+   "25620"
+  ],
+  "l1": "153 HENFOLD ROAD HENFOLD ROAD",
+  "l2": "TYLDESLEY",
+  "cidade": "MANCHESTER",
+  "cep": "M29 7FU",
+  "categoria": "Private Limited Company",
+  "incorporacao": "23/05/2003",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "30/06/2025",
+  "conf_ult": "22/05/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "APEX TRANSPORT AND LOGISTICS LIMITED",
+  "numero": "16082714",
+  "segmento": "transporte",
+  "sic": [
+   "49410"
+  ],
+  "l1": "16 DURHAM CLOSE",
+  "l2": "TYLDESLEY",
+  "cidade": "MANCHESTER",
+  "cep": "M29 8NF",
+  "categoria": "Private Limited Company",
+  "incorporacao": "15/11/2024",
+  "contas_cat": "DORMANT",
+  "contas_ult": "31/03/2025",
+  "conf_ult": "02/12/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "A1 TRANSPORTATION NW LTD",
+  "numero": "15757295",
+  "segmento": "transporte",
+  "sic": [
+   "49410"
+  ],
+  "l1": "59 QUARRYMANS VIEW",
+  "l2": "WORSLEY",
+  "cidade": "MANCHESTER",
+  "cep": "M28 0LB",
+  "categoria": "Private Limited Company",
+  "incorporacao": "03/06/2024",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "30/06/2025",
+  "conf_ult": "02/06/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "BLUEGRASS COURIERS LIMITED",
+  "numero": "11736664",
+  "segmento": "transporte",
+  "sic": [
+   "49410"
+  ],
+  "l1": "21 SMETHURST HALL ROAD",
+  "l2": "",
+  "cidade": "BURY",
+  "cep": "BL9 7TP",
+  "categoria": "Private Limited Company",
+  "incorporacao": "20/12/2018",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "31/12/2024",
+  "conf_ult": "12/11/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "MONARCH SHELVING LIMITED",
+  "numero": "05429662",
+  "segmento": "manufatura",
+  "sic": [
+   "25990"
+  ],
+  "l1": "UNIT F",
+  "l2": "DALTRY STREET",
+  "cidade": "OLDHAM",
+  "cep": "OL1 4AB",
+  "categoria": "Private Limited Company",
+  "incorporacao": "19/04/2005",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "30/04/2025",
+  "conf_ult": "09/02/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "PURE FABS LIMITED",
+  "numero": "07348616",
+  "segmento": "manufatura",
+  "sic": [
+   "25990"
+  ],
+  "l1": "BRIDGE STREET BRIDGE STREET",
+  "l2": "HORWICH",
+  "cidade": "BOLTON",
+  "cep": "BL6 7BT",
+  "categoria": "Private Limited Company",
+  "incorporacao": "17/08/2010",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "31/03/2025",
+  "conf_ult": "19/08/2025",
+  "coabitantes_endereco": 5
+ },
+ {
+  "nome": "AJ & RC PLUMBING SERVICES LTD",
+  "numero": "15837819",
+  "segmento": "construcao",
+  "sic": [
+   "43220",
+   "43310",
+   "43341",
+   "43999"
+  ],
+  "l1": "FLAT NO 2",
+  "l2": "52 CENTRAL ROAD",
+  "cidade": "MANCHESTER",
+  "cep": "M20 4ZD",
+  "categoria": "Private Limited Company",
+  "incorporacao": "15/07/2024",
+  "contas_cat": "UNAUDITED ABRIDGED",
+  "contas_ult": "31/07/2025",
+  "conf_ult": "14/07/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "BEDFORD FABRICATIONS LIMITED",
+  "numero": "06213675",
+  "segmento": "manufatura",
+  "sic": [
+   "25110"
+  ],
+  "l1": "UNIT 3 & 4 HILTON SQUARE",
+  "l2": "SWINTON",
+  "cidade": "MANCHESTER",
+  "cep": "M27 4DB",
+  "categoria": "Private Limited Company",
+  "incorporacao": "16/04/2007",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "30/09/2025",
+  "conf_ult": "16/04/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "MS1 MCR LIMITED",
+  "numero": "16959624",
+  "segmento": "transporte",
+  "sic": [
+   "52103"
+  ],
+  "l1": "VERNON MILL",
+  "l2": "MERSEY STREET",
+  "cidade": "STOCKPORT",
+  "cep": "SK1 2HX",
+  "categoria": "Private Limited Company",
+  "incorporacao": "13/01/2026",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 2
+ },
+ {
+  "nome": "R WARD WELDING SPECIALISTS LIMITED",
+  "numero": "04932653",
+  "segmento": "manufatura",
+  "sic": [
+   "25110"
+  ],
+  "l1": "24 HOLLYWAY",
+  "l2": "",
+  "cidade": "MANCHESTER",
+  "cep": "M22 4WS",
+  "categoria": "Private Limited Company",
+  "incorporacao": "15/10/2003",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "31/10/2025",
+  "conf_ult": "06/10/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "R.& J.BRADLEY(CONTRACTORS)LIMITED",
+  "numero": "00563640",
+  "segmento": "construcao",
+  "sic": [
+   "41201"
+  ],
+  "l1": "99 TITHEBARN ROAD",
+  "l2": "ASHTON IN MAKERFIELD",
+  "cidade": "WIGAN",
+  "cep": "WN4 0YD",
+  "categoria": "Private Limited Company",
+  "incorporacao": "28/03/1956",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "31/03/2025",
+  "conf_ult": "13/11/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "PENDLE METALWARES LIMITED",
+  "numero": "01632538",
+  "segmento": "manufatura",
+  "sic": [
+   "25990"
+  ],
+  "l1": "17-18 THE HIVES MOSELEY ROAD",
+  "l2": "TRAFFORD PARK",
+  "cidade": "MANCHESTER",
+  "cep": "M17 1HQ",
+  "categoria": "Private Limited Company",
+  "incorporacao": "30/04/1982",
+  "contas_cat": "DORMANT",
+  "contas_ult": "30/04/2025",
+  "conf_ult": "30/07/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "BROADTHORN CONSTRUCTION LIMITED",
+  "numero": "01222789",
+  "segmento": "construcao",
+  "sic": [
+   "43999"
+  ],
+  "l1": "C/O POMEGRANATE, 3 HARDMAN SQUARE",
+  "l2": "SPINNINGFIELDS",
+  "cidade": "MANCHESTER",
+  "cep": "M3 3EB",
+  "categoria": "Private Limited Company",
+  "incorporacao": "13/08/1975",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "31/08/2023",
+  "conf_ult": "14/12/2024",
+  "coabitantes_endereco": 10
+ },
+ {
+  "nome": "PRIMROSE HOLDINGS GROUP LIMITED",
+  "numero": "15238621",
+  "segmento": "construcao",
+  "sic": [
+   "41201"
+  ],
+  "l1": "366 HOLCOMBE ROAD",
+  "l2": "GREENMOUNT",
+  "cidade": "BURY",
+  "cep": "BL8 4DT",
+  "categoria": "Private Limited Company",
+  "incorporacao": "26/10/2023",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "31/10/2025",
+  "conf_ult": "25/10/2025",
+  "coabitantes_endereco": 24
+ },
+ {
+  "nome": "NAJM ALDEEN MOHAMEED ALGHBRI AND PARTENER CO LTD",
+  "numero": "16910127",
+  "segmento": "atacado",
+  "sic": [
+   "46499",
+   "46760",
+   "46900",
+   "47190"
+  ],
+  "l1": "UNIT 7 INITIAL BUSINESS CENTRE",
+  "l2": "WILSON BUSINESS PARK",
+  "cidade": "MANCHESTER",
+  "cep": "M40 8WN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "15/12/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1054
+ },
+ {
+  "nome": "QUAYS LOGISTICS LTD",
+  "numero": "17319129",
+  "segmento": "transporte",
+  "sic": [
+   "52290"
+  ],
+  "l1": "27 CLIFTON ROAD",
+  "l2": "",
+  "cidade": "MANCHESTER",
+  "cep": "M41 5RU",
+  "categoria": "Private Limited Company",
+  "incorporacao": "03/07/2026",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "27/07/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "PAUL S SMITH CONTRACTING LTD",
+  "numero": "13396702",
+  "segmento": "manufatura",
+  "sic": [
+   "25990"
+  ],
+  "l1": "21 ESKDALE AVENUE",
+  "l2": "",
+  "cidade": "WIGAN",
+  "cep": "WN1 2HA",
+  "categoria": "Private Limited Company",
+  "incorporacao": "14/05/2021",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "31/05/2025",
+  "conf_ult": "11/12/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "BKE LIMITED",
+  "numero": "17024278",
+  "segmento": "transporte",
+  "sic": [
+   "49410"
+  ],
+  "l1": "76 MARKET STREET",
+  "l2": "FARNWORTH",
+  "cidade": "BOLTON",
+  "cep": "BL4 7NY",
+  "categoria": "Private Limited Company",
+  "incorporacao": "10/02/2026",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 101
+ },
+ {
+  "nome": "PGA FABRICATIONS LIMITED",
+  "numero": "08930159",
+  "segmento": "manufatura",
+  "sic": [
+   "25620"
+  ],
+  "l1": "UNIT 13/14 CHESHAM INDUSTRIAL ESTATE",
+  "l2": "ORAM STREET",
+  "cidade": "BURY",
+  "cep": "BL9 6EN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "10/03/2014",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "31/03/2026",
+  "conf_ult": "10/03/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "BARROWMIX LIMITED",
+  "numero": "05178292",
+  "segmento": "construcao",
+  "sic": [
+   "43999"
+  ],
+  "l1": "77 SCHOOL LANE",
+  "l2": "",
+  "cidade": "MANCHESTER",
+  "cep": "M20 6WN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "13/07/2004",
+  "contas_cat": "UNAUDITED ABRIDGED",
+  "contas_ult": "31/07/2025",
+  "conf_ult": "14/04/2026",
+  "coabitantes_endereco": 21
+ },
+ {
+  "nome": "AL HAYAT MEDICAL LTD",
+  "numero": "16656645",
+  "segmento": "atacado",
+  "sic": [
+   "46690",
+   "46730",
+   "46760",
+   "46900"
+  ],
+  "l1": "UNIT 7 INITIAL BUSINESS CENTRE",
+  "l2": "WILSON BUSINESS PARK",
+  "cidade": "MANCHESTER",
+  "cep": "M40 8WN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "18/08/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1054
+ },
+ {
+  "nome": "AL-MUALM ALMUTAMAYIZ ALHADITH FOR TRADING LTD",
+  "numero": "16634793",
+  "segmento": "transporte",
+  "sic": [
+   "46520",
+   "46900",
+   "52290",
+   "62090"
+  ],
+  "l1": "UNIT 7 INITIAL BUSINESS CENTRE",
+  "l2": "WILSON BUSINESS PARK",
+  "cidade": "MANCHESTER",
+  "cep": "M40 8WN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "07/08/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1054
+ },
+ {
+  "nome": "ASCENT LIFTING LTD",
+  "numero": "16431608",
+  "segmento": "construcao",
+  "sic": [
+   "43999"
+  ],
+  "l1": "1 PRESTBURY ROAD",
+  "l2": "",
+  "cidade": "WILMSLOW",
+  "cep": "SK9 2LJ",
+  "categoria": "Private Limited Company",
+  "incorporacao": "06/05/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "PW CONSTRUCTION PLANNING LTD",
+  "numero": "11881514",
+  "segmento": "construcao",
+  "sic": [
+   "43999"
+  ],
+  "l1": "24A MARKET STREET",
+  "l2": "DISLEY",
+  "cidade": "STOCKPORT",
+  "cep": "SK12 2AA",
+  "categoria": "Private Limited Company",
+  "incorporacao": "14/03/2019",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "28/02/2025",
+  "conf_ult": "13/03/2026",
+  "coabitantes_endereco": 40
+ },
+ {
+  "nome": "PIRES PARTNERSHIPS LIMITED",
+  "numero": "16805553",
+  "segmento": "construcao",
+  "sic": [
+   "41100",
+   "41202",
+   "68100",
+   "68320"
+  ],
+  "l1": "THE ISLAND BUILDING",
+  "l2": "ST. ANNS PARADE",
+  "cidade": "WILMSLOW",
+  "cep": "SK9 1HG",
+  "categoria": "Private Limited Company",
+  "incorporacao": "23/10/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "ASAL TRANSPORT LIMITED",
+  "numero": "16137539",
+  "segmento": "transporte",
+  "sic": [
+   "49410"
+  ],
+  "l1": "5 CORNBROOK WAY",
+  "l2": "",
+  "cidade": "MANCHESTER",
+  "cep": "M16 7QD",
+  "categoria": "Private Limited Company",
+  "incorporacao": "16/12/2024",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "31/12/2025",
+  "conf_ult": "15/12/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "ABDULNASER AND ABDULKAREEM LTD",
+  "numero": "16813642",
+  "segmento": "manufatura",
+  "sic": [
+   "25990",
+   "49410",
+   "56101",
+   "62020"
+  ],
+  "l1": "UNIT 7 INITIAL BUSINESS CENTRE",
+  "l2": "WILSON BUSINESS PARK",
+  "cidade": "MANCHESTER",
+  "cep": "M40 8WN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "27/10/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1054
+ },
+ {
+  "nome": "ARM GATE LTD",
+  "numero": "16979695",
+  "segmento": "manufatura",
+  "sic": [
+   "25110"
+  ],
+  "l1": "5 VICTORIA COURT VICTORIA LANE",
+  "l2": "WHITEFIELD",
+  "cidade": "MANCHESTER",
+  "cep": "M45 6FF",
+  "categoria": "Private Limited Company",
+  "incorporacao": "21/01/2026",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "AYYUB BUILDERS LTD",
+  "numero": "14892809",
+  "segmento": "construcao",
+  "sic": [
+   "41202",
+   "68100"
+  ],
+  "l1": "283 FEATHERSTALL ROAD NORTH",
+  "l2": "",
+  "cidade": "OLDHAM",
+  "cep": "OL1 2NH",
+  "categoria": "Private Limited Company",
+  "incorporacao": "24/05/2023",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "30/05/2025",
+  "conf_ult": "23/05/2026",
+  "coabitantes_endereco": 9
+ },
+ {
+  "nome": "PATRON DIY NETWORK LTD",
+  "numero": "17178872",
+  "segmento": "construcao",
+  "sic": [
+   "41202",
+   "43999",
+   "46130",
+   "46190"
+  ],
+  "l1": "62 MEDWAY DRIVE MEDWAY DRIVE",
+  "l2": "KEARSLEY",
+  "cidade": "BOLTON",
+  "cep": "BL4 8PJ",
+  "categoria": "Private Limited Company",
+  "incorporacao": "24/04/2026",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "BRIAN MOORES LIMITED",
+  "numero": "07532929",
+  "segmento": "transporte",
+  "sic": [
+   "49410"
+  ],
+  "l1": "C/O ATRIA ACCOUNTANTS LTD IMPERIAL HOUSE",
+  "l2": "79-81 HORNBY STREET",
+  "cidade": "BURY",
+  "cep": "BL9 5BN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "17/02/2011",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "31/03/2025",
+  "conf_ult": "20/02/2026",
+  "coabitantes_endereco": 98
+ },
+ {
+  "nome": "PRESTIGE CABINETS LIMITED",
+  "numero": "16436389",
+  "segmento": "atacado",
+  "sic": [
+   "33200",
+   "46690"
+  ],
+  "l1": "527A WILMSLOW ROAD",
+  "l2": "WITHINGTON",
+  "cidade": "MANCHESTER",
+  "cep": "M20 4BA",
+  "categoria": "Private Limited Company",
+  "incorporacao": "08/05/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 18
+ },
+ {
+  "nome": "BDP LTD",
+  "numero": "05284150",
+  "segmento": "construcao",
+  "sic": [
+   "41202"
+  ],
+  "l1": "38 HALL POOL DRIVE",
+  "l2": "",
+  "cidade": "STOCKPORT",
+  "cep": "SK2 5ED",
+  "categoria": "Private Limited Company",
+  "incorporacao": "11/11/2004",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "30/11/2024",
+  "conf_ult": "11/11/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "2FJ LIMITED",
+  "numero": "16696376",
+  "segmento": "construcao",
+  "sic": [
+   "41201",
+   "41202",
+   "43390"
+  ],
+  "l1": "203 KENYON WAY",
+  "l2": "LITTLE HULTON",
+  "cidade": "MANCHESTER",
+  "cep": "M38 0DJ",
+  "categoria": "Private Limited Company",
+  "incorporacao": "05/09/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 11
+ },
+ {
+  "nome": "BRIGHT FUTURE GLOBAL LTD",
+  "numero": "08621396",
+  "segmento": "transporte",
+  "sic": [
+   "52103",
+   "52290",
+   "82990"
+  ],
+  "l1": "UNIT 3C CALDERSHAW BUSINESS PARK",
+  "l2": "INGS LANE",
+  "cidade": "ROCHDALE",
+  "cep": "OL12 7LQ",
+  "categoria": "Private Limited Company",
+  "incorporacao": "23/07/2013",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "31/08/2025",
+  "conf_ult": "19/06/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "PANTHEON CATERING EQUIPMENT LIMITED",
+  "numero": "05585351",
+  "segmento": "atacado",
+  "sic": [
+   "46690"
+  ],
+  "l1": "MICHAEL SOHOR AND CO",
+  "l2": "74 ST GEORGES ROAD",
+  "cidade": "BOLTON",
+  "cep": "BL1 2DD",
+  "categoria": "Private Limited Company",
+  "incorporacao": "06/10/2005",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "30/06/2025",
+  "conf_ult": "06/10/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "PINTAR TRANSPORT LTD",
+  "numero": "16416144",
+  "segmento": "transporte",
+  "sic": [
+   "49410"
+  ],
+  "l1": "16 REGENT CLOSE",
+  "l2": "",
+  "cidade": "CHEADLE",
+  "cep": "SK8 5PJ",
+  "categoria": "Private Limited Company",
+  "incorporacao": "29/04/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "08/05/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "AL FARIS GROUP FOR TRADING LTD",
+  "numero": "16833416",
+  "segmento": "atacado",
+  "sic": [
+   "46499",
+   "46760",
+   "46900",
+   "47190"
+  ],
+  "l1": "UNIT 7 INITIAL BUSINESS CENTRE",
+  "l2": "WILSON BUSINESS PARK",
+  "cidade": "MANCHESTER",
+  "cep": "M40 8WN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "05/11/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1054
+ },
+ {
+  "nome": "PRODGEKT LIMITED",
+  "numero": "12116958",
+  "segmento": "construcao",
+  "sic": [
+   "41100",
+   "41201",
+   "41202"
+  ],
+  "l1": "38A MELBOURNE STREET",
+  "l2": "",
+  "cidade": "STALYBRIDGE",
+  "cep": "SK15 2JJ",
+  "categoria": "Private Limited Company",
+  "incorporacao": "23/07/2019",
+  "contas_cat": "UNAUDITED ABRIDGED",
+  "contas_ult": "31/10/2025",
+  "conf_ult": "22/07/2025",
+  "coabitantes_endereco": 27
+ },
+ {
+  "nome": "BLACKSTONE FABRICATIONS LTD",
+  "numero": "16714186",
+  "segmento": "manufatura",
+  "sic": [
+   "25990"
+  ],
+  "l1": "UNIT 8B GREEN VALE BUSINESS PARK",
+  "l2": "TODMORDEN ROAD",
+  "cidade": "LITTLEBOROUGH",
+  "cep": "OL15 9EG",
+  "categoria": "Private Limited Company",
+  "incorporacao": "12/09/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "R S T M GENERAL TRADING LTD",
+  "numero": "16802247",
+  "segmento": "atacado",
+  "sic": [
+   "46499",
+   "46760",
+   "46900",
+   "47190"
+  ],
+  "l1": "UNIT 7 INITIAL BUSINESS CENTRE",
+  "l2": "WILSON BUSINESS PARK",
+  "cidade": "MANCHESTER",
+  "cep": "M40 8WN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "22/10/2025",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1054
+ },
+ {
+  "nome": "ASH TOOL CO. LIMITED",
+  "numero": "01072813",
+  "segmento": "manufatura",
+  "sic": [
+   "25620"
+  ],
+  "l1": "LORD STREET,",
+  "l2": "ASHTON-UNDER--LYNE.",
+  "cidade": "",
+  "cep": "OL6 6HZ",
+  "categoria": "Private Limited Company",
+  "incorporacao": "20/09/1972",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "31/07/2025",
+  "conf_ult": "29/04/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "BEST BUILDERS MANCHESTER LTD",
+  "numero": "09538692",
+  "segmento": "construcao",
+  "sic": [
+   "43999"
+  ],
+  "l1": "65 CRINGLE ROAD",
+  "l2": "",
+  "cidade": "MANCHESTER",
+  "cep": "M19 2RQ",
+  "categoria": "Private Limited Company",
+  "incorporacao": "13/04/2015",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "30/04/2025",
+  "conf_ult": "13/04/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "NORTHERN RECOVERY AND TRANSPORT LTD",
+  "numero": "17343938",
+  "segmento": "transporte",
+  "sic": [
+   "52290"
+  ],
+  "l1": "45 GILDA ROAD",
+  "l2": "",
+  "cidade": "WORSLEY",
+  "cep": "M28 1BA",
+  "categoria": "Private Limited Company",
+  "incorporacao": "16/07/2026",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "ASIABUSINESS HUB LTD",
+  "numero": "10458020",
+  "segmento": "atacado",
+  "sic": [
+   "46690",
+   "74909"
+  ],
+  "l1": "3A ERA STREET",
+  "l2": "",
+  "cidade": "SALE",
+  "cep": "M33 3AH",
+  "categoria": "Private Limited Company",
+  "incorporacao": "02/11/2016",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "30/11/2024",
+  "conf_ult": "01/11/2025",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "RAPID DROP HOLDINGS LTD",
+  "numero": "17168370",
+  "segmento": "transporte",
+  "sic": [
+   "52290"
+  ],
+  "l1": "ABC BUILDINGS",
+  "l2": "21-23 QUAY STREET",
+  "cidade": "MANCHESTER",
+  "cep": "M3 4AE",
+  "categoria": "Private Limited Company",
+  "incorporacao": "20/04/2026",
+  "contas_cat": "NO ACCOUNTS FILED",
+  "contas_ult": "",
+  "conf_ult": "",
+  "coabitantes_endereco": 6
+ },
+ {
+  "nome": "POWELL MASONRY LTD.",
+  "numero": "03018186",
+  "segmento": "construcao",
+  "sic": [
+   "43999"
+  ],
+  "l1": "UNIT 41 BRADLEY HALL TRADING ESTATE BRADLEY LANE",
+  "l2": "STANDISH",
+  "cidade": "WIGAN",
+  "cep": "WN6 0XQ",
+  "categoria": "Private Limited Company",
+  "incorporacao": "03/02/1995",
+  "contas_cat": "TOTAL EXEMPTION FULL",
+  "contas_ult": "31/01/2025",
+  "conf_ult": "01/02/2026",
+  "coabitantes_endereco": 1
+ },
+ {
+  "nome": "ALINA LTD",
+  "numero": "08706113",
+  "segmento": "atacado",
+  "sic": [
+   "46760"
+  ],
+  "l1": "INITIAL BUSINESS CENTRE",
+  "l2": "WILSON BUSINESS PARK",
+  "cidade": "MANCHESTER",
+  "cep": "M40 8WN",
+  "categoria": "Private Limited Company",
+  "incorporacao": "25/09/2013",
+  "contas_cat": "MICRO ENTITY",
+  "contas_ult": "31/12/2024",
+  "conf_ult": "25/09/2025",
+  "coabitantes_endereco": 219
+ }
+]

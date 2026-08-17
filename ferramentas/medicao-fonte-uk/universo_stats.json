@@ -1,0 +1,12 @@
+{
+ "linhas": 1699999,
+ "area": 83560,
+ "ativas_area": 74189,
+ "universo": 3896,
+ "por_segmento": {
+  "transporte": 1332,
+  "construcao": 2045,
+  "atacado": 310,
+  "manufatura": 209
+ }
+}

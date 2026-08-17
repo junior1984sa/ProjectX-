@@ -116,6 +116,10 @@ export function useExecutarBusca() {
         segmentosBusca,
         pais: paisDaBusca,
         bairro,
+        // Único ponto do sistema que autoriza empresas de exemplo: o
+        // visitante não gastou crédito e a tela marca o resultado como
+        // simulado.
+        permitirSimulado: true,
         timestamp: new Date(),
       }
 

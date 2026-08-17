@@ -7,6 +7,7 @@ import { usePreferenciasStore } from "@/store/usePreferenciasStore"
 import { useAuthStore } from "@/store/useAuthStore"
 import { useExecutarBusca } from "@/hooks/useExecutarBusca"
 import { EscolhaIdiomaPais } from "@/components/EscolhaIdiomaPais"
+import { HomeSecoes } from "@/components/HomeSecoes"
 import {
   obterPais,
   obterSegmentosClientes,
@@ -121,7 +122,12 @@ export function TelaAbertura() {
       </header>
 
       {/* ═══ B · O instrumento ═══ */}
-      <main className="flex-1 flex flex-col items-center px-4 pt-[10svh] sm:pt-0 sm:justify-center fundo-conteudo">
+      {/* A altura mínima é explícita, e não `flex-1`, porque agora existe
+          conteúdo depois: com `flex-1` o instrumento encolheria para caber
+          junto das seções, e ele deixaria de ocupar a primeira dobra —
+          que é a única coisa que a home precisa fazer bem. Descontar a
+          barra utilitária (3.5rem) mantém o conjunto centrado na tela. */}
+      <main className="relative flex flex-col items-center px-4 pt-[10svh] pb-16 sm:pt-0 sm:pb-0 sm:justify-center sm:min-h-[calc(100svh-3.5rem)] fundo-conteudo">
         {/* Halo único, centrado no vértice. O próprio X fornece a
             segunda massa focal, então dois halos só borrariam o centro. */}
         <div className="absolute left-1/2 -translate-x-1/2 top-1/3 w-[720px] h-[720px] max-w-[100vw] rounded-full bg-azul-500/[0.07] blur-3xl pointer-events-none" />
@@ -300,6 +306,14 @@ export function TelaAbertura() {
           )}
         </div>
       </main>
+
+      {/* ═══ C2 · Seções institucionais ═══
+          Ficam ABAIXO da dobra, sempre. Quem chega sabendo o que quer
+          busca e sai sem ver nada disto; quem vem do Instagram rola e
+          entende o produto. A primeira dobra continua sendo o
+          instrumento, não o folheto — que foi a decisão original desta
+          tela e continua valendo. */}
+      <HomeSecoes />
 
       {/* ═══ D · Rodapé mínimo ═══ */}
       <footer className="flex-shrink-0 py-6 px-4 flex flex-col items-center gap-1.5">

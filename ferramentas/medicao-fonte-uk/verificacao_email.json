@@ -1,0 +1,377 @@
+[
+ {
+  "dominio": "balmirapvt.com",
+  "mx": [
+   "mx1.hostinger.com",
+   "mx2.hostinger.com"
+  ],
+  "catchall": false,
+  "resultados": {
+   "sales@balmirapvt.com": {
+    "status": "ACEITO",
+    "code": 250,
+    "msg": "2.1.5 Ok"
+   }
+  }
+ },
+ {
+  "dominio": "atlasindustrial.com",
+  "mx": [
+   "mx001.netsol.xion.oxcs.net",
+   "mx002.netsol.xion.oxcs.net",
+   "mx003.netsol.xion.oxcs.net"
+  ],
+  "catchall": false,
+  "resultados": {
+   "info@atlasindustrial.com": {
+    "status": "INCONCLUSIVO",
+    "code": -1,
+    "msg": "SMTPServerDisconnected: Connection unexpectedly closed"
+   }
+  }
+ },
+ {
+  "dominio": "prowood.com",
+  "mx": [
+   "prowood-com.mail.protection.outlook.com"
+  ],
+  "catchall": false,
+  "resultados": {
+   "customerservice@prowood.com": {
+    "status": "REJEITADO",
+    "code": 550,
+    "msg": "5.7.1 Service unavailable, Client host [2804:14d:5c32:51d1::109d] blocked using Spamhaus. To request removal from this l"
+   }
+  }
+ },
+ {
+  "dominio": "nexabuild.co.uk",
+  "mx": [
+   "aspmx.l.google.com",
+   "alt1.aspmx.l.google.com",
+   "alt2.aspmx.l.google.com"
+  ],
+  "catchall": false,
+  "resultados": {
+   "contact@nexabuild.co.uk": {
+    "status": "ACEITO",
+    "code": 250,
+    "msg": "2.1.5 OK 5a478bee46e88-320ea2fe917si25058062eec.49 - gsmtp"
+   }
+  }
+ },
+ {
+  "dominio": "aquilorefrigeration.co.uk",
+  "mx": [
+   "aquilorefrigeration-co-uk.mail.protection.outlook.com"
+  ],
+  "catchall": false,
+  "resultados": {
+   "enquiries@aquilorefrigeration.co.uk": {
+    "status": "REJEITADO",
+    "code": 550,
+    "msg": "5.7.1 Service unavailable, Client host [2804:14d:5c32:51d1::109d] blocked using Spamhaus. To request removal from this l"
+   },
+   "sales@aquilorefrigeration.co.uk": {
+    "status": "REJEITADO",
+    "code": 550,
+    "msg": "5.7.1 Service unavailable, Client host [2804:14d:5c32:51d1::109d] blocked using Spamhaus. To request removal from this l"
+   }
+  }
+ },
+ {
+  "dominio": "brearman.com",
+  "mx": [
+   "mx00.ionos.co.uk",
+   "mx01.ionos.co.uk"
+  ],
+  "catchall": false,
+  "resultados": {
+   "admin@brearman.com": {
+    "status": "INCONCLUSIVO",
+    "code": -1,
+    "msg": "SMTPServerDisconnected: Connection unexpectedly closed"
+   },
+   "support@brearman.com": {
+    "status": "INCONCLUSIVO",
+    "code": -1,
+    "msg": "SMTPServerDisconnected: Connection unexpectedly closed"
+   }
+  }
+ },
+ {
+  "dominio": "pendlehardwoods.co.uk",
+  "mx": [
+   "pendlehardwoods-co-uk.mail.protection.outlook.com"
+  ],
+  "catchall": false,
+  "resultados": {
+   "sales@pendlehardwoods.co.uk": {
+    "status": "REJEITADO",
+    "code": 550,
+    "msg": "5.7.1 Service unavailable, Client host [2804:14d:5c32:51d1::109d] blocked using Spamhaus. To request removal from this l"
+   }
+  }
+ },
+ {
+  "dominio": "amc-tcg.com",
+  "mx": [
+   "amctcg-com0i.mail.protection.outlook.com"
+  ],
+  "catchall": false,
+  "resultados": {
+   "orders@amc-tcg.com": {
+    "status": "ACEITO",
+    "code": 250,
+    "msg": "2.1.5 Recipient OK"
+   },
+   "sales@amc-tcg.com": {
+    "status": "ACEITO",
+    "code": 250,
+    "msg": "2.1.5 Recipient OK"
+   }
+  }
+ },
+ {
+  "dominio": "packagedheat.uk",
+  "mx": [
+   "packagedheat-uk.mail.protection.outlook.com"
+  ],
+  "catchall": false,
+  "resultados": {
+   "info@packagedheat.uk": {
+    "status": "ACEITO",
+    "code": 250,
+    "msg": "2.1.5 Recipient OK"
+   }
+  }
+ },
+ {
+  "dominio": "abbottmellor.com",
+  "mx": [
+   "mail.abbottmellor.com"
+  ],
+  "catchall": false,
+  "resultados": {
+   "info@abbottmellor.com": {
+    "status": "REJEITADO",
+    "code": 554,
+    "msg": "The IP address of the sender (186.205.22.231) was found in a DNS blacklist database and was therefore refused."
+   }
+  }
+ },
+ {
+  "dominio": "accumac.co.uk",
+  "mx": [
+   "mailcluster.zen.co.uk"
+  ],
+  "catchall": false,
+  "resultados": {
+   "rodneya@accumac.co.uk": {
+    "status": "INCONCLUSIVO",
+    "code": -1,
+    "msg": "SMTPServerDisconnected: Connection unexpectedly closed: timed out"
+   }
+  }
+ },
+ {
+  "dominio": "zen.co.uk",
+  "mx": [
+   "mailcluster.zen.co.uk"
+  ],
+  "catchall": false,
+  "resultados": {
+   "rodneya@zen.co.uk": {
+    "status": "INCONCLUSIVO",
+    "code": -1,
+    "msg": "SMTPServerDisconnected: Connection unexpectedly closed: timed out"
+   }
+  }
+ },
+ {
+  "dominio": "bubblemedia.co.uk",
+  "mx": [],
+  "catchall": null,
+  "resultados": {
+   "paull@bubblemedia.co.uk": {
+    "status": "SEM_MX",
+    "code": null,
+    "msg": "dominio nao aceita e-mail"
+   }
+  }
+ },
+ {
+  "dominio": "azintec.com",
+  "mx": [
+   "azintec-com.mail.protection.outlook.com"
+  ],
+  "catchall": false,
+  "resultados": {
+   "info@azintec.com": {
+    "status": "REJEITADO",
+    "code": 550,
+    "msg": "5.7.1 Service unavailable, Client host [2804:14d:5c32:51d1::109d] blocked using Spamhaus. To request removal from this l"
+   }
+  }
+ },
+ {
+  "dominio": "nero.co.uk",
+  "mx": [
+   "mta01.scanscope.net",
+   "mail3.scanscope.net",
+   "mail2.scanscope.net"
+  ],
+  "catchall": false,
+  "resultados": {
+   "info@nero.co.uk": {
+    "status": "REJEITADO",
+    "code": 554,
+    "msg": "5.0.5 ip listed on rbl <info@nero.co.uk>, 4 retry(ies) remaining."
+   }
+  }
+ },
+ {
+  "dominio": "company.com",
+  "mx": [],
+  "catchall": null,
+  "resultados": {
+   "you@company.com": {
+    "status": "SEM_MX",
+    "code": null,
+    "msg": "dominio nao aceita e-mail"
+   }
+  }
+ },
+ {
+  "dominio": "apex.co.uk",
+  "mx": [
+   "apex-co-uk.mail.protection.outlook.com"
+  ],
+  "catchall": false,
+  "resultados": {
+   "hello@apex.co.uk": {
+    "status": "ACEITO",
+    "code": 250,
+    "msg": "2.1.5 Recipient OK"
+   }
+  }
+ },
+ {
+  "dominio": "purecompanies.co.uk",
+  "mx": [
+   "purecompanies-co-uk.mail.protection.outlook.com"
+  ],
+  "catchall": false,
+  "resultados": {
+   "info@purecompanies.co.uk": {
+    "status": "REJEITADO",
+    "code": 550,
+    "msg": "5.4.1 Recipient address rejected: Access denied. For more information see https://aka.ms/EXOSmtpErrors [LO1PEPF000028CC."
+   }
+  }
+ },
+ {
+  "dominio": "shorehillcapital.com",
+  "mx": [
+   "mx1-us2.ppe-hosted.com",
+   "mx2-us2.ppe-hosted.com"
+  ],
+  "catchall": false,
+  "resultados": {
+   "rjackson@shorehillcapital.com": {
+    "status": "ACEITO",
+    "code": 250,
+    "msg": "2.1.5 Ok"
+   }
+  }
+ },
+ {
+  "dominio": "certex.com",
+  "mx": [
+   "certex-com.mail.protection.outlook.com"
+  ],
+  "catchall": false,
+  "resultados": {
+   "bwoodland@certex.com": {
+    "status": "REJEITADO",
+    "code": 550,
+    "msg": "5.7.1 Service unavailable, Client host [2804:14d:5c32:51d1::109d] blocked using Spamhaus. To request removal from this l"
+   }
+  }
+ },
+ {
+  "dominio": "pw-planning.com",
+  "mx": [
+   "pw-planning.com.1.0001.arsmtp.com",
+   "pw-planning.com.2.0001.arsmtp.com"
+  ],
+  "catchall": true,
+  "resultados": {
+   "info@pw-planning.com": {
+    "status": "CATCH_ALL_INCONCLUSIVO",
+    "code": 250,
+    "msg": "info@pw-planning.com will relay to a client address"
+   }
+  }
+ },
+ {
+  "dominio": "maro.am",
+  "mx": [
+   "ASPMX.L.GOOGLE.COM",
+   "ALT1.ASPMX.L.GOOGLE.COM",
+   "ALT2.ASPMX.L.GOOGLE.COM"
+  ],
+  "catchall": true,
+  "resultados": {
+   "ask@maro.am": {
+    "status": "CATCH_ALL_INCONCLUSIVO",
+    "code": 250,
+    "msg": "2.1.5 OK 5a478bee46e88-320eb00593fsi22514805eec.73 - gsmtp"
+   }
+  }
+ },
+ {
+  "dominio": "brianmoores.co.uk",
+  "mx": [
+   "brianmoores-co-uk.mail.protection.outlook.com"
+  ],
+  "catchall": false,
+  "resultados": {
+   "enquiries@brianmoores.co.uk": {
+    "status": "REJEITADO",
+    "code": 550,
+    "msg": "5.7.1 Service unavailable, Client host [2804:14d:5c32:51d1::109d] blocked using Spamhaus. To request removal from this l"
+   }
+  }
+ },
+ {
+  "dominio": "prestigecabinets.co.uk",
+  "mx": [
+   "aspmx.l.google.com",
+   "alt1.aspmx.l.google.com",
+   "alt2.aspmx.l.google.com"
+  ],
+  "catchall": true,
+  "resultados": {
+   "info@prestigecabinets.co.uk": {
+    "status": "CATCH_ALL_INCONCLUSIVO",
+    "code": 250,
+    "msg": "2.1.5 OK 5a478bee46e88-320d64ea987si22759580eec.26 - gsmtp"
+   }
+  }
+ },
+ {
+  "dominio": "bright.com",
+  "mx": [
+   "bright-com.mail.protection.outlook.com"
+  ],
+  "catchall": false,
+  "resultados": {
+   "sales-sonoma@bright.com": {
+    "status": "REJEITADO",
+    "code": 550,
+    "msg": "5.7.1 Service unavailable, Client host [2804:14d:5c32:51d1::109d] blocked using Spamhaus. To request removal from this l"
+   }
+  }
+ }
+]

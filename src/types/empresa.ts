@@ -76,6 +76,18 @@ export interface ParametrosBusca {
    * original).
    */
   segmentosBusca?: string[]
+  /**
+   * Autoriza a substituição por empresas de exemplo quando a fonte real
+   * não devolve nada. Só a demonstração de visitante liga isto.
+   *
+   * Para quem pagou, fica DESLIGADO de propósito. O crédito é debitado
+   * antes da busca; se a fonte falhar e o sistema entregar empresas
+   * inventadas, o assinante paga por telefone e e-mail que não existem
+   * e descobre isso ao ligar. Devolver zero resultado com explicação é
+   * ruim; devolver contato falso com cara de contato real destrói a
+   * credibilidade do produto inteiro — que é o único ativo que ele tem.
+   */
+  permitirSimulado?: boolean
   timestamp: Date
 }
 

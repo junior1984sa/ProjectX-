@@ -156,7 +156,13 @@
     "trialIniciado": "{{dias}}-day free trial started!",
     "precisaConta": "Create your account to start the free trial.",
     "criarContaParaAssinar": "Create account and start the trial",
-    "degrau": "{{percentual}}% cheaper than the {{anterior}} plan — {{valor}} saved over the cycle"
+    "degrau": "{{percentual}}% cheaper than the {{anterior}} plan — {{valor}} saved over the cycle",
+    "ciclo": {
+      "mensal": "Monthly",
+      "trimestral": "Quarterly",
+      "semestral": "Half-yearly",
+      "anual": "Annual"
+    }
   },
   "leads": {
     "titulo": "Targets found",
@@ -599,5 +605,105 @@
     "dicaEditar": "Edit freely before sending — you're the one who knows your service.",
     "semPerfil": "Complete your profile so the assistant knows what you do.",
     "fechar": "Close"
+  },
+  "secoes": {
+    "pilares": {
+      "sobrescrito": "What the tool does",
+      "titulo": "From a list of companies to the conversation that closes.",
+      "subtitulo": "Three moves, one place. You never leave for a spreadsheet.",
+      "descobrir": {
+        "titulo": "Discover",
+        "texto": "Enter your trade and your city. You get the companies that hire what you do, not the end consumer."
+      },
+      "abordar": {
+        "titulo": "Reach out",
+        "texto": "An assistant drafts the first message from the client trade, and batch sending follows each country rules."
+      },
+      "acompanhar": {
+        "titulo": "Track",
+        "texto": "Every company you contact enters a pipeline with stage, date and closed value. Nothing is lost between searches."
+      }
+    },
+    "passos": {
+      "sobrescrito": "How it works",
+      "titulo": "Four steps. The first takes under a minute.",
+      "p1": {
+        "titulo": "Say what you sell",
+        "texto": "Your trade, in your own words. The system recognises variations and synonyms in English, Portuguese and Spanish."
+      },
+      "p2": {
+        "titulo": "See who hires it",
+        "texto": "Instead of hunting for companies like yours, you get the sectors that buy your service and the companies in each."
+      },
+      "p3": {
+        "titulo": "Pick and reach out",
+        "texto": "Filter for those with contact details, generate the message and send. The legal footer and unsubscribe are added for you."
+      },
+      "p4": {
+        "titulo": "Follow it to close",
+        "texto": "Move each opportunity through the pipeline and record the value. That is what shows what the tool gave back."
+      }
+    },
+    "precos": {
+      "sobrescrito": "Pricing",
+      "titulo": "List prices. No sales call.",
+      "subtitulo": "Longer cycles cost less per month and carry more credits. Pick your country to see your currency.",
+      "ciclo": "Billing cycle",
+      "pais": "Country",
+      "porMes": "per month",
+      "cobradoDeUmaVez": "Billed {{total}} once, every {{meses}} months",
+      "economia": "{{pct}}% cheaper per month than the previous cycle",
+      "item": {
+        "creditos": "{{creditos}} credits per month, they roll over",
+        "segmentos": "{{total}} trades mapped, in three languages",
+        "funil": "Pipeline with stages and closed value",
+        "abordagem": "First-approach assistant by trade",
+        "idiomas": "Search in English, Portuguese and Spanish"
+      },
+      "cta": "See all plans",
+      "transparencia": {
+        "titulo": "The maths, before you pay",
+        "credito": {
+          "p": "What spends a credit?",
+          "r": "Only a search that returns companies. Viewing saved results, opening the pipeline and writing messages cost nothing."
+        },
+        "acumulo": {
+          "p": "What happens to unused credits?",
+          "r": "They roll over while the subscription is active. They are not cash and are not refundable."
+        },
+        "cancelamento": {
+          "p": "How do I cancel?",
+          "r": "From your dashboard, without talking to anyone. Access runs to the end of the cycle you already paid for."
+        },
+        "moeda": {
+          "p": "Which currency do I pay in?",
+          "r": "In {{moeda}}, the currency of the country you selected. The figure shown is what your card is charged."
+        }
+      }
+    },
+    "faq": {
+      "sobrescrito": "Questions",
+      "titulo": "What people ask before subscribing.",
+      "origem": {
+        "p": "Where does the company data come from?",
+        "r": "From official public company registers, with the source declared on every record. In the United Kingdom we use Companies House, under a licence that permits commercial use. No data comes from a source that forbids storing it, and we do not scrape social networks."
+      },
+      "cobertura": {
+        "p": "Does every company come with contact details?",
+        "r": "No, and it would be dishonest to say otherwise. The official register gives the name, address and trade of virtually every company; contact details only appear where the company itself publishes them on its own site. That is why credits are charged for the contact delivered, not for the search: you see the whole market and pay only for what came back verified."
+      },
+      "creditos": {
+        "p": "Why charge per credit and not per seat?",
+        "r": "Because seats charge for headcount, and service providers usually work alone. Credits charge for use, so lighter users pay less."
+      },
+      "email": {
+        "p": "Can I email companies in any country?",
+        "r": "No. Each country has its own rule and the system refuses to send where the law requires prior consent. The refusal appears on screen, with the reason and the rule."
+      },
+      "cancelar": {
+        "p": "Do I need to talk to sales to subscribe or cancel?",
+        "r": "No. Both are self-service. There is no lock-in contract and no retention call."
+      }
+    }
   }
 }

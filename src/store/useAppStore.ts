@@ -96,9 +96,21 @@ export const useAppStore = create<AppState>()(
           let empresas = await buscarEmpresasReais(params)
           let fonteDados: "openstreetmap" | "simulado" = "openstreetmap"
 
+          // O exemplo simulado é SÓ para a demonstração de visitante, que
+          // não gastou crédito. Para quem pagou, busca vazia devolve
+          // vazio: o crédito já foi debitado antes desta chamada, e
+          // preencher o vazio com empresas inventadas faz o assinante
+          // pagar por telefone e e-mail que não existem. O selo de
+          // "exemplo simulado" na tela não conserta isso — ele aparece
+          // depois que o crédito já saiu, e o dado exportado não carrega
+          // o selo junto.
           if (!empresas || empresas.length === 0) {
-            empresas = await gerarEmpresasMock(params)
-            fonteDados = "simulado"
+            if (params.permitirSimulado) {
+              empresas = await gerarEmpresasMock(params)
+              fonteDados = "simulado"
+            } else {
+              empresas = []
+            }
           }
 
           // Aplica os favoritos salvos anteriormente

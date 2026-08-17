@@ -156,7 +156,13 @@
     "trialIniciado": "¡Prueba gratuita de {{dias}} días iniciada!",
     "precisaConta": "Crea tu cuenta para empezar la prueba gratuita.",
     "criarContaParaAssinar": "Crear cuenta y empezar la prueba",
-    "degrau": "{{percentual}}% más barato que el {{anterior}} — ahorro de {{valor}} en el ciclo"
+    "degrau": "{{percentual}}% más barato que el {{anterior}} — ahorro de {{valor}} en el ciclo",
+    "ciclo": {
+      "mensal": "Mensual",
+      "trimestral": "Trimestral",
+      "semestral": "Semestral",
+      "anual": "Anual"
+    }
   },
   "leads": {
     "titulo": "Objetivos encontrados",
@@ -599,5 +605,105 @@
     "dicaEditar": "Edita a gusto antes de enviar — quien conoce tu servicio eres tú.",
     "semPerfil": "Completa tu perfil para que el asistente sepa qué haces.",
     "fechar": "Cerrar"
+  },
+  "secoes": {
+    "pilares": {
+      "sobrescrito": "Que hace la herramienta",
+      "titulo": "De la lista de empresas a la conversacion que cierra.",
+      "subtitulo": "Tres movimientos, un solo lugar. No sales de aqui hacia ninguna planilla.",
+      "descobrir": {
+        "titulo": "Descubrir",
+        "texto": "Indica tu rubro y tu ciudad. Recibes las empresas que contratan lo que haces, no el consumidor final."
+      },
+      "abordar": {
+        "titulo": "Abordar",
+        "texto": "Un asistente escribe el primer mensaje segun el rubro del cliente, y el envio masivo respeta la norma de cada pais."
+      },
+      "acompanhar": {
+        "titulo": "Dar seguimiento",
+        "texto": "Cada empresa abordada entra en un embudo con etapa, fecha y valor cerrado. Nada se pierde entre busquedas."
+      }
+    },
+    "passos": {
+      "sobrescrito": "Como funciona",
+      "titulo": "Cuatro pasos. El primero toma menos de un minuto.",
+      "p1": {
+        "titulo": "Di que vendes",
+        "texto": "Tu rubro, con tus palabras. El sistema reconoce variaciones y sinonimos en espanol, portugues e ingles."
+      },
+      "p2": {
+        "titulo": "Mira quien lo contrata",
+        "texto": "En vez de buscar empresas parecidas a la tuya, recibes los rubros que compran tu servicio y las empresas de cada uno."
+      },
+      "p3": {
+        "titulo": "Elige y aborda",
+        "texto": "Filtra por quien tiene contacto disponible, genera el mensaje y envia. El pie legal y la baja se agregan solos."
+      },
+      "p4": {
+        "titulo": "Acompana hasta cerrar",
+        "texto": "Mueve cada oportunidad por el embudo y registra el valor. Es lo que muestra cuanto devolvio la herramienta."
+      }
+    },
+    "precos": {
+      "sobrescrito": "Precios",
+      "titulo": "Precio de lista, sin consulta comercial.",
+      "subtitulo": "Los ciclos mas largos cuestan menos por mes y rinden mas creditos. Elige el pais para ver tu moneda.",
+      "ciclo": "Ciclo de cobro",
+      "pais": "Pais",
+      "porMes": "por mes",
+      "cobradoDeUmaVez": "Se cobra {{total}} de una vez, cada {{meses}} meses",
+      "economia": "{{pct}}% mas barato por mes que el ciclo anterior",
+      "item": {
+        "creditos": "{{creditos}} creditos por mes, acumulables",
+        "segmentos": "{{total}} rubros mapeados, en tres idiomas",
+        "funil": "Embudo con etapas y valor cerrado",
+        "abordagem": "Asistente de primer abordaje por rubro",
+        "idiomas": "Busqueda en espanol, portugues e ingles"
+      },
+      "cta": "Ver todos los planes",
+      "transparencia": {
+        "titulo": "La cuenta, antes de pagar",
+        "credito": {
+          "p": "Que gasta un credito?",
+          "r": "Solo la busqueda que devuelve empresas. Ver resultados guardados, abrir el embudo y escribir mensajes no gastan nada."
+        },
+        "acumulo": {
+          "p": "Que pasa con los creditos no usados?",
+          "r": "Se acumulan mientras la suscripcion este activa. No son dinero ni son reembolsables."
+        },
+        "cancelamento": {
+          "p": "Como cancelo?",
+          "r": "Desde el panel, sin hablar con nadie. El acceso sigue hasta el fin del ciclo ya pagado."
+        },
+        "moeda": {
+          "p": "En que moneda pago?",
+          "r": "En {{moeda}}, la moneda del pais seleccionado. El valor mostrado es el que se cobra en la tarjeta."
+        }
+      }
+    },
+    "faq": {
+      "sobrescrito": "Preguntas",
+      "titulo": "Lo que suelen preguntar antes de suscribirse.",
+      "origem": {
+        "p": "De donde vienen los datos de las empresas?",
+        "r": "De registros publicos oficiales de empresas, con el origen declarado en cada registro. En el Reino Unido usamos Companies House, bajo licencia que permite uso comercial. Ningun dato viene de una fuente que prohiba almacenarlo, y no raspamos redes sociales."
+      },
+      "cobertura": {
+        "p": "Toda empresa viene con contacto?",
+        "r": "No, y seria deshonesto decir que si. El registro oficial trae nombre, direccion y rubro de practicamente todas las empresas; el contacto solo aparece cuando la propia empresa lo publica en su sitio. Por eso el credito se cobra por el contacto entregado y no por la busqueda: ves todo el mercado y pagas solo por lo que llego verificado."
+      },
+      "creditos": {
+        "p": "Por que cobrar por credito y no por asiento?",
+        "r": "Porque el asiento cobra por cantidad de personas, y quien presta servicios suele trabajar solo. El credito cobra por uso, asi que quien usa menos paga menos."
+      },
+      "email": {
+        "p": "Puedo enviar correos a cualquier pais?",
+        "r": "No. Cada pais tiene su norma y el sistema rechaza el envio donde la ley exige consentimiento previo. El rechazo aparece en pantalla, con el motivo y la norma."
+      },
+      "cancelar": {
+        "p": "Necesito hablar con ventas para suscribirme o cancelar?",
+        "r": "No. Ambas cosas son autoservicio. No hay contrato de permanencia ni llamada de retencion."
+      }
+    }
   }
 }

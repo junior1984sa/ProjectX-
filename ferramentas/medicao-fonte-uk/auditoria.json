@@ -1,0 +1,492 @@
+[
+ {
+  "nome": "BALMIRA PVT LTD",
+  "numero": "16806314",
+  "cep": "M40 8WN",
+  "cidade": "MANCHESTER",
+  "dominio": "balmirapvt.com",
+  "sinais": [],
+  "contra": [],
+  "url_final": "https://balmirapvt.com/",
+  "titulo": "Home - balmirapvt.com",
+  "tam_texto": 5073
+ },
+ {
+  "nome": "ATLAS INDUSTRIAL GROUP LIMITED",
+  "numero": "16952574",
+  "cep": "M12 6AE",
+  "cidade": "MANCHESTER",
+  "dominio": "atlasindustrial.com",
+  "sinais": [],
+  "contra": [],
+  "url_final": "http://atlasindustrial.com/",
+  "titulo": "Atlas Industrial- Designers and Manufacturers of Heat Exchangers & Equipment",
+  "tam_texto": 2198
+ },
+ {
+  "nome": "BRADLEYS CONSTRUCTION LTD",
+  "numero": "07293726",
+  "cep": "WN6 9DX",
+  "cidade": "WIGAN",
+  "dominio": "www.360lawservices.com",
+  "sinais": [
+   "REGISTERED_IN_ENGLAND",
+   "TEL_UK_OUTRA_AREA:03337727736",
+   "MOEDA_OU_VAT_UK"
+  ],
+  "contra": [],
+  "url_final": "https://www.360lawservices.com/",
+  "titulo": "Home - 360 Law Services Limited - Full-Service Law Firm",
+  "tam_texto": 10695
+ },
+ {
+  "nome": "PROWOOD LIMITED",
+  "numero": "03271673",
+  "cep": "M50 2XD",
+  "cidade": "SALFORD",
+  "dominio": "www.prowood.com",
+  "sinais": [],
+  "contra": [],
+  "url_final": "https://www.prowood.com/",
+  "titulo": "ProWood Pressure-Treated Lumber Products &amp; More",
+  "tam_texto": 6083
+ },
+ {
+  "nome": "NEXABUILD NW LTD",
+  "numero": "16992102",
+  "cep": "OL11 2YW",
+  "cidade": "ROCHDALE",
+  "dominio": "nexabuild.co.uk",
+  "sinais": [],
+  "contra": [],
+  "url_final": "https://nexabuild.co.uk/",
+  "titulo": "Self Storage Installation London | Storage Fit-Out Specialists",
+  "tam_texto": 2953
+ },
+ {
+  "nome": "AQUILO REFRIGERATION LIMITED",
+  "numero": "11999914",
+  "cep": "BL1 2DD",
+  "cidade": "BOLTON",
+  "dominio": "aquilorefrigeration.co.uk",
+  "sinais": [
+   "CEP_PARCIAL_MESMO_DISTRITO",
+   "CIDADE_REGISTRADA",
+   "MANCHESTER",
+   "TEL_UK_OUTRA_AREA:08000938343"
+  ],
+  "contra": [],
+  "url_final": "https://aquilorefrigeration.co.uk/",
+  "titulo": "Aquilo Refrigeration Equipment | Commercial Fridges &amp; Freezers",
+  "tam_texto": 10374
+ },
+ {
+  "nome": "P.D.S. (SHEET METAL) LIMITED",
+  "numero": "01236941",
+  "cep": "BL6 6RD",
+  "cidade": "BOLTON",
+  "dominio": "www.pdssheetmetal.co.uk",
+  "sinais": [],
+  "contra": [],
+  "url_final": "https://www.pdssheetmetal.co.uk/",
+  "titulo": "Sheet Metal Fabrication, Laser Cutting &amp; Paint Finishing - PDS Portsmouth Hampshire UK",
+  "tam_texto": 2218
+ },
+ {
+  "nome": "BREARMAN LTD",
+  "numero": "13679563",
+  "cep": "OL16 1PA",
+  "cidade": "ROCHDALE",
+  "dominio": "brearman.co.uk",
+  "sinais": [
+   "CIDADE_REGISTRADA",
+   "TEL_UK_OUTRA_AREA:02039165818"
+  ],
+  "contra": [],
+  "url_final": "http://brearman.co.uk/",
+  "titulo": "Brearman &#8211; Accommodate Asylum Seekers With A Government Scheme",
+  "tam_texto": 2360
+ },
+ {
+  "nome": "NM TRANS LTD",
+  "numero": "10295518",
+  "cep": "M27 5BH",
+  "cidade": "SWINTON",
+  "dominio": "nmtrans.net",
+  "sinais": [],
+  "contra": [
+   "PAGINA_MUITO_CURTA"
+  ],
+  "url_final": "https://nmtrans.net/",
+  "titulo": "nmtrans.net",
+  "tam_texto": 694
+ },
+ {
+  "nome": "PERFORMANCE MATERIALS LIMITED",
+  "numero": "09174053",
+  "cep": "M2 3BD",
+  "cidade": "MANCHESTER",
+  "dominio": "www.performancematerials.net",
+  "sinais": [],
+  "contra": [],
+  "url_final": "https://www.performancematerials.net/",
+  "titulo": "Performance Materials | High-performance agricultural and industrial fabrics",
+  "tam_texto": 10666
+ },
+ {
+  "nome": "PENDLE HARDWOODS LIMITED",
+  "numero": "00364656",
+  "cep": "M4 5DL",
+  "cidade": "MANCHESTER",
+  "dominio": "www.pendlehardwoods.co.uk",
+  "sinais": [
+   "TEL_AREA_GM:01617868308,01618737004"
+  ],
+  "contra": [],
+  "url_final": "https://www.pendlehardwoods.co.uk/",
+  "titulo": "Home - Pendle Hardwoods",
+  "tam_texto": 5146
+ },
+ {
+  "nome": "AUTO MARINE CABLES LIMITED",
+  "numero": "00804767",
+  "cep": "M28 3PT",
+  "cidade": "WORSLEY",
+  "dominio": "www.amc-tcg.com",
+  "sinais": [
+   "CEP_COMPLETO",
+   "MENCIONA_COMPANIES_HOUSE",
+   "CIDADE_REGISTRADA",
+   "MOEDA_OU_VAT_UK"
+  ],
+  "contra": [],
+  "url_final": "https://www.amc-tcg.com/",
+  "titulo": "AMC Automotive Cable, Marine Cable, Industrial Cable, Specialist Cable and Assembly Cable",
+  "tam_texto": 6843
+ },
+ {
+  "nome": "PHOENIX HOME PROJECTS LTD",
+  "numero": "14935620",
+  "cep": "M30 7EF",
+  "cidade": "MANCHESTER",
+  "dominio": "www.phoenix.org.uk",
+  "sinais": [
+   "TEL_UK_OUTRA_AREA:01162422800"
+  ],
+  "contra": [],
+  "url_final": "https://www.phoenix.org.uk/",
+  "titulo": "Phoenix Leicester | Homepage",
+  "tam_texto": 6598
+ },
+ {
+  "nome": "PACKAGED HEAT LIMITED",
+  "numero": "11475951",
+  "cep": "WN3 5BA",
+  "cidade": "WIGAN",
+  "dominio": "packagedheat.uk",
+  "sinais": [],
+  "contra": [],
+  "url_final": "https://packagedheat.uk/",
+  "titulo": "Home - packagedheat.uk",
+  "tam_texto": 1697
+ },
+ {
+  "nome": "ABBOTT MELLOR LIMITED",
+  "numero": "12094826",
+  "cep": "OL4 1DH",
+  "cidade": "OLDHAM",
+  "dominio": "abbottmellor.com",
+  "sinais": [
+   "CIDADE_REGISTRADA",
+   "TEL_AREA_GM:01618509099"
+  ],
+  "contra": [],
+  "url_final": "https://abbottmellor.com/",
+  "titulo": "Abbott Mellor Ltd. Home - Abbott Mellor Ltd",
+  "tam_texto": 10644
+ },
+ {
+  "nome": "ACCUMAC LIMITED",
+  "numero": "07864189",
+  "cep": "OL16 1PJ",
+  "cidade": "ROCHDALE",
+  "dominio": "accumac.co.uk",
+  "sinais": [
+   "CIDADE_REGISTRADA"
+  ],
+  "contra": [],
+  "url_final": "https://accumac.co.uk/",
+  "titulo": "accumac",
+  "tam_texto": 1782
+ },
+ {
+  "nome": "AZ INTEC LIMITED",
+  "numero": "05323768",
+  "cep": "WN5 7XX",
+  "cidade": "BILLINGE",
+  "dominio": "www.azintec.com",
+  "sinais": [],
+  "contra": [],
+  "url_final": "https://www.azintec.com/",
+  "titulo": "AZ INTEC – PIPING POWER - Die leitende Kraft",
+  "tam_texto": 2758
+ },
+ {
+  "nome": "NERO FOR TRADING LTD",
+  "numero": "16953531",
+  "cep": "M40 8WN",
+  "cidade": "MANCHESTER",
+  "dominio": "www.nero.co.uk",
+  "sinais": [
+   "MENCIONA_COMPANIES_HOUSE",
+   "TEL_UK_OUTRA_AREA:01216653900"
+  ],
+  "contra": [],
+  "url_final": "https://www.nero.co.uk/",
+  "titulo": "Stainless Steel Pipe, Tube, Fittings, Flanges, Valves - NERO Pipeline Connections Ltd",
+  "tam_texto": 5787
+ },
+ {
+  "nome": "RADIAL LINE SHEETMETAL LIMITED",
+  "numero": "06905727",
+  "cep": "WN7 2TG",
+  "cidade": "LEIGH",
+  "dominio": "www.radial.com",
+  "sinais": [],
+  "contra": [],
+  "url_final": "https://www.radial.com/",
+  "titulo": "Radial eCommerce Fulfillment",
+  "tam_texto": 5401
+ },
+ {
+  "nome": "APEX TRANSPORT AND LOGISTICS LIMITED",
+  "numero": "16082714",
+  "cep": "M29 8NF",
+  "cidade": "MANCHESTER",
+  "dominio": "www.apex.co.uk",
+  "sinais": [
+   "CIDADE_REGISTRADA",
+   "MANCHESTER"
+  ],
+  "contra": [
+   "TEL_EUA"
+  ],
+  "url_final": "https://www.apex.co.uk/",
+  "titulo": "Exhibition Stand Design &amp; Build UK | Apex",
+  "tam_texto": 13210
+ },
+ {
+  "nome": "PURE FABS LIMITED",
+  "numero": "07348616",
+  "cep": "BL6 7BT",
+  "cidade": "BOLTON",
+  "dominio": "www.purecompanies.co.uk",
+  "sinais": [
+   "CEP_COMPLETO",
+   "REGISTERED_IN_ENGLAND",
+   "TEL_UK_OUTRA_AREA:03333446710,03333446711"
+  ],
+  "contra": [],
+  "url_final": "https://www.purecompanies.co.uk/",
+  "titulo": "Pure Companies",
+  "tam_texto": 1462
+ },
+ {
+  "nome": "PRIMROSE HOLDINGS GROUP LIMITED",
+  "numero": "15238621",
+  "cep": "BL8 4DT",
+  "cidade": "BURY",
+  "dominio": "www.primrose.co.uk",
+  "sinais": [
+   "TEL_UK_OUTRA_AREA:01189035210"
+  ],
+  "contra": [],
+  "url_final": "https://www.primrose.co.uk/",
+  "titulo": "Primrose | The UK's Leading Online Garden Centre",
+  "tam_texto": 11429
+ },
+ {
+  "nome": "QUAYS LOGISTICS LTD",
+  "numero": "17319129",
+  "cep": "M41 5RU",
+  "cidade": "MANCHESTER",
+  "dominio": "www.domainstore.co.uk",
+  "sinais": [
+   "REGISTERED_IN_ENGLAND"
+  ],
+  "contra": [
+   "SINAL_DE_PARKING/TEMPLATE:domain name"
+  ],
+  "url_final": "https://www.domainstore.co.uk/",
+  "titulo": "Premium UK Domain Names for Sale | DomainStore",
+  "tam_texto": 2029
+ },
+ {
+  "nome": "BARROWMIX LIMITED",
+  "numero": "05178292",
+  "cep": "M20 6WN",
+  "cidade": "MANCHESTER",
+  "dominio": "barrowmixconcrete.com",
+  "sinais": [
+   "CIDADE_REGISTRADA",
+   "MANCHESTER",
+   "TEL_AREA_GM:01617484500,01942722629"
+  ],
+  "contra": [],
+  "url_final": "https://barrowmixconcrete.com/",
+  "titulo": "Barrow Mix Concrete | Ready Mix Concrete Manchester",
+  "tam_texto": 12105
+ },
+ {
+  "nome": "ASCENT LIFTING LTD",
+  "numero": "16431608",
+  "cep": "SK9 2LJ",
+  "cidade": "WILMSLOW",
+  "dominio": "ascentlifting.com",
+  "sinais": [],
+  "contra": [
+   "PARECE_EMPRESA_EUA"
+  ],
+  "url_final": "https://ascentlifting.com/",
+  "titulo": "Home - Ascent Lifting",
+  "tam_texto": 4821
+ },
+ {
+  "nome": "PW CONSTRUCTION PLANNING LTD",
+  "numero": "11881514",
+  "cep": "SK12 2AA",
+  "cidade": "STOCKPORT",
+  "dominio": "www.pw-planning.com",
+  "sinais": [],
+  "contra": [
+   "PAGINA_MUITO_CURTA"
+  ],
+  "url_final": "https://www.pw-planning.com/",
+  "titulo": "International Tax &amp; Wealth Planning | Law office | Israel",
+  "tam_texto": 618
+ },
+ {
+  "nome": "PIRES PARTNERSHIPS LIMITED",
+  "numero": "16805553",
+  "cep": "SK9 1HG",
+  "cidade": "WILMSLOW",
+  "dominio": "www.wearepires.com",
+  "sinais": [],
+  "contra": [],
+  "url_final": "https://www.wearepires.com/",
+  "titulo": "We Are PIRES | PurposeâLed Property Development &amp; Investment",
+  "tam_texto": 2448
+ },
+ {
+  "nome": "ASAL TRANSPORT LIMITED",
+  "numero": "16137539",
+  "cep": "M16 7QD",
+  "cidade": "MANCHESTER",
+  "dominio": "asaltransport.co.uk",
+  "sinais": [],
+  "contra": [
+   "PAGINA_MUITO_CURTA"
+  ],
+  "url_final": "https://asaltransport.co.uk/",
+  "titulo": "Asal Transport",
+  "tam_texto": 804
+ },
+ {
+  "nome": "ARM GATE LTD",
+  "numero": "16979695",
+  "cep": "M45 6FF",
+  "cidade": "MANCHESTER",
+  "dominio": "armgate.am",
+  "sinais": [],
+  "contra": [],
+  "url_final": "https://armgate.am/",
+  "titulo": "Регистрация ИП/ООО в Армении, бухгалтерия, ВНЖ под ключ в 2026 // ArmGate Advisers",
+  "tam_texto": 6917
+ },
+ {
+  "nome": "BRIAN MOORES LIMITED",
+  "numero": "07532929",
+  "cep": "BL9 5BN",
+  "cidade": "BURY",
+  "dominio": "brianmoores.co.uk",
+  "sinais": [
+   "CEP_COMPLETO",
+   "CIDADE_REGISTRADA",
+   "TEL_AREA_GM:01615330399"
+  ],
+  "contra": [],
+  "url_final": "https://brianmoores.co.uk/",
+  "titulo": "Brian Moores",
+  "tam_texto": 3301
+ },
+ {
+  "nome": "PRESTIGE CABINETS LIMITED",
+  "numero": "16436389",
+  "cep": "M20 4BA",
+  "cidade": "MANCHESTER",
+  "dominio": "prestigecabinets.co.uk",
+  "sinais": [
+   "REGISTERED_IN_ENGLAND",
+   "TEL_AREA_GM:01254937073",
+   "MOEDA_OU_VAT_UK"
+  ],
+  "contra": [],
+  "url_final": "https://prestigecabinets.co.uk/",
+  "titulo": "Fitted Kitchens, Bedrooms & Media Walls in the North West | Prestige Cabinets, Blackburn",
+  "tam_texto": 14039
+ },
+ {
+  "nome": "BRIGHT FUTURE GLOBAL LTD",
+  "numero": "08621396",
+  "cep": "OL12 7LQ",
+  "cidade": "ROCHDALE",
+  "dominio": "bright.com",
+  "sinais": [],
+  "contra": [],
+  "url_final": "https://bright.com/",
+  "titulo": "Bright Rentals | Event Rentals for Professionals",
+  "tam_texto": 10569
+ },
+ {
+  "nome": "BEST BUILDERS MANCHESTER LTD",
+  "numero": "09538692",
+  "cep": "M19 2RQ",
+  "cidade": "MANCHESTER",
+  "dominio": "bestweb.com",
+  "sinais": [],
+  "contra": [],
+  "url_final": "https://bestweb.com/",
+  "titulo": "BestWeb | Premium Digital Asset Investment & Strategic Technology Partnerships",
+  "tam_texto": 4699
+ },
+ {
+  "nome": "RAPID DROP HOLDINGS LTD",
+  "numero": "17168370",
+  "cep": "M3 4AE",
+  "cidade": "MANCHESTER",
+  "dominio": "rapid-drop.com",
+  "sinais": [],
+  "contra": [
+   "SINAL_DE_PARKING/TEMPLATE:this domain",
+   "PARECE_EMPRESA_EUA",
+   "PAGINA_MUITO_CURTA"
+  ],
+  "url_final": "https://rapid-drop.com/",
+  "titulo": "Rapid Delivery Platform Coming Soon",
+  "tam_texto": 742
+ },
+ {
+  "nome": "ALINA LTD",
+  "numero": "08706113",
+  "cep": "M40 8WN",
+  "cidade": "MANCHESTER",
+  "dominio": "alina.co.uk",
+  "sinais": [
+   "TEL_UK_OUTRA_AREA:03302233355"
+  ],
+  "contra": [],
+  "url_final": "https://alina.co.uk/",
+  "titulo": "Alina Compostable Bin Liners | Alina | Alina.co.uk",
+  "tam_texto": 2519
+ }
+]
