@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="WhoHiresYou">
+  <!--
+    MARCA — alternativa "lupa"
+
+    Vem da ideia de substituir o O de WHO por uma lupa. A lupa diz
+    "procurar"; o ponto azul cheio dentro dela diz "achou". Juntos
+    contam o produto: a busca que termina numa empresa encontrada.
+
+    Por que plana, e não cromada em 3D: a marca precisa sobreviver a
+    16 pixels no favicon e a 40 num avatar de comentário. Relevo,
+    gradiente e reflexo viram ruído nesse tamanho — o que resta é uma
+    mancha. Forma sólida com duas cores resiste.
+
+    O anel é ouro (a cor da marca) e o miolo é azul (a cor da ação no
+    sistema). Nenhuma cor foi escolhida por estética: as duas já
+    significam isso no resto do produto.
+
+    O cabo sai a 45 graus e é grosso o bastante para não sumir quando
+    a imagem é reduzida — cabo fino é o primeiro detalhe que o
+    navegador come ao redimensionar um favicon.
+  -->
+  <g fill="none" stroke-linecap="round">
+    <!-- cabo, desenhado primeiro para o anel cobrir a emenda -->
+    <path d="M62 62 L84 84" stroke="#D4A84F" stroke-width="12"/>
+    <!-- anel da lupa -->
+    <circle cx="44" cy="44" r="26" stroke="#D4A84F" stroke-width="11"/>
+  </g>
+  <!-- a empresa encontrada -->
+  <circle cx="44" cy="44" r="12" fill="#287BFF"/>
+</svg>

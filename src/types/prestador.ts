@@ -91,16 +91,7 @@ export const ORDEM_PLANOS: TipoPlano[] = ["mensal", "trimestral", "semestral", "
 export const PRECOS_POR_PAIS: Record<string, Record<TipoPlano, number>> = {
   BR: { mensal: 497, trimestral: 1377, semestral: 2497, anual: 4497 },
   US: { mensal: 97, trimestral: 277, semestral: 497, anual: 887 },
-  AU: { mensal: 147, trimestral: 417, semestral: 747, anual: 1337 },
-  NZ: { mensal: 157, trimestral: 437, semestral: 797, anual: 1427 },
-  CA: { mensal: 137, trimestral: 387, semestral: 697, anual: 1247 },
   GB: { mensal: 77, trimestral: 217, semestral: 397, anual: 707 },
-  PT: { mensal: 89, trimestral: 257, semestral: 457, anual: 807 },
-  // México e Paraguai têm poder de compra menor que EUA/Europa: o
-  // preço é ancorado no mercado local, não convertido do dólar, senão
-  // sai caro demais para a realidade de uma marmoraria em Asunción.
-  MX: { mensal: 1497, trimestral: 4137, semestral: 7517, anual: 13537 },
-  PY: { mensal: 397000, trimestral: 1096000, semestral: 1991000, anual: 3587000 },
 }
 
 /** Preço total do plano no país informado, caindo no Brasil se desconhecido */
@@ -131,13 +122,7 @@ export const PRECOS_LANCAMENTO_POR_PAIS: Record<
 > = {
   BR: { mensal: 197, trimestral: 547, semestral: 977, anual: 1707 },
   US: { mensal: 37, trimestral: 107, semestral: 187, anual: 317 },
-  AU: { mensal: 57, trimestral: 167, semestral: 287, anual: 487 },
-  NZ: { mensal: 57, trimestral: 167, semestral: 287, anual: 487 },
-  CA: { mensal: 57, trimestral: 167, semestral: 287, anual: 487 },
   GB: { mensal: 29, trimestral: 79, semestral: 142, anual: 247 },
-  PT: { mensal: 34, trimestral: 93, semestral: 167, anual: 297 },
-  MX: { mensal: 597, trimestral: 1637, semestral: 2937, anual: 5167 },
-  PY: { mensal: 157000, trimestral: 429000, semestral: 771000, anual: 1356000 },
 }
 
 /**
@@ -401,106 +386,6 @@ export const PAISES_DISPONIVEIS: ConfiguracaoPais[] = [
     gateway: null,
   },
   {
-    codigo: "AU",
-    nome: "Austrália",
-    nomeGeocodificacao: "Australia",
-    exemploCidade: "Sydney, NSW",
-    cidadesSugeridas: [
-      "Sydney, NSW",
-      "Melbourne, VIC",
-      "Brisbane, QLD",
-      "Perth, WA",
-      "Adelaide, SA",
-      "Gold Coast, QLD",
-    ],
-    codigoISO2: "au",
-    codigoTelefone: "61",
-    moeda: "AUD",
-    idioma: "en-AU",
-    buscaDisponivel: true,
-    gateway: null,
-  },
-  {
-    codigo: "CA",
-    nome: "Canadá",
-    nomeGeocodificacao: "Canada",
-    exemploCidade: "Toronto, ON",
-    cidadesSugeridas: [
-      "Toronto, ON",
-      "Vancouver, BC",
-      "Montréal, QC",
-      "Calgary, AB",
-      "Ottawa, ON",
-      "Edmonton, AB",
-    ],
-    codigoISO2: "ca",
-    codigoTelefone: "1",
-    moeda: "CAD",
-    idioma: "en-CA",
-    buscaDisponivel: true,
-    gateway: null,
-  },
-  {
-    codigo: "MX",
-    nome: "México",
-    nomeGeocodificacao: "México",
-    exemploCidade: "Guadalajara, JAL",
-    cidadesSugeridas: [
-      "Ciudad de México, CDMX",
-      "Guadalajara, JAL",
-      "Monterrey, NL",
-      "Puebla, PUE",
-      "Querétaro, QRO",
-      "Tijuana, BC",
-    ],
-    codigoISO2: "mx",
-    codigoTelefone: "52",
-    moeda: "MXN",
-    idioma: "es-MX",
-    buscaDisponivel: true,
-    gateway: null,
-  },
-  {
-    codigo: "NZ",
-    nome: "Nova Zelândia",
-    nomeGeocodificacao: "New Zealand",
-    exemploCidade: "Auckland",
-    cidadesSugeridas: [
-      "Auckland",
-      "Wellington",
-      "Christchurch",
-      "Hamilton",
-      "Tauranga",
-      "Dunedin",
-    ],
-    codigoISO2: "nz",
-    codigoTelefone: "64",
-    moeda: "NZD",
-    idioma: "en-NZ",
-    buscaDisponivel: true,
-    gateway: null,
-  },
-  {
-    codigo: "PY",
-    nome: "Paraguai",
-    nomeGeocodificacao: "Paraguay",
-    exemploCidade: "Asunción",
-    cidadesSugeridas: [
-      "Asunción",
-      "Ciudad del Este",
-      "Encarnación",
-      "San Lorenzo",
-      "Luque",
-      "Pedro Juan Caballero",
-    ],
-    codigoISO2: "py",
-    codigoTelefone: "595",
-    moeda: "PYG",
-    idioma: "es-PY",
-    buscaDisponivel: true,
-    gateway: null,
-  },
-  {
     codigo: "GB",
     nome: "Reino Unido",
     nomeGeocodificacao: "United Kingdom",
@@ -517,19 +402,6 @@ export const PAISES_DISPONIVEIS: ConfiguracaoPais[] = [
     codigoTelefone: "44",
     moeda: "GBP",
     idioma: "en-GB",
-    buscaDisponivel: true,
-    gateway: null,
-  },
-  {
-    codigo: "PT",
-    nome: "Portugal",
-    nomeGeocodificacao: "Portugal",
-    exemploCidade: "Lisboa",
-    cidadesSugeridas: ["Lisboa", "Porto", "Braga", "Coimbra", "Faro", "Aveiro"],
-    codigoISO2: "pt",
-    codigoTelefone: "351",
-    moeda: "EUR",
-    idioma: "pt-PT",
     buscaDisponivel: true,
     gateway: null,
   },
@@ -553,18 +425,7 @@ export const DIVISOES_POR_PAIS: Record<string, string[]> = {
        "IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE",
        "NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD",
        "TN","TX","UT","VT","VA","WA","WV","WI","WY"],
-  AU: ["ACT","NSW","NT","QLD","SA","TAS","VIC","WA"],
-  CA: ["AB","BC","MB","NB","NL","NS","NT","NU","ON","PE","QC","SK","YT"],
-  NZ: ["AUK","BOP","CAN","GIS","HKB","MBH","MWT","NSN","NTL","OTA","STL",
-       "TAS","TKI","WGN","WKO","WTC"],
-  MX: ["AGU","BCN","BCS","CAM","CHH","CHP","CMX","COA","COL","DUR","GRO","GUA",
-       "HID","JAL","MEX","MIC","MOR","NAY","NLE","OAX","PUE","QUE","ROO","SIN",
-       "SLP","SON","TAB","TAM","TLA","VER","YUC","ZAC"],
-  PY: ["ASU","ALT","AMA","BOQ","CAA","CAG","CAN","CON","COR","GUA","ITA","MIS",
-       "NEE","PAR","PHA","SPE"],
   GB: ["ENG","SCT","WLS","NIR"],
-  PT: ["AVE","ACO","BEJ","BRA","BRG","CBR","EVR","FAR","GUA","LEI","LIS","MAD",
-       "PTG","PTO","SAN","SET","VCT","VRL","VIS"],
 }
 
 /**
@@ -572,8 +433,7 @@ export const DIVISOES_POR_PAIS: Record<string, string[]> = {
  * pedir "UF" a um canadense é pedir algo que ele não reconhece.
  */
 export const ROTULO_DIVISAO_POR_PAIS: Record<string, string> = {
-  BR: "UF", US: "State", AU: "State", CA: "Province", NZ: "Region",
-  MX: "Estado", PY: "Depto.", GB: "Nation", PT: "Distrito",
+  BR: "UF", US: "State", GB: "Nation",
 }
 
 export function divisoesDoPais(codigo: string | null | undefined): string[] {

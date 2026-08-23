@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 100" role="img" aria-label="WhoHiresYou">
+  <!--
+    LOGOTIPO HORIZONTAL — marca + assinatura
+
+    A assinatura usa Space Grotesk, a mesma fonte dos títulos do
+    produto, então o logotipo e a interface falam a mesma língua
+    tipográfica em vez de parecerem dois projetos diferentes.
+
+    "Who" e "You" ficam em branco; "Hires" fica em ouro. Isso não é
+    enfeite: destaca o VERBO, que é o que o produto faz. Lido rápido,
+    o olho pega "Hires" — contrata — que é a ideia inteira.
+
+    A fonte tem alternativa declarada porque o SVG pode ser aberto fora
+    do site, onde a Space Grotesk não está carregada. Sem isso, o
+    logotipo cairia em Times New Roman na primeira vez que alguém o
+    abrisse no visualizador de imagens do sistema.
+  -->
+  <g fill="none" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 24 L33.5 76 L50 42" stroke="#287BFF"/>
+    <path d="M50 42 L66.5 76 L84 24" stroke="#D4A84F"/>
+  </g>
+
+  <text x="108" y="65"
+        font-family="'Space Grotesk','Inter',system-ui,sans-serif"
+        font-size="42" font-weight="600" letter-spacing="-0.8">
+    <tspan fill="#F4F6F8">Who</tspan><tspan fill="#D4A84F">Hires</tspan><tspan fill="#F4F6F8">You</tspan>
+  </text>
+</svg>

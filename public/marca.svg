@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="WhoHiresYou">
+  <!--
+    MARCA — WhoHiresYou
+
+    Um W construído com dois traços que se encontram no vértice central.
+    O da esquerda é azul, a cor da AÇÃO no sistema; o da direita é ouro,
+    a cor da MARCA. Eles não são decorativos: representam os dois lados
+    que o produto junta — quem presta o serviço e quem o contrata. O
+    vértice do meio é onde a busca acontece.
+
+    Por que um monograma e não um símbolo ilustrativo: a marca precisa
+    sobreviver a 16 pixels no favicon e a um avatar redondo de rede
+    social. Ilustração de seta, funil ou alfinete de mapa vira mancha
+    nesse tamanho — letra não vira.
+
+    Os traços têm ponta e junta arredondadas para não criar bicos
+    agressivos nos vértices inferiores, que é o que faz um W geométrico
+    parecer serrote.
+  -->
+  <g fill="none" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 24 L33.5 76 L50 42" stroke="#287BFF"/>
+    <path d="M50 42 L66.5 76 L84 24" stroke="#D4A84F"/>
+  </g>
+</svg>

@@ -42,32 +42,18 @@ const PAIS_POR_FUSO: Record<string, string> = {
   "America/Los_Angeles": "US", "America/Phoenix": "US", "America/Anchorage": "US",
   "America/Detroit": "US", "America/Boise": "US", "America/Juneau": "US",
   "Pacific/Honolulu": "US",
-  // Canadá
-  "America/Toronto": "CA", "America/Vancouver": "CA", "America/Edmonton": "CA",
-  "America/Winnipeg": "CA", "America/Halifax": "CA", "America/St_Johns": "CA",
-  "America/Regina": "CA", "America/Moncton": "CA", "America/Whitehorse": "CA",
-  "America/Yellowknife": "CA", "America/Iqaluit": "CA",
-  // México
-  "America/Mexico_City": "MX", "America/Cancun": "MX", "America/Monterrey": "MX",
-  "America/Tijuana": "MX", "America/Chihuahua": "MX", "America/Hermosillo": "MX",
-  "America/Mazatlan": "MX", "America/Merida": "MX", "America/Matamoros": "MX",
-  // Paraguai
-  "America/Asuncion": "PY",
   // Reino Unido
   "Europe/London": "GB",
-  // Portugal
-  "Europe/Lisbon": "PT", "Atlantic/Azores": "PT", "Atlantic/Madeira": "PT",
-  // Nova Zelândia
-  "Pacific/Auckland": "NZ", "Pacific/Chatham": "NZ",
 }
 
 function paisPeloFuso(): string | null {
   try {
     const fuso = Intl.DateTimeFormat().resolvedOptions().timeZone
     if (!fuso) return null
-    // A Austrália tem uma dúzia de fusos (Sydney, Perth, Brisbane,
-    // Adelaide, Darwin, Hobart, Lord_Howe...). O prefixo cobre todos.
-    if (fuso.startsWith("Australia/")) return "AU"
+    // Fuso de país que não atendemos devolve null, e o visitante cai na
+    // tela de escolha em vez de num país errado. Australianos e
+    // canadenses eram detectados aqui antes; os dois saíram da lista
+    // porque o registro público deles não serve ao produto.
     return PAIS_POR_FUSO[fuso] ?? null
   } catch {
     // Navegador muito antigo sem Intl: cai no palpite pelo idioma
@@ -87,9 +73,12 @@ function paisInicial(): string {
   // Último recurso: o idioma do navegador. É um palpite pior que o
   // fuso, mas melhor que assumir Brasil para todo mundo.
   const idiomaNavegador = navigator.language?.toLowerCase() ?? ""
+  // Só países que a lista realmente tem. Devolver um código removido
+  // daqui deixaria a preferência apontando para um país inexistente:
+  // `obterPais` cairia no Brasil, mas o estado guardaria "AU", e as
+  // duas coisas discordariam pelo resto da sessão.
   const porIdioma: Record<string, string> = {
-    "en-us": "US", "en-au": "AU", "en-gb": "GB", "en-nz": "NZ", "en-ca": "CA",
-    "es-mx": "MX", "es-py": "PY", "pt-pt": "PT", "pt-br": "BR",
+    "en-us": "US", "en-gb": "GB", "pt-br": "BR",
   }
   return porIdioma[idiomaNavegador] ?? "BR"
 }
