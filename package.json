@@ -5,7 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && npm run typecheck:pipeline && vite build",
+    "typecheck:pipeline": "tsc -p pipeline/tsconfig.json --noEmit",
+    "pipeline:teste": "node pipeline/src/cli/autoteste.ts",
+    "pipeline:medir": "node pipeline/src/cli/medir.ts",
+    "pipeline:reavaliar": "node pipeline/src/cli/reavaliar.ts",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },

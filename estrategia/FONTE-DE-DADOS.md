@@ -1,12 +1,144 @@
 # Fonte de dados — a cadeia do contato verificado (Reino Unido)
 
-**Data:** 16 de agosto de 2026
 **Autor:** engenheiro-dados
 **Restrição que governa este documento:** *"o contato confiável é o principal pilar do nosso modelo… ele tem que funcionar… senão perderemos a credibilidade."* Entregar empresa sem contato, ou com contato morto, é falha de produto.
 
-**Tudo que está aqui foi medido nesta sessão, contra dados reais.** Onde não foi possível medir, está escrito que não foi medido. Nenhum número deste relatório é estimativa de mercado ou opinião.
+**Tudo que está aqui foi medido contra dados reais.** Onde não foi possível medir, está escrito que não foi medido. Nenhum número deste relatório é estimativa de mercado ou opinião.
+
+| Parte | Data | O que é |
+|---|---|---|
+| **Parte I — Fase 1 construída** | 23/08/2026 | O pipeline gratuito, e a remedição da mesma amostra |
+| **Parte II — linha de base** | 16/08/2026 | A avaliação original da fonte, preservada para comparação |
 
 ---
+
+# PARTE I — Fase 1 construída e remedida (23/08/2026)
+
+## I.1 O que foi construído
+
+Pipeline em `pipeline/`, TypeScript, executado direto pelo Node 24, **zero dependência nova**. Toda etapa que pode custar dinheiro é uma interface com duas implementações: uma gratuita que funciona hoje, e um encaixe pago que liga por variável de ambiente. Ausência de chave paga nunca quebra o fluxo — só reduz a taxa de acerto. Cada registro carrega qual implementação o atendeu.
+
+| Comando | O que faz |
+|---|---|
+| `node pipeline/src/cli/ingerir.ts <zip> --areas M,BL --sic 41201` | ingere o snapshot, idempotente |
+| `node pipeline/src/cli/medir.ts` | remede a amostra congelada e compara com a linha de base |
+| `node pipeline/src/cli/autoteste.ts` | 40 conferências das regras, sem rede |
+
+## I.2 O resultado, lado a lado com a linha de base
+
+Mesma amostra: 100 empresas de Grande Manchester, 25 por segmento B2B, semente 20260816, congelada em `pipeline/dados/amostra-linha-base.json`. Trocar a amostra tornaria a comparação inútil.
+
+| Etapa | Linha de base (16/08) | **Pipeline novo (23/08)** |
+|---|---|---|
+| Empresas na amostra | 100 | 100 |
+| Candidatos de domínio avaliados | não instrumentado | **383** |
+| Páginas lidas | não instrumentado | 438 |
+| **Sites ACEITOS** | 35 (35,0%) | **11 (11,0%)** |
+| dos quais **corretos** | 9 | **10** |
+| dos quais **errados** | 26 | **1** |
+| **PRECISÃO** | **25,7%** | **90,9%** |
+| IC 95% da precisão | [14,2 ; 42,1] | **[62,3 ; 98,4]** |
+| Com e-mail entregável | 8 (8,0%) | **9 (9,0%)** |
+| Com telefone | 8 (8,0%) | 8 (8,0%) |
+| **Com algum contato** | **8 (8,0%)** | **10 (10,0%)** |
+
+Tempo de execução: 954 s para 100 empresas, concorrência 12.
+
+> **A trava de identidade fez o que o plano previa: 25,7% → 90,9% de precisão.**
+> Os 26 falsos positivos da linha de base viraram **1**.
+
+### Qual sinal confirmou cada site
+
+| Sinal | Aceitos | Corretos | Precisão |
+|---|---|---|---|
+| `numero_registro` (prova) | 0 | 0 | — |
+| `cep_registrado` (forte) | 4 | 4 | **100%** |
+| `nome_e_dominio` + corroboração geográfica (médio) | 7 | 6 | **85,7%** |
+
+Nenhum site publicou o número de registro nas páginas lidas. A regra funciona (está testada no autoteste com o caso real da AMC), mas na prática o número costuma ficar em página de termos ou de política, fora das 3 páginas de contato que o pipeline lê. **Aumentar o alcance da leitura para pegar `/terms` e `/privacy` é a melhoria gratuita mais promissora que sobrou.**
+
+### Quem entregou cada site
+
+| Implementação | Sites | Camada |
+|---|---|---|
+| `heuristica-dominio` | **11** | gratuita |
+| `common-crawl` | 0 | gratuita |
+| `serpapi` | — | **desligada, sem chave** |
+
+O Common Crawl não contribuiu com nenhum site. Ele confirma domínio por URL; não descobre domínio a partir de nome. Está registrado como tal em `PENDENTE-PAGAMENTO.md`.
+
+### Nível de verificação dos e-mails entregues
+
+| Nível | Endereços |
+|---|---|
+| `mx_presente` | **12** |
+| `smtp_fornecedor` | 0 — **verificador pago desligado** |
+
+Todos os 12 endereços entregues são genéricos (`info@`, `sales@`, `enquiries@`, `admin@`, `orders@`, `support@`). **Nenhum nominal foi coletado** — o extrator descarta em vez de guardar.
+
+## I.3 Os portões da Fase 1
+
+| Portão do `PLANO.md` | Alvo | Medido | Situação |
+|---|---|---|---|
+| Precisão da descoberta de site | > 90% | **90,9%** | **PASSOU**, no limite |
+| Taxa de contato verificado | > 25% | **10,0%** | **NÃO PASSOU** |
+| Custo por registro entregue | < US$ 0,15 | **US$ 0,0007** | **PASSOU** com folga |
+| Medição refeita com a mesma semente | — | sim | **PASSOU** |
+
+### Sobre o portão de precisão — leia a ressalva antes de comemorar
+
+90,9% é **10 corretos em 11 aceitos**, e o intervalo de confiança de 95% vai de **62,3% a 98,4%**. Com 11 casos, o número é frágil: **um único erro a mais derrubaria para 81,8%**. O portão passou, mas não passou com margem. Antes de tratar 90% como fato consolidado, a medição precisa ser repetida numa amostra maior — 300 empresas dariam um intervalo utilizável.
+
+### Sobre o portão de contato — não passou, e não vai passar de graça
+
+**10% contra os 25% exigidos.** Isso não é falha de implementação; é o limite do que meios gratuitos alcançam.
+
+A trava consertou a precisão. Ela não conserta a cobertura, e não tinha como: **se a empresa não tem domínio adivinhável a partir do nome, nenhuma regra de validação a encontra**. Das 100 empresas, 89 terminaram sem site — a maioria porque não foi encontrada, não porque foi rejeitada.
+
+O plano diz: *"Se a taxa não passar de 25%, não avance. Reveja a fonte, não o discurso."* **O que falta está medido e precificado em `estrategia/PENDENTE-PAGAMENTO.md`**, e o item nº 1 é o único que mexe nesta taxa.
+
+## I.4 Ganho líquido de qualidade, além dos percentuais
+
+O número de contatos entregues subiu pouco (8 → 10). O que mudou de verdade é **o que está dentro deles**:
+
+| | Linha de base | Pipeline novo |
+|---|---|---|
+| Contatos entregues | 8 | 10 |
+| Desses, de sites de OUTRA empresa | ~26 dos 35 sites aceitos alimentavam contato errado | **1** |
+| E-mails nominais coletados | 6 (4 de sites errados) | **0, por regra** |
+| Registros com procedência e nível de prova gravados | não | **todos** |
+| `you@company.com` e placeholders entregues | sim | **não** |
+
+Casos concretos que o pipeline novo corrigiu:
+
+- **RADIAL LINE SHEETMETAL** — a linha de base entregava `radial.com` (logística americana, e-mail `you@company.com`). O pipeline novo encontrou **`www.radialline.co.uk`**, com o CEP do distrito WN7 publicado e telefone 01942 (Leigh), e entrega `info@radialline.co.uk`. Site diferente, empresa certa.
+- **MPT GROUP MATTRESS MACHINERY** — empresa que a linha de base **não tinha encontrado**. O pipeline novo achou `www.mptgroup.com` com o CEP registrado OL13 9RW publicado na página, e entrega `info@mptgroup.com`.
+- **BRADLEYS CONSTRUCTION, QUAYS LOGISTICS, ARM GATE, PHOENIX, PRIMROSE, NERO, P.D.S., ATLAS INDUSTRIAL, PROWOOD, BALMIRA** — todos rejeitados. Todos eram entregues antes.
+
+## I.5 Defeitos encontrados e corrigidos durante a construção
+
+Registrados porque valem para quem mexer no código depois:
+
+1. **A ordenação de candidatos consumia o orçamento de DNS.** As 42 combinações de sufixo da primeira base eram consultadas antes da segunda base receber a primeira consulta. `atlasindustrial.com` e `nexabuild.co.uk` ficavam fora dos 40 primeiros e a empresa terminava sem candidato nenhum. Corrigido com geração em ondas por TLD, e **travado por teste de regressão** no autoteste.
+2. **DNS sequencial custava ~2 minutos por empresa.** 40 consultas em série. Passou a resolver em ondas paralelas de 10, preservando a ordem de preferência.
+3. **`pkshutter` não era gerado** — iniciais mais a primeira palavra distintiva faltavam na heurística. Corrigido.
+4. **Parameter properties do TypeScript** não rodam no modo strip-only do Node. Trocadas por campos explícitos em cinco classes.
+
+## I.6 O que a Parte II diz e continua valendo
+
+Tudo na Parte II segue de pé. Nada foi refutado pela nova medição:
+
+- Companies House sob **OGL v3.0**, sem *share-alike*, atribuição obrigatória — confirmado em uso: 3.896 empresas ingeridas, ingestão idempotente verificada (segunda rodada do mesmo arquivo: 0 novas, 1.937 atualizadas, total inalterado).
+- **38% dos endereços são de contador** — reconfirmado na ingestão real: 28,6% com 5+ coabitantes no conjunto completo de 3.896.
+- **38,3% sem sinal contábil de operação** (`DORMANT` ou `NO ACCOUNTS FILED`) no conjunto de 3.896 — medido de novo, agora com o filtro implementado.
+- **Verificação SMTP da nossa infraestrutura é inviável** — motivo pelo qual o verificador gratuito tem teto declarado em `mx_presente`.
+- **E-mail nominal não deve ser perseguido** — agora é regra de código, não recomendação.
+
+---
+
+# PARTE II — Avaliação original da fonte (16/08/2026)
+
+*Preservada como linha de base. Os números desta parte são o "antes" da tabela da seção I.2.*
 
 ## 1. Sumário
 

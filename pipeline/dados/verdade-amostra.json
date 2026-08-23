@@ -1,0 +1,298 @@
+[
+ {
+  "numeroRegistro": "00364656",
+  "nome": "PENDLE HARDWOODS LIMITED",
+  "site": "www.pendlehardwoods.co.uk",
+  "veredito": "correto",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: CEP, numero de registro ou telefone da regiao"
+ },
+ {
+  "numeroRegistro": "00804767",
+  "nome": "AUTO MARINE CABLES LIMITED",
+  "site": "www.amc-tcg.com",
+  "veredito": "correto",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: CEP, numero de registro ou telefone da regiao"
+ },
+ {
+  "numeroRegistro": "01236941",
+  "nome": "P.D.S. (SHEET METAL) LIMITED",
+  "site": "www.pdssheetmetal.co.uk",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "03271673",
+  "nome": "PROWOOD LIMITED",
+  "site": "www.prowood.com",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "05178292",
+  "nome": "BARROWMIX LIMITED",
+  "site": "barrowmixconcrete.com",
+  "veredito": "correto",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: CEP, numero de registro ou telefone da regiao"
+ },
+ {
+  "numeroRegistro": "05323768",
+  "nome": "AZ INTEC LIMITED",
+  "site": "www.azintec.com",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "06905727",
+  "nome": "RADIAL LINE SHEETMETAL LIMITED",
+  "site": "www.radial.com",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "06905727",
+  "nome": "RADIAL LINE SHEETMETAL LIMITED",
+  "site": "www.radialline.co.uk",
+  "veredito": "correto",
+  "adjudicadoEm": "2026-08-23",
+  "evidencia": "conferido na pagina: schema.org declara name=\"Radial Line Sheet Metal Ltd\"; CEP do distrito WN7 publicado e telefone 01942 (Leigh). Site DIFERENTE do radial.com que a linha de base entregava e que era logistica americana."
+ },
+ {
+  "numeroRegistro": "07293726",
+  "nome": "BRADLEYS CONSTRUCTION LTD",
+  "site": "www.360lawservices.com",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "07348616",
+  "nome": "PURE FABS LIMITED",
+  "site": "www.purecompanies.co.uk",
+  "veredito": "correto",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: CEP, numero de registro ou telefone da regiao"
+ },
+ {
+  "numeroRegistro": "07532929",
+  "nome": "BRIAN MOORES LIMITED",
+  "site": "brianmoores.co.uk",
+  "veredito": "correto",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: CEP, numero de registro ou telefone da regiao"
+ },
+ {
+  "numeroRegistro": "07864189",
+  "nome": "ACCUMAC LIMITED",
+  "site": "accumac.co.uk",
+  "veredito": "correto",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: CEP, numero de registro ou telefone da regiao"
+ },
+ {
+  "numeroRegistro": "08621396",
+  "nome": "BRIGHT FUTURE GLOBAL LTD",
+  "site": "bright.com",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "08706113",
+  "nome": "ALINA LTD",
+  "site": "alina.co.uk",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "09174053",
+  "nome": "PERFORMANCE MATERIALS LIMITED",
+  "site": "www.performancematerials.net",
+  "veredito": "duvidoso",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: sem evidencia a favor nem contra"
+ },
+ {
+  "numeroRegistro": "09538692",
+  "nome": "BEST BUILDERS MANCHESTER LTD",
+  "site": "bestweb.com",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "10295518",
+  "nome": "NM TRANS LTD",
+  "site": "nmtrans.net",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "11475951",
+  "nome": "PACKAGED HEAT LIMITED",
+  "site": "packagedheat.uk",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "11881514",
+  "nome": "PW CONSTRUCTION PLANNING LTD",
+  "site": "www.pw-planning.com",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "11999914",
+  "nome": "AQUILO REFRIGERATION LIMITED",
+  "site": "aquilorefrigeration.co.uk",
+  "veredito": "correto",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: CEP, numero de registro ou telefone da regiao"
+ },
+ {
+  "numeroRegistro": "12094826",
+  "nome": "ABBOTT MELLOR LIMITED",
+  "site": "abbottmellor.com",
+  "veredito": "correto",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: CEP, numero de registro ou telefone da regiao"
+ },
+ {
+  "numeroRegistro": "13679563",
+  "nome": "BREARMAN LTD",
+  "site": "brearman.co.uk",
+  "veredito": "correto",
+  "adjudicadoEm": "2026-08-23",
+  "evidencia": "CASO MAIS FRAGIL DOS 11. A favor: nome \"Brearman\" e distintivo e raro; site cita Rochdale e CEP da area OL (registrado OL16 1PA, Rochdale); o ramo do site (alojamento sob programa do governo) bate com os SIC 68209 (locacao de imovel proprio) e 41100 (incorporacao). Contra: os e-mails publicados sao @brearman.com e o site e .co.uk; nenhum CEP exato nem numero de registro na pagina. Mantido como correto por consistencia com a adjudicacao de 16/08, que usou o mesmo criterio. Se rebaixado, a precisao cai de 100% para 90,9%."
+ },
+ {
+  "numeroRegistro": "14665645",
+  "nome": "MPT GROUP MATTRESS MACHINERY LTD",
+  "site": "www.mptgroup.com",
+  "veredito": "correto",
+  "adjudicadoEm": "2026-08-23",
+  "evidencia": "conferido na pagina: \"MPT Group Mattress Machinery is a leading supplier\", sede em Bacup (area OL13), e o CEP registrado OL13 9RW aparece publicado. Empresa nao encontrada pela linha de base."
+ },
+ {
+  "numeroRegistro": "14935620",
+  "nome": "PHOENIX HOME PROJECTS LTD",
+  "site": "www.phoenix.org.uk",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "15238621",
+  "nome": "PRIMROSE HOLDINGS GROUP LIMITED",
+  "site": "www.primrose.co.uk",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "16082714",
+  "nome": "APEX TRANSPORT AND LOGISTICS LIMITED",
+  "site": "www.apex.co.uk",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "16137539",
+  "nome": "ASAL TRANSPORT LIMITED",
+  "site": "asaltransport.co.uk",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "16431608",
+  "nome": "ASCENT LIFTING LTD",
+  "site": "ascentlifting.com",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "16436389",
+  "nome": "PRESTIGE CABINETS LIMITED",
+  "site": "prestigecabinets.co.uk",
+  "veredito": "duvidoso",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: sem evidencia a favor nem contra"
+ },
+ {
+  "numeroRegistro": "16805553",
+  "nome": "PIRES PARTNERSHIPS LIMITED",
+  "site": "www.wearepires.com",
+  "veredito": "duvidoso",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: sem evidencia a favor nem contra"
+ },
+ {
+  "numeroRegistro": "16806314",
+  "nome": "BALMIRA PVT LTD",
+  "site": "balmirapvt.com",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "16952574",
+  "nome": "ATLAS INDUSTRIAL GROUP LIMITED",
+  "site": "atlasindustrial.com",
+  "veredito": "duvidoso",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: sem evidencia a favor nem contra"
+ },
+ {
+  "numeroRegistro": "16953531",
+  "nome": "NERO FOR TRADING LTD",
+  "site": "www.nero.co.uk",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "16979695",
+  "nome": "ARM GATE LTD",
+  "site": "armgate.am",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "16992102",
+  "nome": "NEXABUILD NW LTD",
+  "site": "nexabuild.co.uk",
+  "veredito": "duvidoso",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: sem evidencia a favor nem contra"
+ },
+ {
+  "numeroRegistro": "17168370",
+  "nome": "RAPID DROP HOLDINGS LTD",
+  "site": "rapid-drop.com",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ },
+ {
+  "numeroRegistro": "17319129",
+  "nome": "QUAYS LOGISTICS LTD",
+  "site": "www.domainstore.co.uk",
+  "veredito": "errado",
+  "adjudicadoEm": "2026-08-16",
+  "evidencia": "auditoria manual 16/08: evidencia contraria (outra empresa, parking ou outro pais)"
+ }
+]

@@ -1,0 +1,4942 @@
+{
+ "executadoEm": "2026-08-23T12:42:57.414Z",
+ "chavesLigadas": [
+  "companies-house-snapshot (gratuito)",
+  "heuristica-dominio (gratuito)",
+  "common-crawl (gratuito)",
+  "verificador-gratuito (sintaxe + MX + descartavel)"
+ ],
+ "chavesDesligadas": [
+  {
+   "nome": "API do Companies House",
+   "variavel": "COMPANIES_HOUSE_API_KEY",
+   "efeito": "sem atualização diária; o snapshot mensal continua funcionando"
+  },
+  {
+   "nome": "SerpApi — descoberta de site por busca",
+   "variavel": "SERPAPI_KEY",
+   "efeito": "descoberta fica limitada a heurística + Common Crawl"
+  },
+  {
+   "nome": "Verificador de e-mail (SMTP com IP limpo)",
+   "variavel": "VERIFICADOR_EMAIL_URL + VERIFICADOR_EMAIL_KEY",
+   "efeito": "e-mail para no nível 'mx_presente'; nunca chega a 'verificado'"
+  }
+ ],
+ "linhaBase": {
+  "sitesEncontrados": 35,
+  "sitesCorretos": 9,
+  "comEmail": 8,
+  "total": 100
+ },
+ "resumo": {
+  "n": 100,
+  "sitesAceitos": 11,
+  "corretos": 11,
+  "duvidosos": 0,
+  "errados": 0,
+  "naoAdjudicados": 0,
+  "precisao": 1,
+  "precisaoOtimista": 1,
+  "comEmail": 9,
+  "comTelefone": 8,
+  "comContato": 10,
+  "portaoPrecisao": true,
+  "portaoContato": false
+ },
+ "registros": [
+  {
+   "empresa": {
+    "numeroRegistro": "16749377",
+    "nome": "ALDEYAR ALMASREYA COMPANY LTD",
+    "endereco1": "UNIT 7 INITIAL BUSINESS CENTRE",
+    "endereco2": "WILSON BUSINESS PARK",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M40 8WN",
+    "distritoPostal": "M40",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46499",
+     "46760",
+     "46900",
+     "47190"
+    ],
+    "dataConstituicao": "2025-09-29",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1054,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 2,
+   "paginasLidas": 6,
+   "processadoEm": "2026-08-23T12:28:16.189Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16627897",
+    "nome": "ATR COURIERS LIMITED",
+    "endereco1": "4 KINGS HALL DRIVE",
+    "endereco2": "",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M18 7FN",
+    "distritoPostal": "M18",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "49410",
+     "53201",
+     "53202",
+     "78200"
+    ],
+    "dataConstituicao": "2025-08-04",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": "2026-02-19",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 2,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 0,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:28:00.127Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16806314",
+    "nome": "BALMIRA PVT LTD",
+    "endereco1": "UNIT 7 INITIAL BUSINESS CENTRE",
+    "endereco2": "WILSON BUSINESS PARK",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M40 8WN",
+    "distritoPostal": "M40",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46499",
+     "46760",
+     "46900",
+     "47190"
+    ],
+    "dataConstituicao": "2025-10-23",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1054,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 2,
+   "paginasLidas": 3,
+   "processadoEm": "2026-08-23T12:28:15.687Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "08843504",
+    "nome": "BALMORAL BRICKLAYING LIMITED",
+    "endereco1": "30 HAMILTON ROAD",
+    "endereco2": "ASHTON-IN-MAKERFIELD",
+    "cidade": "WIGAN",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "WN4 0SU",
+    "distritoPostal": "WN4",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "43999"
+    ],
+    "dataConstituicao": "2014-01-14",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2025-10-11",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 34,
+    "enderecoDeMassa": true,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 5,
+   "paginasLidas": 5,
+   "processadoEm": "2026-08-23T12:28:26.800Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16952574",
+    "nome": "ATLAS INDUSTRIAL GROUP LIMITED",
+    "endereco1": "PICCADILLY BUSINESS CENTRE UNIT C ALDOW ENTERPRISE PARK",
+    "endereco2": "BLACKETT STREET",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M12 6AE",
+    "distritoPostal": "M12",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46140",
+     "46610",
+     "46690",
+     "46900"
+    ],
+    "dataConstituicao": "2026-01-09",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 183,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 9,
+   "processadoEm": "2026-08-23T12:32:11.094Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "12555281",
+    "nome": "R A CARTER EXCAVATIONS & GROUNDWORK LTD",
+    "endereco1": "10 BANKSIDE CLOSE",
+    "endereco2": "",
+    "cidade": "BACUP",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "OL13 8HZ",
+    "distritoPostal": "OL13",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "43999"
+    ],
+    "dataConstituicao": "2020-04-14",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2026-04-13",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 5,
+   "paginasLidas": 8,
+   "processadoEm": "2026-08-23T12:31:44.972Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16242646",
+    "nome": "RAT LAB LTD",
+    "endereco1": "APARTMENT N S 305, ROYAL MILLS, 2",
+    "endereco2": "COTTON STREET",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M4 5BD",
+    "distritoPostal": "M4",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "43999"
+    ],
+    "dataConstituicao": "2025-02-10",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 5,
+   "paginasLidas": 4,
+   "processadoEm": "2026-08-23T12:29:12.682Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "15351061",
+    "nome": "NELI ATHD LIMITED",
+    "endereco1": "58 A CHORLEY ROAD",
+    "endereco2": "SWINTON",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M27 5AD",
+    "distritoPostal": "M27",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "52290",
+     "53202"
+    ],
+    "dataConstituicao": "2023-12-14",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2025-12-13",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 0,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:28:15.195Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "07293726",
+    "nome": "BRADLEYS CONSTRUCTION LTD",
+    "endereco1": "THE NEW OFFICE PARK HOUSE FARM APPLEY LANE NORTH",
+    "endereco2": "APPLEY BRIDGE",
+    "cidade": "WIGAN",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "WN6 9DX",
+    "distritoPostal": "WN6",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "28302",
+     "41201",
+     "46140"
+    ],
+    "dataConstituicao": "2010-06-23",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2026-06-23",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 4,
+   "processadoEm": "2026-08-23T12:28:56.560Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "03271673",
+    "nome": "PROWOOD LIMITED",
+    "endereco1": "C/O GE ROBINSON & CO THURLOW SAWMILLS",
+    "endereco2": "MONTFORD STREET",
+    "cidade": "SALFORD",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M50 2XD",
+    "distritoPostal": "M50",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "16100",
+     "46730"
+    ],
+    "dataConstituicao": "1996-10-31",
+    "categoriaContas": "AUDIT EXEMPTION SUBSIDIARY",
+    "dataUltimaConfirmacao": "2025-10-31",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 5,
+   "paginasLidas": 8,
+   "processadoEm": "2026-08-23T12:28:26.808Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16992102",
+    "nome": "NEXABUILD NW LTD",
+    "endereco1": "C/O NRA ACCOUNTANCY",
+    "endereco2": "ARROW MILL, QUEENSWAY",
+    "cidade": "ROCHDALE",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "OL11 2YW",
+    "distritoPostal": "OL11",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "43999"
+    ],
+    "dataConstituicao": "2026-01-27",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 6,
+    "enderecoDeMassa": true,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 3,
+   "paginasLidas": 1,
+   "processadoEm": "2026-08-23T12:28:15.185Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "17195442",
+    "nome": "B L M GALLAGHER LTD",
+    "endereco1": "44 NEWARK ROAD",
+    "endereco2": "",
+    "cidade": "STOCKPORT",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "SK5 7NF",
+    "distritoPostal": "SK5",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "52290"
+    ],
+    "dataConstituicao": "2026-05-01",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 6,
+   "processadoEm": "2026-08-23T12:28:53.035Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "09850126",
+    "nome": "PKRUK ONLINE LTD",
+    "endereco1": "FERNHILLS BUSINESS CENTRE FOERSTER CHAMBERS",
+    "endereco2": "TODD STREET",
+    "cidade": "BURY",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "BL9 5BJ",
+    "distritoPostal": "BL9",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46760",
+     "47290",
+     "47910"
+    ],
+    "dataConstituicao": "2015-10-30",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2025-10-29",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 48,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 3,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:29:23.245Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "11999914",
+    "nome": "AQUILO REFRIGERATION LIMITED",
+    "endereco1": "74 ST. GEORGES ROAD",
+    "endereco2": "",
+    "cidade": "BOLTON",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "BL1 2DD",
+    "distritoPostal": "BL1",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46690"
+    ],
+    "dataConstituicao": "2019-05-16",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2026-05-25",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 21,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": "aquilorefrigeration.co.uk",
+   "identidade": {
+    "nivel": "nome_e_dominio",
+    "aceito": true,
+    "confianca": 0.8,
+    "detalhe": "tokens AQUILO+REFRIGERATION em domínio \"aquilorefrigeration\"; CEP do mesmo distrito (BL1) na página",
+    "contraindicacoes": []
+   },
+   "descobertoPor": "heuristica-dominio",
+   "emails": [
+    {
+     "endereco": "sales@aquilorefrigeration.co.uk",
+     "generico": true,
+     "papel": "sales",
+     "nivelVerificacao": "mx_presente",
+     "status": "provavel",
+     "verificadoPor": "verificador-gratuito",
+     "encontradoEm": "https://aquilorefrigeration.co.uk/"
+    },
+    {
+     "endereco": "enquiries@aquilorefrigeration.co.uk",
+     "generico": true,
+     "papel": "enquiries",
+     "nivelVerificacao": "mx_presente",
+     "status": "provavel",
+     "verificadoPor": "verificador-gratuito",
+     "encontradoEm": "https://aquilorefrigeration.co.uk/pages/contact-us"
+    }
+   ],
+   "telefones": [
+    {
+     "e164": "+448000938343",
+     "original": "0800 0938343",
+     "areaCompativel": false,
+     "encontradoEm": "https://aquilorefrigeration.co.uk/"
+    }
+   ],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 5,
+   "processadoEm": "2026-08-23T12:29:34.299Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16062130",
+    "nome": "RAP ROLLERS UK LTD",
+    "endereco1": "LOGIC 3 CHARLES BABBAGE AVENUE",
+    "endereco2": "KINGSWAY BUSINESS PARK",
+    "cidade": "ROCHDALE",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "OL16 4NW",
+    "distritoPostal": "OL16",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46690"
+    ],
+    "dataConstituicao": "2024-11-05",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": "2025-11-04",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 2,
+    "enderecoDeMassa": false,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 0,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:29:22.236Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "01236941",
+    "nome": "P.D.S. (SHEET METAL) LIMITED",
+    "endereco1": "13 HIGHER BARN",
+    "endereco2": "HORWICH",
+    "cidade": "BOLTON",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "BL6 6RD",
+    "distritoPostal": "BL6",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25990"
+    ],
+    "dataConstituicao": "1975-12-10",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2026-06-08",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 8,
+   "processadoEm": "2026-08-23T12:29:38.791Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "13473772",
+    "nome": "OTAAWA LIMITED",
+    "endereco1": "105 UPPER LLOYD STREET",
+    "endereco2": "",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M14 4HS",
+    "distritoPostal": "M14",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "49410"
+    ],
+    "dataConstituicao": "2021-06-23",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2026-03-21",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 0,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:29:21.736Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "13679563",
+    "nome": "BREARMAN LTD",
+    "endereco1": "64 DRAKE STREET",
+    "endereco2": "",
+    "cidade": "ROCHDALE",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "OL16 1PA",
+    "distritoPostal": "OL16",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "41100",
+     "41201",
+     "68209"
+    ],
+    "dataConstituicao": "2021-10-14",
+    "categoriaContas": "DORMANT",
+    "dataUltimaConfirmacao": "2026-04-28",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 21,
+    "enderecoDeMassa": true,
+    "segmento": "construcao"
+   },
+   "site": "brearman.co.uk",
+   "identidade": {
+    "nivel": "nome_e_dominio",
+    "aceito": true,
+    "confianca": 0.7,
+    "detalhe": "tokens BREARMAN em domínio \"brearman\"; CEP da mesma área postal (OL) na página",
+    "contraindicacoes": []
+   },
+   "descobertoPor": "heuristica-dominio",
+   "emails": [
+    {
+     "endereco": "admin@brearman.com",
+     "generico": true,
+     "papel": "admin",
+     "nivelVerificacao": "mx_presente",
+     "status": "provavel",
+     "verificadoPor": "verificador-gratuito",
+     "encontradoEm": "http://brearman.co.uk/"
+    },
+    {
+     "endereco": "support@brearman.com",
+     "generico": true,
+     "papel": "support",
+     "nivelVerificacao": "mx_presente",
+     "status": "provavel",
+     "verificadoPor": "verificador-gratuito",
+     "encontradoEm": "http://brearman.co.uk/contact-us/"
+    }
+   ],
+   "telefones": [
+    {
+     "e164": "+442039165818",
+     "original": "0203 916 5818",
+     "areaCompativel": false,
+     "encontradoEm": "http://brearman.co.uk/"
+    }
+   ],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 2,
+   "paginasLidas": 6,
+   "processadoEm": "2026-08-23T12:29:47.318Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16913092",
+    "nome": "ABDULLAH HASAN AL-SAGHEER TRADING LIMITED",
+    "endereco1": "UNIT 7 INITIAL BUSINESS CENTRE",
+    "endereco2": "WILSON BUSINESS PARK",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M40 8WN",
+    "distritoPostal": "M40",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46499",
+     "46760",
+     "46900",
+     "47190"
+    ],
+    "dataConstituicao": "2025-12-16",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1054,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 2,
+   "paginasLidas": 1,
+   "processadoEm": "2026-08-23T12:29:42.801Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "09152664",
+    "nome": "P P A K LIMITED",
+    "endereco1": "1 TRAFFORD ROAD",
+    "endereco2": "ECCLES",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M30 0JX",
+    "distritoPostal": "M30",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "41202"
+    ],
+    "dataConstituicao": "2014-07-29",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2025-07-29",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 1,
+   "paginasLidas": 2,
+   "processadoEm": "2026-08-23T12:30:01.895Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "10295518",
+    "nome": "NM TRANS LTD",
+    "endereco1": "60 ROLAG CRESCENT",
+    "endereco2": "",
+    "cidade": "SWINTON",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M27 5BH",
+    "distritoPostal": "M27",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "49410"
+    ],
+    "dataConstituicao": "2016-07-26",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2025-07-26",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 12,
+   "processadoEm": "2026-08-23T12:30:17.477Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "03401609",
+    "nome": "A. & C. SHEET METAL LIMITED",
+    "endereco1": "BARTON MOSS ROAD",
+    "endereco2": "ECCLES",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M30 7RL",
+    "distritoPostal": "M30",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25110",
+     "25990"
+    ],
+    "dataConstituicao": "1997-07-10",
+    "categoriaContas": "UNAUDITED ABRIDGED",
+    "dataUltimaConfirmacao": "2026-05-31",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 3,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 5,
+   "processadoEm": "2026-08-23T12:30:42.625Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "12739724",
+    "nome": "A&O TRANSPORTERS LTD",
+    "endereco1": "38 GREENWAY ROAD",
+    "endereco2": "HEALD GREEN CHEADLE",
+    "cidade": "CHESHIRE",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "SK8 3NU",
+    "distritoPostal": "SK8",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "49410",
+     "81299"
+    ],
+    "dataConstituicao": "2020-07-14",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2025-07-13",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 3,
+   "paginasLidas": 1,
+   "processadoEm": "2026-08-23T12:30:34.099Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "14928633",
+    "nome": "AVEZO LIMITED",
+    "endereco1": "29 VARDON DRIVE",
+    "endereco2": "",
+    "cidade": "WIGAN",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "WN6 0YY",
+    "distritoPostal": "WN6",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "49320",
+     "52290",
+     "77110"
+    ],
+    "dataConstituicao": "2023-06-12",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2026-06-11",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 1,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:31:09.256Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "03870924",
+    "nome": "P & K SHUTTER SERVICES LIMITED",
+    "endereco1": "UNIT 4 WESTHOUGHTON INDUSTRIAL ESTATE JAMES STREET",
+    "endereco2": "WESTHOUGHTON",
+    "cidade": "BOLTON",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "BL5 3QR",
+    "distritoPostal": "BL5",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25110"
+    ],
+    "dataConstituicao": "1999-11-03",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2025-11-03",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 6,
+   "processadoEm": "2026-08-23T12:30:49.647Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "08599466",
+    "nome": "AQL INTERNATIONAL LTD",
+    "endereco1": "73 ST HELENS ROAD",
+    "endereco2": "",
+    "cidade": "BOLTON",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "BL3 3PR",
+    "distritoPostal": "BL3",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46760"
+    ],
+    "dataConstituicao": "2013-07-05",
+    "categoriaContas": "FULL",
+    "dataUltimaConfirmacao": "2025-09-06",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 5,
+   "paginasLidas": 3,
+   "processadoEm": "2026-08-23T12:32:48.368Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16839656",
+    "nome": "AL AYKOONA AL THAHABIYA FOR GENERAL TRADING LTD",
+    "endereco1": "UNIT 7 INITIAL BUSINESS CENTRE",
+    "endereco2": "WILSON BUSINESS PARK",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M40 8WN",
+    "distritoPostal": "M40",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46499",
+     "46760",
+     "46900",
+     "47190"
+    ],
+    "dataConstituicao": "2025-11-07",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1054,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 2,
+   "paginasLidas": 1,
+   "processadoEm": "2026-08-23T12:30:51.162Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "09174053",
+    "nome": "PERFORMANCE MATERIALS LIMITED",
+    "endereco1": "XEINADIN MANCHESTER",
+    "endereco2": "100 BARBIROLLI SQUARE",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M2 3BD",
+    "distritoPostal": "M2",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25110"
+    ],
+    "dataConstituicao": "2014-08-13",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2025-08-13",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 30,
+    "enderecoDeMassa": true,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 1,
+   "processadoEm": "2026-08-23T12:31:16.320Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "00364656",
+    "nome": "PENDLE HARDWOODS LIMITED",
+    "endereco1": "C/O MENZIES LLP ONE EXPRESS",
+    "endereco2": "1 GEORGE LEIGH STREET",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M4 5DL",
+    "distritoPostal": "M4",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46730"
+    ],
+    "dataConstituicao": "1941-01-02",
+    "categoriaContas": "DORMANT",
+    "dataUltimaConfirmacao": "2025-08-02",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 68,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": "www.pendlehardwoods.co.uk",
+   "identidade": {
+    "nivel": "nome_e_dominio",
+    "aceito": true,
+    "confianca": 0.7,
+    "detalhe": "tokens PENDLE+HARDWOODS em domínio \"pendlehardwoods\"; CEP da mesma área postal (M) na página",
+    "contraindicacoes": []
+   },
+   "descobertoPor": "heuristica-dominio",
+   "emails": [
+    {
+     "endereco": "sales@pendlehardwoods.co.uk",
+     "generico": true,
+     "papel": "sales",
+     "nivelVerificacao": "mx_presente",
+     "status": "provavel",
+     "verificadoPor": "verificador-gratuito",
+     "encontradoEm": "https://www.pendlehardwoods.co.uk/"
+    }
+   ],
+   "telefones": [
+    {
+     "e164": "+441617868308",
+     "original": "0161 786 8308",
+     "areaCompativel": true,
+     "encontradoEm": "https://www.pendlehardwoods.co.uk/"
+    },
+    {
+     "e164": "+441618737004",
+     "original": "0161 873 7004",
+     "areaCompativel": true,
+     "encontradoEm": "https://www.pendlehardwoods.co.uk/"
+    }
+   ],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 5,
+   "paginasLidas": 6,
+   "processadoEm": "2026-08-23T12:31:13.798Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16288526",
+    "nome": "ALRIQIE LTD",
+    "endereco1": "FLAT 4 FLAT 4 BEYERS HOUSE",
+    "endereco2": "132 WENLOCK WAY",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M12 5UE",
+    "distritoPostal": "M12",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "52290",
+     "53100",
+     "62090",
+     "82990"
+    ],
+    "dataConstituicao": "2025-03-03",
+    "categoriaContas": "DORMANT",
+    "dataUltimaConfirmacao": "2026-04-21",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 0,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:31:08.258Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16836741",
+    "nome": "NABRAS AL-TUMOOH COMPANY LTD",
+    "endereco1": "UNIT 7 INITIAL BUSINESS CENTRE",
+    "endereco2": "WILSON BUSINESS PARK",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M40 8WN",
+    "distritoPostal": "M40",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46499",
+     "46760",
+     "46900",
+     "47190"
+    ],
+    "dataConstituicao": "2025-11-06",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1054,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 2,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:31:29.373Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "14768509",
+    "nome": "ORPHEUS MANUFACTURING LIMITED",
+    "endereco1": "UNIT 2 CLIFTON INDUSTRIAL ESTATE",
+    "endereco2": "RAKE LANE",
+    "cidade": "CLIFTON",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M27 8LT",
+    "distritoPostal": "M27",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25620"
+    ],
+    "dataConstituicao": "2023-03-30",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2026-03-29",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 4,
+   "paginasLidas": 7,
+   "processadoEm": "2026-08-23T12:31:46.987Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16758404",
+    "nome": "AFAQ ALGHARBYAH INTERNATIONAL FOR TRADING CO LTD",
+    "endereco1": "UNIT 7 INITIAL BUSINESS CENTRE",
+    "endereco2": "WILSON BUSINESS PARK",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M40 8WN",
+    "distritoPostal": "M40",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46499",
+     "46760",
+     "46900",
+     "47190"
+    ],
+    "dataConstituicao": "2025-10-02",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": "2025-10-13",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1054,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 0,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:31:52.003Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "00804767",
+    "nome": "AUTO MARINE CABLES LIMITED",
+    "endereco1": "UNIT 32 DEVONSHIRE ROAD",
+    "endereco2": "OAKHILL TRADING ESTATE",
+    "cidade": "WORSLEY",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M28 3PT",
+    "distritoPostal": "M28",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "27320",
+     "32990",
+     "46760"
+    ],
+    "dataConstituicao": "1964-05-11",
+    "categoriaContas": "MEDIUM",
+    "dataUltimaConfirmacao": "2026-04-15",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 2,
+    "enderecoDeMassa": false,
+    "segmento": "atacado"
+   },
+   "site": "www.amc-tcg.com",
+   "identidade": {
+    "nivel": "cep_registrado",
+    "aceito": true,
+    "confianca": 0.92,
+    "detalhe": "CEP M28 3PT publicado na página",
+    "contraindicacoes": []
+   },
+   "descobertoPor": "heuristica-dominio",
+   "emails": [
+    {
+     "endereco": "sales@amc-tcg.com",
+     "generico": true,
+     "papel": "sales",
+     "nivelVerificacao": "mx_presente",
+     "status": "provavel",
+     "verificadoPor": "verificador-gratuito",
+     "encontradoEm": "https://www.amc-tcg.com/"
+    },
+    {
+     "endereco": "orders@amc-tcg.com",
+     "generico": true,
+     "papel": "orders",
+     "nivelVerificacao": "mx_presente",
+     "status": "provavel",
+     "verificadoPor": "verificador-gratuito",
+     "encontradoEm": "https://www.amc-tcg.com/"
+    }
+   ],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio"
+   ],
+   "candidatosAvaliados": 5,
+   "paginasLidas": 10,
+   "processadoEm": "2026-08-23T12:31:02.243Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "14935620",
+    "nome": "PHOENIX HOME PROJECTS LTD",
+    "endereco1": "51 CARDWELL ROAD",
+    "endereco2": "ECCLES",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M30 7EF",
+    "distritoPostal": "M30",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "41202"
+    ],
+    "dataConstituicao": "2023-06-14",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2026-06-13",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 5,
+   "processadoEm": "2026-08-23T12:34:29.145Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "11475951",
+    "nome": "PACKAGED HEAT LIMITED",
+    "endereco1": "OFFICE G26, CT3 BUILDING WIGAN INVESTMENT CENTRE",
+    "endereco2": "WATERSIDE DRIVE",
+    "cidade": "WIGAN",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "WN3 5BA",
+    "distritoPostal": "WN3",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25990"
+    ],
+    "dataConstituicao": "2018-07-20",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2025-07-19",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 20,
+    "enderecoDeMassa": true,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 4,
+   "processadoEm": "2026-08-23T12:32:20.153Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "17092424",
+    "nome": "APT DOOR GROUP LIMITED",
+    "endereco1": "ALSTON HOUSE ALSTON STREET",
+    "endereco2": "UNIT 1 WOOLFOLD INDUSTRIAL ESTATE",
+    "cidade": "BURY",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "BL8 1SF",
+    "distritoPostal": "BL8",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25110"
+    ],
+    "dataConstituicao": "2026-03-16",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 2,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 1,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:32:18.153Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "14665645",
+    "nome": "MPT GROUP MATTRESS MACHINERY LTD",
+    "endereco1": "UNIT 5",
+    "endereco2": "THE SIDINGS",
+    "cidade": "BACUP",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "OL13 9RW",
+    "distritoPostal": "OL13",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25110"
+    ],
+    "dataConstituicao": "2023-02-15",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2025-05-18",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": "www.mptgroup.com",
+   "identidade": {
+    "nivel": "cep_registrado",
+    "aceito": true,
+    "confianca": 0.92,
+    "detalhe": "CEP OL13 9RW publicado na página",
+    "contraindicacoes": []
+   },
+   "descobertoPor": "heuristica-dominio",
+   "emails": [
+    {
+     "endereco": "info@mptgroup.com",
+     "generico": true,
+     "papel": "info",
+     "nivelVerificacao": "mx_presente",
+     "status": "provavel",
+     "verificadoPor": "verificador-gratuito",
+     "encontradoEm": "https://www.mptgroup.com/"
+    }
+   ],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio"
+   ],
+   "candidatosAvaliados": 3,
+   "paginasLidas": 5,
+   "processadoEm": "2026-08-23T12:31:26.172Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "12094826",
+    "nome": "ABBOTT MELLOR LIMITED",
+    "endereco1": "65 GREENGATE STREET",
+    "endereco2": "",
+    "cidade": "OLDHAM",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "OL4 1DH",
+    "distritoPostal": "OL4",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25110",
+     "25120",
+     "43290",
+     "82990"
+    ],
+    "dataConstituicao": "2019-07-10",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2026-04-02",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": "abbottmellor.com",
+   "identidade": {
+    "nivel": "nome_e_dominio",
+    "aceito": true,
+    "confianca": 0.7,
+    "detalhe": "tokens ABBOTT+MELLOR em domínio \"abbottmellor\"; CEP da mesma área postal (OL) na página",
+    "contraindicacoes": []
+   },
+   "descobertoPor": "heuristica-dominio",
+   "emails": [
+    {
+     "endereco": "info@abbottmellor.com",
+     "generico": true,
+     "papel": "info",
+     "nivelVerificacao": "mx_presente",
+     "status": "provavel",
+     "verificadoPor": "verificador-gratuito",
+     "encontradoEm": "https://abbottmellor.com/"
+    }
+   ],
+   "telefones": [
+    {
+     "e164": "+441618509099",
+     "original": "+44 161 850 9099",
+     "areaCompativel": true,
+     "encontradoEm": "https://abbottmellor.com/"
+    }
+   ],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 5,
+   "paginasLidas": 14,
+   "processadoEm": "2026-08-23T12:32:55.941Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "14249780",
+    "nome": "ANCOATS STORAGE LTD",
+    "endereco1": "15 FIRS AVENUE",
+    "endereco2": "",
+    "cidade": "ASHTON-UNDER-LYNE",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "OL6 8PL",
+    "distritoPostal": "OL6",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "52103"
+    ],
+    "dataConstituicao": "2022-07-21",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2026-03-25",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 4,
+   "paginasLidas": 5,
+   "processadoEm": "2026-08-23T12:32:40.334Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "07864189",
+    "nome": "ACCUMAC LIMITED",
+    "endereco1": "PARK HOUSE",
+    "endereco2": "200 DRAKE STREET",
+    "cidade": "ROCHDALE",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "OL16 1PJ",
+    "distritoPostal": "OL16",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46690"
+    ],
+    "dataConstituicao": "2011-11-29",
+    "categoriaContas": "UNAUDITED ABRIDGED",
+    "dataUltimaConfirmacao": "2025-11-29",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 35,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": "accumac.co.uk",
+   "identidade": {
+    "nivel": "nome_e_dominio",
+    "aceito": true,
+    "confianca": 0.7,
+    "detalhe": "tokens ACCUMAC em domínio \"accumac\"; CEP da mesma área postal (OL) na página",
+    "contraindicacoes": []
+   },
+   "descobertoPor": "heuristica-dominio",
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 2,
+   "paginasLidas": 5,
+   "processadoEm": "2026-08-23T12:32:37.307Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "05323768",
+    "nome": "AZ INTEC LIMITED",
+    "endereco1": "OFFICE 16-17 CROWS NEST BUSINESS PARK",
+    "endereco2": "ASHTON ROAD",
+    "cidade": "BILLINGE",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "WN5 7XX",
+    "distritoPostal": "WN5",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25990"
+    ],
+    "dataConstituicao": "2005-01-04",
+    "categoriaContas": "UNAUDITED ABRIDGED",
+    "dataUltimaConfirmacao": "2025-11-13",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 8,
+   "processadoEm": "2026-08-23T12:34:02.940Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "01077393",
+    "nome": "READ & TURNER (TRANSPORT) LIMITED",
+    "endereco1": "READ & TURNER (TRANSPORT) LTD",
+    "endereco2": "HARPUR HILL INDUSTRIAL ESTATE",
+    "cidade": "BUXTON",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "SK17 9JL",
+    "distritoPostal": "SK17",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46120",
+     "49410",
+     "68201"
+    ],
+    "dataConstituicao": "1972-10-19",
+    "categoriaContas": "UNAUDITED ABRIDGED",
+    "dataUltimaConfirmacao": "2025-08-22",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 1,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:32:53.923Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "12662850",
+    "nome": "PCW DEVELOPMENTS (BAMFORD) LIMITED",
+    "endereco1": "STERLING HOUSE, 501 MIDDLETON ROAD",
+    "endereco2": "CHADDERTON",
+    "cidade": "OLDHAM",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "OL9 9LY",
+    "distritoPostal": "OL9",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "41202"
+    ],
+    "dataConstituicao": "2020-06-11",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2026-06-09",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 4,
+    "enderecoDeMassa": false,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 0,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:32:54.435Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16953531",
+    "nome": "NERO FOR TRADING LTD",
+    "endereco1": "UNIT 7 INITIAL BUSINESS CENTRE",
+    "endereco2": "WILSON BUSINESS PARK",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M40 8WN",
+    "distritoPostal": "M40",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46620",
+     "46690",
+     "46740",
+     "47520"
+    ],
+    "dataConstituicao": "2026-01-09",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1054,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 0,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:32:59.450Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "06917358",
+    "nome": "P & D SHEET METAL FABRICATIONS LTD",
+    "endereco1": "UNIT 7 BROOKFIELD WORKS",
+    "endereco2": "CHRISTIE STREET",
+    "cidade": "STOCKPORT",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "SK1 4LR",
+    "distritoPostal": "SK1",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25110"
+    ],
+    "dataConstituicao": "2009-05-28",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2025-11-18",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 5,
+   "processadoEm": "2026-08-23T12:33:41.849Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16277496",
+    "nome": "A & P RECOVERY LTD",
+    "endereco1": "APARTMENT 2 EGERTON HOUSE 3 ELMIRA WAY",
+    "endereco2": "SALFORD",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M5 3DH",
+    "distritoPostal": "M5",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "49390",
+     "49420",
+     "52103",
+     "52219"
+    ],
+    "dataConstituicao": "2025-02-26",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": "2026-02-25",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 9,
+   "processadoEm": "2026-08-23T12:33:55.382Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "02874747",
+    "nome": "ARCON OVERSEAS LIMITED",
+    "endereco1": "2 HUDDERSFIELD ROAD",
+    "endereco2": "",
+    "cidade": "STALYBRIDGE",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "SK15 2QA",
+    "distritoPostal": "SK15",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46690"
+    ],
+    "dataConstituicao": "1993-11-24",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2025-09-24",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 39,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 5,
+   "paginasLidas": 3,
+   "processadoEm": "2026-08-23T12:34:15.518Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "06905727",
+    "nome": "RADIAL LINE SHEETMETAL LIMITED",
+    "endereco1": "62 HAWKHURST PARK",
+    "endereco2": "",
+    "cidade": "LEIGH",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "WN7 2TG",
+    "distritoPostal": "WN7",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25910",
+     "25990"
+    ],
+    "dataConstituicao": "2009-05-14",
+    "categoriaContas": "UNAUDITED ABRIDGED",
+    "dataUltimaConfirmacao": "2026-05-14",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": "www.radialline.co.uk",
+   "identidade": {
+    "nivel": "nome_e_dominio",
+    "aceito": true,
+    "confianca": 0.8,
+    "detalhe": "tokens RADIAL+LINE+SHEETMETAL em domínio \"radialline\"; CEP do mesmo distrito (WN7) na página",
+    "contraindicacoes": []
+   },
+   "descobertoPor": "heuristica-dominio",
+   "emails": [
+    {
+     "endereco": "info@radialline.co.uk",
+     "generico": true,
+     "papel": "info",
+     "nivelVerificacao": "mx_presente",
+     "status": "provavel",
+     "verificadoPor": "verificador-gratuito",
+     "encontradoEm": "https://www.radialline.co.uk/"
+    }
+   ],
+   "telefones": [
+    {
+     "e164": "+441942386242",
+     "original": "01942 386242",
+     "areaCompativel": true,
+     "encontradoEm": "https://www.radialline.co.uk/contact-us"
+    }
+   ],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 9,
+   "processadoEm": "2026-08-23T12:35:16.008Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "14068774",
+    "nome": "ACB WELDING LTD",
+    "endereco1": "76 MARKET STREET",
+    "endereco2": "FARNWORTH",
+    "cidade": "BOLTON",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "BL4 7NY",
+    "distritoPostal": "BL4",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "28290",
+     "49410"
+    ],
+    "dataConstituicao": "2022-04-26",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2026-04-23",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 101,
+    "enderecoDeMassa": true,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 0,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:33:48.366Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "15920986",
+    "nome": "OAKENBANK JOINERY & BUILD LTD",
+    "endereco1": "98 RUGBY DRIVE",
+    "endereco2": "",
+    "cidade": "MACCLESFIELD",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "SK10 2JF",
+    "distritoPostal": "SK10",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "41202"
+    ],
+    "dataConstituicao": "2024-08-28",
+    "categoriaContas": "DORMANT",
+    "dataUltimaConfirmacao": "2025-08-27",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 3,
+    "enderecoDeMassa": false,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 1,
+   "paginasLidas": 1,
+   "processadoEm": "2026-08-23T12:33:57.899Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "17336413",
+    "nome": "PMA MULTISECTOR SERVICE LIMITED",
+    "endereco1": "42 CHATHAM STREET",
+    "endereco2": "INCE",
+    "cidade": "WIGAN",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "WN2 2HG",
+    "distritoPostal": "WN2",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "01500",
+     "03110",
+     "25990",
+     "64306"
+    ],
+    "dataConstituicao": "2026-07-13",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 0,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:34:00.401Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "04776526",
+    "nome": "A. KENNY & SONS LIMITED",
+    "endereco1": "153 HENFOLD ROAD HENFOLD ROAD",
+    "endereco2": "TYLDESLEY",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M29 7FU",
+    "distritoPostal": "M29",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25620"
+    ],
+    "dataConstituicao": "2003-05-23",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2026-05-22",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 5,
+   "paginasLidas": 4,
+   "processadoEm": "2026-08-23T12:34:07.965Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16082714",
+    "nome": "APEX TRANSPORT AND LOGISTICS LIMITED",
+    "endereco1": "16 DURHAM CLOSE",
+    "endereco2": "TYLDESLEY",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M29 8NF",
+    "distritoPostal": "M29",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "49410"
+    ],
+    "dataConstituicao": "2024-11-15",
+    "categoriaContas": "DORMANT",
+    "dataUltimaConfirmacao": "2025-12-02",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 7,
+   "processadoEm": "2026-08-23T12:34:10.973Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "15757295",
+    "nome": "A1 TRANSPORTATION NW LTD",
+    "endereco1": "59 QUARRYMANS VIEW",
+    "endereco2": "WORSLEY",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M28 0LB",
+    "distritoPostal": "M28",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "49410"
+    ],
+    "dataConstituicao": "2024-06-03",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2025-06-02",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 3,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:34:14.012Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "11736664",
+    "nome": "BLUEGRASS COURIERS LIMITED",
+    "endereco1": "21 SMETHURST HALL ROAD",
+    "endereco2": "",
+    "cidade": "BURY",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "BL9 7TP",
+    "distritoPostal": "BL9",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "49410"
+    ],
+    "dataConstituicao": "2018-12-20",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2025-11-12",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 4,
+   "paginasLidas": 8,
+   "processadoEm": "2026-08-23T12:35:11.972Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "05429662",
+    "nome": "MONARCH SHELVING LIMITED",
+    "endereco1": "UNIT F",
+    "endereco2": "DALTRY STREET",
+    "cidade": "OLDHAM",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "OL1 4AB",
+    "distritoPostal": "OL1",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25990"
+    ],
+    "dataConstituicao": "2005-04-19",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2026-02-09",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 2,
+   "processadoEm": "2026-08-23T12:36:16.811Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "07348616",
+    "nome": "PURE FABS LIMITED",
+    "endereco1": "BRIDGE STREET BRIDGE STREET",
+    "endereco2": "HORWICH",
+    "cidade": "BOLTON",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "BL6 7BT",
+    "distritoPostal": "BL6",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25990"
+    ],
+    "dataConstituicao": "2010-08-17",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2025-08-19",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 5,
+    "enderecoDeMassa": true,
+    "segmento": "manufatura"
+   },
+   "site": "www.purecompanies.co.uk",
+   "identidade": {
+    "nivel": "cep_registrado",
+    "aceito": true,
+    "confianca": 0.92,
+    "detalhe": "CEP BL6 7BT publicado na página",
+    "contraindicacoes": []
+   },
+   "descobertoPor": "heuristica-dominio",
+   "emails": [
+    {
+     "endereco": "info@purecompanies.co.uk",
+     "generico": true,
+     "papel": "info",
+     "nivelVerificacao": "mx_presente",
+     "status": "provavel",
+     "verificadoPor": "verificador-gratuito",
+     "encontradoEm": "https://www.purecompanies.co.uk/"
+    }
+   ],
+   "telefones": [
+    {
+     "e164": "+443333446710",
+     "original": "03333 446 710",
+     "areaCompativel": false,
+     "encontradoEm": "https://www.purecompanies.co.uk/"
+    },
+    {
+     "e164": "+443333446711",
+     "original": "03333 446 711",
+     "areaCompativel": false,
+     "encontradoEm": "https://www.purecompanies.co.uk/"
+    }
+   ],
+   "provedoresTentados": [
+    "heuristica-dominio"
+   ],
+   "candidatosAvaliados": 3,
+   "paginasLidas": 3,
+   "processadoEm": "2026-08-23T12:34:09.714Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "15837819",
+    "nome": "AJ & RC PLUMBING SERVICES LTD",
+    "endereco1": "FLAT NO 2",
+    "endereco2": "52 CENTRAL ROAD",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M20 4ZD",
+    "distritoPostal": "M20",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "43220",
+     "43310",
+     "43341",
+     "43999"
+    ],
+    "dataConstituicao": "2024-07-15",
+    "categoriaContas": "UNAUDITED ABRIDGED",
+    "dataUltimaConfirmacao": "2025-07-14",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 2,
+   "processadoEm": "2026-08-23T12:35:23.030Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "06213675",
+    "nome": "BEDFORD FABRICATIONS LIMITED",
+    "endereco1": "UNIT 3 & 4 HILTON SQUARE",
+    "endereco2": "SWINTON",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M27 4DB",
+    "distritoPostal": "M27",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25110"
+    ],
+    "dataConstituicao": "2007-04-16",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2025-04-16",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 8,
+   "processadoEm": "2026-08-23T12:36:17.311Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16959624",
+    "nome": "MS1 MCR LIMITED",
+    "endereco1": "VERNON MILL",
+    "endereco2": "MERSEY STREET",
+    "cidade": "STOCKPORT",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "SK1 2HX",
+    "distritoPostal": "SK1",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "52103"
+    ],
+    "dataConstituicao": "2026-01-13",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 2,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 0,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:35:08.972Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "04932653",
+    "nome": "R WARD WELDING SPECIALISTS LIMITED",
+    "endereco1": "24 HOLLYWAY",
+    "endereco2": "",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M22 4WS",
+    "distritoPostal": "M22",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25110"
+    ],
+    "dataConstituicao": "2003-10-15",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2025-10-06",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 4,
+   "paginasLidas": 2,
+   "processadoEm": "2026-08-23T12:35:21.023Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "00563640",
+    "nome": "R.& J.BRADLEY(CONTRACTORS)LIMITED",
+    "endereco1": "99 TITHEBARN ROAD",
+    "endereco2": "ASHTON IN MAKERFIELD",
+    "cidade": "WIGAN",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "WN4 0YD",
+    "distritoPostal": "WN4",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "41201"
+    ],
+    "dataConstituicao": "1956-03-28",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2025-11-13",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 9,
+   "processadoEm": "2026-08-23T12:35:28.057Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "01632538",
+    "nome": "PENDLE METALWARES LIMITED",
+    "endereco1": "17-18 THE HIVES MOSELEY ROAD",
+    "endereco2": "TRAFFORD PARK",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M17 1HQ",
+    "distritoPostal": "M17",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25990"
+    ],
+    "dataConstituicao": "1982-04-30",
+    "categoriaContas": "DORMANT",
+    "dataUltimaConfirmacao": "2026-07-30",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 4,
+   "paginasLidas": 4,
+   "processadoEm": "2026-08-23T12:35:26.558Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "01222789",
+    "nome": "BROADTHORN CONSTRUCTION LIMITED",
+    "endereco1": "C/O POMEGRANATE, 3 HARDMAN SQUARE",
+    "endereco2": "SPINNINGFIELDS",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M3 3EB",
+    "distritoPostal": "M3",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "43999"
+    ],
+    "dataConstituicao": "1975-08-13",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2024-12-14",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 10,
+    "enderecoDeMassa": true,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 1,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:35:23.024Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "15238621",
+    "nome": "PRIMROSE HOLDINGS GROUP LIMITED",
+    "endereco1": "366 HOLCOMBE ROAD",
+    "endereco2": "GREENMOUNT",
+    "cidade": "BURY",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "BL8 4DT",
+    "distritoPostal": "BL8",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "41201"
+    ],
+    "dataConstituicao": "2023-10-26",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2025-10-25",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 24,
+    "enderecoDeMassa": true,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 7,
+   "processadoEm": "2026-08-23T12:35:55.204Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16910127",
+    "nome": "NAJM ALDEEN MOHAMEED ALGHBRI AND PARTENER CO LTD",
+    "endereco1": "UNIT 7 INITIAL BUSINESS CENTRE",
+    "endereco2": "WILSON BUSINESS PARK",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M40 8WN",
+    "distritoPostal": "M40",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46499",
+     "46760",
+     "46900",
+     "47190"
+    ],
+    "dataConstituicao": "2025-12-15",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1054,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 0,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:35:36.123Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "17319129",
+    "nome": "QUAYS LOGISTICS LTD",
+    "endereco1": "27 CLIFTON ROAD",
+    "endereco2": "",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M41 5RU",
+    "distritoPostal": "M41",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "52290"
+    ],
+    "dataConstituicao": "2026-07-03",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": "2026-07-27",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 3,
+   "paginasLidas": 2,
+   "processadoEm": "2026-08-23T12:36:21.827Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "13396702",
+    "nome": "PAUL S SMITH CONTRACTING LTD",
+    "endereco1": "21 ESKDALE AVENUE",
+    "endereco2": "",
+    "cidade": "WIGAN",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "WN1 2HA",
+    "distritoPostal": "WN1",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25990"
+    ],
+    "dataConstituicao": "2021-05-14",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2025-12-11",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 3,
+   "processadoEm": "2026-08-23T12:36:40.025Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "17024278",
+    "nome": "BKE LIMITED",
+    "endereco1": "76 MARKET STREET",
+    "endereco2": "FARNWORTH",
+    "cidade": "BOLTON",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "BL4 7NY",
+    "distritoPostal": "BL4",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "49410"
+    ],
+    "dataConstituicao": "2026-02-10",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 101,
+    "enderecoDeMassa": true,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 2,
+   "processadoEm": "2026-08-23T12:37:00.121Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "08930159",
+    "nome": "PGA FABRICATIONS LIMITED",
+    "endereco1": "UNIT 13/14 CHESHAM INDUSTRIAL ESTATE",
+    "endereco2": "ORAM STREET",
+    "cidade": "BURY",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "BL9 6EN",
+    "distritoPostal": "BL9",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25620"
+    ],
+    "dataConstituicao": "2014-03-10",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2026-03-10",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 1,
+   "paginasLidas": 1,
+   "processadoEm": "2026-08-23T12:36:29.392Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "05178292",
+    "nome": "BARROWMIX LIMITED",
+    "endereco1": "77 SCHOOL LANE",
+    "endereco2": "",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M20 6WN",
+    "distritoPostal": "M20",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "43999"
+    ],
+    "dataConstituicao": "2004-07-13",
+    "categoriaContas": "UNAUDITED ABRIDGED",
+    "dataUltimaConfirmacao": "2026-04-14",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 21,
+    "enderecoDeMassa": true,
+    "segmento": "construcao"
+   },
+   "site": "barrowmixconcrete.com",
+   "identidade": {
+    "nivel": "nome_e_dominio",
+    "aceito": true,
+    "confianca": 0.65,
+    "detalhe": "tokens BARROWMIX em domínio \"barrowmix\"; telefone com código de área 0161, compatível com M",
+    "contraindicacoes": []
+   },
+   "descobertoPor": "heuristica-dominio",
+   "emails": [],
+   "telefones": [
+    {
+     "e164": "+441617484500",
+     "original": "0161 748 4500",
+     "areaCompativel": true,
+     "encontradoEm": "https://barrowmixconcrete.com/"
+    },
+    {
+     "e164": "+441942722629",
+     "original": "01942 722 629",
+     "areaCompativel": true,
+     "encontradoEm": "https://barrowmixconcrete.com/"
+    },
+    {
+     "e164": "+448000740442",
+     "original": "0800 074 0442",
+     "areaCompativel": false,
+     "encontradoEm": "https://barrowmixconcrete.com/"
+    },
+    {
+     "e164": "+441565734111",
+     "original": "01565 734 111",
+     "areaCompativel": false,
+     "encontradoEm": "https://barrowmixconcrete.com/"
+    }
+   ],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 4,
+   "paginasLidas": 16,
+   "processadoEm": "2026-08-23T12:36:55.608Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16656645",
+    "nome": "AL HAYAT MEDICAL LTD",
+    "endereco1": "UNIT 7 INITIAL BUSINESS CENTRE",
+    "endereco2": "WILSON BUSINESS PARK",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M40 8WN",
+    "distritoPostal": "M40",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46690",
+     "46730",
+     "46760",
+     "46900"
+    ],
+    "dataConstituicao": "2025-08-18",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1054,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 6,
+   "processadoEm": "2026-08-23T12:37:35.519Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16634793",
+    "nome": "AL-MUALM ALMUTAMAYIZ ALHADITH FOR TRADING LTD",
+    "endereco1": "UNIT 7 INITIAL BUSINESS CENTRE",
+    "endereco2": "WILSON BUSINESS PARK",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M40 8WN",
+    "distritoPostal": "M40",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46520",
+     "46900",
+     "52290",
+     "62090"
+    ],
+    "dataConstituicao": "2025-08-07",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1054,
+    "enderecoDeMassa": true,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 2,
+   "paginasLidas": 3,
+   "processadoEm": "2026-08-23T12:36:38.504Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16431608",
+    "nome": "ASCENT LIFTING LTD",
+    "endereco1": "1 PRESTBURY ROAD",
+    "endereco2": "",
+    "cidade": "WILMSLOW",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "SK9 2LJ",
+    "distritoPostal": "SK9",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "43999"
+    ],
+    "dataConstituicao": "2025-05-06",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 14,
+   "processadoEm": "2026-08-23T12:36:53.604Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "11881514",
+    "nome": "PW CONSTRUCTION PLANNING LTD",
+    "endereco1": "24A MARKET STREET",
+    "endereco2": "DISLEY",
+    "cidade": "STOCKPORT",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "SK12 2AA",
+    "distritoPostal": "SK12",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "43999"
+    ],
+    "dataConstituicao": "2019-03-14",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2026-03-13",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 40,
+    "enderecoDeMassa": true,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 5,
+   "processadoEm": "2026-08-23T12:36:56.107Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16805553",
+    "nome": "PIRES PARTNERSHIPS LIMITED",
+    "endereco1": "THE ISLAND BUILDING",
+    "endereco2": "ST. ANNS PARADE",
+    "cidade": "WILMSLOW",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "SK9 1HG",
+    "distritoPostal": "SK9",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "41100",
+     "41202",
+     "68100",
+     "68320"
+    ],
+    "dataConstituicao": "2025-10-23",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 8,
+   "processadoEm": "2026-08-23T12:37:06.652Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16137539",
+    "nome": "ASAL TRANSPORT LIMITED",
+    "endereco1": "5 CORNBROOK WAY",
+    "endereco2": "",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M16 7QD",
+    "distritoPostal": "M16",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "49410"
+    ],
+    "dataConstituicao": "2024-12-16",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2025-12-15",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 3,
+   "processadoEm": "2026-08-23T12:37:34.493Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16813642",
+    "nome": "ABDULNASER AND ABDULKAREEM LTD",
+    "endereco1": "UNIT 7 INITIAL BUSINESS CENTRE",
+    "endereco2": "WILSON BUSINESS PARK",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M40 8WN",
+    "distritoPostal": "M40",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25990",
+     "49410",
+     "56101",
+     "62020"
+    ],
+    "dataConstituicao": "2025-10-27",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1054,
+    "enderecoDeMassa": true,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 1,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:37:46.114Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16979695",
+    "nome": "ARM GATE LTD",
+    "endereco1": "5 VICTORIA COURT VICTORIA LANE",
+    "endereco2": "WHITEFIELD",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M45 6FF",
+    "distritoPostal": "M45",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25110"
+    ],
+    "dataConstituicao": "2026-01-21",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 2,
+   "paginasLidas": 2,
+   "processadoEm": "2026-08-23T12:37:43.607Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "14892809",
+    "nome": "AYYUB BUILDERS LTD",
+    "endereco1": "283 FEATHERSTALL ROAD NORTH",
+    "endereco2": "",
+    "cidade": "OLDHAM",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "OL1 2NH",
+    "distritoPostal": "OL1",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "41202",
+     "68100"
+    ],
+    "dataConstituicao": "2023-05-24",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2026-05-23",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 9,
+    "enderecoDeMassa": true,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 2,
+   "paginasLidas": 2,
+   "processadoEm": "2026-08-23T12:42:57.378Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "17178872",
+    "nome": "PATRON DIY NETWORK LTD",
+    "endereco1": "62 MEDWAY DRIVE MEDWAY DRIVE",
+    "endereco2": "KEARSLEY",
+    "cidade": "BOLTON",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "BL4 8PJ",
+    "distritoPostal": "BL4",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "41202",
+     "43999",
+     "46130",
+     "46190"
+    ],
+    "dataConstituicao": "2026-04-24",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 6,
+   "processadoEm": "2026-08-23T12:38:02.181Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "07532929",
+    "nome": "BRIAN MOORES LIMITED",
+    "endereco1": "C/O ATRIA ACCOUNTANTS LTD IMPERIAL HOUSE",
+    "endereco2": "79-81 HORNBY STREET",
+    "cidade": "BURY",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "BL9 5BN",
+    "distritoPostal": "BL9",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "49410"
+    ],
+    "dataConstituicao": "2011-02-17",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2026-02-20",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 98,
+    "enderecoDeMassa": true,
+    "segmento": "transporte"
+   },
+   "site": "brianmoores.co.uk",
+   "identidade": {
+    "nivel": "cep_registrado",
+    "aceito": true,
+    "confianca": 0.92,
+    "detalhe": "CEP BL9 5BN publicado na página",
+    "contraindicacoes": []
+   },
+   "descobertoPor": "heuristica-dominio",
+   "emails": [
+    {
+     "endereco": "enquiries@brianmoores.co.uk",
+     "generico": true,
+     "papel": "enquiries",
+     "nivelVerificacao": "mx_presente",
+     "status": "provavel",
+     "verificadoPor": "verificador-gratuito",
+     "encontradoEm": "https://brianmoores.co.uk/"
+    }
+   ],
+   "telefones": [
+    {
+     "e164": "+441615330399",
+     "original": "0161 533 0399",
+     "areaCompativel": true,
+     "encontradoEm": "https://brianmoores.co.uk/"
+    }
+   ],
+   "provedoresTentados": [
+    "heuristica-dominio"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 8,
+   "processadoEm": "2026-08-23T12:36:58.331Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16436389",
+    "nome": "PRESTIGE CABINETS LIMITED",
+    "endereco1": "527A WILMSLOW ROAD",
+    "endereco2": "WITHINGTON",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M20 4BA",
+    "distritoPostal": "M20",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "33200",
+     "46690"
+    ],
+    "dataConstituicao": "2025-05-08",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 18,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 8,
+   "processadoEm": "2026-08-23T12:39:06.513Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "05284150",
+    "nome": "BDP LTD",
+    "endereco1": "38 HALL POOL DRIVE",
+    "endereco2": "",
+    "cidade": "STOCKPORT",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "SK2 5ED",
+    "distritoPostal": "SK2",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "41202"
+    ],
+    "dataConstituicao": "2004-11-11",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2025-11-11",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 11,
+   "processadoEm": "2026-08-23T12:39:03.501Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16696376",
+    "nome": "2FJ LIMITED",
+    "endereco1": "203 KENYON WAY",
+    "endereco2": "LITTLE HULTON",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M38 0DJ",
+    "distritoPostal": "M38",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "41201",
+     "41202",
+     "43390"
+    ],
+    "dataConstituicao": "2025-09-05",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 11,
+    "enderecoDeMassa": true,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 2,
+   "paginasLidas": 2,
+   "processadoEm": "2026-08-23T12:38:15.230Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "08621396",
+    "nome": "BRIGHT FUTURE GLOBAL LTD",
+    "endereco1": "UNIT 3C CALDERSHAW BUSINESS PARK",
+    "endereco2": "INGS LANE",
+    "cidade": "ROCHDALE",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "OL12 7LQ",
+    "distritoPostal": "OL12",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "52103",
+     "52290",
+     "82990"
+    ],
+    "dataConstituicao": "2013-07-23",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2026-06-19",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 6,
+   "processadoEm": "2026-08-23T12:38:11.715Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "05585351",
+    "nome": "PANTHEON CATERING EQUIPMENT LIMITED",
+    "endereco1": "MICHAEL SOHOR AND CO",
+    "endereco2": "74 ST GEORGES ROAD",
+    "cidade": "BOLTON",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "BL1 2DD",
+    "distritoPostal": "BL1",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46690"
+    ],
+    "dataConstituicao": "2005-10-06",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2025-10-06",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 5,
+   "paginasLidas": 6,
+   "processadoEm": "2026-08-23T12:38:30.797Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16416144",
+    "nome": "PINTAR TRANSPORT LTD",
+    "endereco1": "16 REGENT CLOSE",
+    "endereco2": "",
+    "cidade": "CHEADLE",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "SK8 5PJ",
+    "distritoPostal": "SK8",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "49410"
+    ],
+    "dataConstituicao": "2025-04-29",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": "2026-05-08",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 5,
+   "paginasLidas": 4,
+   "processadoEm": "2026-08-23T12:38:22.269Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16833416",
+    "nome": "AL FARIS GROUP FOR TRADING LTD",
+    "endereco1": "UNIT 7 INITIAL BUSINESS CENTRE",
+    "endereco2": "WILSON BUSINESS PARK",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M40 8WN",
+    "distritoPostal": "M40",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46499",
+     "46760",
+     "46900",
+     "47190"
+    ],
+    "dataConstituicao": "2025-11-05",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1054,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 5,
+   "processadoEm": "2026-08-23T12:39:40.194Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "12116958",
+    "nome": "PRODGEKT LIMITED",
+    "endereco1": "38A MELBOURNE STREET",
+    "endereco2": "",
+    "cidade": "STALYBRIDGE",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "SK15 2JJ",
+    "distritoPostal": "SK15",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "41100",
+     "41201",
+     "41202"
+    ],
+    "dataConstituicao": "2019-07-23",
+    "categoriaContas": "UNAUDITED ABRIDGED",
+    "dataUltimaConfirmacao": "2025-07-22",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 27,
+    "enderecoDeMassa": true,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 0,
+   "paginasLidas": 0,
+   "processadoEm": "2026-08-23T12:38:41.398Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16714186",
+    "nome": "BLACKSTONE FABRICATIONS LTD",
+    "endereco1": "UNIT 8B GREEN VALE BUSINESS PARK",
+    "endereco2": "TODMORDEN ROAD",
+    "cidade": "LITTLEBOROUGH",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "OL15 9EG",
+    "distritoPostal": "OL15",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25990"
+    ],
+    "dataConstituicao": "2025-09-12",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 4,
+   "paginasLidas": 4,
+   "processadoEm": "2026-08-23T12:39:03.514Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "16802247",
+    "nome": "R S T M GENERAL TRADING LTD",
+    "endereco1": "UNIT 7 INITIAL BUSINESS CENTRE",
+    "endereco2": "WILSON BUSINESS PARK",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M40 8WN",
+    "distritoPostal": "M40",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46499",
+     "46760",
+     "46900",
+     "47190"
+    ],
+    "dataConstituicao": "2025-10-22",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1054,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 5,
+   "processadoEm": "2026-08-23T12:39:38.178Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "01072813",
+    "nome": "ASH TOOL CO. LIMITED",
+    "endereco1": "LORD STREET,",
+    "endereco2": "ASHTON-UNDER--LYNE.",
+    "cidade": null,
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "OL6 6HZ",
+    "distritoPostal": "OL6",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "25620"
+    ],
+    "dataConstituicao": "1972-09-20",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2026-04-29",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "manufatura"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 2,
+   "paginasLidas": 1,
+   "processadoEm": "2026-08-23T12:39:51.759Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "09538692",
+    "nome": "BEST BUILDERS MANCHESTER LTD",
+    "endereco1": "65 CRINGLE ROAD",
+    "endereco2": "",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M19 2RQ",
+    "distritoPostal": "M19",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "43999"
+    ],
+    "dataConstituicao": "2015-04-13",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2026-04-13",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 8,
+   "processadoEm": "2026-08-23T12:42:26.685Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "17343938",
+    "nome": "NORTHERN RECOVERY AND TRANSPORT LTD",
+    "endereco1": "45 GILDA ROAD",
+    "endereco2": "",
+    "cidade": "WORSLEY",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M28 1BA",
+    "distritoPostal": "M28",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "52290"
+    ],
+    "dataConstituicao": "2026-07-16",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 5,
+   "paginasLidas": 15,
+   "processadoEm": "2026-08-23T12:39:41.694Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "10458020",
+    "nome": "ASIABUSINESS HUB LTD",
+    "endereco1": "3A ERA STREET",
+    "endereco2": "",
+    "cidade": "SALE",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M33 3AH",
+    "distritoPostal": "M33",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46690",
+     "74909"
+    ],
+    "dataConstituicao": "2016-11-02",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2025-11-01",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 3,
+   "paginasLidas": 3,
+   "processadoEm": "2026-08-23T12:39:36.677Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "17168370",
+    "nome": "RAPID DROP HOLDINGS LTD",
+    "endereco1": "ABC BUILDINGS",
+    "endereco2": "21-23 QUAY STREET",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M3 4AE",
+    "distritoPostal": "M3",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "52290"
+    ],
+    "dataConstituicao": "2026-04-20",
+    "categoriaContas": "NO ACCOUNTS FILED",
+    "dataUltimaConfirmacao": null,
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 6,
+    "enderecoDeMassa": true,
+    "segmento": "transporte"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 6,
+   "processadoEm": "2026-08-23T12:40:21.475Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "03018186",
+    "nome": "POWELL MASONRY LTD.",
+    "endereco1": "UNIT 41 BRADLEY HALL TRADING ESTATE BRADLEY LANE",
+    "endereco2": "STANDISH",
+    "cidade": "WIGAN",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "WN6 0XQ",
+    "distritoPostal": "WN6",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "43999"
+    ],
+    "dataConstituicao": "1995-02-03",
+    "categoriaContas": "TOTAL EXEMPTION FULL",
+    "dataUltimaConfirmacao": "2026-02-01",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 1,
+    "enderecoDeMassa": false,
+    "segmento": "construcao"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 10,
+   "processadoEm": "2026-08-23T12:40:06.857Z",
+   "versaoPipeline": "1.0.0"
+  },
+  {
+   "empresa": {
+    "numeroRegistro": "08706113",
+    "nome": "ALINA LTD",
+    "endereco1": "INITIAL BUSINESS CENTRE",
+    "endereco2": "WILSON BUSINESS PARK",
+    "cidade": "MANCHESTER",
+    "condado": "",
+    "pais": "United Kingdom",
+    "cep": "M40 8WN",
+    "distritoPostal": "M40",
+    "categoria": "Private Limited Company",
+    "situacao": "ativa",
+    "situacaoBruta": "Active",
+    "codigosSic": [
+     "46760"
+    ],
+    "dataConstituicao": "2013-09-25",
+    "categoriaContas": "MICRO ENTITY",
+    "dataUltimaConfirmacao": "2025-09-25",
+    "fonte": "companies-house-snapshot:BasicCompanyData-2026-08-01 (amostra congelada)",
+    "coletadoEm": "2026-08-16T00:00:00.000Z",
+    "empresasNoMesmoEndereco": 219,
+    "enderecoDeMassa": true,
+    "segmento": "atacado"
+   },
+   "site": null,
+   "identidade": {
+    "nivel": "nenhuma",
+    "aceito": false,
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contraindicacoes": []
+   },
+   "descobertoPor": null,
+   "emails": [],
+   "telefones": [],
+   "provedoresTentados": [
+    "heuristica-dominio",
+    "common-crawl"
+   ],
+   "candidatosAvaliados": 6,
+   "paginasLidas": 6,
+   "processadoEm": "2026-08-23T12:40:24.496Z",
+   "versaoPipeline": "1.0.0"
+  }
+ ],
+ "reavaliadoEm": "2026-08-23T14:33:37.373Z"
+}
