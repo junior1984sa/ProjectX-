@@ -101,7 +101,7 @@ export function useExecutarBusca() {
     // créditos, para que a pessoa sinta a ferramenta antes de criar conta.
     // O tamanho fica fixo em 10 empresas e fica marcado como "demo" na sessão.
     if (!usuarioId) {
-      if (sessionStorage.getItem("prospectx_demo_usado")) {
+      if (sessionStorage.getItem("whohiresyou_demo_usado")) {
         toast.error(t("busca.erro.demoUsada"))
         navigate("/entrar")
         return
@@ -123,7 +123,7 @@ export function useExecutarBusca() {
         timestamp: new Date(),
       }
 
-      sessionStorage.setItem("prospectx_demo_usado", "true")
+      sessionStorage.setItem("whohiresyou_demo_usado", "true")
       toast.success(t("busca.ok.demonstracao"))
       await buscarEmpresas(params)
       return

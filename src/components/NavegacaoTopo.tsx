@@ -41,12 +41,12 @@ export function NavegacaoTopo() {
           className="flex items-center gap-2 flex-shrink-0"
         >
           <img
-            src="/logo-x.png"
-            alt="ProjectX"
-            className="w-7 h-7 object-contain"
+            src="/marca.svg"
+            alt=""
+            className="w-7 h-7"
           />
           <span className="font-bold text-foreground tracking-tight hidden sm:inline">
-            Prospect<span className="text-dourado-400">X</span>
+            Who<span className="text-dourado-400">Hires</span>You
           </span>
         </button>
 

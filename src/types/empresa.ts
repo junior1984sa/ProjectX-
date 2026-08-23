@@ -1,4 +1,4 @@
-// Tipos e interfaces do ProspectX
+// Tipos e interfaces do WhoHiresYou
 
 /**
  * Representa uma empresa encontrada na prospecção

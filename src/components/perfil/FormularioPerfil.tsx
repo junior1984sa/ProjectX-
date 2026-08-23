@@ -208,8 +208,9 @@ export function FormularioPerfil({ onConcluido }: FormularioPerfilProps) {
               ))}
             </div>
             <p className="text-xs text-muted-foreground">
-              Por enquanto, o ProspectX atua no Brasil. Em breve, expansão para outros países
-              com preços e moeda locais.
+              O WhoHiresYou atende Brasil, Estados Unidos e Reino Unido, cada um
+              com preço e moeda próprios. O país escolhido define onde buscamos
+              empresas e em que moeda a assinatura é cobrada.
             </p>
           </div>
 

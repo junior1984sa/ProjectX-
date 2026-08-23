@@ -30,7 +30,7 @@ import { PAISES_DISPONIVEIS, TOTAL_SEGMENTOS_MAPEADOS } from "@/types/prestador"
  *   1. o que é isso            → tese
  *   2. será que funciona       → formato do resultado
  *   3. como funciona           → três passos
- *   4. em que isso é diferente → anúncio espera, ProspectX vai
+ *   4. em que isso é diferente → anúncio espera, WhoHiresYou vai
  *   5. quanto custa            → a conta ANTES do preço
  */
 export function PaginaComoFunciona() {

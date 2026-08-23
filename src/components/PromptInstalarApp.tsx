@@ -7,7 +7,7 @@ interface EventoInstalacaoPWA extends Event {
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>
 }
 
-const CHAVE_DISPENSADO = "prospectx_pwa_dispensado"
+const CHAVE_DISPENSADO = "whohiresyou_pwa_dispensado"
 
 /**
  * Banner discreto que aparece quando o navegador sinaliza que o app

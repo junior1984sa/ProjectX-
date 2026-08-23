@@ -2,9 +2,9 @@ import { create } from "zustand"
 import i18n, { CHAVE_IDIOMA } from "@/i18n"
 import { PAISES_DISPONIVEIS, obterPais } from "@/types/prestador"
 
-const CHAVE_PAIS = "prospectx:pais"
-const CHAVE_ESCOLHEU = "prospectx:escolheu-preferencias"
-const CHAVE_IDIOMA_MANUAL = "prospectx:idioma-manual"
+const CHAVE_PAIS = "whohiresyou:pais"
+const CHAVE_ESCOLHEU = "whohiresyou:escolheu-preferencias"
+const CHAVE_IDIOMA_MANUAL = "whohiresyou:idioma-manual"
 
 /**
  * PREFERÊNCIAS DE IDIOMA E PAÍS

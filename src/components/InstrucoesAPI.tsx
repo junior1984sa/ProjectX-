@@ -60,7 +60,7 @@ export function InstrucoesAPI({ aberto, onFechar }: InstrucoesAPIProps) {
             Integrar APIs reais
           </DialogTitle>
           <DialogDescription>
-            O ProspectX usa dados simulados por padrão. Siga os passos abaixo para conectar APIs reais e obter leads verdadeiros.
+            O WhoHiresYou usa dados simulados por padrão. Siga os passos abaixo para conectar APIs reais e obter leads verdadeiros.
           </DialogDescription>
         </DialogHeader>
 

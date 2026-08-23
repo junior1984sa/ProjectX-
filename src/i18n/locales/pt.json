@@ -22,7 +22,7 @@
   "apresentacao": {
     "eyebrow": "Prospecção B2B ativa",
     "titulo": "Seu próximo cliente já existe.",
-    "subtitulo": "Enquanto seu anúncio espera alguém aparecer, o ProspectX vai até as empresas que precisam do seu serviço agora — com telefone e e-mail, prontas para o contato.",
+    "subtitulo": "Enquanto seu anúncio espera alguém aparecer, o WhoHiresYou vai até as empresas que precisam do seu serviço agora — com telefone e e-mail, prontas para o contato.",
     "ctaPrincipal": "Buscar empresas agora",
     "ctaObservacao": "Funciona sem cadastro. Você vê empresas reais antes de decidir.",
     "comoFunciona": "Como funciona",
@@ -33,12 +33,12 @@
     "passo3Titulo": "Fala com elas ali mesmo",
     "passo3Texto": "WhatsApp com a mensagem pronta, um clique por empresa. Ou e-mail para até 50 de uma vez, com seu portfólio.",
     "contaTitulo": "Faça a conta antes de olhar o preço",
-    "contaTexto": "Quanto vale um cliente novo para você? Se um serviço seu fecha em R$ 8.000 e o ProspectX custa R$ 197 por mês, fechar um único por mês já pagou a ferramenta 40 vezes.",
+    "contaTexto": "Quanto vale um cliente novo para você? Se um serviço seu fecha em R$ 8.000 e o WhoHiresYou custa R$ 197 por mês, fechar um único por mês já pagou a ferramenta 40 vezes.",
     "contaRodape": "É por isso que o teste é de 7 dias, sem compromisso: dá tempo de descobrir se fecha.",
     "diferencialTitulo": "O que muda em relação a anunciar",
     "difEsperar": "Anúncio espera",
     "difEsperarTexto": "Você paga para aparecer e torce para alguém procurar exatamente naquele momento.",
-    "difIr": "ProspectX vai",
+    "difIr": "WhoHiresYou vai",
     "difIrTexto": "Você escolhe o ramo e a região, e recebe as empresas com contato. A direção é invertida.",
     "planosTitulo": "Preço de fundador para os primeiros",
     "planosTexto": "As primeiras vagas entram com preço travado para sempre. Depois disso, valor de tabela.",
@@ -218,7 +218,7 @@
     }
   },
   "busca": {
-    "chamada": "Esqueça anúncio esperando alguém ver. O ProspectX vai direto até quem, agora, precisa do serviço que você presta — em qualquer cidade {{regiao}}.",
+    "chamada": "Esqueça anúncio esperando alguém ver. O WhoHiresYou vai direto até quem, agora, precisa do serviço que você presta — em qualquer cidade {{regiao}}.",
     "regiaoDoPais": "do país escolhido",
     "oQueEncontrar": "O que você quer encontrar?",
     "modoClientes": "Clientes potenciais",
@@ -364,7 +364,7 @@
     "empresa_other": "{{count}} empresas",
     "bairrosComMaisAlvos": "Bairros com mais alvos",
     "semDados": "Sem dados disponíveis",
-    "instalarTitulo": "Instale o ProspectX",
+    "instalarTitulo": "Instale o WhoHiresYou",
     "instalarTexto": "Acesse mais rápido, direto da tela inicial do seu celular.",
     "instalarAgora": "Instalar agora"
   },
@@ -445,7 +445,7 @@
   },
   "diretorio": {
     "titulo": "Encontre um prestador",
-    "subtitulo": "Busque diretamente entre prestadores verificados e assinantes ativos do ProspectX.",
+    "subtitulo": "Busque diretamente entre prestadores verificados e assinantes ativos do WhoHiresYou.",
     "placeholderSegmento": "Segmento (ex: jateamento abrasivo)",
     "placeholderCidade": "Cidade (ex: {{exemplo}})",
     "buscar": "Buscar",
@@ -475,7 +475,7 @@
     "mensagem": "Mensagem",
     "placeholderMensagem": "Descreva sua dúvida ou problema com o máximo de detalhes possível...",
     "enviarMensagem": "Enviar mensagem",
-    "assuntoPadrao": "Suporte ProspectX",
+    "assuntoPadrao": "Suporte WhoHiresYou",
     "erroPreencha": "Preencha seu nome e a mensagem antes de enviar.",
     "abrindoEmail": "Abrindo seu aplicativo de e-mail...",
     "faq": {
@@ -609,15 +609,15 @@
   "secoes": {
     "pilares": {
       "sobrescrito": "O que a ferramenta faz",
-      "titulo": "Da lista de empresas a conversa que vira contrato.",
-      "subtitulo": "Tres movimentos, um lugar so. Voce nao sai daqui para planilha nenhuma.",
+      "titulo": "Da lista de empresas à conversa que vira contrato.",
+      "subtitulo": "Três movimentos, um lugar só. Você não sai daqui para planilha nenhuma.",
       "descobrir": {
         "titulo": "Descobrir",
-        "texto": "Informe o seu ramo e a cidade. O sistema devolve as empresas que contratam o que voce faz, nao o consumidor final."
+        "texto": "Informe o seu ramo e a cidade. O sistema devolve as empresas que contratam o que você faz, não o consumidor final."
       },
       "abordar": {
         "titulo": "Abordar",
-        "texto": "Um assistente escreve a primeira mensagem a partir do ramo do cliente, e o disparo em lote respeita a regra de cada pais."
+        "texto": "Um assistente escreve a primeira mensagem a partir do ramo do cliente, e o disparo em lote respeita a regra de cada país."
       },
       "acompanhar": {
         "titulo": "Acompanhar",
@@ -628,56 +628,56 @@
       "sobrescrito": "Como funciona",
       "titulo": "Quatro passos. O primeiro leva menos de um minuto.",
       "p1": {
-        "titulo": "Diga o que voce vende",
-        "texto": "O seu ramo, escrito do seu jeito. O sistema reconhece variacoes e sinonimos em portugues, ingles e espanhol."
+        "titulo": "Diga o que você vende",
+        "texto": "O seu ramo, escrito do seu jeito. O sistema reconhece variações e sinônimos em português, inglês e espanhol."
       },
       "p2": {
         "titulo": "Veja quem contrata isso",
-        "texto": "Em vez de procurar empresas parecidas com a sua, voce recebe os ramos que compram o seu servico e as empresas de cada um."
+        "texto": "Em vez de procurar empresas parecidas com a sua, você recebe os ramos que compram o seu serviço e as empresas de cada um."
       },
       "p3": {
         "titulo": "Escolha e aborde",
-        "texto": "Filtre por quem tem contato disponivel, gere a mensagem e envie. O rodape legal e o descadastro entram sozinhos."
+        "texto": "Filtre por quem tem contato disponível, gere a mensagem e envie. O rodapé legal e o descadastro entram sozinhos."
       },
       "p4": {
-        "titulo": "Acompanhe ate fechar",
-        "texto": "Mova cada oportunidade pelo funil e registre o valor. E o que mostra quanto a ferramenta devolveu."
+        "titulo": "Acompanhe até fechar",
+        "texto": "Mova cada oportunidade pelo funil e registre o valor. É o que mostra quanto a ferramenta devolveu."
       }
     },
     "precos": {
-      "sobrescrito": "Precos",
-      "titulo": "Preco de tabela, sem consulta comercial.",
-      "subtitulo": "Ciclos mais longos custam menos por mes e rendem mais creditos. Escolha o pais para ver na sua moeda.",
-      "ciclo": "Ciclo de cobranca",
-      "pais": "Pais",
-      "porMes": "por mes",
+      "sobrescrito": "Preços",
+      "titulo": "Preço de tabela, sem consulta comercial.",
+      "subtitulo": "Ciclos mais longos custam menos por mês e rendem mais créditos. Escolha o país para ver na sua moeda.",
+      "ciclo": "Ciclo de cobrança",
+      "pais": "País",
+      "porMes": "por mês",
       "cobradoDeUmaVez": "Cobrado {{total}} de uma vez, a cada {{meses}} meses",
-      "economia": "{{pct}}% mais barato por mes que o ciclo anterior",
+      "economia": "{{pct}}% mais barato por mês que o ciclo anterior",
       "item": {
-        "creditos": "{{creditos}} creditos por mes, acumulativos",
-        "segmentos": "{{total}} ramos mapeados, em tres idiomas",
+        "creditos": "{{creditos}} créditos por mês, acumulativos",
+        "segmentos": "{{total}} ramos mapeados, em três idiomas",
         "funil": "Funil de acompanhamento com etapas e valor fechado",
         "abordagem": "Assistente de primeira abordagem por ramo",
-        "idiomas": "Busca em portugues, ingles e espanhol"
+        "idiomas": "Busca em português, inglês e espanhol"
       },
       "cta": "Ver todos os planos",
       "transparencia": {
-        "titulo": "A conta, antes de voce pagar",
+        "titulo": "A conta, antes de você pagar",
         "credito": {
-          "p": "O que gasta credito?",
-          "r": "So a busca que devolve empresas. Ver resultado salvo, abrir o funil e escrever mensagem nao gastam nada."
+          "p": "O que gasta crédito?",
+          "r": "Só a busca que devolve empresas. Ver resultado salvo, abrir o funil e escrever mensagem não gastam nada."
         },
         "acumulo": {
-          "p": "Credito nao usado vira o que?",
-          "r": "Acumula para o mes seguinte enquanto a assinatura estiver ativa. Nao vira dinheiro nem e reembolsavel."
+          "p": "Crédito não usado vira o quê?",
+          "r": "Acumula para o mês seguinte enquanto a assinatura estiver ativa. Não vira dinheiro nem é reembolsável."
         },
         "cancelamento": {
           "p": "Como cancelo?",
-          "r": "Pelo painel, sem falar com ninguem. O acesso continua ate o fim do ciclo ja pago."
+          "r": "Pelo painel, sem falar com ninguém. O acesso continua até o fim do ciclo já pago."
         },
         "moeda": {
           "p": "Em que moeda eu pago?",
-          "r": "Em {{moeda}}, a moeda do pais selecionado. O valor exibido e o que sai no cartao."
+          "r": "Em {{moeda}}, a moeda do país selecionado. O valor exibido é o que sai no cartão."
         }
       }
     },
@@ -685,24 +685,24 @@
       "sobrescrito": "Perguntas",
       "titulo": "O que costumam perguntar antes de assinar.",
       "origem": {
-        "p": "De onde vem os dados das empresas?",
-        "r": "De registros publicos oficiais de empresas, com a origem declarada em cada registro. No Reino Unido usamos o Companies House, sob licenca que permite uso comercial. Nenhum dado vem de fonte que proiba armazenamento, e nao raspamos rede social."
+        "p": "De onde vêm os dados das empresas?",
+        "r": "De registros públicos oficiais de empresas, com a origem declarada em cada registro. No Reino Unido usamos o Companies House, sob licença que permite uso comercial. Nenhum dado vem de fonte que proíba armazenamento, e não raspamos rede social."
       },
       "cobertura": {
         "p": "Toda empresa vem com contato?",
-        "r": "Nao, e seria desonesto dizer que sim. O registro oficial traz nome, endereco e ramo de praticamente todas as empresas; contato so aparece quando a propria empresa publica no site dela. Por isso o credito e cobrado pelo contato entregue, e nao pela busca: voce ve o mercado inteiro e paga so pelo que veio verificado."
+        "r": "Não, e seria desonesto dizer que sim. O registro oficial traz nome, endereço e ramo de praticamente todas as empresas; contato só aparece quando a própria empresa publica no site dela. Por isso o crédito é cobrado pelo contato entregue, e não pela busca: você vê o mercado inteiro e paga só pelo que veio verificado."
       },
       "creditos": {
-        "p": "Por que cobrar por credito e nao por assento?",
-        "r": "Porque assento cobra por quantidade de pessoas, e quem presta servico costuma trabalhar sozinho. Credito cobra pelo uso, entao quem usa menos paga menos."
+        "p": "Por que cobrar por crédito e não por assento?",
+        "r": "Porque assento cobra por quantidade de pessoas, e quem presta serviço costuma trabalhar sozinho. Crédito cobra pelo uso, então quem usa menos paga menos."
       },
       "email": {
-        "p": "Posso disparar e-mail para qualquer pais?",
-        "r": "Nao. Cada pais tem uma regra propria e o sistema recusa o envio onde a lei exige consentimento previo. A recusa aparece na tela, com o motivo e a norma."
+        "p": "Posso disparar e-mail para qualquer país?",
+        "r": "Não. Cada país tem uma regra própria e o sistema recusa o envio onde a lei exige consentimento prévio. A recusa aparece na tela, com o motivo e a norma."
       },
       "cancelar": {
         "p": "Preciso falar com vendas para assinar ou cancelar?",
-        "r": "Nao. Assinatura e cancelamento sao pelo painel. Nao ha contrato de fidelidade nem ligacao de retencao."
+        "r": "Não. Assinatura e cancelamento são pelo painel. Não há contrato de fidelidade nem ligação de retenção."
       }
     }
   }

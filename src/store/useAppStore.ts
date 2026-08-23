@@ -55,7 +55,7 @@ function filtrarEmpresas(empresas: Empresa[], filtros: Filtros): Empresa[] {
 }
 
 /**
- * Store global do ProspectX usando Zustand com persistência
+ * Store global do WhoHiresYou usando Zustand com persistência
  */
 export const useAppStore = create<AppState>()(
   persist(

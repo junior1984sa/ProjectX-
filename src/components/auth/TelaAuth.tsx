@@ -82,12 +82,12 @@ export function TelaAuth({ onSucesso }: TelaAuthProps) {
       <div className="mb-8 text-center animate-fadeIn">
         <div className="flex items-center justify-center gap-3 mb-4">
           <img
-            src="/logo-x.png"
-            alt="ProjectX"
-            className="w-10 h-10 object-contain"
+            src="/marca.svg"
+            alt=""
+            className="w-10 h-10"
           />
           <h1 className="text-3xl font-bold text-foreground tracking-tight">
-            Prospect<span className="text-dourado-400">X</span>
+            Who<span className="text-dourado-400">Hires</span>You
           </h1>
         </div>
         <p className="text-muted-foreground max-w-sm mx-auto">

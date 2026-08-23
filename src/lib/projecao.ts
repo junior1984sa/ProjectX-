@@ -82,7 +82,7 @@ export const PREMISSAS_PADRAO: Premissas = {
   },
 }
 
-const CHAVE_PREMISSAS = "prospectx:premissas-financeiras"
+const CHAVE_PREMISSAS = "whohiresyou:premissas-financeiras"
 
 export function carregarPremissas(): Premissas {
   try {

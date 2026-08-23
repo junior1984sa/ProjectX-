@@ -23,7 +23,7 @@ import es from "./locales/es.json"
  * voltar para português ao recarregar a página.
  */
 
-export const CHAVE_IDIOMA = "prospectx:idioma"
+export const CHAVE_IDIOMA = "whohiresyou:idioma"
 
 export const IDIOMAS_DISPONIVEIS = [
   { codigo: "pt", nome: "Português", nomeNativo: "Português" },

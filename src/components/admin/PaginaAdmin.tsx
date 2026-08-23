@@ -36,7 +36,7 @@ export function PaginaAdmin() {
         <ShieldAlert className="w-10 h-10 text-muted-foreground/40 mx-auto mb-3" />
         <h1 className="text-lg font-semibold text-foreground">Área restrita</h1>
         <p className="text-sm text-muted-foreground mt-1">
-          Esta página é exclusiva para administradores do ProspectX.
+          Esta página é exclusiva para administradores do WhoHiresYou.
         </p>
         <button
           onClick={() => navigate("/buscar")}

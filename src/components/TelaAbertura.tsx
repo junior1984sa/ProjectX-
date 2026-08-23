@@ -28,12 +28,16 @@ import {
  * Então a home É a prospecção. O argumento de venda mudou de endereço:
  * mora em /como-funciona, alcançável pelo rodapé por quem quiser.
  *
- * O X da marca é usado como DIAGRAMA, não como enfeite. Os dois braços
- * de cima nascem acima da barra e mergulham nela — um sobre o campo de
- * ramo, outro sobre o de cidade. Os de baixo começam invisíveis e se
- * desenham conforme cada campo é preenchido. Com os dois preenchidos, a
- * marca fica inteira e a busca está pronta: é a validação do formulário
- * contada pela própria identidade visual, em vez de um botão que acende.
+ * A VALIDAÇÃO DO FORMULÁRIO É CONTADA POR UMA RÉGUA, não por um botão
+ * que acende. A barra tem duas metades na base: a da esquerda pertence
+ * ao campo de ramo, a da direita ao de cidade, e cada uma se preenche
+ * quando o seu campo é preenchido. Com as duas cheias, a busca está
+ * pronta — e a pessoa vê isso sem precisar ler nada.
+ *
+ * Isso nasceu como um X, quando a marca era um X. A marca mudou para
+ * WhoHiresYou e o X saiu: um X grande no meio da tela lê como
+ * "cancelar" quando não é mais identidade visual. A régua sobreviveu
+ * porque o mecanismo nunca dependeu do desenho.
  */
 
 export function TelaAbertura() {
@@ -138,12 +142,15 @@ export function TelaAbertura() {
               leitor de tela leem texto, não pixels, e uma home cuja
               única identificação é um PNG não é encontrada por ninguém. */}
           <h1 className="leading-none">
+            {/* As medidas mudaram junto com a marca: o logotipo antigo
+                era quase quadrado (599x579) e o novo e horizontal
+                (420x100). Manter as medidas antigas esticaria a imagem. */}
             <img
-              src="/logo-prospectx.png"
-              alt="ProspectX"
-              width={599}
-              height={579}
-              className="w-52 sm:w-72 h-auto drop-shadow-[0_0_60px_rgba(212,176,106,0.18)]"
+              src="/logo-whohiresyou.svg"
+              alt="WhoHiresYou"
+              width={420}
+              height={100}
+              className="w-64 sm:w-[380px] h-auto"
             />
           </h1>
 
@@ -169,7 +176,7 @@ export function TelaAbertura() {
             ))}
           </div>
 
-          {/* ── A barra, com o X atrás ── */}
+          {/* ── A barra de busca ── */}
           <div className="relative w-full mt-4">
             {/* A barra: poço mais escuro que o card, borda prata-500
                 (4,65:1 — a borda padrão do sistema dá 1,51:1 e reprova) */}
@@ -234,7 +241,7 @@ export function TelaAbertura() {
               {/* RÉGUA DE PRONTIDÃO.
                   Cada metade pertence a um campo e se preenche quando
                   ele é preenchido — o estado da busca vira sinal visual,
-                  sem repetir o X que a logomarca já carrega.
+                  sem precisar de texto de ajuda nem de botão desabilitado.
 
                   Foi removida uma vez por engano: o painel de preview
                   não estava compondo quadros, então as transições CSS

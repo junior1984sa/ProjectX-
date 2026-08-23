@@ -45,12 +45,16 @@ export function PaginaSAC() {
   const [mensagem, setMensagem] = useState("")
   const [enviando, setEnviando] = useState(false)
 
-  const emailSuporte = "suporte@prospectx.com.br"
+  // [PREENCHER] Trocar assim que o domínio for registrado. O endereço
+  // antigo apontava para prospectx.com.br, que nunca foi nosso — o nome
+  // pertence a outra empresa. Deixar um e-mail que não existe é pior que
+  // deixar visível que ele está pendente.
+  const emailSuporte = "[PREENCHER: e-mail de suporte no domínio novo]"
   const whatsappSuporte = "5548999999999" // TODO: substituir pelo número real de suporte
 
   function handleEnviarWhatsApp() {
     const texto = encodeURIComponent(
-      `Olá! Preciso de ajuda com o ProspectX.\n\nNome: ${nome || "(não informado)"}\nAssunto: ${assunto || "(não informado)"}\n\n${mensagem || ""}`
+      `Olá! Preciso de ajuda com o WhoHiresYou.\n\nNome: ${nome || "(não informado)"}\nAssunto: ${assunto || "(não informado)"}\n\n${mensagem || ""}`
     )
     window.open(`https://wa.me/${whatsappSuporte}?text=${texto}`, "_blank")
   }

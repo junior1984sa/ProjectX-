@@ -48,8 +48,8 @@ export function EscolhaIdiomaPais({ aoConcluir }: EscolhaIdiomaPaisProps = {}) {
       <div className="relative w-full max-w-md space-y-8">
         <div className="flex flex-col items-center gap-5">
           <img
-            src="/logo-prospectx.png"
-            alt="ProspectX"
+            src="/logo-whohiresyou.svg"
+            alt="WhoHiresYou"
             className="w-40 drop-shadow-[0_0_40px_rgba(212,176,106,0.15)]"
           />
 

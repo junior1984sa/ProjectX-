@@ -22,7 +22,7 @@
   "apresentacao": {
     "eyebrow": "Active B2B prospecting",
     "titulo": "Your next client already exists.",
-    "subtitulo": "While your ad waits for someone to show up, ProspectX goes to the companies that need your service right now — with phone and email, ready to contact.",
+    "subtitulo": "While your ad waits for someone to show up, WhoHiresYou goes to the companies that need your service right now — with phone and email, ready to contact.",
     "ctaPrincipal": "Find companies now",
     "ctaObservacao": "Works without signing up. You see real companies before deciding.",
     "comoFunciona": "How it works",
@@ -33,12 +33,12 @@
     "passo3Titulo": "Reach out right there",
     "passo3Texto": "WhatsApp with the message ready, one click per company. Or email up to 50 at once, with your portfolio attached.",
     "contaTitulo": "Do the math before you look at the price",
-    "contaTexto": "What is a new client worth to you? If one job closes at $4,000 and ProspectX costs $37 a month, closing a single one per month already paid for the tool 100 times over.",
+    "contaTexto": "What is a new client worth to you? If one job closes at $4,000 and WhoHiresYou costs $37 a month, closing a single one per month already paid for the tool 100 times over.",
     "contaRodape": "That's why the trial is 7 days, no strings: enough time to find out whether it closes.",
     "diferencialTitulo": "How this differs from advertising",
     "difEsperar": "Ads wait",
     "difEsperarTexto": "You pay to be visible and hope someone searches at exactly the right moment.",
-    "difIr": "ProspectX goes",
+    "difIr": "WhoHiresYou goes",
     "difIrTexto": "You pick the trade and the area, and get companies with contact details. The direction is reversed.",
     "planosTitulo": "Founder pricing for the first ones in",
     "planosTexto": "The first spots lock the price for life. After that, standard pricing applies.",
@@ -218,7 +218,7 @@
     }
   },
   "busca": {
-    "chamada": "Forget ads waiting for someone to notice them. ProspectX goes straight to the companies that need your service right now — in any city {{regiao}}.",
+    "chamada": "Forget ads waiting for someone to notice them. WhoHiresYou goes straight to the companies that need your service right now — in any city {{regiao}}.",
     "regiaoDoPais": "in your chosen country",
     "oQueEncontrar": "What are you looking for?",
     "modoClientes": "Potential clients",
@@ -364,7 +364,7 @@
     "empresa_other": "{{count}} companies",
     "bairrosComMaisAlvos": "Areas with most targets",
     "semDados": "No data available",
-    "instalarTitulo": "Install ProspectX",
+    "instalarTitulo": "Install WhoHiresYou",
     "instalarTexto": "Get in faster, straight from your phone's home screen.",
     "instalarAgora": "Install now"
   },
@@ -445,7 +445,7 @@
   },
   "diretorio": {
     "titulo": "Find a provider",
-    "subtitulo": "Search directly among verified providers and active ProspectX subscribers.",
+    "subtitulo": "Search directly among verified providers and active WhoHiresYou subscribers.",
     "placeholderSegmento": "Trade (e.g. sandblasting)",
     "placeholderCidade": "City (e.g. {{exemplo}})",
     "buscar": "Search",
@@ -475,7 +475,7 @@
     "mensagem": "Message",
     "placeholderMensagem": "Describe your question or problem in as much detail as possible...",
     "enviarMensagem": "Send message",
-    "assuntoPadrao": "ProspectX Support",
+    "assuntoPadrao": "WhoHiresYou Support",
     "erroPreencha": "Fill in your name and message before sending.",
     "abrindoEmail": "Opening your email app...",
     "faq": {

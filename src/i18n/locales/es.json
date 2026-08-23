@@ -22,7 +22,7 @@
   "apresentacao": {
     "eyebrow": "Prospección B2B activa",
     "titulo": "Tu próximo cliente ya existe.",
-    "subtitulo": "Mientras tu anuncio espera que alguien aparezca, ProspectX va hacia las empresas que necesitan tu servicio ahora — con teléfono y correo, listas para el contacto.",
+    "subtitulo": "Mientras tu anuncio espera que alguien aparezca, WhoHiresYou va hacia las empresas que necesitan tu servicio ahora — con teléfono y correo, listas para el contacto.",
     "ctaPrincipal": "Buscar empresas ahora",
     "ctaObservacao": "Funciona sin registro. Ves empresas reales antes de decidir.",
     "comoFunciona": "Cómo funciona",
@@ -33,12 +33,12 @@
     "passo3Titulo": "Hablas con ellas ahí mismo",
     "passo3Texto": "WhatsApp con el mensaje listo, un clic por empresa. O correo para hasta 50 a la vez, con tu portafolio.",
     "contaTitulo": "Haz la cuenta antes de mirar el precio",
-    "contaTexto": "¿Cuánto vale un cliente nuevo para ti? Si un trabajo cierra en $40.000 y ProspectX cuesta $597 al mes, cerrar uno solo por mes ya pagó la herramienta 60 veces.",
+    "contaTexto": "¿Cuánto vale un cliente nuevo para ti? Si un trabajo cierra en $40.000 y WhoHiresYou cuesta $597 al mes, cerrar uno solo por mes ya pagó la herramienta 60 veces.",
     "contaRodape": "Por eso la prueba es de 7 días, sin compromiso: alcanza para descubrir si cierra.",
     "diferencialTitulo": "Qué cambia frente a anunciar",
     "difEsperar": "El anuncio espera",
     "difEsperarTexto": "Pagas para aparecer y esperas que alguien busque justo en ese momento.",
-    "difIr": "ProspectX va",
+    "difIr": "WhoHiresYou va",
     "difIrTexto": "Eliges el rubro y la zona, y recibes las empresas con contacto. La dirección está invertida.",
     "planosTitulo": "Precio fundador para los primeros",
     "planosTexto": "Los primeros lugares fijan el precio para siempre. Después de eso, precio de lista.",
@@ -218,7 +218,7 @@
     }
   },
   "busca": {
-    "chamada": "Olvídate del anuncio esperando que alguien lo vea. ProspectX va directo a quien necesita tu servicio ahora — en cualquier ciudad {{regiao}}.",
+    "chamada": "Olvídate del anuncio esperando que alguien lo vea. WhoHiresYou va directo a quien necesita tu servicio ahora — en cualquier ciudad {{regiao}}.",
     "regiaoDoPais": "del país que elijas",
     "oQueEncontrar": "¿Qué quieres encontrar?",
     "modoClientes": "Clientes potenciales",
@@ -364,7 +364,7 @@
     "empresa_other": "{{count}} empresas",
     "bairrosComMaisAlvos": "Zonas con más objetivos",
     "semDados": "Sin datos disponibles",
-    "instalarTitulo": "Instala ProspectX",
+    "instalarTitulo": "Instala WhoHiresYou",
     "instalarTexto": "Entra más rápido, directo desde la pantalla de inicio de tu celular.",
     "instalarAgora": "Instalar ahora"
   },
@@ -445,7 +445,7 @@
   },
   "diretorio": {
     "titulo": "Encuentra un prestador",
-    "subtitulo": "Busca directamente entre prestadores verificados y suscriptores activos de ProspectX.",
+    "subtitulo": "Busca directamente entre prestadores verificados y suscriptores activos de WhoHiresYou.",
     "placeholderSegmento": "Rubro (ej: arenado)",
     "placeholderCidade": "Ciudad (ej: {{exemplo}})",
     "buscar": "Buscar",
@@ -475,7 +475,7 @@
     "mensagem": "Mensaje",
     "placeholderMensagem": "Describe tu duda o problema con el mayor detalle posible...",
     "enviarMensagem": "Enviar mensaje",
-    "assuntoPadrao": "Soporte ProspectX",
+    "assuntoPadrao": "Soporte WhoHiresYou",
     "erroPreencha": "Completa tu nombre y el mensaje antes de enviar.",
     "abrindoEmail": "Abriendo tu aplicación de correo...",
     "faq": {
@@ -608,76 +608,76 @@
   },
   "secoes": {
     "pilares": {
-      "sobrescrito": "Que hace la herramienta",
-      "titulo": "De la lista de empresas a la conversacion que cierra.",
-      "subtitulo": "Tres movimientos, un solo lugar. No sales de aqui hacia ninguna planilla.",
+      "sobrescrito": "Qué hace la herramienta",
+      "titulo": "De la lista de empresas a la conversación que cierra.",
+      "subtitulo": "Tres movimientos, un solo lugar. No sales de aquí hacia ninguna planilla.",
       "descobrir": {
         "titulo": "Descubrir",
         "texto": "Indica tu rubro y tu ciudad. Recibes las empresas que contratan lo que haces, no el consumidor final."
       },
       "abordar": {
         "titulo": "Abordar",
-        "texto": "Un asistente escribe el primer mensaje segun el rubro del cliente, y el envio masivo respeta la norma de cada pais."
+        "texto": "Un asistente escribe el primer mensaje según el rubro del cliente, y el envío masivo respeta la norma de cada país."
       },
       "acompanhar": {
         "titulo": "Dar seguimiento",
-        "texto": "Cada empresa abordada entra en un embudo con etapa, fecha y valor cerrado. Nada se pierde entre busquedas."
+        "texto": "Cada empresa abordada entra en un embudo con etapa, fecha y valor cerrado. Nada se pierde entre búsquedas."
       }
     },
     "passos": {
-      "sobrescrito": "Como funciona",
+      "sobrescrito": "Cómo funciona",
       "titulo": "Cuatro pasos. El primero toma menos de un minuto.",
       "p1": {
-        "titulo": "Di que vendes",
-        "texto": "Tu rubro, con tus palabras. El sistema reconoce variaciones y sinonimos en espanol, portugues e ingles."
+        "titulo": "Di qué vendes",
+        "texto": "Tu rubro, con tus palabras. El sistema reconoce variaciones y sinónimos en español, portugués e inglés."
       },
       "p2": {
-        "titulo": "Mira quien lo contrata",
+        "titulo": "Mira quién lo contrata",
         "texto": "En vez de buscar empresas parecidas a la tuya, recibes los rubros que compran tu servicio y las empresas de cada uno."
       },
       "p3": {
         "titulo": "Elige y aborda",
-        "texto": "Filtra por quien tiene contacto disponible, genera el mensaje y envia. El pie legal y la baja se agregan solos."
+        "texto": "Filtra por quien tiene contacto disponible, genera el mensaje y envía. El pie legal y la baja se agregan solos."
       },
       "p4": {
-        "titulo": "Acompana hasta cerrar",
-        "texto": "Mueve cada oportunidad por el embudo y registra el valor. Es lo que muestra cuanto devolvio la herramienta."
+        "titulo": "Acompaña hasta cerrar",
+        "texto": "Mueve cada oportunidad por el embudo y registra el valor. Es lo que muestra cuánto devolvió la herramienta."
       }
     },
     "precos": {
       "sobrescrito": "Precios",
       "titulo": "Precio de lista, sin consulta comercial.",
-      "subtitulo": "Los ciclos mas largos cuestan menos por mes y rinden mas creditos. Elige el pais para ver tu moneda.",
+      "subtitulo": "Los ciclos más largos cuestan menos por mes y rinden más créditos. Elige el país para ver tu moneda.",
       "ciclo": "Ciclo de cobro",
-      "pais": "Pais",
+      "pais": "País",
       "porMes": "por mes",
       "cobradoDeUmaVez": "Se cobra {{total}} de una vez, cada {{meses}} meses",
-      "economia": "{{pct}}% mas barato por mes que el ciclo anterior",
+      "economia": "{{pct}}% más barato por mes que el ciclo anterior",
       "item": {
-        "creditos": "{{creditos}} creditos por mes, acumulables",
+        "creditos": "{{creditos}} créditos por mes, acumulables",
         "segmentos": "{{total}} rubros mapeados, en tres idiomas",
         "funil": "Embudo con etapas y valor cerrado",
         "abordagem": "Asistente de primer abordaje por rubro",
-        "idiomas": "Busqueda en espanol, portugues e ingles"
+        "idiomas": "Búsqueda en español, portugués e inglés"
       },
       "cta": "Ver todos los planes",
       "transparencia": {
         "titulo": "La cuenta, antes de pagar",
         "credito": {
-          "p": "Que gasta un credito?",
-          "r": "Solo la busqueda que devuelve empresas. Ver resultados guardados, abrir el embudo y escribir mensajes no gastan nada."
+          "p": "¿Qué gasta un crédito?",
+          "r": "Solo la búsqueda que devuelve empresas. Ver resultados guardados, abrir el embudo y escribir mensajes no gastan nada."
         },
         "acumulo": {
-          "p": "Que pasa con los creditos no usados?",
-          "r": "Se acumulan mientras la suscripcion este activa. No son dinero ni son reembolsables."
+          "p": "¿Qué pasa con los créditos no usados?",
+          "r": "Se acumulan mientras la suscripción esté activa. No son dinero ni son reembolsables."
         },
         "cancelamento": {
-          "p": "Como cancelo?",
+          "p": "¿Cómo cancelo?",
           "r": "Desde el panel, sin hablar con nadie. El acceso sigue hasta el fin del ciclo ya pagado."
         },
         "moeda": {
-          "p": "En que moneda pago?",
-          "r": "En {{moeda}}, la moneda del pais seleccionado. El valor mostrado es el que se cobra en la tarjeta."
+          "p": "¿En qué moneda pago?",
+          "r": "En {{moeda}}, la moneda del país seleccionado. El valor mostrado es el que se cobra en la tarjeta."
         }
       }
     },
@@ -685,24 +685,24 @@
       "sobrescrito": "Preguntas",
       "titulo": "Lo que suelen preguntar antes de suscribirse.",
       "origem": {
-        "p": "De donde vienen los datos de las empresas?",
-        "r": "De registros publicos oficiales de empresas, con el origen declarado en cada registro. En el Reino Unido usamos Companies House, bajo licencia que permite uso comercial. Ningun dato viene de una fuente que prohiba almacenarlo, y no raspamos redes sociales."
+        "p": "¿De dónde vienen los datos de las empresas?",
+        "r": "De registros públicos oficiales de empresas, con el origen declarado en cada registro. En el Reino Unido usamos Companies House, bajo licencia que permite uso comercial. Ningún dato viene de una fuente que prohíba almacenarlo, y no raspamos redes sociales."
       },
       "cobertura": {
-        "p": "Toda empresa viene con contacto?",
-        "r": "No, y seria deshonesto decir que si. El registro oficial trae nombre, direccion y rubro de practicamente todas las empresas; el contacto solo aparece cuando la propia empresa lo publica en su sitio. Por eso el credito se cobra por el contacto entregado y no por la busqueda: ves todo el mercado y pagas solo por lo que llego verificado."
+        "p": "¿Toda empresa viene con contacto?",
+        "r": "No, y sería deshonesto decir que sí. El registro oficial trae nombre, dirección y rubro de prácticamente todas las empresas; el contacto solo aparece cuando la propia empresa lo publica en su sitio. Por eso el crédito se cobra por el contacto entregado y no por la búsqueda: ves todo el mercado y pagas solo por lo que llegó verificado."
       },
       "creditos": {
-        "p": "Por que cobrar por credito y no por asiento?",
-        "r": "Porque el asiento cobra por cantidad de personas, y quien presta servicios suele trabajar solo. El credito cobra por uso, asi que quien usa menos paga menos."
+        "p": "¿Por qué cobrar por crédito y no por asiento?",
+        "r": "Porque el asiento cobra por cantidad de personas, y quien presta servicios suele trabajar solo. El crédito cobra por uso, así que quien usa menos paga menos."
       },
       "email": {
-        "p": "Puedo enviar correos a cualquier pais?",
-        "r": "No. Cada pais tiene su norma y el sistema rechaza el envio donde la ley exige consentimiento previo. El rechazo aparece en pantalla, con el motivo y la norma."
+        "p": "¿Puedo enviar correos a cualquier país?",
+        "r": "No. Cada país tiene su norma y el sistema rechaza el envío donde la ley exige consentimiento previo. El rechazo aparece en pantalla, con el motivo y la norma."
       },
       "cancelar": {
-        "p": "Necesito hablar con ventas para suscribirme o cancelar?",
-        "r": "No. Ambas cosas son autoservicio. No hay contrato de permanencia ni llamada de retencion."
+        "p": "¿Necesito hablar con ventas para suscribirme o cancelar?",
+        "r": "No. Ambas cosas son autoservicio. No hay contrato de permanencia ni llamada de retención."
       }
     }
   }
