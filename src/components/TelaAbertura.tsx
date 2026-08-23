@@ -132,8 +132,9 @@ export function TelaAbertura() {
           que é a única coisa que a home precisa fazer bem. Descontar a
           barra utilitária (3.5rem) mantém o conjunto centrado na tela. */}
       <main className="relative flex flex-col items-center px-4 pt-[10svh] pb-16 sm:pt-0 sm:pb-0 sm:justify-center sm:min-h-[calc(100svh-3.5rem)] fundo-conteudo">
-        {/* Halo único, centrado no vértice. O próprio X fornece a
-            segunda massa focal, então dois halos só borrariam o centro. */}
+        {/* Halo único, atrás do conjunto. Um só de propósito: a marca e
+            a barra já são duas massas focais, e um segundo halo
+            borraria o centro em vez de organizá-lo. */}
         <div className="absolute left-1/2 -translate-x-1/2 top-1/3 w-[720px] h-[720px] max-w-[100vw] rounded-full bg-azul-500/[0.07] blur-3xl pointer-events-none" />
 
         <div className="relative w-full max-w-[880px] flex flex-col items-center">
@@ -144,11 +145,11 @@ export function TelaAbertura() {
           <h1 className="leading-none">
             {/* As medidas mudaram junto com a marca: o logotipo antigo
                 era quase quadrado (599x579) e o novo e horizontal
-                (420x100). Manter as medidas antigas esticaria a imagem. */}
+                (470x100). Manter as medidas antigas esticaria a imagem. */}
             <img
               src="/logo-whohiresyou.svg"
               alt="WhoHiresYou"
-              width={420}
+              width={470}
               height={100}
               className="w-64 sm:w-[380px] h-auto"
             />

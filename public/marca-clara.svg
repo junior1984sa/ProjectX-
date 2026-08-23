@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="WhoHiresYou">
   <!--
-    MARCA — WhoHiresYou — fundo escuro
+    MARCA — WhoHiresYou — fundo claro
 
     Um W com uma cunha dourada descendo ate o vertice central. O W e a
     inicial; a cunha e um foco apontando para o ponto onde os dois
@@ -21,6 +21,6 @@
   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
     <path d="M50 14 L50 44" stroke="#D4A84F" stroke-width="13"/>
     <path d="M14 26 L33 78 L50 44 L67 78 L86 26"
-          stroke="#F4F6F8" stroke-width="12"/>
+          stroke="#11151B" stroke-width="12"/>
   </g>
 </svg>

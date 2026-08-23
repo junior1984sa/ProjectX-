@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 100" role="img" aria-label="WhoHiresYou">
   <!--
-    LOGOTIPO HORIZONTAL — fundo escuro
+    LOGOTIPO HORIZONTAL — fundo claro
 
     Assinatura em caixa alta com espacamento largo. Nao e so estilo:
     caixa alta espacada continua legivel reduzida, enquanto minuscula
@@ -16,12 +16,12 @@
   <g fill="none" stroke-linecap="round" stroke-linejoin="round">
     <path d="M50 14 L50 44" stroke="#D4A84F" stroke-width="13"/>
     <path d="M14 26 L33 78 L50 44 L67 78 L86 26"
-          stroke="#F4F6F8" stroke-width="12"/>
+          stroke="#11151B" stroke-width="12"/>
   </g>
 
   <text x="112" y="62"
         font-family="'Space Grotesk','Inter',system-ui,sans-serif"
         font-size="30" font-weight="500" letter-spacing="4.5">
-    <tspan fill="#F4F6F8">WHO</tspan><tspan fill="#D4A84F"> HIRES</tspan><tspan fill="#F4F6F8"> YOU</tspan>
+    <tspan fill="#11151B">WHO</tspan><tspan fill="#D4A84F"> HIRES</tspan><tspan fill="#11151B"> YOU</tspan>
   </text>
 </svg>
