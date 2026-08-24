@@ -146,12 +146,18 @@ export const useAppStore = create<AppState>()(
           set((state) => ({
             historicoBuscas: [novaBusca, ...state.historicoBuscas].slice(0, 5),
           }))
+
+          return empresasComFavoritos
         } catch (erro) {
           const mensagem =
             erro instanceof Error
               ? erro.message
               : "Erro desconhecido ao buscar empresas."
           set({ carregando: false, erroAtual: mensagem })
+          // Devolve vazio, e nao undefined: quem chama vai contar
+          // quantos contatos entregar para cobrar. Busca que falhou
+          // entregou zero, e zero nao custa nada.
+          return []
         }
       },
 

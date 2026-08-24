@@ -264,12 +264,15 @@
       "assineParaLiberar": "Suscríbete a un plan para liberar tus búsquedas.",
       "creditosInsuficientes": "Créditos insuficientes (necesitas {{custo}}, tienes {{saldo}}). Espera la próxima recarga de tu plan.",
       "limiteDiario": "Alcanzaste el límite de hoy ({{restantes}} créditos restantes en el día). Durante los primeros 7 días hay un tope diario — tu saldo queda guardado y se libera mañana.",
-      "restricaoExportacao": "Tu cuenta está configurada para operar fuera de Brasil. Las búsquedas de empresas brasileñas no están disponibles en este plan — cambia el país de actuación en tu perfil si ahora atiendes Brasil."
+      "restricaoExportacao": "Tu cuenta está configurada para operar fuera de Brasil. Las búsquedas de empresas brasileñas no están disponibles en este plan — cambia el país de actuación en tu perfil si ahora atiendes Brasil.",
+      "semCreditos": "Se te acabaron los créditos. Vuelven al renovar el ciclo, o puedes cambiar de plan."
     },
     "ok": {
       "iaIdentificou": "Identificamos los clientes potenciales con ayuda de IA.",
       "demonstracao": "Esto es una demostración — crea tu cuenta para ver los contactos y buscar sin límites.",
-      "creditosUsados": "{{custo}} créditos usados · {{saldo}} restantes"
+      "creditosUsados": "{{custo}} créditos usados · {{saldo}} restantes",
+      "contatosEntregues": "{{contatos}} contactos entregados · {{saldo}} créditos restantes",
+      "semContatoSemCusto": "Ninguna empresa vino con contacto esta vez — por eso no se cobró nada."
     }
   },
   "creditos": {

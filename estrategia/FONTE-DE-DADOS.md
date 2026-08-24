@@ -8,7 +8,27 @@
 | Parte | Data | O que é |
 |---|---|---|
 | **Parte I — Fase 1 construída** | 23/08/2026 | O pipeline gratuito, e a remedição da mesma amostra |
+| **Parte I-B — Opção C medida** | 23/08/2026 | O índice reverso do Common Crawl por número de registro: medido e reprovado |
 | **Parte II — linha de base** | 16/08/2026 | A avaliação original da fonte, preservada para comparação |
+
+---
+
+## Tabela de evolução — as três medições, lado a lado
+
+Mesma amostra congelada, mesma semente 20260816, 100 empresas de Grande Manchester em quatro segmentos B2B.
+
+| Etapa | Linha de base 16/08 | Pipeline + trava 23/08 | **+ Opção C (Common Crawl) 23/08** |
+|---|---|---|---|
+| Empresas na amostra | 100 | 100 | 100 |
+| Sites aceitos | 35 | 11 | **11** *(0 novos)* |
+| dos quais corretos | 9 | 11 | **11** |
+| **Precisão** | **25,7%** | **100%** | **100%** |
+| Com e-mail | 8 | 9 | **9** |
+| **Com algum contato** | **8 (8,0%)** | **10 (10,0%)** | **10 (10,0%)** |
+| Portão de precisão (>90%) | não | **PASSOU** | **PASSOU** |
+| Portão de contato (>25%) | não | **NÃO PASSOU** | **NÃO PASSOU** |
+
+> **A Opção C não moveu a taxa em um único registro.** Os números medidos que explicam isso estão na Parte I-B.
 
 ---
 
@@ -135,6 +155,61 @@ Tudo na Parte II segue de pé. Nada foi refutado pela nova medição:
 - **E-mail nominal não deve ser perseguido** — agora é regra de código, não recomendação.
 
 ---
+
+# PARTE I-B — A Opção C medida (23/08/2026)
+
+*Esta parte está sendo escrita durante a medição. Cada número entra assim que é apurado.*
+
+## I-B.1 O que foi medido, e como
+
+A hipótese da Opção C, escrita por mim mesmo em 16/08: sociedades incorporadas britânicas são obrigadas a exibir o número de registro no site; logo, um índice do Common Crawl chaveado por número de registro liga empresa a domínio com precisão de prova, e descoberta e verificação viram o mesmo passo.
+
+**Achado operacional antes de qualquer taxa:** `index.commoncrawl.org` — a API CDX que o pipeline usa hoje em `pipeline/src/descoberta/commonCrawl.ts` — **está inacessível da nossa rede**. Três tentativas, timeout de conexão em 21 s, porta 443 e porta 80, IP 54.237.141.66:
+
+```
+* connect to 54.237.141.66 port 443 from 0.0.0.0 port 59464 failed: Timed out
+* Failed to connect to index.commoncrawl.org port 443 after 21162 ms
+```
+
+`data.commoncrawl.org` (CloudFront) responde em **0,63 s** e entrega **17 MB/s**. Ou seja: o corpus está acessível; o servidor de índice, não.
+
+Reescrevi o acesso ao índice para não depender dele: baixar `cluster.idx` (103,9 MB, 6,1 s) e resolver cada host por **busca binária + range request** nos arquivos `cdx-000NN.gz`, tudo pelo CloudFront. Mecanismo conferido contra controles: `gov.uk` devolve 5.059 URLs, `monarchshelving.co.uk` devolve 374.
+
+> **Consequência para o código:** o provedor `common-crawl` do pipeline consultava um endpoint fora do ar e devolvia lista vazia em silêncio. Os "0 sites do Common Crawl" da medição de 23/08 **não medem a fonte — medem um endpoint caído.** É exatamente o defeito que o princípio nº 4 chama de *fallback silencioso*: ausência de sinal virou "nada encontrado" sem alarme. Corrigir é obrigatório, independentemente do veredito da Opção C.
+
+## I-B.2 Primeiro resultado: os 11 sites que sabemos serem corretos
+
+Para o índice reverso funcionar, o número de registro precisa estar numa página que o Common Crawl tenha rastreado. Testei isso nos **11 sites que a trava de identidade aceitou e a auditoria confirmou como corretos** — a população mais favorável possível, porque aqui sabemos que o site existe e é da empresa.
+
+Para cada um: resolver o host no índice, baixar todas as páginas com status 200 (priorizando `/terms`, `/privacy`, `/legal`, `/contact`, `/about`, home) e procurar o número de registro.
+
+| Empresa | Host | Páginas 200 no CC | Achou o número | Qualquer número de registro publicado |
+|---|---|---|---|---|
+| AQUILO REFRIGERATION | aquilorefrigeration.co.uk | 3 | não | nenhum |
+| BREARMAN | brearman.co.uk | 1 | não | nenhum |
+| PENDLE HARDWOODS | www.pendlehardwoods.co.uk | **0** | não | — |
+| **AUTO MARINE CABLES** | www.amc-tcg.com | 5 | **SIM** | `00804767` |
+| MPT GROUP | www.mptgroup.com | 60 | não | nenhum |
+| ABBOTT MELLOR | abbottmellor.com | **0** | não | — |
+| ACCUMAC | accumac.co.uk | 18 | não | nenhum |
+| RADIAL LINE SHEETMETAL | www.radialline.co.uk | **0** | não | — |
+| PURE FABS | www.purecompanies.co.uk | 23 | não | nenhum |
+| BARROWMIX | barrowmixconcrete.com | **0** | não | — |
+| BRIAN MOORES | brianmoores.co.uk | **0** | não | — |
+
+**1 de 11.** E a decomposição importa mais que o total:
+
+| Motivo da perda | Empresas |
+|---|---|
+| Host **não está** no índice do Common Crawl | **5 de 11 (45%)** |
+| Está no índice, mas **nenhuma página publica número de registro nenhum** | 5 de 11 (45%) |
+| Publica o número — índice reverso acharia | **1 de 11 (9%)** |
+
+O trecho encontrado no único caso, para registro:
+
+> `…COSHH, RoHS, WEEE and ELV directives. Company Registration Number 00804767 VAT Registration Number GB354703753…`
+
+Note a coluna da direita: em **nenhum** dos 10 sites restantes apareceu um número de registro sequer — nem o da empresa, nem o de uma coligada. Não é caso de "o número está lá mas o índice não pegou". **O número não está publicado.**
 
 # PARTE II — Avaliação original da fonte (16/08/2026)
 

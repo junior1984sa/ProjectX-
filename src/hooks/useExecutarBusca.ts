@@ -42,7 +42,7 @@ export function useExecutarBusca() {
   const { buscarEmpresas, carregando } = useAppStore()
   const { usuarioId, perfil } = useAuthStore()
   const paisPreferido = usePreferenciasStore((s) => s.pais)
-  const { consumirCreditos } = useCreditosStore()
+  const { podeBuscar, cobrarPelaEntrega } = useCreditosStore()
 
   const [buscandoMapeamento, setBuscandoMapeamento] = useState(false)
 
@@ -137,33 +137,27 @@ export function useExecutarBusca() {
 
     const faixa = FAIXAS_CREDITO[faixaSelecionada]
 
-    // Verifica e debita créditos de forma atômica no banco antes de gerar a busca
-    const resultado = await consumirCreditos({
-      quantidadeEmpresas: faixa.max,
-      segmento: segmento.trim(),
-      cidade: nomeCidade,
-      estado,
-      raioKm,
-      pais: paisDaBusca,
-    })
+    // ── 1. A BUSCA NÃO CUSTA MAIS NADA ────────────────────────
+    //
+    // Antes o crédito era debitado aqui, pela quantidade PEDIDA. A
+    // medição do Reino Unido mostrou que só cerca de 10% das empresas
+    // chegam com contato utilizável — cobrar por 40 e entregar 4 é a
+    // conta que destrói confiança.
+    //
+    // Agora esta chamada só PERGUNTA se pode buscar. Ela não debita.
+    const permissao = await podeBuscar(paisDaBusca)
 
-    if (!resultado.sucesso) {
-      // Duas recusas bem diferentes: sem saldo pede recarga; teto do
-      // dia significa que o saldo existe e só precisa voltar amanhã.
-      // Dar a mensagem errada aqui faria o cliente achar que acabou.
+    if (!permissao.pode) {
       // Três recusas bem diferentes. Dar a mensagem errada aqui faz o
       // cliente achar que acabou o crédito quando o caso é outro.
-      if (resultado.motivo === "restricao_exportacao") {
+      if (permissao.motivo === "restricao_exportacao") {
         toast.error(t("busca.erro.restricaoExportacao"))
         return
       }
       toast.error(
-        resultado.motivo === "limite_diario"
-          ? t("busca.erro.limiteDiario", { restantes: resultado.creditos_restantes })
-          : t("busca.erro.creditosInsuficientes", {
-              custo: resultado.custo,
-              saldo: resultado.creditos_restantes,
-            })
+        permissao.motivo === "limite_diario"
+          ? t("busca.erro.limiteDiario", { restantes: permissao.restante_hoje })
+          : t("busca.erro.semCreditos")
       )
       return
     }
@@ -180,13 +174,37 @@ export function useExecutarBusca() {
       timestamp: new Date(),
     }
 
-    toast.success(
-      t("busca.ok.creditosUsados", {
-        custo: resultado.custo,
-        saldo: resultado.creditos_restantes,
-      })
-    )
-    await buscarEmpresas(params)
+    const empresas = await buscarEmpresas(params)
+
+    // ── 2. COBRA PELO QUE VEIO ────────────────────────────────
+    //
+    // Um crédito por contato entregue. Empresa sem telefone e sem
+    // e-mail não é contato: é nome numa lista, e o cliente já vê isso
+    // de graça. Busca que não achou nada não custa nada.
+    const comContato = (empresas ?? []).filter((e) => e.telefone || e.email).length
+
+    const cobranca = await cobrarPelaEntrega({
+      contatosEntregues: comContato,
+      segmento: segmento.trim(),
+      cidade: nomeCidade,
+      estado,
+      raioKm,
+      pais: paisDaBusca,
+    })
+
+    if (cobranca.cobrados > 0) {
+      toast.success(
+        t("busca.ok.contatosEntregues", {
+          contatos: cobranca.cobrados,
+          saldo: cobranca.saldo_creditos,
+        })
+      )
+    } else {
+      // Dizer isto em voz alta importa: o cliente precisa saber que a
+      // busca fraca não custou nada, senão ele conta a busca como
+      // desperdício de crédito e desconta da confiança.
+      toast(t("busca.ok.semContatoSemCusto"))
+    }
   }
 
   return { executarBusca, buscandoMapeamento, carregando }

@@ -139,7 +139,15 @@ export interface AppState {
   filtros: Filtros
 
   // Ações
-  buscarEmpresas: (params: ParametrosBusca) => Promise<void>
+  /**
+   * Devolve as empresas encontradas, além de gravá-las no estado.
+   *
+   * O retorno existe porque a cobrança agora acontece DEPOIS da busca,
+   * pelo número de contatos entregues — e quem cobra precisa saber o
+   * que veio. Ler do estado logo após a chamada seria correr atrás de
+   * um `set` assíncrono e cobrar pelo resultado da busca anterior.
+   */
+  buscarEmpresas: (params: ParametrosBusca) => Promise<Empresa[]>
   aplicarFiltros: (filtros: Partial<Filtros>) => void
   alternarFavorito: (empresaId: string) => void
   removerBuscaSalva: (buscaId: string) => void
