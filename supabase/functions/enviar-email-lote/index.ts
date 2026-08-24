@@ -24,11 +24,11 @@
 // Secrets: RESEND_API_KEY, REMETENTE_EMAIL, SEGREDO_DESCADASTRO
 // ═══════════════════════════════════════════════════════════
 
+import { regraDoPais, podeEnviarPara } from "./regimes.ts"
+
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY") ?? ""
 const REMETENTE_EMAIL = Deno.env.get("REMETENTE_EMAIL") ?? ""
 const SEGREDO_DESCADASTRO = Deno.env.get("SEGREDO_DESCADASTRO") ?? ""
-import { regraDoPais, podeEnviarPara } from "./regimes.ts"
-
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? ""
 const SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") ?? ""
 
