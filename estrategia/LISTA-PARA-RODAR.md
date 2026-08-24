@@ -5,6 +5,25 @@
 
 ---
 
+## ✅ Resolvido em 23/08/2026
+
+Auditoria feita, e os itens de produção consertados no mesmo dia:
+
+| Item | O que era | Estado |
+|---|---|---|
+| **Google Places ativo** | função consultando a API proibida, versão 10 | ✅ **neutralizada** — corpo substituído, não chama o Google, devolve 410 e exige JWT. Verificado: 401 sem token |
+| **Disparo sem trava por país** | versão publicada era a antiga, com `p_pais` fixo em BR | ✅ **publicada a versão 8** com trava, rodapé CAN-SPAM e endereço postal. Verificado: 401 sem token e com token inválido |
+| **Funções sensíveis abertas** | `expurgo_retencao` apagava dados e era alcançável por anônimo | ✅ **corrigido** — a causa era `revoke from anon` em vez de `from public`. Verificado nas ACLs |
+| **Função de IA com o defeito do relay** | mandava publicar com `--no-verify-jwt` e gasta a chave da Anthropic | ✅ **guarda instalada na origem.** Não publicada: o caminho de IA é código morto hoje |
+| **Licença não declarada** | `package.json` sem `license` nem `private` | ✅ declarado |
+| **13 commits não enviados** | nada do trabalho recente estava no ar | ✅ **enviados** — 16 commits publicados |
+
+**O que a auditoria mostrou estar CERTO e não devia ser mexido:** o webhook do Mercado Pago não confia no payload — pega só o ID e busca o pagamento real na API deles, então notificação forjada não ativa assinatura. E quatro das cinco funções que gastam dinheiro já verificam o usuário dentro do código.
+
+**Endurecimento pendente:** `criar-assinatura-mp` e `cancelar-assinatura` dependem só do `verify_jwt`. Não é buraco aberto — é a mesma classe de risco que já nos custou caro uma vez.
+
+---
+
 ## O resumo em três frases
 
 O código está muito à frente do que está publicado: **13 commits não foram enviados**, então nada do trabalho recente está no ar — nem o nome novo, nem a trava por país, nem a redução de países.
