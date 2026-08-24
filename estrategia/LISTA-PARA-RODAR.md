@@ -20,7 +20,23 @@ Auditoria feita, e os itens de produção consertados no mesmo dia:
 
 **O que a auditoria mostrou estar CERTO e não devia ser mexido:** o webhook do Mercado Pago não confia no payload — pega só o ID e busca o pagamento real na API deles, então notificação forjada não ativa assinatura. E quatro das cinco funções que gastam dinheiro já verificam o usuário dentro do código.
 
-**Endurecimento pendente:** `criar-assinatura-mp` e `cancelar-assinatura` dependem só do `verify_jwt`. Não é buraco aberto — é a mesma classe de risco que já nos custou caro uma vez.
+**Correção do que eu mesmo afirmei antes:** cheguei a listar `criar-assinatura-mp` e `cancelar-assinatura` como endurecimento pendente. **Estava errado.** As duas verificam o usuário dentro do código — usam `auth.getUser` do SDK, e o meu `grep` procurava a chamada crua `auth/v1/user`. O mesmo erro me fez dizer antes que `gerar-abordagem` não tinha guarda.
+
+Auditoria refeita com o padrão certo, e o quadro está limpo:
+
+| Função | Gasta dinheiro | Verifica o chamador |
+|---|---|---|
+| `enviar-email-lote` | sim | sim, no código |
+| `gerar-abordagem` | sim | sim, no código |
+| `inferir-segmentos-clientes` | sim | sim, no código |
+| `publicar-instagram` | sim | sim, no código |
+| `criar-assinatura-mp` | sim | sim, no código |
+| `cancelar-assinatura` | sim | sim, no código |
+| `descadastrar` | não | assinatura HMAC — correto, precisa funcionar sem login |
+| `buscar-empresas-osm` | não | pública de propósito |
+| `webhook-mercadopago` | sim | não verifica usuário, e está certo: é webhook, e busca a verdade na API do Mercado Pago |
+
+**As seis funções que gastam dinheiro verificam o chamador dentro do código.** Nenhuma depende só do `verify_jwt`.
 
 ---
 

@@ -1,0 +1,1149 @@
+{
+ "executadoEm": "2026-08-24T03:16:58.818Z",
+ "estado": "PARCIAL — aceites auditados; falta consolidar custo de construcao do indice",
+ "pendente": [
+  "dimensionar o custo de construcao do indice reverso (fatia .uk do CC)"
+ ],
+ "objeto": "Opcao C — indice reverso do Common Crawl por numero de registro do Companies House",
+ "amostra": {
+  "fonte": "pipeline/dados/amostra-linha-base.json",
+  "n": 100,
+  "semente": 20260816,
+  "area": "Grande Manchester (M,BL,OL,SK,WN)",
+  "segmentos": [
+   "construcao",
+   "transporte",
+   "manufatura metalica",
+   "atacado B2B"
+  ]
+ },
+ "infraestrutura": {
+  "indexCommoncrawlOrg": {
+   "alcancavel": false,
+   "ip": "54.237.141.66",
+   "erro": "timeout de conexao em 21s, portas 443 e 80, 3 tentativas",
+   "consequencia": "o provedor common-crawl do pipeline consultava endpoint fora do ar e devolvia vazio em silencio"
+  },
+  "dataCommoncrawlOrg": {
+   "alcancavel": true,
+   "latenciaSegundos": 0.63,
+   "vazaoBytesPorSegundo": 17124343
+  },
+  "crawl": "CC-MAIN-2026-30 (July 2026 Index, coletado 2026-07-10 a 2026-07-23)",
+  "metodoDeAcesso": "cluster.idx (103.946.392 bytes, baixado em 6,07s) + range requests em cdx-000NN.gz e nos WARC, tudo por CloudFront",
+  "validacaoDoMecanismo": {
+   "gov.uk": 5059,
+   "monarchshelving.co.uk": 374,
+   "bbc.co.uk": 1
+  }
+ },
+ "fatiaUk": {
+  "blocosNoClusterIdx": 877051,
+  "blocosComSurtUk": 17637,
+  "fracaoUk": 0.0201
+ },
+ "medicaoA_sitesAceitosPeloPipeline": {
+  "descricao": "os 11 sites que a trava aceitou e a auditoria confirmou corretos",
+  "registros": [
+   {
+    "numeroRegistro": "11999914",
+    "nome": "AQUILO REFRIGERATION LIMITED",
+    "host": "aquilorefrigeration.co.uk",
+    "urlsNoIndice": 11,
+    "urls200": 3,
+    "paginasLidas": 3,
+    "bytesBaixados": 195085,
+    "segundos": 3.35,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   },
+   {
+    "numeroRegistro": "13679563",
+    "nome": "BREARMAN LTD",
+    "host": "brearman.co.uk",
+    "urlsNoIndice": 2,
+    "urls200": 1,
+    "paginasLidas": 1,
+    "bytesBaixados": 12387,
+    "segundos": 1.21,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   },
+   {
+    "numeroRegistro": "00364656",
+    "nome": "PENDLE HARDWOODS LIMITED",
+    "host": "www.pendlehardwoods.co.uk",
+    "urlsNoIndice": 4,
+    "urls200": 0,
+    "paginasLidas": 0,
+    "bytesBaixados": 0,
+    "segundos": 0.61,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   },
+   {
+    "numeroRegistro": "00804767",
+    "nome": "AUTO MARINE CABLES LIMITED",
+    "host": "www.amc-tcg.com",
+    "urlsNoIndice": 8,
+    "urls200": 5,
+    "paginasLidas": 4,
+    "bytesBaixados": 64610,
+    "segundos": 2.16,
+    "encontrado": true,
+    "estrita": true,
+    "onde": "https://www.amc-tcg.com/",
+    "trecho": "ion (EU). These include COSHH, RoHS, WEEE and ELV directives. Company Registration Number 00804767 VATÂ Registration Number GB354703753 Au",
+    "numerosPublicadosNoSite": [
+     "00804767"
+    ]
+   },
+   {
+    "numeroRegistro": "14665645",
+    "nome": "MPT GROUP MATTRESS MACHINERY LTD",
+    "host": "www.mptgroup.com",
+    "urlsNoIndice": 65,
+    "urls200": 60,
+    "paginasLidas": 60,
+    "bytesBaixados": 3232271,
+    "segundos": 23.33,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   },
+   {
+    "numeroRegistro": "12094826",
+    "nome": "ABBOTT MELLOR LIMITED",
+    "host": "abbottmellor.com",
+    "urlsNoIndice": 0,
+    "urls200": 0,
+    "paginasLidas": 0,
+    "bytesBaixados": 0,
+    "segundos": 0.62,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   },
+   {
+    "numeroRegistro": "07864189",
+    "nome": "ACCUMAC LIMITED",
+    "host": "accumac.co.uk",
+    "urlsNoIndice": 21,
+    "urls200": 18,
+    "paginasLidas": 18,
+    "bytesBaixados": 43334,
+    "segundos": 7.24,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   },
+   {
+    "numeroRegistro": "06905727",
+    "nome": "RADIAL LINE SHEETMETAL LIMITED",
+    "host": "www.radialline.co.uk",
+    "urlsNoIndice": 0,
+    "urls200": 0,
+    "paginasLidas": 0,
+    "bytesBaixados": 0,
+    "segundos": 0.76,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   },
+   {
+    "numeroRegistro": "07348616",
+    "nome": "PURE FABS LIMITED",
+    "host": "www.purecompanies.co.uk",
+    "urlsNoIndice": 24,
+    "urls200": 23,
+    "paginasLidas": 23,
+    "bytesBaixados": 552590,
+    "segundos": 9.1,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   },
+   {
+    "numeroRegistro": "05178292",
+    "nome": "BARROWMIX LIMITED",
+    "host": "barrowmixconcrete.com",
+    "urlsNoIndice": 0,
+    "urls200": 0,
+    "paginasLidas": 0,
+    "bytesBaixados": 0,
+    "segundos": 0.59,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   },
+   {
+    "numeroRegistro": "07532929",
+    "nome": "BRIAN MOORES LIMITED",
+    "host": "brianmoores.co.uk",
+    "urlsNoIndice": 0,
+    "urls200": 0,
+    "paginasLidas": 0,
+    "bytesBaixados": 0,
+    "segundos": 0.53,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   }
+  ]
+ },
+ "medicaoB_sitesAoVivo": {
+  "descricao": "os mesmos 11 sites lidos AO VIVO, incluindo /terms /privacy /legal /about — testa a premissa da Opcao C independentemente do Common Crawl",
+  "registros": [
+   {
+    "numeroRegistro": "11999914",
+    "nome": "AQUILO REFRIGERATION LIMITED",
+    "host": "aquilorefrigeration.co.uk",
+    "alcancou": true,
+    "paginasLidas": 7,
+    "encontrado": true,
+    "estrita": true,
+    "onde": "https://aquilorefrigeration.co.uk/pages/terms-conditions",
+    "trecho": "r address is The Mill, Marsh Fold Lane, Bolton, BL1 4HG. Our registered company number is 11999914 and we are part of a group that has bee",
+    "numerosPublicados": [
+     "11999914"
+    ],
+    "segundos": 12.2
+   },
+   {
+    "numeroRegistro": "13679563",
+    "nome": "BREARMAN LTD",
+    "host": "brearman.co.uk",
+    "alcancou": false,
+    "paginasLidas": 0,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicados": [],
+    "segundos": 1.4
+   },
+   {
+    "numeroRegistro": "00364656",
+    "nome": "PENDLE HARDWOODS LIMITED",
+    "host": "www.pendlehardwoods.co.uk",
+    "alcancou": true,
+    "paginasLidas": 4,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicados": [],
+    "segundos": 18.2
+   },
+   {
+    "numeroRegistro": "00804767",
+    "nome": "AUTO MARINE CABLES LIMITED",
+    "host": "www.amc-tcg.com",
+    "alcancou": true,
+    "paginasLidas": 4,
+    "encontrado": true,
+    "estrita": true,
+    "onde": "https://www.amc-tcg.com/",
+    "trecho": "ion (EU). These include COSHH, RoHS, WEEE and ELV directives. Company Registration Number 00804767 VAT Registration Number GB354703753 Aut",
+    "numerosPublicados": [
+     "00804767"
+    ],
+    "segundos": 7.6
+   },
+   {
+    "numeroRegistro": "14665645",
+    "nome": "MPT GROUP MATTRESS MACHINERY LTD",
+    "host": "www.mptgroup.com",
+    "alcancou": true,
+    "paginasLidas": 9,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicados": [],
+    "segundos": 21.1
+   },
+   {
+    "numeroRegistro": "12094826",
+    "nome": "ABBOTT MELLOR LIMITED",
+    "host": "abbottmellor.com",
+    "alcancou": true,
+    "paginasLidas": 6,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicados": [],
+    "segundos": 13.1
+   },
+   {
+    "numeroRegistro": "07864189",
+    "nome": "ACCUMAC LIMITED",
+    "host": "accumac.co.uk",
+    "alcancou": true,
+    "paginasLidas": 2,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicados": [],
+    "segundos": 9
+   },
+   {
+    "numeroRegistro": "06905727",
+    "nome": "RADIAL LINE SHEETMETAL LIMITED",
+    "host": "www.radialline.co.uk",
+    "alcancou": true,
+    "paginasLidas": 3,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicados": [],
+    "segundos": 14.7
+   },
+   {
+    "numeroRegistro": "07348616",
+    "nome": "PURE FABS LIMITED",
+    "host": "www.purecompanies.co.uk",
+    "alcancou": true,
+    "paginasLidas": 1,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicados": [],
+    "segundos": 21.9
+   },
+   {
+    "numeroRegistro": "05178292",
+    "nome": "BARROWMIX LIMITED",
+    "host": "barrowmixconcrete.com",
+    "alcancou": true,
+    "paginasLidas": 6,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicados": [],
+    "segundos": 20.8
+   },
+   {
+    "numeroRegistro": "07532929",
+    "nome": "BRIAN MOORES LIMITED",
+    "host": "brianmoores.co.uk",
+    "alcancou": true,
+    "paginasLidas": 10,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicados": [],
+    "segundos": 17.9
+   }
+  ]
+ },
+ "medicaoC_auditoriaManualDas89Perdidas": {
+  "descricao": "subamostra deterministica de 40 das 89 empresas sem site, auditadas uma a uma com motor de busca",
+  "subamostra": [
+   {
+    "n": "16749377",
+    "nome": "ALDEYAR ALMASREYA COMPANY LTD",
+    "cep": "M40 8WN",
+    "contas": "NO ACCOUNTS FILED",
+    "enderecoDeMassa": true
+   },
+   {
+    "n": "12555281",
+    "nome": "R A CARTER EXCAVATIONS & GROUNDWORK LTD",
+    "cep": "OL13 8HZ",
+    "contas": "TOTAL EXEMPTION FULL",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "15351061",
+    "nome": "NELI ATHD LIMITED",
+    "cep": "M27 5AD",
+    "contas": "MICRO ENTITY",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "07293726",
+    "nome": "BRADLEYS CONSTRUCTION LTD",
+    "cep": "WN6 9DX",
+    "contas": "TOTAL EXEMPTION FULL",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "16992102",
+    "nome": "NEXABUILD NW LTD",
+    "cep": "OL11 2YW",
+    "contas": "NO ACCOUNTS FILED",
+    "enderecoDeMassa": true
+   },
+   {
+    "n": "17195442",
+    "nome": "B L M GALLAGHER LTD",
+    "cep": "SK5 7NF",
+    "contas": "NO ACCOUNTS FILED",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "01236941",
+    "nome": "P.D.S. (SHEET METAL) LIMITED",
+    "cep": "BL6 6RD",
+    "contas": "MICRO ENTITY",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "09152664",
+    "nome": "P P A K LIMITED",
+    "cep": "M30 0JX",
+    "contas": "TOTAL EXEMPTION FULL",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "03401609",
+    "nome": "A. & C. SHEET METAL LIMITED",
+    "cep": "M30 7RL",
+    "contas": "UNAUDITED ABRIDGED",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "14928633",
+    "nome": "AVEZO LIMITED",
+    "cep": "WN6 0YY",
+    "contas": "MICRO ENTITY",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "03870924",
+    "nome": "P & K SHUTTER SERVICES LIMITED",
+    "cep": "BL5 3QR",
+    "contas": "TOTAL EXEMPTION FULL",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "09174053",
+    "nome": "PERFORMANCE MATERIALS LIMITED",
+    "cep": "M2 3BD",
+    "contas": "TOTAL EXEMPTION FULL",
+    "enderecoDeMassa": true
+   },
+   {
+    "n": "14768509",
+    "nome": "ORPHEUS MANUFACTURING LIMITED",
+    "cep": "M27 8LT",
+    "contas": "TOTAL EXEMPTION FULL",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "14935620",
+    "nome": "PHOENIX HOME PROJECTS LTD",
+    "cep": "M30 7EF",
+    "contas": "MICRO ENTITY",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "14249780",
+    "nome": "ANCOATS STORAGE LTD",
+    "cep": "OL6 8PL",
+    "contas": "MICRO ENTITY",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "05323768",
+    "nome": "AZ INTEC LIMITED",
+    "cep": "WN5 7XX",
+    "contas": "UNAUDITED ABRIDGED",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "01077393",
+    "nome": "READ & TURNER (TRANSPORT) LIMITED",
+    "cep": "SK17 9JL",
+    "contas": "UNAUDITED ABRIDGED",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "16953531",
+    "nome": "NERO FOR TRADING LTD",
+    "cep": "M40 8WN",
+    "contas": "NO ACCOUNTS FILED",
+    "enderecoDeMassa": true
+   },
+   {
+    "n": "06917358",
+    "nome": "P & D SHEET METAL FABRICATIONS LTD",
+    "cep": "SK1 4LR",
+    "contas": "MICRO ENTITY",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "15920986",
+    "nome": "OAKENBANK JOINERY & BUILD LTD",
+    "cep": "SK10 2JF",
+    "contas": "DORMANT",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "17336413",
+    "nome": "PMA MULTISECTOR SERVICE LIMITED",
+    "cep": "WN2 2HG",
+    "contas": "NO ACCOUNTS FILED",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "04776526",
+    "nome": "A. KENNY & SONS LIMITED",
+    "cep": "M29 7FU",
+    "contas": "TOTAL EXEMPTION FULL",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "11736664",
+    "nome": "BLUEGRASS COURIERS LIMITED",
+    "cep": "BL9 7TP",
+    "contas": "MICRO ENTITY",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "04932653",
+    "nome": "R WARD WELDING SPECIALISTS LIMITED",
+    "cep": "M22 4WS",
+    "contas": "MICRO ENTITY",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "01222789",
+    "nome": "BROADTHORN CONSTRUCTION LIMITED",
+    "cep": "M3 3EB",
+    "contas": "TOTAL EXEMPTION FULL",
+    "enderecoDeMassa": true
+   },
+   {
+    "n": "16910127",
+    "nome": "NAJM ALDEEN MOHAMEED ALGHBRI AND PARTENER CO LTD",
+    "cep": "M40 8WN",
+    "contas": "NO ACCOUNTS FILED",
+    "enderecoDeMassa": true
+   },
+   {
+    "n": "08930159",
+    "nome": "PGA FABRICATIONS LIMITED",
+    "cep": "BL9 6EN",
+    "contas": "MICRO ENTITY",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "11881514",
+    "nome": "PW CONSTRUCTION PLANNING LTD",
+    "cep": "SK12 2AA",
+    "contas": "MICRO ENTITY",
+    "enderecoDeMassa": true
+   },
+   {
+    "n": "16805553",
+    "nome": "PIRES PARTNERSHIPS LIMITED",
+    "cep": "SK9 1HG",
+    "contas": "NO ACCOUNTS FILED",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "16137539",
+    "nome": "ASAL TRANSPORT LIMITED",
+    "cep": "M16 7QD",
+    "contas": "TOTAL EXEMPTION FULL",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "14892809",
+    "nome": "AYYUB BUILDERS LTD",
+    "cep": "OL1 2NH",
+    "contas": "TOTAL EXEMPTION FULL",
+    "enderecoDeMassa": true
+   },
+   {
+    "n": "17178872",
+    "nome": "PATRON DIY NETWORK LTD",
+    "cep": "BL4 8PJ",
+    "contas": "NO ACCOUNTS FILED",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "16436389",
+    "nome": "PRESTIGE CABINETS LIMITED",
+    "cep": "M20 4BA",
+    "contas": "NO ACCOUNTS FILED",
+    "enderecoDeMassa": true
+   },
+   {
+    "n": "05284150",
+    "nome": "BDP LTD",
+    "cep": "SK2 5ED",
+    "contas": "TOTAL EXEMPTION FULL",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "08621396",
+    "nome": "BRIGHT FUTURE GLOBAL LTD",
+    "cep": "OL12 7LQ",
+    "contas": "MICRO ENTITY",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "05585351",
+    "nome": "PANTHEON CATERING EQUIPMENT LIMITED",
+    "cep": "BL1 2DD",
+    "contas": "TOTAL EXEMPTION FULL",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "16833416",
+    "nome": "AL FARIS GROUP FOR TRADING LTD",
+    "cep": "M40 8WN",
+    "contas": "NO ACCOUNTS FILED",
+    "enderecoDeMassa": true
+   },
+   {
+    "n": "16802247",
+    "nome": "R S T M GENERAL TRADING LTD",
+    "cep": "M40 8WN",
+    "contas": "NO ACCOUNTS FILED",
+    "enderecoDeMassa": true
+   },
+   {
+    "n": "01072813",
+    "nome": "ASH TOOL CO. LIMITED",
+    "cep": "OL6 6HZ",
+    "contas": "TOTAL EXEMPTION FULL",
+    "enderecoDeMassa": false
+   },
+   {
+    "n": "08706113",
+    "nome": "ALINA LTD",
+    "cep": "M40 8WN",
+    "contas": "MICRO ENTITY",
+    "enderecoDeMassa": true
+   }
+  ],
+  "candidatosEncontrados": [
+   {
+    "numeroRegistro": "12555281",
+    "nome": "R A CARTER EXCAVATIONS & GROUNDWORK LTD",
+    "host": "www.racarterexcavations.co.uk",
+    "confianca": "alta"
+   },
+   {
+    "numeroRegistro": "03870924",
+    "nome": "P & K SHUTTER SERVICES LIMITED",
+    "host": "www.pkrollershutterdoors.com",
+    "confianca": "alta"
+   },
+   {
+    "numeroRegistro": "03401609",
+    "nome": "A. & C. SHEET METAL LIMITED",
+    "host": "www.aandcsheetmetalwork.co.uk",
+    "confianca": "alta"
+   },
+   {
+    "numeroRegistro": "06917358",
+    "nome": "P & D SHEET METAL FABRICATIONS LTD",
+    "host": "www.pdsheetmetal.co.uk",
+    "confianca": "alta"
+   },
+   {
+    "numeroRegistro": "05585351",
+    "nome": "PANTHEON CATERING EQUIPMENT LIMITED",
+    "host": "pantheonce.co.uk",
+    "confianca": "alta"
+   },
+   {
+    "numeroRegistro": "07293726",
+    "nome": "BRADLEYS CONSTRUCTION LTD",
+    "host": "www.bradleysgroup.com",
+    "confianca": "duvidosa"
+   },
+   {
+    "numeroRegistro": "05323768",
+    "nome": "AZ INTEC LIMITED",
+    "host": "www.azintec.com",
+    "confianca": "duvidosa"
+   },
+   {
+    "numeroRegistro": "05284150",
+    "nome": "BDP LTD",
+    "host": "bdpbuilders.co.uk",
+    "confianca": "duvidosa"
+   }
+  ],
+  "semSiteProprio": 32
+ },
+ "medicaoD_travaNosCandidatos": {
+  "descricao": "a trava de identidade REAL do pipeline aplicada aos 8 candidatos achados na auditoria",
+  "registros": [
+   {
+    "numeroRegistro": "12555281",
+    "nome": "R A CARTER EXCAVATIONS & GROUNDWORK LTD",
+    "cep": "OL13 8HZ",
+    "host": "www.racarterexcavations.co.uk",
+    "aceito": true,
+    "nivel": "numero_registro",
+    "confianca": 0.99,
+    "detalhe": "número de registro 12555281 publicado na página",
+    "contra": [],
+    "emails": [
+     "info@racarterexcavations.co.uk [provavel]"
+    ],
+    "telefones": [
+     "+447469196930"
+    ],
+    "paginasLidas": 2
+   },
+   {
+    "numeroRegistro": "03870924",
+    "nome": "P & K SHUTTER SERVICES LIMITED",
+    "cep": "BL5 3QR",
+    "host": "www.pkrollershutterdoors.com",
+    "aceito": false,
+    "nivel": "nenhuma",
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contra": [],
+    "emails": [],
+    "telefones": [],
+    "paginasLidas": 0
+   },
+   {
+    "numeroRegistro": "03401609",
+    "nome": "A. & C. SHEET METAL LIMITED",
+    "cep": "M30 7RL",
+    "host": "www.aandcsheetmetalwork.co.uk",
+    "aceito": true,
+    "nivel": "numero_registro",
+    "confianca": 0.99,
+    "detalhe": "número de registro 03401609 publicado na página",
+    "contra": [],
+    "emails": [],
+    "telefones": [
+     "+441617892425"
+    ],
+    "paginasLidas": 2
+   },
+   {
+    "numeroRegistro": "06917358",
+    "nome": "P & D SHEET METAL FABRICATIONS LTD",
+    "cep": "SK1 4LR",
+    "host": "www.pdsheetmetal.co.uk",
+    "aceito": true,
+    "nivel": "cep_registrado",
+    "confianca": 0.92,
+    "detalhe": "CEP SK1 4LR publicado na página",
+    "contra": [],
+    "emails": [
+     "info@pdsheetmetal.co.uk [provavel]"
+    ],
+    "telefones": [
+     "+441614808928",
+     "+447540194805"
+    ],
+    "paginasLidas": 3
+   },
+   {
+    "numeroRegistro": "05585351",
+    "nome": "PANTHEON CATERING EQUIPMENT LIMITED",
+    "cep": "BL1 2DD",
+    "host": "pantheonce.co.uk",
+    "aceito": false,
+    "nivel": "nenhuma",
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contra": [],
+    "emails": [],
+    "telefones": [],
+    "paginasLidas": 4
+   },
+   {
+    "numeroRegistro": "07293726",
+    "nome": "BRADLEYS CONSTRUCTION LTD",
+    "cep": "WN6 9DX",
+    "host": "www.bradleysgroup.com",
+    "aceito": true,
+    "nivel": "numero_registro",
+    "confianca": 0.99,
+    "detalhe": "número de registro 7293726 publicado na página",
+    "contra": [],
+    "emails": [
+     "info@bradleysgroup.com [provavel]"
+    ],
+    "telefones": [
+     "+441257253593",
+     "+441257255806"
+    ],
+    "paginasLidas": 3
+   },
+   {
+    "numeroRegistro": "05323768",
+    "nome": "AZ INTEC LIMITED",
+    "cep": "WN5 7XX",
+    "host": "www.azintec.com",
+    "aceito": false,
+    "nivel": "nenhuma",
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contra": [],
+    "emails": [],
+    "telefones": [],
+    "paginasLidas": 2
+   },
+   {
+    "numeroRegistro": "05284150",
+    "nome": "BDP LTD",
+    "cep": "SK2 5ED",
+    "host": "bdpbuilders.co.uk",
+    "aceito": false,
+    "nivel": "nenhuma",
+    "confianca": 0,
+    "detalhe": "nenhum candidato de domínio passou na trava de identidade",
+    "contra": [],
+    "emails": [],
+    "telefones": [],
+    "paginasLidas": 0
+   }
+  ]
+ },
+ "medicaoE_diagnosticoDaTrava": {
+  "descricao": "sinal por sinal, para separar rejeicao correta de falso negativo",
+  "registros": [
+   {
+    "numeroRegistro": "12555281",
+    "nome": "R A CARTER EXCAVATIONS & GROUNDWORK LTD",
+    "host": "www.racarterexcavations.co.uk",
+    "cepRegistrado": "OL13 8HZ",
+    "paginas": 2,
+    "tokensDistintivos": [
+     "CARTER",
+     "EXCAVATIONS",
+     "GROUNDWORK"
+    ],
+    "tokensPresentesNaPagina": [
+     "CARTER",
+     "EXCAVATIONS",
+     "GROUNDWORK"
+    ],
+    "tokensAusentes": [],
+    "dominioCarregaNome": false,
+    "rotuloDominio": "racarterexcavations",
+    "nomeJunto": "carterexcavationsgroundwork",
+    "cepsNaPagina": [
+     "OL13 8HZ"
+    ],
+    "mesmoDistrito": true,
+    "mesmaArea": true,
+    "codigosArea": []
+   },
+   {
+    "numeroRegistro": "03401609",
+    "nome": "A. & C. SHEET METAL LIMITED",
+    "host": "www.aandcsheetmetalwork.co.uk",
+    "cepRegistrado": "M30 7RL",
+    "paginas": 2,
+    "tokensDistintivos": [
+     "SHEET",
+     "METAL"
+    ],
+    "tokensPresentesNaPagina": [
+     "SHEET",
+     "METAL"
+    ],
+    "tokensAusentes": [],
+    "dominioCarregaNome": true,
+    "rotuloDominio": "aandcsheetmetalwork",
+    "nomeJunto": "sheetmetal",
+    "cepsNaPagina": [
+     "M30 7RL"
+    ],
+    "mesmoDistrito": true,
+    "mesmaArea": true,
+    "codigosArea": [
+     "0161"
+    ]
+   },
+   {
+    "numeroRegistro": "06917358",
+    "nome": "P & D SHEET METAL FABRICATIONS LTD",
+    "host": "www.pdsheetmetal.co.uk",
+    "cepRegistrado": "SK1 4LR",
+    "paginas": 3,
+    "tokensDistintivos": [
+     "SHEET",
+     "METAL",
+     "FABRICATIONS"
+    ],
+    "tokensPresentesNaPagina": [
+     "SHEET",
+     "METAL"
+    ],
+    "tokensAusentes": [
+     "FABRICATIONS"
+    ],
+    "dominioCarregaNome": false,
+    "rotuloDominio": "pdsheetmetal",
+    "nomeJunto": "sheetmetalfabrications",
+    "cepsNaPagina": [
+     "SK1 4LR"
+    ],
+    "mesmoDistrito": true,
+    "mesmaArea": true,
+    "codigosArea": [
+     "0161"
+    ]
+   },
+   {
+    "numeroRegistro": "05585351",
+    "nome": "PANTHEON CATERING EQUIPMENT LIMITED",
+    "host": "pantheonce.co.uk",
+    "cepRegistrado": "BL1 2DD",
+    "paginas": 4,
+    "tokensDistintivos": [
+     "PANTHEON",
+     "CATERING",
+     "EQUIPMENT"
+    ],
+    "tokensPresentesNaPagina": [
+     "PANTHEON",
+     "CATERING",
+     "EQUIPMENT"
+    ],
+    "tokensAusentes": [],
+    "dominioCarregaNome": false,
+    "rotuloDominio": "pantheonce",
+    "nomeJunto": "pantheoncateringequipment",
+    "cepsNaPagina": [
+     "BL1 4HG"
+    ],
+    "mesmoDistrito": true,
+    "mesmaArea": true,
+    "codigosArea": []
+   },
+   {
+    "numeroRegistro": "07293726",
+    "nome": "BRADLEYS CONSTRUCTION LTD",
+    "host": "www.bradleysgroup.com",
+    "cepRegistrado": "WN6 9DX",
+    "paginas": 3,
+    "tokensDistintivos": [
+     "BRADLEYS"
+    ],
+    "tokensPresentesNaPagina": [
+     "BRADLEYS"
+    ],
+    "tokensAusentes": [],
+    "dominioCarregaNome": true,
+    "rotuloDominio": "bradleysgroup",
+    "nomeJunto": "bradleys",
+    "cepsNaPagina": [
+     "WN6 9DX"
+    ],
+    "mesmoDistrito": true,
+    "mesmaArea": true,
+    "codigosArea": [
+     "01257"
+    ]
+   },
+   {
+    "numeroRegistro": "05323768",
+    "nome": "AZ INTEC LIMITED",
+    "host": "www.azintec.com",
+    "cepRegistrado": "WN5 7XX",
+    "paginas": 2,
+    "tokensDistintivos": [
+     "INTEC"
+    ],
+    "tokensPresentesNaPagina": [
+     "INTEC"
+    ],
+    "tokensAusentes": [],
+    "dominioCarregaNome": true,
+    "rotuloDominio": "azintec",
+    "nomeJunto": "intec",
+    "cepsNaPagina": [],
+    "mesmoDistrito": false,
+    "mesmaArea": false,
+    "codigosArea": []
+   }
+  ]
+ },
+ "medicaoF_ccNosCandidatos": {
+  "descricao": "indice reverso do Common Crawl aplicado aos 8 candidatos da auditoria",
+  "registros": [
+   {
+    "numeroRegistro": "12555281",
+    "nome": "R A CARTER EXCAVATIONS & GROUNDWORK LTD",
+    "host": "www.racarterexcavations.co.uk",
+    "urlsNoIndice": 0,
+    "urls200": 0,
+    "paginasLidas": 0,
+    "bytesBaixados": 0,
+    "segundos": 2.22,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   },
+   {
+    "numeroRegistro": "03870924",
+    "nome": "P & K SHUTTER SERVICES LIMITED",
+    "host": "www.pkrollershutterdoors.com",
+    "urlsNoIndice": 0,
+    "urls200": 0,
+    "paginasLidas": 0,
+    "bytesBaixados": 0,
+    "segundos": 0.83,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   },
+   {
+    "numeroRegistro": "03401609",
+    "nome": "A. & C. SHEET METAL LIMITED",
+    "host": "www.aandcsheetmetalwork.co.uk",
+    "urlsNoIndice": 0,
+    "urls200": 0,
+    "paginasLidas": 0,
+    "bytesBaixados": 0,
+    "segundos": 0.68,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   },
+   {
+    "numeroRegistro": "06917358",
+    "nome": "P & D SHEET METAL FABRICATIONS LTD",
+    "host": "www.pdsheetmetal.co.uk",
+    "urlsNoIndice": 2,
+    "urls200": 1,
+    "paginasLidas": 1,
+    "bytesBaixados": 8691,
+    "segundos": 0.94,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   },
+   {
+    "numeroRegistro": "05585351",
+    "nome": "PANTHEON CATERING EQUIPMENT LIMITED",
+    "host": "pantheonce.co.uk",
+    "urlsNoIndice": 31,
+    "urls200": 30,
+    "paginasLidas": 30,
+    "bytesBaixados": 1816300,
+    "segundos": 12.26,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   },
+   {
+    "numeroRegistro": "07293726",
+    "nome": "BRADLEYS CONSTRUCTION LTD",
+    "host": "www.bradleysgroup.com",
+    "urlsNoIndice": 36,
+    "urls200": 31,
+    "paginasLidas": 30,
+    "bytesBaixados": 837573,
+    "segundos": 12.23,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   },
+   {
+    "numeroRegistro": "05323768",
+    "nome": "AZ INTEC LIMITED",
+    "host": "www.azintec.com",
+    "urlsNoIndice": 38,
+    "urls200": 24,
+    "paginasLidas": 22,
+    "bytesBaixados": 8831320,
+    "segundos": 10.09,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   },
+   {
+    "numeroRegistro": "05284150",
+    "nome": "BDP LTD",
+    "host": "bdpbuilders.co.uk",
+    "urlsNoIndice": 0,
+    "urls200": 0,
+    "paginasLidas": 0,
+    "bytesBaixados": 0,
+    "segundos": 0.84,
+    "encontrado": false,
+    "estrita": false,
+    "onde": null,
+    "trecho": null,
+    "numerosPublicadosNoSite": []
+   }
+  ]
+ },
+ "medicaoG_auditoriaDosAceitesPorNumeroRegistro": {
+  "descricao": "conferencia em contexto dos 3 aceites de nivel numero_registro — nenhum falso positivo",
+  "veredito": "3 de 3 confirmados",
+  "casos": [
+   {
+    "numeroRegistro": "12555281",
+    "host": "www.racarterexcavations.co.uk",
+    "trecho": "…ons & Groundwork Ltd, registered as a limited company in England and Wales *or Scotland under company number: 12555281. Registered Company Address:…",
+    "veredito": "correto"
+   },
+   {
+    "numeroRegistro": "03401609",
+    "host": "www.aandcsheetmetalwork.co.uk",
+    "trecho": "…ire M30 7RL A & C Sheet Metal Ltd, registered as a limited company in England and Wales under company number: 03401609. Registered Company Address:…",
+    "veredito": "correto"
+   },
+   {
+    "numeroRegistro": "07293726",
+    "host": "www.bradleysgroup.com",
+    "trecho": "…Registered office address is: Park House Farm, Appley Lane North, Appley Bridge, Wigan, WN6 9DX Registered in England and Wales: 7293726 VAT Number: 180924695…",
+    "veredito": "correto — e o endereco registrado publicado bate exatamente com o do Companies House (WN6 9DX)"
+   }
+  ]
+ }
+}
