@@ -105,7 +105,14 @@
     "centralAjuda": "Centro de ayuda",
     "sair": "Salir",
     "saiuDaConta": "Cerraste sesión.",
-    "meusContatos": "Mis contactos"
+    "meusContatos": "Mis contactos",
+    "buscar": "Buscar empresas",
+    "principal": "Navegación principal",
+    "creditosDisponiveis": "{{saldo}} créditos disponibles",
+    "expandirMenu": "Expandir menú",
+    "recolherMenu": "Contraer menú",
+    "abrirMenu": "Abrir menú",
+    "fecharMenu": "Cerrar menú"
   },
   "resultados": {
     "novaBusca": "Nueva búsqueda",

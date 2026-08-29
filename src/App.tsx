@@ -8,6 +8,7 @@ import { FunilProspeccao } from "@/components/FunilProspeccao"
 import { FormularioBusca } from "@/components/FormularioBusca"
 import { Dashboard } from "@/components/Dashboard"
 import { NavegacaoTopo } from "@/components/NavegacaoTopo"
+import { MenuLateral } from "@/components/MenuLateral"
 import { PromptInstalarApp } from "@/components/PromptInstalarApp"
 import { BannerContextual } from "@/components/BannerContextual"
 import { PaginaSAC } from "@/components/PaginaSAC"
@@ -151,7 +152,7 @@ function TelaCarregando() {
 
 /** Componente interno que inicializa autenticação e define as rotas */
 function ConteudoApp() {
-  const { inicializar, inicializado, backendIndisponivel, perfil } = useAuthStore()
+  const { inicializar, inicializado, backendIndisponivel, perfil, usuarioId } = useAuthStore()
   const sincronizarComPerfil = usePreferenciasStore((s) => s.sincronizarComPerfil)
   const location = useLocation()
 
@@ -174,6 +175,21 @@ function ConteudoApp() {
   // anúncio, para que nada dispute atenção com a apresentação.
   const naPaginaInicial = location.pathname === "/"
 
+  /**
+   * QUEM VÊ O MENU LATERAL
+   *
+   * Só quem está logado, e fora da home e da tela de entrada. A home é
+   * vitrine e a tela de entrada é um formulário isolado: menu de
+   * aplicativo nas duas só ocuparia espaço sem oferecer destino útil.
+   *
+   * Para quem ainda não entrou, a barra de topo continua — ela tem a
+   * chamada de cadastro, que é o que interessa a essa pessoa. Um menu
+   * de navegação interna para quem não tem conta seria uma sala cheia
+   * de portas trancadas.
+   */
+  const usaMenuLateral =
+    Boolean(usuarioId) && !naPaginaInicial && location.pathname !== "/entrar"
+
   return (
     <>
       {/* Aviso de backend fora do ar — a causa mais comum é o projeto
@@ -188,14 +204,20 @@ function ConteudoApp() {
       )}
 
       {/* O header de navegação não aparece na tela de abertura (splash) */}
-      {!naPaginaInicial && <NavegacaoTopo />}
+      {!naPaginaInicial && !usaMenuLateral && <NavegacaoTopo />}
       <PromptInstalarApp />
 
       {/* Reserva a altura exata da faixa de anúncios do rodapé
           (80px no celular, 96px no computador), garantindo que nenhum
           conteúdo fique escondido atrás dela. Na página inicial não há
           faixa, então também não há altura a reservar. */}
-      <div className={naPaginaInicial ? "" : "pb-20 md:pb-24"}>
+      {/* Layout de duas colunas quando há menu lateral. `min-w-0` no
+          conteúdo não é detalhe: sem ele, uma tabela larga dentro de um
+          filho de flex empurra o menu para fora da tela em vez de rolar
+          dentro da própria área. */}
+      <div className={usaMenuLateral ? "flex items-start" : ""}>
+        {usaMenuLateral && <MenuLateral />}
+        <div className={`${usaMenuLateral ? "flex-1 min-w-0" : ""} ${naPaginaInicial ? "" : "pb-20 md:pb-24"}`}>
       <Routes>
         <Route path="/" element={<TelaAbertura />} />
         <Route path="/buscar" element={<PaginaBusca />} />
@@ -212,6 +234,7 @@ function ConteudoApp() {
         <Route path="/assinatura/pendente" element={<PaginaRetornoCheckout resultado="pendente" />} />
         <Route path="*" element={<Navigate to="/buscar" replace />} />
       </Routes>
+        </div>
       </div>
 
       {/* Banner contextual — faixa no rodapé das páginas internas.

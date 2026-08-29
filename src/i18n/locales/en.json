@@ -105,7 +105,14 @@
     "centralAjuda": "Help center",
     "sair": "Sign out",
     "saiuDaConta": "You've been signed out.",
-    "meusContatos": "My contacts"
+    "meusContatos": "My contacts",
+    "buscar": "Find companies",
+    "principal": "Main navigation",
+    "creditosDisponiveis": "{{saldo}} credits available",
+    "expandirMenu": "Expand menu",
+    "recolherMenu": "Collapse menu",
+    "abrirMenu": "Open menu",
+    "fecharMenu": "Close menu"
   },
   "resultados": {
     "novaBusca": "New search",
