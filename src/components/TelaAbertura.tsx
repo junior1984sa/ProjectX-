@@ -8,6 +8,7 @@ import { useAuthStore } from "@/store/useAuthStore"
 import { useExecutarBusca } from "@/hooks/useExecutarBusca"
 import { EscolhaIdiomaPais } from "@/components/EscolhaIdiomaPais"
 import { HomeSecoes } from "@/components/HomeSecoes"
+import { SeletorTema } from "@/components/SeletorTema"
 import {
   obterPais,
   obterSegmentosClientes,
@@ -15,6 +16,7 @@ import {
   TOTAL_SEGMENTOS_MAPEADOS,
   type ModoBusca,
 } from "@/types/prestador"
+import { Logotipo } from "@/components/Marca"
 
 /**
  * PÁGINA INICIAL — o instrumento, não o folheto.
@@ -99,6 +101,7 @@ export function TelaAbertura() {
         </button>
 
         <div className="flex items-center gap-3">
+          <SeletorTema compacto />
           {usuarioId ? (
             <Link
               to="/perfil"
@@ -146,13 +149,7 @@ export function TelaAbertura() {
             {/* As medidas mudaram junto com a marca: o logotipo antigo
                 era quase quadrado (599x579) e o novo e horizontal
                 (470x100). Manter as medidas antigas esticaria a imagem. */}
-            <img
-              src="/logo-whohiresyou.svg"
-              alt="WhoHiresYou"
-              width={470}
-              height={100}
-              className="w-64 sm:w-[380px] h-auto"
-            />
+            <Logotipo className="w-64 sm:w-[380px] h-auto" />
           </h1>
 
           <p className="mt-3 sm:mt-4 text-[1.125rem] sm:text-[1.375rem] text-prata-300 text-center leading-snug">
@@ -227,7 +224,7 @@ export function TelaAbertura() {
               <button
                 onClick={handleBuscar}
                 disabled={!pronto || ocupado}
-                className="h-13 sm:h-auto py-3.5 sm:py-0 sm:w-[216px] flex-shrink-0 flex items-center justify-center gap-2 rounded-xl sm:rounded-none text-[1.125rem] font-semibold transition-colors duration-fast disabled:cursor-not-allowed bg-azul-600 text-white hover:bg-azul-500 active:bg-azul-700 disabled:bg-prata-700 disabled:text-prata-500"
+                className="h-13 sm:h-auto py-3.5 sm:py-0 sm:w-[216px] flex-shrink-0 flex items-center justify-center gap-2 rounded-xl sm:rounded-none text-[1.125rem] font-semibold transition-colors duration-fast disabled:cursor-not-allowed bg-azul-600 text-white hover:bg-azul-500 active:bg-azul-700 disabled:bg-prata-700 disabled:text-prata-300"
               >
                 {ocupado ? (
                   <>
@@ -342,7 +339,10 @@ export function TelaAbertura() {
         </nav>
         {/* Escopo verificável do produto — não é prova social. Os três
             números saem da configuração real, então não desatualizam. */}
-        <p className="text-[12px] text-prata-500">
+        {/* prata-400, e nao 500: sobre o fundo obsidian o 500 entrega
+            3,67:1 e reprova o minimo de 4,5 para texto pequeno. Este
+            texto e conteudo, nao ornamento — precisa ser lido. */}
+        <p className="text-[12px] text-prata-400">
           {t("home.escopo", {
             paises: PAISES_DISPONIVEIS.length,
             idiomas: 3,

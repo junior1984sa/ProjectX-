@@ -66,15 +66,15 @@ export default {
          * não é clicável nem indica estado de interação, não é azul.
          */
         azul: {
-          900: "#0C2B5E",
-          800: "#123C82",
-          700: "#1750AE",
-          600: "#1E63D6",
-          500: "#287BFF",
-          400: "#3D8BFF",
-          300: "#6BA5FF",
-          200: "#9CC3FF",
-          100: "#D0E1FF",
+          900: "rgb(var(--c-azul-900) / <alpha-value>)",
+          800: "rgb(var(--c-azul-800) / <alpha-value>)",
+          700: "rgb(var(--c-azul-700) / <alpha-value>)",
+          600: "rgb(var(--c-azul-600) / <alpha-value>)",
+          500: "rgb(var(--c-azul-500) / <alpha-value>)",
+          400: "rgb(var(--c-azul-400) / <alpha-value>)",
+          300: "rgb(var(--c-azul-300) / <alpha-value>)",
+          200: "rgb(var(--c-azul-200) / <alpha-value>)",
+          100: "rgb(var(--c-azul-100) / <alpha-value>)",
         },
 
         /**
@@ -85,15 +85,15 @@ export default {
          * então todo o produto adota a paleta nova de uma vez.
          */
         dourado: {
-          900: "#5C4318",
-          800: "#7A5920",
-          700: "#9B7128",
-          600: "#BC9142",
-          500: "#D4A84F",
-          400: "#E0B85C",
-          300: "#F0C96A",
-          200: "#F5E3BE",
-          100: "#FAF0DC",
+          900: "rgb(var(--c-dourado-900) / <alpha-value>)",
+          800: "rgb(var(--c-dourado-800) / <alpha-value>)",
+          700: "rgb(var(--c-dourado-700) / <alpha-value>)",
+          600: "rgb(var(--c-dourado-600) / <alpha-value>)",
+          500: "rgb(var(--c-dourado-500) / <alpha-value>)",
+          400: "rgb(var(--c-dourado-400) / <alpha-value>)",
+          300: "rgb(var(--c-dourado-300) / <alpha-value>)",
+          200: "rgb(var(--c-dourado-200) / <alpha-value>)",
+          100: "rgb(var(--c-dourado-100) / <alpha-value>)",
         },
 
         /**
@@ -102,26 +102,26 @@ export default {
          * os do sistema novo (obsidian → grafite → texto).
          */
         prata: {
-          900: "#11151B",
-          800: "#181D24",
-          700: "#292F38",
-          600: "#4A525C",
-          500: "#626B76",
-          400: "#8B949E",
-          300: "#C2C9D1",
-          200: "#DDE2E7",
-          100: "#F4F6F8",
+          900: "rgb(var(--c-prata-900) / <alpha-value>)",
+          800: "rgb(var(--c-prata-800) / <alpha-value>)",
+          700: "rgb(var(--c-prata-700) / <alpha-value>)",
+          600: "rgb(var(--c-prata-600) / <alpha-value>)",
+          500: "rgb(var(--c-prata-500) / <alpha-value>)",
+          400: "rgb(var(--c-prata-400) / <alpha-value>)",
+          300: "rgb(var(--c-prata-300) / <alpha-value>)",
+          200: "rgb(var(--c-prata-200) / <alpha-value>)",
+          100: "rgb(var(--c-prata-100) / <alpha-value>)",
         },
 
         /** Fundo mais profundo que a superfície dos cards */
-        obsidian: "#080A0D",
+        obsidian: "rgb(var(--c-obsidian) / <alpha-value>)",
 
         verde: {
-          700: "#1B6B45",
-          600: "#228555",
-          500: "#2F9E68",
-          400: "#3DBB7E",
-          300: "#5FD69C",
+          700: "rgb(var(--c-verde-700) / <alpha-value>)",
+          600: "rgb(var(--c-verde-600) / <alpha-value>)",
+          500: "rgb(var(--c-verde-500) / <alpha-value>)",
+          400: "rgb(var(--c-verde-400) / <alpha-value>)",
+          300: "rgb(var(--c-verde-300) / <alpha-value>)",
         },
       },
       borderRadius: {

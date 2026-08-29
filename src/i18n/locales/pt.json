@@ -708,5 +708,11 @@
         "r": "Não. Assinatura e cancelamento são pelo painel. Não há contrato de fidelidade nem ligação de retenção."
       }
     }
+  },
+  "tema": {
+    "rotulo": "Tema",
+    "claro": "Tema claro",
+    "escuro": "Tema escuro",
+    "sistema": "Seguir o sistema"
   }
 }

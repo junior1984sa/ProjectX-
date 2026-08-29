@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 import { useAuthStore } from "@/store/useAuthStore"
 import toast from "react-hot-toast"
+import { MarcaIcone } from "@/components/Marca"
 
 interface TelaAuthProps {
   onSucesso?: () => void
@@ -81,11 +82,7 @@ export function TelaAuth({ onSucesso }: TelaAuthProps) {
       {/* Header */}
       <div className="mb-8 text-center animate-fadeIn">
         <div className="flex items-center justify-center gap-3 mb-4">
-          <img
-            src="/marca.svg"
-            alt=""
-            className="w-10 h-10"
-          />
+          <MarcaIcone className="w-10 h-10" />
           <h1 className="text-3xl font-bold text-foreground tracking-tight">
             Who<span className="text-dourado-400">Hires</span>You
           </h1>

@@ -8,6 +8,8 @@ import { useAuthStore } from "@/store/useAuthStore"
 import { useCreditosStore } from "@/store/useCreditosStore"
 import { temAcessoLiberado } from "@/types/prestador"
 import toast from "react-hot-toast"
+import { SeletorTema } from "@/components/SeletorTema"
+import { MarcaIcone } from "@/components/Marca"
 
 export function NavegacaoTopo() {
   const navigate = useNavigate()
@@ -40,11 +42,7 @@ export function NavegacaoTopo() {
           onClick={() => navigate("/buscar")}
           className="flex items-center gap-2 flex-shrink-0"
         >
-          <img
-            src="/marca.svg"
-            alt=""
-            className="w-7 h-7"
-          />
+          <MarcaIcone className="w-7 h-7" />
           <span className="font-bold text-foreground tracking-tight hidden sm:inline">
             Who<span className="text-dourado-400">Hires</span>You
           </span>
@@ -52,6 +50,7 @@ export function NavegacaoTopo() {
 
         {/* Ações de navegação */}
         <div className="flex items-center gap-2">
+          <SeletorTema compacto />
           {estaLogado ? (
             <>
               {/* Indicador de trial */}

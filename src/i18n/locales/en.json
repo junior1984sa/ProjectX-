@@ -708,5 +708,11 @@
         "r": "No. Both are self-service. There is no lock-in contract and no retention call."
       }
     }
+  },
+  "tema": {
+    "rotulo": "Theme",
+    "claro": "Light theme",
+    "escuro": "Dark theme",
+    "sistema": "Match system"
   }
 }

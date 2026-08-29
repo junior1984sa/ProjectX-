@@ -14,6 +14,7 @@ import { useTranslation } from "react-i18next"
 import { useExecutarBusca } from "@/hooks/useExecutarBusca"
 import { format } from "date-fns"
 import { ptBR } from "date-fns/locale"
+import { MarcaIcone } from "@/components/Marca"
 
 // As sugestões de segmento vêm da tradução (mudam com o idioma) e as
 // de cidade vêm do país escolhido — sugerir "São Paulo, SP" para quem
@@ -83,11 +84,7 @@ export function FormularioBusca() {
       {/* Header */}
       <div className="mb-10 text-center animate-fadeIn">
         <div className="flex items-center justify-center gap-3 mb-4">
-          <img
-            src="/marca.svg"
-            alt=""
-            className="w-10 h-10"
-          />
+          <MarcaIcone className="w-10 h-10" />
           <h1 className="text-3xl font-bold text-foreground tracking-tight">
             Who<span className="text-dourado-400">Hires</span>You
           </h1>

@@ -3,6 +3,7 @@ import { Globe, Check } from "lucide-react"
 import { usePreferenciasStore } from "@/store/usePreferenciasStore"
 import { IDIOMAS_DISPONIVEIS } from "@/i18n"
 import { PAISES_DISPONIVEIS, obterPais } from "@/types/prestador"
+import { Logotipo } from "@/components/Marca"
 
 /**
  * ESCOLHA DE IDIOMA E PAÍS — primeira coisa que o visitante vê.
@@ -47,11 +48,7 @@ export function EscolhaIdiomaPais({ aoConcluir }: EscolhaIdiomaPaisProps = {}) {
 
       <div className="relative w-full max-w-md space-y-8">
         <div className="flex flex-col items-center gap-5">
-          <img
-            src="/logo-whohiresyou.svg"
-            alt="WhoHiresYou"
-            className="w-40 drop-shadow-[0_0_40px_rgba(212,176,106,0.15)]"
-          />
+          <Logotipo className="w-40" />
 
           <div className="text-center space-y-2">
             <h1 className="text-lg font-semibold text-foreground flex items-center justify-center gap-2">

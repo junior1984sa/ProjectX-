@@ -708,5 +708,11 @@
         "r": "No. Ambas cosas son autoservicio. No hay contrato de permanencia ni llamada de retención."
       }
     }
+  },
+  "tema": {
+    "rotulo": "Tema",
+    "claro": "Tema claro",
+    "escuro": "Tema oscuro",
+    "sistema": "Seguir el sistema"
   }
 }
