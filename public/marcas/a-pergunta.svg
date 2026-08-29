@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="WhoHiresYou">
+  <!--
+    OPÇÃO A — A PERGUNTA
+
+    O produto é literalmente uma pergunta: quem contrata você? A
+    interrogação diz isso sem traduzir nada, e é o único símbolo desta
+    categoria que ninguém usa — os concorrentes vivem de seta, globo e
+    lupa. Ser o único com um símbolo é metade da lembrança.
+
+    O ponto é um losango sólido em ouro, não um círculo: losango tem
+    aresta e conversa com a geometria do resto do sistema, enquanto
+    círculo amoleceria a marca.
+
+    Traço grosso para sobreviver a 16 pixels no favicon.
+  -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="13">
+    <path d="M32 34 A18 18 0 1 1 50 56 L50 64" stroke="#F4F6F8"/>
+  </g>
+  <path d="M50 78 L57 85 L50 92 L43 85 Z" fill="#D4A84F"/>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="WhoHiresYou">
+  <!--
+    OPÇÃO B — A CONVERGÊNCIA
+
+    Toda ferramenta de prospecção desenha a seta apontando para FORA:
+    você caçando o cliente. Aqui a direção é a inversa — três traços
+    convergindo num ponto dourado, que é a demanda chegando até você.
+
+    É a tese do produto virada em desenho: não é você procurando, é
+    descobrir quem já contrataria o que você faz.
+
+    Os três traços têm comprimentos diferentes de propósito. Iguais,
+    viraria um asterisco; desiguais, lê como movimento.
+  -->
+  <g fill="none" stroke-linecap="round" stroke-width="12">
+    <path d="M12 26 L40 46" stroke="#C2C9D1"/>
+    <path d="M14 74 L40 54" stroke="#C2C9D1"/>
+    <path d="M88 50 L58 50" stroke="#F4F6F8"/>
+  </g>
+  <circle cx="48" cy="50" r="11" fill="#D4A84F"/>
+</svg>

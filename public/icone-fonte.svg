@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="WhoHiresYou">
+  <!--
+    FONTE DOS ÍCONES DO APLICATIVO
+
+    Diferente de `marca.svg` em duas coisas, e as duas por exigência
+    de plataforma:
+
+    1. TEM FUNDO. A marca isolada é transparente e usa traço claro —
+       num lançador de aplicativo com papel de parede claro, ela
+       sumiria. O ícone precisa carregar o próprio fundo.
+
+    2. A MARCA OCUPA SÓ O MIOLO. Ícone "maskable" pode ser recortado
+       em círculo, em quadrado arredondado ou em gota, dependendo do
+       aparelho. A zona segura é os 80% centrais; qualquer coisa fora
+       dela pode ser cortada. Aqui a marca ocupa cerca de 58% da
+       largura, bem dentro da margem — é por isso que ela parece
+       pequena olhando o arquivo sozinho, e do tamanho certo depois
+       de recortada.
+
+    Os PNGs de public/icons são gerados a partir deste arquivo:
+      npx sharp-cli -i public/icone-fonte.svg -o public/icons resize N N
+  -->
+  <rect width="512" height="512" fill="#080A0D"/>
+
+  <!-- A marca, centrada e reduzida para caber na zona segura.
+       O grupo escala o desenho original de 100x100 por 3.0 e o
+       desloca para o centro: 256 - (100 * 3.0 / 2) = 106. -->
+  <g transform="translate(106 106) scale(3.0)">
+    <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M50 14 L50 44" stroke="#D4A84F" stroke-width="13"/>
+      <path d="M14 26 L33 78 L50 44 L67 78 L86 26"
+            stroke="#F4F6F8" stroke-width="12"/>
+    </g>
+  </g>
+</svg>

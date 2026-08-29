@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="WhoHiresYou">
+  <!--
+    OPÇÃO C — O ALVO
+
+    Geométrico e simétrico, no espírito da referência que o dono
+    aprovou, mas sem repetir o triângulo dela.
+
+    Dois arcos abertos e um núcleo dourado: lê como mira, como foco,
+    como "encontrado". A abertura nos arcos evita o anel fechado, que
+    é o clichê de todo logotipo de tecnologia.
+
+    Os arcos são grossos e o núcleo é sólido, então a 16 pixels sobra
+    um ponto dourado dentro de duas meias-luas — que continua sendo
+    uma forma, não uma mancha.
+  -->
+  <g fill="none" stroke-linecap="round" stroke-width="12">
+    <path d="M50 12 A38 38 0 0 1 88 50" stroke="#C2C9D1"/>
+    <path d="M50 88 A38 38 0 0 1 12 50" stroke="#F4F6F8"/>
+  </g>
+  <circle cx="50" cy="50" r="15" fill="#D4A84F"/>
+</svg>
