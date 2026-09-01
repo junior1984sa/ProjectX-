@@ -29,6 +29,11 @@ def _massa(b):
     return b[TOT] * KGM[b[BIT]]
 
 
+def bit(d):
+    """Bitola no padrao brasileiro: Ø12,5 em vez de Ø12.5."""
+    return ("%g" % d).replace(".", ",")
+
+
 def gerar(spec, destino):
     nt = spec["nt"]
     barras = spec["barras"]
@@ -161,7 +166,7 @@ def gerar(spec, destino):
                  [round(compr_tot / nt, 2), round(massa_tot / nt, 2)]
                  for tq in spec["tanques"]]
         cols = (["Tanque", "Elemento", "Fundações"] +
-                ["Compr. Ø%g\n(m)" % d for d in bitolas] + ["Compr. total\n(m)", "Massa de aço\n(kg)"])
+                ["Compr. Ø%s\n(m)" % bit(d) for d in bitolas] + ["Compr. total\n(m)", "Massa de aço\n(kg)"])
         fmts = [None, None, N_INT] + [N_2] * len(bitolas) + [N_2, N_2]
         larg = [17, 30, 11] + [12] * len(bitolas) + [13, 14]
         fim = tabela(ws_un, 5, cols, dados, fmts, larg)
@@ -213,13 +218,13 @@ def gerar(spec, destino):
         comp_calc = sum(b[TOT] for b in barras if b[BIT] == d)
         dv = round(comp_calc - comp_des, 2)
         val.append(["Comprimento" if dv == 0 else "DIVERGÊNCIA",
-                    "Ø%g — comprimento total (m)" % d, round(comp_calc, 2), comp_des, dv,
+                    "Ø%s — comprimento total (m)" % bit(d), round(comp_calc, 2), comp_des, dv,
                     ("Soma das posições da LISTA DE BARRAS confere exatamente com o quadro RESUMO GERAL."
                      if dv == 0 else spec["msg_desvio_compr"][d])])
     for d in bitolas:
         massa_des = resumo_des[d][1]
         massa_calc = resumo_des[d][0] * KGM[d]
-        val.append(["Massa", "Ø%g — massa total (kg)" % d, round(massa_calc, 2), massa_des,
+        val.append(["Massa", "Ø%s — massa total (kg)" % bit(d), round(massa_calc, 2), massa_des,
                     round(massa_calc - massa_des, 2),
                     "Comprimento do RESUMO GERAL × massa linear. Desvio inferior a 0,5 kg, "
                     "compatível com o arredondamento do quadro."])
@@ -266,7 +271,7 @@ def gerar(spec, destino):
     for d in bitolas:
         comp = sum(b[TOT] for b in barras if b[BIT] == d)
         m = comp * KGM[d]
-        for j, v, f in ((1, "Ø%g mm" % d, None), (2, round(comp, 2), N_2), (3, round(m, 2), N_2),
+        for j, v, f in ((1, "Ø%s mm" % bit(d), None), (2, round(comp, 2), N_2), (3, round(m, 2), N_2),
                         (4, m / massa_tot, N_PCT), (5, math.ceil(comp / 12), N_INT)):
             c = ws.cell(row=lin, column=j, value=v)
             c.font = F_BODY; c.fill = PatternFill("solid", fgColor=LINHA)
