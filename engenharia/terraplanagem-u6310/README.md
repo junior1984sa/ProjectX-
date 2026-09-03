@@ -39,12 +39,15 @@ sobrelargura da Nota 4. A faixa hachurada em azul mede 1,50 m, igual à projeç�
 |---|---|---|---|---|---|---|---|---|
 | 816 | 816A a D | OB 100N | 29,00 m | 13,71 m | 15,21 m | 9,71 m | 19,42 m | cotado |
 | 817 | 817A a D | OB 220N | 29,00 m | 13,71 m | 15,21 m | 9,71 m | 19,42 m | cotado |
-| 818 | 818A a D | OB 500/600N | 27,50 m | 12,78 m | 14,28 m | 8,78 m | 17,56 m | aferido |
+| 818 | 818A a D | OB 500/600N | 27,50 m | 12,78 m | 14,28 m | 8,78 m | 17,56 m | retro-calculado |
 | 815 | 815A a D | OB 80N | 24,00 m | 10,85 m | 12,35 m | 6,85 m | 13,70 m | cotado |
 | 824 | TQ-6312824 | UCO | — | 18,53 m | 20,03 m | 14,53 m | 29,06 m | cotado |
 
-> A linha 818 é a única sem cota de raio na planta. Adotou-se 12,78 m, medido no arquivo vetorial
-> (12,77 m) e confirmado pelo volume do desenho com desvio de 0,03%.
+> A linha 818 é a única sem cota de raio na planta. Adotou-se **12,78 m**, retro-calculado a partir do
+> próprio volume do desenho (12,7818 m) e corroborado por medição independente no arquivo vetorial
+> (12,77 m). Como o raio saiu do volume, **o desvio de 0,03% dessa linha não é verificação
+> independente** — a aferição é independente apenas nas linhas 816, 817 e 824, cujos raios estão
+> cotados. Confirmar a cota com o projetista.
 
 ## 3. Aferição contra a tabela do desenho
 
@@ -59,12 +62,33 @@ O modelo geométrico reproduz a coluna **REATERRO** da tabela de quantitativos:
 | 824 | 1.756,44 m³ | 1.752,57 m³ | −0,22% |
 | **Total** | **15.597,05 m³** | **15.636,28 m³** | **+0,25%** |
 
-A aderência confirma que o **REATERRO do desenho é exatamente o volume escavado sob os tanques**, e
-autoriza desagregar o quantitativo por tanque — que é o que a produção precisa.
+A aderência confirma que o **REATERRO do desenho é o volume escavado sob os tanques**, e autoriza
+desagregar o quantitativo por tanque — que é o que a produção precisa. Ver a ressalva de
+independência da linha 818 no item 2.
 
-A linha 815 é o único desvio relevante: nos cortes D-D os espaçamentos são 24,11 / 23,89 / 24,00 m
-(não uniformes) e os círculos de topo são truncados pelo limite da plataforma (cotas 11,85 e 11,15
-nas extremidades). **Adota-se o valor do desenho**, a favor da segurança.
+### O desvio da linha 815
+
+É o único acima de 0,25%. Os mecanismos foram identificados na planta e quantificados por integração:
+
+| Mecanismo | Volume |
+|---|---:|
+| Truncamento dos quatro cones pelo limite sul da plataforma (cota 10,97 m do eixo, menor que o raio de topo 12,35 m) | 23,05 m³ |
+| Truncamento do cone da extremidade oeste (cota 11,85 m) | 0,46 m³ |
+| Truncamento do cone da extremidade leste (cota 11,15 m) | 4,08 m³ |
+| Sobreposição entre cones adjacentes (espaçamento 24,00 m, raio de topo 12,35 m) | 1,14 m³ |
+| **Soma** | **28,73 m³ — 60% do desvio** |
+
+O saldo de cerca de 19 m³ (0,76% da linha) **permanece em aberto** e deve ser confirmado com o
+projetista. Adota-se o valor do desenho por **prevalência contratual do documento emitido** — e não
+por margem de segurança: 2.492,22 m³ é o *menor* dos dois valores, de modo que a adoção
+subdimensiona em 47,71 m³ quem executa e mede.
+
+### Inconsistência interna do projeto (a esclarecer)
+
+O corte D-D cota os espaçamentos de eixo da linha 815 como **24,11 / 23,89 / 24,00 m**, enquanto a
+planta e as coordenadas PDMS do próprio corte (E = 4208,387 / 4232,387 / 4256,387 / 4280,387) dão
+**24,000 m exatos**. Não afeta o volume — a soma de troncos de cone independentes não depende do
+espaçamento entre eles — mas convém alinhar com o projetista.
 
 ## 4. Decomposição do corte
 
@@ -85,8 +109,8 @@ em EL. 18,70 (contra 18,90 em U-6310).
 **5.1 — As bases não são rastreáveis aos desenhos.** Os valores 2.434,25 / 2.464,06 / 2.071,27 /
 1.415,86 / 2.235,88 m³ não constam de nenhuma das duas plantas emitidas em 07/08/2026 e não se
 obtêm por operação sobre as colunas CORTE ou REATERRO. Representam de 52% a 80% do corte da linha
-correspondente, sem proporção constante. Origem provável: quantitativo preliminar, anterior à
-emissão rev.0 — coerente com a observação registrada na própria planilha ("o ID usado sofrerá
+correspondente (53,4% a 80,2%), sem proporção constante. Origem provável: quantitativo preliminar,
+anterior à emissão rev.0 — coerente com a observação registrada na própria planilha ("o ID usado sofrerá
 alterações com a aprovação do Book B").
 
 **5.2 — O fator 0,7 aplica uma segunda redução indevida.** A planilha rateia 70% para "área tanque"
@@ -103,6 +127,15 @@ i ≥ 1,5%) enquanto o tanque é escavado 1,50 m. Só o TQ-6312824 se aproxima d
 | Total apurado nesta memória (corte empolado) | 24.175,07 m³ |
 | Escopo faltante | 13.766,18 m³ |
 | **Cobertura da planilha vigente** | **43,1%** |
+
+O mesmo percentual vale em volume geométrico (10.408,89 ÷ 1,40 = 7.434,92 m³ contra 17.267,91 m³),
+já que o fator de empolamento incide nos dois lados da comparação.
+
+**5.4 — Alcance da coluna "Quantidade".** Tanto na planilha vigente quanto nesta memória, a
+quantidade da ficha mede **apenas o corte** (atividade 001). As atividades 002-TROCA DE SOLO,
+003-ATERRO e 004-COMPACTAÇÃO, também declaradas na ficha, correspondem a outros 15.597,05 m³ *in
+situ* que não estão medidos em nenhuma coluna da planilha de importação. A convenção foi mantida
+igual à do cliente — fica registrada aqui para não induzir a erro de medição.
 
 ## 6. Resumo dos quantitativos
 
@@ -124,7 +157,9 @@ i ≥ 1,5%) enquanto o tanque é escavado 1,50 m. Só o TQ-6312824 se aproxima d
   Os volumes desta memória valem para a profundidade de projeto de 1,50 m.
 - **Fator de empolamento (1,40)** não tem respaldo documental nos desenhos. Deve ser confirmado por
   ensaio ou pela `ET-5400.00-6310-113-TX3-001` antes da medição. O estudo preliminar da equipe usava 1,30.
-- **Raio da linha 818** não está cotado na planta — ver item 2.
+- **Raio da linha 818** não está cotado na planta e foi retro-calculado pelo volume — ver item 2.
+- **Saldo de 19 m³ na linha 815** sem explicação geométrica — ver item 3.
+- **Corte D-D × planta**: espaçamentos divergentes na linha 815 — ver item 3.
 - **Diques e mini-diques de contenção** aparecem nos cortes A-A a E-E mas não estão discriminados na
   tabela do desenho. Se executados em aterro compactado, devem ser orçados à parte.
 - **Não há coluna de aterro** na tabela do desenho. Se parte do corte for reaproveitada em outra

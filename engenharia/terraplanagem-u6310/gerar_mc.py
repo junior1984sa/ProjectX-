@@ -149,7 +149,7 @@ prem = [
  ("11", "Declividade mínima da bacia — U-6310", 0.015, "m/m", "Símbolo '≥1,5% (INC.)' na planta, área U-6310.", True),
  ("12", "Declividade mínima da bacia — U-6312", 0.010, "m/m", "Símbolo '≥1,0% (INC.)' na planta, área do TQ-6312824.", True),
  ("13", "Fator de empolamento (corte → solto)", 1.40, "—", "Fator vigente na planilha de importação de FTs (multiplicador 1,4). A CONFIRMAR com ensaio/ET — o estudo anterior (aba 'Planilha1') usava 1,30.", True),
- ("14", "Fator de empolamento — cenário alternativo", 1.30, "—", "Valor usado no estudo preliminar da equipe (aba 'Planilha1', célula B9). Mantido para análise de sensibilidade.", True),
+ ("14", "Fator de empolamento — cenário alternativo", 1.30, "—", "Valor usado no estudo preliminar da equipe — aba 'Planilha1', célula B9 do arquivo original IMPORTAÇÃO_TERRAPLAN_TANQUE.xlsx. Mantido para análise de sensibilidade.", True),
  ("15", "Nº de fichas de tarefa (FT) por linha de tanques", 2, "un", "Critério da equipe: cada linha de 4 tanques é executada em 2 FTs (D/C e B/A). TQ-6312824 é dividido em 2 FTs (_1 e _2).", True),
 ]
 r = 5
@@ -161,7 +161,7 @@ for it, nome, val, un, org, is_in in prem:
         c = put(ws, r, 3, f, PR, N2, align="center")
     else:
         fmt = PCT if it in ("11", "12") else (N2 if isinstance(val, float) else '#,##0')
-        c = put(ws, r, 3, val, AZ, fmt, FA if it in ("6", "13") else None, align="center")
+        c = put(ws, r, 3, val, AZ, fmt, FA if it in ("6", "13", "14") else None, align="center")
     put(ws, r, 4, un, PR, align="center")
     cc = put(ws, r, 5, org, SMALL)
     cc.alignment = Alignment(wrap_text=True, vertical="center")
@@ -189,7 +189,7 @@ for t in [
 # 3) GEOMETRIA
 # =====================================================================
 ws = wb.create_sheet("GEOMETRIA")
-head(ws, "GEOMETRIA POR LINHA DE TANQUES", "Raios cotados em DE-5400.00-6310-113-TX3-003 rev.0. Linha 818 sem cota de raio na planta — valor aferido graficamente e confirmado pelo volume (ver AFERIÇÃO).")
+head(ws, "GEOMETRIA POR LINHA DE TANQUES", "Raios cotados em DE-5400.00-6310-113-TX3-003 rev.0. A linha 818 não tem cota de raio na planta — ver coluna 'Origem do raio'.")
 hrow(ws, 4, ["Linha", "Tanques", "Produto", "Qtd\ntanques", "Espaç.\neixos (m)",
              "R fundo da\nescavação (m)", "R topo da\nescavação (m)", "R do costado\ndo tanque (m)",
              "Ø do tanque\n(m)", "R topo cotado\nno desenho (m)", "Origem do raio"],
@@ -198,7 +198,7 @@ hrow(ws, 4, ["Linha", "Tanques", "Produto", "Qtd\ntanques", "Espaç.\neixos (m)"
 GEO = [
  ("816", "TQ-6310816A a D", "OB 100N",     4, 29.00, 13.71, 15.21, "Cotado na planta: R13,71 e R15,21"),
  ("817", "TQ-6310817A a D", "OB 220N",     4, 29.00, 13.71, 15.21, "Cotado na planta: R13,71 e R15,21"),
- ("818", "TQ-6310818A a D", "OB 500/600N", 4, 27.50, 12.78, None,  "Sem cota de raio na planta. Aferido no vetor da planta (12,77 m) e confirmado pelo volume do desenho."),
+ ("818", "TQ-6310818A a D", "OB 500/600N", 4, 27.50, 12.78, None,  "Sem cota de raio na planta. Retro-calculado pelo volume do desenho (12,7818 m) e corroborado por medição independente no arquivo vetorial (12,77 m)."),
  ("815", "TQ-6310815A a D", "OB 80N",      4, 24.00, 10.85, 12.35, "Cotado na planta: R10,85 e R12,35"),
  ("824", "TQ-6312824",      "UCO",         1, None,  18.53, 20.03, "Cotado na planta: R18,53 e R20,03"),
 ]
@@ -319,11 +319,25 @@ AF_TOT = r
 r += 2
 ws.cell(row=r, column=2, value="LEITURA DO RESULTADO").font = SUB; r += 1
 for t in [
- "1. O modelo geométrico independente reproduz a coluna REATERRO do desenho com desvio total de 0,25% (menos de 0,1% em quatro das cinco linhas).",
- "   Isso comprova que o REATERRO do desenho corresponde exatamente ao volume escavado sob os tanques (tronco de cone, EL. 17,50 a 19,00, talude 1:1).",
- "2. A linha 815 apresenta o único desvio relevante (+1,91%, +47,71 m³): nos cortes D-D os espaçamentos são 24,11 / 23,89 / 24,00 m (não uniformes) e",
- "   os círculos de topo são truncados pelo limite da plataforma (cotas 11,85 e 11,15 nas extremidades). Adotar o valor do desenho, a favor da segurança.",
- "3. A diferença CORTE − REATERRO é o corte de regularização da plataforma e da bacia de contenção — quantificado na aba QUANT-LINHA.",
+ "1. O modelo geométrico reproduz a coluna REATERRO do desenho com desvio total de +0,25%, e abaixo de 0,1% em três das cinco linhas (816, 817 e 818).",
+ "   Isso comprova que o REATERRO do desenho corresponde ao volume escavado sob os tanques (tronco de cone, EL. 17,50 a 19,00, talude de corte 1:1).",
+ "   Ressalva de independência: o raio da linha 818 foi retro-calculado a partir do próprio volume do desenho, de modo que o desvio de 0,03% dessa linha",
+ "   não constitui verificação independente. A aferição é independente nas linhas 816, 817 e 824, cujos raios estão cotados na planta.",
+ "",
+ "2. A linha 815 é o único desvio relevante (+47,71 m³, +1,91%). Mecanismos identificados e quantificados por integração:",
+ "        truncamento dos quatro cones pelo limite sul da plataforma (cota 10,97 m do eixo, menor que o raio de topo 12,35 m) .... 23,05 m³",
+ "        truncamento do cone da extremidade oeste (cota 11,85 m) ........................................................  0,46 m³",
+ "        truncamento do cone da extremidade leste (cota 11,15 m) ........................................................  4,08 m³",
+ "        sobreposição entre cones adjacentes (espaçamento 24,00 m, raio de topo 12,35 m) ................................  1,14 m³",
+ "        soma .......................................................................................................... 28,73 m³  (60% do desvio)",
+ "   O saldo de aproximadamente 19 m³ (0,76% da linha) permanece em aberto e deve ser confirmado com o projetista.",
+ "   Adota-se o valor do desenho por prevalência contratual do documento emitido — e não por margem de segurança: 2.492,22 m³ é o MENOR dos dois valores.",
+ "",
+ "3. Inconsistência interna do projeto a esclarecer: o corte D-D cota os espaçamentos de eixo da linha 815 como 24,11 / 23,89 / 24,00 m, enquanto a planta",
+ "   e as coordenadas PDMS do próprio corte (E=4208,387 / 4232,387 / 4256,387 / 4280,387) dão 24,000 m exatos. Não afeta o volume, porque a soma de",
+ "   troncos de cone independentes não depende do espaçamento entre eles.",
+ "",
+ "4. A diferença CORTE − REATERRO é o corte de regularização da plataforma e da bacia de contenção — quantificado na aba QUANT-LINHA.",
 ]:
     ws.cell(row=r, column=2, value=t).font = SMALL; r += 1
 
@@ -379,7 +393,7 @@ ws = wb.create_sheet("DISTRIB-FT")
 head(ws, "DISTRIBUIÇÃO DOS QUANTITATIVOS PELAS FICHAS DE TAREFA",
      "Rateio por tanque (e não pela área total), preservando o particionamento adotado pela equipe: 2 FTs por linha de tanques")
 hrow(ws, 4, ["Chave de\nimportação", "TAG do componente", "Data\nprogramada", "Unid.", "Código Primavera",
-             "Linha", "Tanques abrangidos", "Nº de\ntanques", "Fração\nda linha",
+             "Linha", "Tanques abrangidos", "Nº de\ntanques", "Fração da linha\n(1 ÷ nº de FTs)",
              "CORTE geométrico\n(m³)", "Troca de solo\ngeométrico (m³)", "Plataforma/bacia\ngeométrico (m³)",
              "CORTE solto —\ntransporte (m³)", "Rachão a fornecer\n(m³ in situ)"],
      [12, 19, 12, 8, 20, 8, 21, 8, 8, 15, 14, 15, 14, 15])
@@ -409,7 +423,7 @@ for chave, tag, data, unid, prim, lin, abr, nt, ntot in FTS:
     put(ws, r, 6, lin, PR, align="center")
     put(ws, r, 7, abr, PR)
     put(ws, r, 8, nt, AZ, '#,##0', align="center")
-    put(ws, r, 9, f"=H{r}/{ntot}", PR, '0.0%', align="center")
+    put(ws, r, 9, "=1/PREMISSAS!$C$19", PR, '0.0%', align="center")
     put(ws, r,10, f"=INDEX({QLD},MATCH($F{r},{QLA},0))*$I{r}", PR, N2)
     put(ws, r,11, f"=INDEX({QLE},MATCH($F{r},{QLA},0))*$I{r}", PR, N2)
     put(ws, r,12, f"=INDEX({QLF},MATCH($F{r},{QLA},0))*$I{r}", PR, N2)
@@ -429,6 +443,8 @@ for t in [
  "Coluna 'Rachão a fornecer' = volume da troca de solo, in situ compactado. O fator de conversão para volume solto de fornecimento deve ser",
  "definido com o fornecedor / ET antes da compra; não está aplicado aqui.",
  "As datas programadas reproduzem a planilha de importação vigente e não foram alteradas por esta memória de cálculo.",
+ "Cada linha de tanques é executada em 2 FTs, logo a fração é sempre 1/2 (PREMISSAS, item 15). Para a linha 816, por exemplo, cada FT abrange 2 dos 4 tanques;",
+ "para o TQ-6312824, tanque único, cada FT abrange metade do serviço do mesmo tanque.",
 ]:
     ws.cell(row=r, column=1, value=t).font = SMALL; r += 1
 
@@ -461,7 +477,7 @@ for i, (chave, tag, data, unid, prim, lin, abr, nt, ntot) in enumerate(FTS):
     put(ws, r, 1, chave, BOLD, align="center")
     put(ws, r, 2, tag, PR)
     put(ws, r, 3, lin, PR, align="center")
-    put(ws, r, 4, f'=(TEXT(E{r},"#,##0.00")&"/2 × 70% × "&TEXT($C$7,"0.00"))', PR, align="center")
+    put(ws, r, 4, f'=(TEXT(E{r},"#,##0.00")&" ÷ "&TEXT($C$5,"0")&" × "&TEXT($C$6,"0%")&" × "&TEXT($C$7,"0.00"))', PR, align="center")
     put(ws, r, 5, BASES[lin], AZ, N2)
     put(ws, r, 6, f"=E{r}/$C$5*$C$6*$C$7", PR, N2)
     put(ws, r, 7, f"='DISTRIB-FT'!M{dfr}", VD, N2)
@@ -481,17 +497,21 @@ ws.cell(row=r, column=1, value="APURAÇÃO DAS DIVERGÊNCIAS").font = SUB; r += 
 for t in [
  "1) BASE NÃO RASTREÁVEL. As bases usadas na planilha (2.434,25 / 2.464,06 / 2.071,27 / 1.415,86 / 2.235,88 m³) não constam de nenhuma das",
  "   duas plantas emitidas em 07/08/2026 e não se obtêm por operação sobre as colunas CORTE ou REATERRO da tabela de quantitativos.",
- "   Representam de 52% a 80% do corte da linha correspondente, sem proporção constante. Provável origem: quantitativo preliminar,",
+ "   Representam de 53,4% a 80,2% do corte da linha correspondente, sem proporção constante. Provável origem: quantitativo preliminar,",
  "   anterior à emissão rev.0 — coerente com a observação registrada na própria planilha ('o ID usado sofrerá alterações com a aprovação do Book B').",
  "",
  "2) DUPLA REDUÇÃO. Sobre essa base já reduzida ainda se aplica o fator 0,7 ('por área tanque'), que pela geometria do projeto deveria ser",
  "   de 94% a 96% nas linhas de U-6310 (aba QUANT-LINHA). As duas reduções se somam.",
  "",
- "3) EFEITO. O total das 10 fichas fica em 10.408,89 m³ contra 24.175,07 m³ de corte empolado apurado nesta memória — 43% do escopo.",
- "   Em volume geométrico a planilha cobre 60% do corte do desenho.",
+ "3) EFEITO. O total das 10 fichas fica em 10.408,89 m³ contra 24.175,07 m³ de corte empolado apurado nesta memória — 43,1% do escopo de corte.",
+ "   O mesmo percentual vale em volume geométrico (10.408,89 ÷ 1,40 = 7.434,92 m³ contra 17.267,91 m³), já que o fator de empolamento incide nos dois lados.",
  "",
  "4) ENCAMINHAMENTO. Substituir a coluna 'Quantidade' da planilha de importação pelos valores da coluna G desta aba antes de importar",
  "   para o Primavera, e confirmar com a Coordenação de Engenharia Civil o fator de empolamento a adotar (1,30 ou 1,40).",
+ "",
+ "5) ALCANCE DA COLUNA 'Quantidade'. Tanto na planilha vigente quanto nesta memória a quantidade da FT mede APENAS o corte (atividade 001).",
+ "   As atividades 002-TROCA DE SOLO, 003-ATERRO e 004-COMPACTAÇÃO, também declaradas na ficha, correspondem a outros 15.597,05 m³ in situ",
+ "   que não estão medidos em nenhuma coluna da planilha de importação. Convenção mantida igual à do cliente — registrada aqui para não induzir a erro.",
 ]:
     c = ws.cell(row=r, column=1, value=t)
     c.font = RED if t.startswith(("1)", "2)", "3)", "4)")) else SMALL
@@ -510,7 +530,7 @@ RES = [
  ("1", "Escavação — corte total (volume geométrico)", f"='QUANT-LINHA'!D{QL_TOT}", "m³",
   "Soma da coluna CORTE da tabela de quantitativos do desenho. Sem empolamento, referida à EL. de limpeza 19,00."),
  ("1.1", "     Escavação / troca de solo sob os tanques", f"='QUANT-LINHA'!E{QL_TOT}", "m³",
-  "Tronco de cone EL. 17,50 → 19,00, raio = costado + 4,00 m, talude 1:1 (Nota 4). Aferido em 0,25% contra o desenho."),
+  "Valor da coluna REATERRO da tabela do desenho (adotado). O modelo de tronco de cone desta memória o reproduz com +0,25% — ver AFERIÇÃO."),
  ("1.2", "     Corte de regularização da plataforma e bacia", f"='QUANT-LINHA'!F{QL_TOT}", "m³",
   "Diferença CORTE − REATERRO do desenho. Inclui a conformação da bacia (EL. 19,00 → 18,90 em U-6310 e → 18,70 em U-6312)."),
  ("2", "Escavação — volume solto para transporte", f"=C5*PREMISSAS!$C$17", "m³",
@@ -523,16 +543,16 @@ RES = [
   "Igual ao item 1.1. Fator de conversão para volume de fornecimento a definir com o fornecedor / ET."),
  ("5", "Reaterro e compactação com controle tecnológico", f"='QUANT-LINHA'!E{QL_TOT}", "m³",
   "Executar conforme RL-5400.00-6310-115-TX3-001 e ET-5400.00-6310-113-TX3-001. Controle tecnológico obrigatório (Nota 7)."),
- ("6", "Nº de tanques", "=GEOMETRIA!D5+GEOMETRIA!D6+GEOMETRIA!D7+GEOMETRIA!D8+GEOMETRIA!D9", "un",
+ ("6", "Nº de tanques", "=SUM(GEOMETRIA!D5:D9)", "un",
   "16 tanques em U-6310 (4 linhas × 4) + 1 tanque UCO em U-6312."),
- ("7", "Nº de fichas de tarefa", 10, "un",
+ ("7", "Nº de fichas de tarefa", "=COUNTA('DISTRIB-FT'!A5:A14)", "un",
   "Conforme planilha de importação vigente: FT-CV-2619 a FT-CV-2628."),
 ]
 r = 5
 for it, serv, qt, un, obs in RES:
     put(ws, r, 1, it, BOLD, align="center")
     c = put(ws, r, 2, serv, BOLD if "." not in it else PR)
-    put(ws, r, 3, qt, PR if isinstance(qt, str) else AZ, N2 if un == "m³" else '#,##0')
+    put(ws, r, 3, qt, VD if isinstance(qt, str) else AZ, N2 if un == "m³" else '#,##0')
     put(ws, r, 4, un, PR, align="center")
     o = put(ws, r, 5, obs, SMALL); o.alignment = Alignment(wrap_text=True, vertical="center")
     ws.row_dimensions[r].height = 30
@@ -562,11 +582,16 @@ for t in [
  "   deverá ser ajustada às condições reais do terreno, com acompanhamento de engenheiro geotécnico (Nota 4). Volumes desta memória",
  "   valem para a profundidade de projeto de 1,50 m.",
  "b) Fator de empolamento (1,40) não tem respaldo documental nos desenhos — deve ser confirmado por ensaio ou pela ET antes da medição.",
- "c) Raio da linha 818 não está cotado na planta. Adotado 12,78 m, aferido no arquivo vetorial e confirmado pelo volume do desenho (desvio 0,03%).",
+ "c) Raio da linha 818 não está cotado na planta. Adotado 12,78 m, retro-calculado a partir do volume do desenho e corroborado por medição no arquivo",
+ "   vetorial (12,77 m). Confirmar a cota com o projetista — a aferição dessa linha não é independente.",
+ "c1) Linha 815: desvio de +47,71 m³ (+1,91%) explicado em 60% por truncamento e sobreposição dos cones (ver AFERIÇÃO); saldo a confirmar com o projetista.",
+ "c2) Corte D-D cota os espaçamentos da linha 815 como 24,11 / 23,89 / 24,00 m, contra 24,000 m exatos na planta e nas coordenadas PDMS. A esclarecer.",
  "d) A tabela do desenho não distingue o volume do dique e dos mini-diques de contenção mostrados nos cortes A-A a E-E; se forem executados",
  "   em aterro compactado, o material e o volume correspondentes devem ser orçados à parte.",
  "e) Não há coluna de aterro na tabela do desenho. Caso parte do corte venha a ser reaproveitada em outra frente, o bota-fora do item 3 reduz",
  "   na mesma proporção.",
+ "f) A coluna 'Quantidade' das fichas de tarefa mede apenas o corte (atividade 001). Troca de solo, aterro e compactação (itens 4 e 5 acima) não estão",
+ "   medidos em nenhuma coluna da planilha de importação — convenção herdada do cliente, registrada aqui para não induzir a erro.",
 ]:
     ws.cell(row=r, column=2, value=t).font = SMALL; r += 1
 

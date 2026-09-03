@@ -13,8 +13,8 @@ HEADERS = [orig.cell(row=1, column=c).value for c in range(1, 26)]
 
 # Quantitativos apurados na memoria de calculo (corte geometrico por linha, tabela do desenho)
 CORTE_LINHA = {"816": 4100.16, "817": 4130.06, "818": 3599.36, "815": 2649.19, "824": 2789.14}
-QTD_TANQUES = {"816": 4, "817": 4, "818": 4, "815": 4, "824": 2}   # 824: tanque unico dividido em 2 FTs
-TANQ_FT     = {"816": 2, "817": 2, "818": 2, "815": 2, "824": 1}
+QTD_TANQUES = {"816": 4, "817": 4, "818": 4, "815": 4, "824": 1}
+TANQ_FT     = {"816": 2, "817": 2, "818": 2, "815": 2, "824": 0.5}   # 824: tanque unico dividido em 2 FTs
 REATERRO    = {"816": 3945.84, "817": 3947.50, "818": 3455.05, "815": 2492.22, "824": 1756.44}
 BASE_ANT    = {"816": 2434.25, "817": 2464.06, "818": 2071.27, "815": 1415.86, "824": 2235.88}
 
@@ -92,15 +92,25 @@ for lin in ["816", "817", "818", "815", "824"]:
                       (4, REATERRO[lin], AZ), (5, QTD_TANQUES[lin], AZ), (6, TANQ_FT[lin], AZ)]:
         c = pa.cell(row=r, column=col, value=v); c.font = f; c.border = BOX
         if col in (3, 4): c.number_format = '#,##0.00'
+        if col == 6: c.number_format = '#,##0.0'
         if col in (1, 5, 6): c.alignment = Alignment(horizontal="center")
     r += 1
 r += 1
 pa.cell(row=r, column=2, value="Quantidade da FT = CORTE da linha × (tanques da FT ÷ nº de tanques da linha) × fator de empolamento.").font = SMALL
 r += 1
-pa.cell(row=r, column=2, value="Para o TQ-6312824 (tanque único dividido em 2 FTs), a fração é 1/2 do corte da linha.").font = SMALL
+pa.cell(row=r, column=2, value="Para o TQ-6312824 — tanque único dividido em 2 FTs — 'Tanques por FT' vale 0,5, produzindo a mesma fração de 1/2.").font = SMALL
+r += 2
+pa.cell(row=r, column=2, value="TOTAL DAS 10 FICHAS DE TAREFA (m³, volume solto)").font = BOLD
+tc = pa.cell(row=r, column=3, value="=SUM('IMPORTAÇÃO '!I2:I11)")
+tc.font = BOLD; tc.number_format = '#,##0.00'
+tc.fill = PatternFill("solid", fgColor="DDEBF7"); tc.border = BOX
+pa.cell(row=r, column=4, value="m³").font = ARIAL
+pa.cell(row=r, column=5, value="Confere com o item 2 do RESUMO da memória de cálculo (24.175,07 m³).").font = SMALL
+r += 1
+pa.cell(row=r, column=2, value="A aba IMPORTAÇÃO não traz linha de total, para que uma rotina que varra até a última linha preenchida não a leia como registro.").font = SMALL
 
 # ---------- aba IMPORTACAO ----------
-ws = wb.create_sheet("IMPORTAÇÃO")
+ws = wb.create_sheet("IMPORTAÇÃO ")   # espaco final preservado do arquivo original
 ws.sheet_view.showGridLines = False
 for i, h in enumerate(HEADERS, start=1):
     c = ws.cell(row=1, column=i, value=h); c.font = HDR; c.fill = FH; c.border = BOX
@@ -129,9 +139,8 @@ for chave, tag, data, unid, prim, lin, escopo in FTS:
         if col == 9: c.number_format = '#,##0.00'; c.font = BOLD
     r += 1
 last = r - 1
-ws.cell(row=r, column=8, value="TOTAL").font = BOLD
-tc = ws.cell(row=r, column=9, value=f"=SUM(I2:I{last})")
-tc.font = BOLD; tc.number_format = '#,##0.00'; tc.fill = PatternFill("solid", fgColor="DDEBF7")
+# Nenhuma linha de total e escrita nesta aba: uma rotina de importacao que varre ate a
+# ultima linha preenchida leria o total como um registro. O total fica na aba PARAMETROS.
 
 widths = [17, 30, 9, 7, 13, 14, 9, 20, 13, 7, 60, 15, 48, 30, 11, 9, 10, 13, 46, 13, 13, 13, 16, 13, 11]
 for i, w in enumerate(widths, start=1):
@@ -153,7 +162,7 @@ r = 4
 for i, (chave, tag, data, unid, prim, lin, escopo) in enumerate(FTS):
     ant = BASE_ANT[lin] / 2 * 0.7 * 1.4
     for col, v, f, fmt in [(1, chave, BOLD, None), (2, tag, ARIAL, None), (3, ant, AZ, '#,##0.00'),
-                           (4, f"=IMPORTAÇÃO!I{i+2}", ARIAL, '#,##0.00'),
+                           (4, f"='IMPORTAÇÃO '!I{i+2}", ARIAL, '#,##0.00'),
                            (5, f"=D{r}-C{r}", ARIAL, '#,##0.00'),
                            (6, f"=D{r}/C{r}-1", ARIAL, '0.0%')]:
         c = cs.cell(row=r, column=col, value=v); c.font = f; c.border = BOX
